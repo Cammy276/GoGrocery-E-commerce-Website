@@ -20,8 +20,10 @@ This repository includes everything needed to set up the project locally:
 ------------------------------------------------------------
 ⚙️ 1. Clone Repository
 ------------------------------------------------------------
+<pre>
 git clone https://github.com/yourusername/gogrocery.git
 cd gogrocery
+</pre>
 
 ------------------------------------------------------------
 📦 2. Install Composer
@@ -33,22 +35,24 @@ Windows:
    composer -V
 
 Linux/macOS:
+<pre>
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
 composer -V
+</pre>
 
 ------------------------------------------------------------
 🗄️ 3. Setup MySQL Database
 ------------------------------------------------------------
 Step 1: Create Database
 Log in as root (via phpMyAdmin or CLI):
-CREATE DATABASE gogrocery CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+<pre>CREATE DATABASE gogrocery CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</pre>
 
 Step 2: Create Users
 Run the script provided in users.sql:
-mysql -u root -p < users.sql
+<pre>mysql -u root -p < users.sql</pre>
 
 This creates:
 - grocery_customer → frontend customer access
@@ -57,19 +61,20 @@ This creates:
 Step 3: Import Schema
 The schema file db.sql is already prepared.  
 Import it as root:
-mysql -u root -p gogrocery < db.sql
+<pre>mysql -u root -p gogrocery < db.sql</pre>
 
 ------------------------------------------------------------
 🔑 4. Setup Environment File
 ------------------------------------------------------------
 Duplicate the example:
 Linux/macOS:
-cp .env.example .env
+<pre>cp .env.example .env</pre>
 
 Windows PowerShell:
-copy .env.example .env
+<pre>copy .env.example .env</pre>
 
 Default .env:
+<pre>
 DB_HOST=localhost
 DB_NAME=gogrocery
 DB_USER=grocery_customer
@@ -78,6 +83,7 @@ DB_PASS=StrongCustomerPassword123!
 # Optional: admin creds (used only for migrations/scripts)
 DB_ADMIN_USER=grocery_dev
 DB_ADMIN_PASS=StrongDevPassword123!
+</pre>
 
 ⚠️ If you change usernames/passwords in users.sql, update them here.
 
@@ -96,13 +102,13 @@ Option 1: WAMP/XAMPP (Recommended)
 - Visit: http://localhost/gogrocery
 
 Option 2: PHP Built-in Server
-php -S localhost:8000 -t public
+<pre>php -S localhost:8000 -t public</pre>
 Then open http://localhost:8000
 
 ------------------------------------------------------------
 🧪 7. Test Database Connection
 ------------------------------------------------------------
-php config.php
+<pre>php config.php</pre>
 
 Expected:
 ✅ Database connection successful!
@@ -117,6 +123,7 @@ Check:
 ------------------------------------------------------------
 📂 Project Structure
 ------------------------------------------------------------
+<pre>
 gogrocery/
 │── db.sql            # Database schema (already prepared)
 │── users.sql         # Creates MySQL users + grants privileges
@@ -128,6 +135,7 @@ gogrocery/
 │── public/           # Web root (index.php, assets, etc.)
 │── src/              # PHP application code
 │── vendor/           # Installed by Composer (ignored in git)
+</pre>
 
 ------------------------------------------------------------
 🔒 Git Ignore Policy
@@ -186,6 +194,7 @@ Problem: Website loads blank page
 
 Linux/macOS:
 ------------
+<pre>
 # clone
 git clone <repo-url> GoGrocery-Ecommerce
 cd GoGrocery-Ecommerce
@@ -210,10 +219,11 @@ php config.php
 
 # run dev server (optional)
 php -S localhost:8000 -t public
-
+</pre>
 
 Windows (PowerShell):
 ---------------------
+<pre>
 # clone
 git clone <repo-url> GoGrocery-Ecommerce
 cd .\GoGrocery-Ecommerce\
@@ -238,7 +248,7 @@ php config.php
 
 # start WAMP and visit in browser:
 http://localhost/GoGrocery-Ecommerce/
-
+</pre>
 
 ------------------------------------------------------------
 📌 11) Extras & Best Practices
