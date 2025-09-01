@@ -28,17 +28,17 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                    <img src="./assets/fresh_produces_ads.png" alt="Fresh Produces">
+                    <img src="./images/ads/fresh_produces_ads.png" alt="Fresh Produces">
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                    <img src="./assets/new_user_ads.png" alt="New User Promo">
+                    <img src="./images/ads/new_user_ads.png" alt="New User Promo">
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                    <img src="./assets/skincare_ads.png" alt="Skincare Promo">
+                    <img src="./images/ads/skincare_ads.png" alt="Skincare Promo">
                 </div>
             </div>
         </div>
@@ -60,6 +60,10 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <?php 
+        include("footer.php");
+    ?>
 </body>
 
 </html>
