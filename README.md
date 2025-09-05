@@ -4,7 +4,8 @@ GoGrocery E-Commerce Website
 GoGrocery is a PHP + MySQL e-commerce web application.  
 This repository includes everything needed to set up the project locally:
 - Database schema (db.sql)
-- User accounts (grocery_customer (default) & grocery_dev (optional, need to configure everything on your own))
+- User accounts (grocery_customer)
+** grocery_dev (optional, need to configure everything on your own as an alternative for root account))
 - .env configuration
 - Composer dependencies
 
@@ -92,7 +93,7 @@ DB_ADMIN_PASS=StrongDevPassword123!
 ------------------------------------------------------------
 📥 5. Install PHP Dependencies
 ------------------------------------------------------------
-composer install
+<pre>composer install</pre>
 
 This creates a vendor/ directory (ignored in .gitignore).
 
@@ -110,7 +111,7 @@ Then open http://localhost:8000
 ------------------------------------------------------------
 🧪 7. Test Database Connection
 ------------------------------------------------------------
-<pre>php db_connect.php</pre>
+<pre>php connect_db.php</pre>
 
 Expected:
 ✅ Database connection successful!
@@ -131,7 +132,7 @@ gogrocery/
 │── users.sql         # Creates MySQL users + grants privileges
 │── .env.example      # Template environment config
 │── .env              # Your environment file (not committed to git)
-│── db_connect.php        # Database connection test
+│── connect_db.php        # Database connection test
 │── composer.json     # Composer dependencies
 │── composer.lock     # Composer lockfile
 │── public/           # Web root (index.php, assets, etc.)
@@ -246,7 +247,7 @@ composer install
 notepad .env
 
 # test
-php db_connect.php
+php connect_db.php
 
 # start WAMP and visit in browser:
 http://localhost/GoGrocery-Ecommerce/
