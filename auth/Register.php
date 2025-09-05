@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../ConnectDB.php');
+include(__DIR__ . '/../connect_db.php');
 
 $message = "";
 $messageColor = "";
@@ -15,30 +15,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Passwords do not match!";
         $messageColor = "red";
     } else {
-        $checkEmail = $conn->prepare("SELECT id FROM userauthentication WHERE email = ?");
+        $checkEmail = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
         $checkEmail->bind_param("s", $email);
         $checkEmail->execute();
         $checkEmail->store_result();
 
-        $checkPhone = $conn->prepare("SELECT id FROM userauthentication WHERE phone_number = ?");
+        $checkPhone = $conn->prepare("SELECT user_id FROM users WHERE phone = ?");
         $checkPhone->bind_param("s", $phone);
         $checkPhone->execute();
         $checkPhone->store_result();
 
         if ($checkEmail->num_rows > 0) {
-            $message = "Email already exists! <a href='./Login.php'>Click here to login</a>";
+            $message = "Email already exists! <a href='./login.php'>Click here to login</a>";
             $messageColor = "red";
         } elseif ($checkPhone->num_rows > 0) {
-            $message = "Phone number already exists! <a href='./Login.php'>Click here to login</a>";
+            $message = "Phone number already exists! <a href='./login.php'>Click here to login</a>";
             $messageColor = "red";
         } else {
 
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("INSERT INTO userauthentication(name, email, phone_number, password_hash) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO users(name, email, phone, password_hash) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $name, $email, $phone, $hashed_password);
 
             if ($stmt->execute()) {
-                $message = "Registration Successful! <a href='./Login.php'>Click here to login</a>";
+                $message = "Registration Successful! <a href='./login.php'>Click here to login</a>";
                 $messageColor = "green";
             } else {
                 $message = "Error: " . $stmt->error;

@@ -20,14 +20,16 @@ USE gogrocery;
 CREATE TABLE IF NOT EXISTS users (
   user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  phone VARCHAR(20) UNIQUE NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  phone VARCHAR(20) NOT NULL,
   profile_image_url VARCHAR(500) NULL DEFAULT '/images/users/default.png'
     COMMENT 'Path or URL to user profile image',
   password_hash VARBINARY(255) NOT NULL COMMENT 'bcrypt/argon2id hash – NEVER plaintext',
   reset_token_hash VARCHAR(64),  
   reset_token_expires_at DATETIME, 
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_users_email (email),
+  UNIQUE KEY uq_users_phone (phone)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* 3) Product Brands */
@@ -36,9 +38,9 @@ CREATE TABLE IF NOT EXISTS brands (
   name VARCHAR(120) NOT NULL,
   slug VARCHAR(140) GENERATED ALWAYS AS (
   REGEXP_REPLACE(LOWER(name), '[^a-z0-9]+', '_')
-  ) STORED
+  ) STORED,
   UNIQUE KEY uq_brand_name (name),
-  UNIQUE KEY uq_brand_slug (slug),
+  UNIQUE KEY uq_brand_slug (slug)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*
 REPLACE(LOWER(name), ' ', '-'):
@@ -59,7 +61,7 @@ CREATE TABLE IF NOT EXISTS categories (
   parent_id INT UNSIGNED NULL,
   slug VARCHAR(140) GENERATED ALWAYS AS (
   REGEXP_REPLACE(LOWER(name), '[^a-z0-9]+', '_')
-  ) STORED
+  ) STORED,
   UNIQUE KEY uq_cat_name (name),
   UNIQUE KEY uq_cat_slug (slug),
   CONSTRAINT fk_categories_parent
@@ -82,7 +84,7 @@ Ensures that no two rows can have the same slug (the URL-friendly version of the
 
 /* 5) Products */
 CREATE TABLE IF NOT EXISTS products (
-  product_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  product_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   sku VARCHAR(64) NOT NULL,
   product_name VARCHAR(255) NOT NULL,
   brand_id INT UNSIGNED NULL,
@@ -107,8 +109,8 @@ CREATE TABLE IF NOT EXISTS products (
 
 /* 6) Product images (recommended: store URLs/paths, not BLOBs) */
 CREATE TABLE IF NOT EXISTS product_images (
-  image_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  product_id BIGINT UNSIGNED NOT NULL,
+  image_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  product_id INT UNSIGNED NOT NULL,
   image_url VARCHAR(500) NOT NULL,        
   alt_text VARCHAR(255) NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -123,8 +125,8 @@ CREATE TABLE IF NOT EXISTS product_images (
 
 /* 7) Addresses */
 CREATE TABLE IF NOT EXISTS addresses (
-  address_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT UNSIGNED NOT NULL,
+  address_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
   label VARCHAR(50) NOT NULL,                          -- e.g., "Home", "Office"
   street VARCHAR(255) NOT NULL,
   apartment VARCHAR(255) NULL,                          -- apartment/condo/garden
@@ -137,10 +139,20 @@ CREATE TABLE IF NOT EXISTS addresses (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 8) Wishlists */
+/* 8) Shipping Rates */
+CREATE TABLE IF NOT EXISTS shipping_rates (
+  rate_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  postcode VARCHAR(10) NOT NULL,
+  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  delivery_duration VARCHAR(50) NOT NULL,  -- e.g., "2-3 days"
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_shipping_postcode (postcode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* 9) Wishlists */
 CREATE TABLE IF NOT EXISTS wishlists (
-  user_id BIGINT UNSIGNED NOT NULL,
-  product_id BIGINT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NOT NULL,
+  product_id INT UNSIGNED NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   -- Show "Recently added to your wishlist" items (optional)
   -- Allow users to sort their wishlist by date (optional)
@@ -153,18 +165,23 @@ CREATE TABLE IF NOT EXISTS wishlists (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 9) Orders */
+/* 10) Orders */
+/* 10) Orders */
 CREATE TABLE IF NOT EXISTS orders (
-  order_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT UNSIGNED NOT NULL,
-  address_id BIGINT UNSIGNED NULL,
+  order_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  address_id INT UNSIGNED NOT NULL,                          -- required for delivery
   status ENUM('paid','delivered') NOT NULL DEFAULT 'paid'
-  -- user places (and pays) the order → status = paid
-  -- user later clicks “Received” → status = delivered
-  payment_method ENUM('card','bank_transfer', 'e_wallet','grabpay','fpx') NOT NULL,
+    /*
+    paid: Order has been placed and paid by the customer, but not yet confirmed received.
+    delivered: Customer has clicked “Received,” confirming they got the order.
+    */
+  ,
+  payment_method ENUM('card','bank_transfer','e_wallet','grabpay','fpx') NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,           -- fetched from shipping_rates
+  delivery_duration VARCHAR(50) NOT NULL,                           -- fetched from shipping_rates
   tax_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   grand_total DECIMAL(10,2) AS (subtotal - discount_total + shipping_fee + tax_total) STORED,
   placed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -174,7 +191,7 @@ CREATE TABLE IF NOT EXISTS orders (
     ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT fk_orders_address
     FOREIGN KEY (address_id) REFERENCES addresses(address_id)
-    ON DELETE SET NULL ON UPDATE CASCADE
+    ON DELETE RESTRICT ON UPDATE CASCADE        -- prevent deletion of used addresses
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*
@@ -185,11 +202,11 @@ Why order_items exists?
 - 1-to-many relationship: 1 order → many order_items.
 */
 
-/* 10) Order Items */
+/* 11) Order Items */
 CREATE TABLE IF NOT EXISTS order_items (
-  order_item_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  order_id BIGINT UNSIGNED NOT NULL,
-  product_id BIGINT UNSIGNED NOT NULL,
+  order_item_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_id INT UNSIGNED NOT NULL,
+  product_id INT UNSIGNED NOT NULL,
   product_name VARCHAR(255) NOT NULL,       
   sku VARCHAR(64) NOT NULL,                 
   unit_price DECIMAL(10,2) NOT NULL,
@@ -206,10 +223,10 @@ CREATE TABLE IF NOT EXISTS order_items (
     ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 11) Contact form */
+/* 12) Contact form */
 CREATE TABLE IF NOT EXISTS contact_messages (
-  message_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT UNSIGNED NULL,
+  message_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NULL,
   name VARCHAR(120) NOT NULL,
   email VARCHAR(255) NOT NULL,
   phone VARCHAR(20) NULL,

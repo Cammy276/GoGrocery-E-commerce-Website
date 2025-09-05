@@ -7,9 +7,9 @@ if (!$token) {
 
 $token_hash = hash("sha256", $token);
 
-$mysqli = require __DIR__ . "/../ConnectDB.php";
+$mysqli = require __DIR__ . "/../connect_db.php";
 
-$sql = "SELECT * FROM userauthentication WHERE reset_token_hash = ?";
+$sql = "SELECT * FROM users WHERE reset_token_hash = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("s", $token_hash);
 $stmt->execute();
@@ -36,7 +36,7 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
 <body>
     <div class="reset-container">
         <h2>Reset Password</h2>
-        <form method="post" action="./ProcessResetPassword.php">
+        <form method="post" action="./process_reset_password.php">
             <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
             <div class="input-container">

@@ -13,7 +13,7 @@
         <div class="forgot-password-box">
             <h2>Forgot Password</h2>
             <p id="info-message">Please enter your registered email. A reset password link will be sent to this email.</p>
-            <form method="POST" action="./SendPasswordReset.php">
+            <form method="POST" action="./send_password_reset.php">
                 <div class="input-container">
                     <label for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="Enter your email">

@@ -17,10 +17,10 @@ $token_hash = hash("sha256", $token);
 $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
 
 // Include the database connection
-$mysqli = require __DIR__ . "/../ConnectDB.php"; // Ensure this returns the connection
+$mysqli = require __DIR__ . "/../connect_db.php"; // Ensure this returns the connection
 
 // Prepare the SQL query to update the user's reset token and expiry time
-$sql = "UPDATE userauthentication SET reset_token_hash = ?, reset_token_expires_at = ? WHERE email = ?";
+$sql = "UPDATE users SET reset_token_hash = ?, reset_token_expires_at = ? WHERE email = ?";
 
 // Prepare and bind the statement
 $stmt = $mysqli->prepare($sql);
@@ -40,7 +40,7 @@ if($mysqli -> affected_rows){
     <body>
         <p>Dear $name,</p>
         <p>We received a request to reset your password. To proceed, please click the link below:</p>
-        <p><a href="http://localhost/GoGrocery-E-commerce-Website/auth/ResetPassword.php?token=$token">Reset your password</a></p>
+        <p><a href="http://localhost/GoGrocery-E-commerce-Website/auth/reset_password.php?token=$token">Reset your password</a></p>
         <p>If you did not request a password reset, please disregard this email.</p>
         <p>Thank you for using GoGrocery-E-commerce-Website.</p>
         <p>Regards,<br>Customer Service Team</p>
@@ -52,7 +52,7 @@ if($mysqli -> affected_rows){
     try {
         $mail->send();
         // Redirect to a success page or show a success message
-        header("Location: ./SuccessPasswordReset.php?message=Password reset link sent to your email");
+        header("Location: ./success_password_reset.php?message=Password reset link sent to your email");
         exit;  // Make sure no further code is executed
     } catch (Exception $e) {
         // Log the error to a file instead of displaying it on the screen
