@@ -2,11 +2,6 @@
 -- Engine: InnoDB, Charset: utf8mb4, Collation: utf8mb4_unicode_ci
 -- Safe to run as a single script.
 
-/* 0) One-time server/session recommendations (run once per server) */
--- SET GLOBAL time_zone = '+08:00';                                         -- time_zone: server timestamps match MYT (UTC+8).
--- SET PERSIST sql_mode = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';     -- sql_mode: stricter data checks (avoid silent truncation)
--- SET PERSIST innodb_strict_mode = 1;                                      -- innodb_strict_mode: tightens InnoDB consistency checks
-
 /* 1) Create database */
 -- Creates the DB with full Unicode support (emojis, multilingual)
 CREATE DATABASE IF NOT EXISTS gogrocery
@@ -27,13 +22,9 @@ CREATE TABLE IF NOT EXISTS users (
   password_hash VARBINARY(255) NOT NULL COMMENT 'bcrypt/argon2id hash – NEVER plaintext',
   reset_token_hash VARCHAR(64),  
   reset_token_expires_at DATETIME, 
-<<<<<<< HEAD
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_users_email (email),
   UNIQUE KEY uq_users_phone (phone)
-=======
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
->>>>>>> d7c8e83c5d70af304d0d336edbdd4c62e8f22acc
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* 3) Product Brands */
@@ -172,7 +163,6 @@ CREATE TABLE IF NOT EXISTS wishlists (
 /* 10) Orders */
 /* 10) Orders */
 CREATE TABLE IF NOT EXISTS orders (
-<<<<<<< HEAD
   order_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED NOT NULL,
   address_id INT UNSIGNED NOT NULL,                          -- required for delivery
@@ -183,15 +173,6 @@ CREATE TABLE IF NOT EXISTS orders (
     */
   ,
   payment_method ENUM('card','bank_transfer','e_wallet','grabpay','fpx') NOT NULL,
-=======
-  order_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT UNSIGNED NOT NULL,
-  address_id BIGINT UNSIGNED NULL,
-  status ENUM('paid','delivered') NOT NULL DEFAULT 'paid',
-  -- user places (and pays) the order → status = paid
-  -- user later clicks “Received” → status = delivered
-  payment_method ENUM('card','bank_transfer', 'e_wallet','grabpay','fpx') NOT NULL,
->>>>>>> d7c8e83c5d70af304d0d336edbdd4c62e8f22acc
   subtotal DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,           -- fetched from shipping_rates
