@@ -1,5 +1,5 @@
 <?php
-include('ConnectDB.php');
+include(__DIR__ . '/../ConnectDB.php');
 
 $message = "";
 $messageColor = "";
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ssss", $name, $email, $phone, $hashed_password);
 
             if ($stmt->execute()) {
-                $message = "Registration Successful! <a href='Login.php'>Click here to login</a>.";
+                $message = "Registration Successful! <a href='./Login.php'>Click here to login</a>.";
                 $messageColor = "green";
             } else {
                 $message = "Error: " . $stmt->error;
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="./style/RegisterStyles.css">
+    <link rel="stylesheet" href="../css/RegisterStyles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </form>
             <div class="login-link">
-                <p>Already have an account? <a href="login.php">Log in <i class="bi bi-box-arrow-up-right"></i></a></p>
+                <p>Already have an account? <a href="./login.php">Log in <i class="bi bi-box-arrow-up-right"></i></a></p>
             </div>
         </div>
     </div>

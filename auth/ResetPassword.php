@@ -7,7 +7,7 @@ if (!$token) {
 
 $token_hash = hash("sha256", $token);
 
-$mysqli = require __DIR__ . "/ConnectDB.php";
+$mysqli = require __DIR__ . "/../ConnectDB.php";
 
 $sql = "SELECT * FROM userauthentication WHERE reset_token_hash = ?";
 $stmt = $mysqli->prepare($sql);
@@ -30,13 +30,13 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
     <meta charset="UTF-8">
     <title>Reset Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/ResetPasswordStyles.css">
+    <link rel="stylesheet" href="../css/ResetPasswordStyles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <div class="reset-container">
         <h2>Reset Password</h2>
-        <form method="post" action="ProcessResetPassword.php">
+        <form method="post" action="./ProcessResetPassword.php">
             <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
             <div class="input-container">
@@ -60,7 +60,7 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
             <button type="submit">Reset Password</button>
         </form>
         <div class="login-link">
-            <p><a href="login.php">Back to Login <i class="bi bi-box-arrow-up-right"></i></a></p>
+            <p><a href="./login.php">Back to Login <i class="bi bi-box-arrow-up-right"></i></a></p>
         </div>
     </div>
 

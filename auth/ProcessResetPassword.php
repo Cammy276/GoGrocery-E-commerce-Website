@@ -10,7 +10,7 @@ function showError($message) {
         <meta charset="UTF-8">
         <title>Error</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/ResetPasswordStyles.css">
+        <link rel="stylesheet" href="../css/ProcessResetPasswordStyles.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
@@ -18,7 +18,7 @@ function showError($message) {
             <h2>Error</h2>
             <p class="error-message"><?= htmlspecialchars($message) ?></p>
             <div class="login-link">
-            <a class="button-link" href="login.php">Go to Login <i class="bi bi-box-arrow-in-right"></i></a>
+            <a class="button-link" href="./login.php">Go to Login <i class="bi bi-box-arrow-in-right"></i></a>
         </div>
         </div>
     </body>
@@ -32,9 +32,9 @@ if (!isset($_POST['token']) || empty($_POST['token'])) showError("Token not foun
 $token = $_POST["token"];
 $token_hash = hash("sha256", $token);
 
-$mysqli = require __DIR__ . "/ConnectDB.php";
+$mysqli = require __DIR__ . '/../ConnectDB.php';
 
-$sql = "SELECT * FROM user WHERE reset_token_hash = ?";
+$sql = "SELECT * FROM userauthentication WHERE reset_token_hash = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("s", $token_hash);
 $stmt->execute();
@@ -49,7 +49,7 @@ if (!isset($_POST["password"]) || !isset($_POST["confirm-password"])) showError(
 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 // Update the database
-$updateSql = "UPDATE user
+$updateSql = "UPDATE userauthentication
               SET password_hash = ?, reset_token_hash = NULL, reset_token_expires_at = NULL
               WHERE id = ?";
 $updateStmt = $mysqli->prepare($updateSql);
@@ -62,7 +62,7 @@ $updateStmt->execute();
     <meta charset="UTF-8">
     <title>Password Reset Success</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/ProcessResetPasswordStyles.css">
+    <link rel="stylesheet" href="../css/ProcessResetPasswordStyles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -70,7 +70,7 @@ $updateStmt->execute();
         <h2>Password Reset Successful</h2>
         <p class="success-message">Your password has been updated successfully.</p>
         <div class="login-link">
-            <a class="button-link" href="login.php">Go to Login <i class="bi bi-box-arrow-in-right"></i></a>
+            <a class="button-link" href="./login.php">Go to Login <i class="bi bi-box-arrow-in-right"></i></a>
         </div>
     </div>
 </body>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
-    <link rel="stylesheet" href="./style/ForgotPasswordStyles.css">
+    <link rel="stylesheet" href="../css/ForgotPasswordStyles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +13,7 @@
         <div class="forgot-password-box">
             <h2>Forgot Password</h2>
             <p id="info-message">Please enter your registered email. A reset password link will be sent to this email.</p>
-            <form method="POST" action="SendPasswordReset.php">
+            <form method="POST" action="./SendPasswordReset.php">
                 <div class="input-container">
                     <label for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="Enter your email">

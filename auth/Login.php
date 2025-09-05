@@ -2,7 +2,7 @@
 session_start();  // Start session to track the user
 
 // Include the database connection
-include('ConnectDB.php');
+include(__DIR__ . '/../ConnectDB.php');
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Successful login, create session
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['email'] = $user['email'];
-        header("Location: home.php");  // Redirect to homepage
+        header("Location: ../home.php");  // Redirect to homepage
         exit();
     } else {
         $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="./style/LoginStyles.css">
+    <link rel="stylesheet" href="../css/LoginStyles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -57,16 +57,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <small id="password-error" class="error-message"></small>
                     
                     <div class="forgot-password-link">
-                         <a href="ForgotPassword.php">Forgot your password? <i class="bi bi-box-arrow-up-right"></i></a>
+                         <a href="./ForgotPassword.php">Forgot your password? <i class="bi bi-box-arrow-up-right"></i></a>
                     </div>
                 </div>
                 <div class="action-buttons">
                     <button type="submit" class="login-btn">Log in</button>
-                    <button type="button" class="guest-btn" onclick="window.location.href='home.php';">Continue as Guest</button>
+                    <button type="button" class="guest-btn" onclick="window.location.href='../home.php';">Continue as Guest</button>
                 </div>
             </form>
             <div class="register-link">
-                <p>New customer? <a href="Register.php">Register Now <i class="bi bi-box-arrow-up-right"></i></a></p>
+                <p>New customer? <a href="./Register.php">Register Now <i class="bi bi-box-arrow-up-right"></i></a></p>
             </div>
         </div>
     </div>
