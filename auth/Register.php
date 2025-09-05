@@ -26,10 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $checkPhone->store_result();
 
         if ($checkEmail->num_rows > 0) {
-            $message = "Email already exists!";
+            $message = "Email already exists! <a href='./Login.php'>Click here to login</a>";
             $messageColor = "red";
         } elseif ($checkPhone->num_rows > 0) {
-            $message = "Phone number already exists!";
+            $message = "Phone number already exists! <a href='./Login.php'>Click here to login</a>";
             $messageColor = "red";
         } else {
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ssss", $name, $email, $phone, $hashed_password);
 
             if ($stmt->execute()) {
-                $message = "Registration Successful! <a href='./Login.php'>Click here to login</a>.";
+                $message = "Registration Successful! <a href='./Login.php'>Click here to login</a>";
                 $messageColor = "green";
             } else {
                 $message = "Error: " . $stmt->error;
