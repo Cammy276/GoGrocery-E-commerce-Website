@@ -14,14 +14,6 @@ GRANT SELECT, INSERT, UPDATE ON gogrocery.* TO 'grocery_customer'@'localhost';
 FLUSH PRIVILEGES;
 
 
-
-
--- Database Connection Management
--- User Setup
--- Developer/Admin User (full access to gogrocery DB only)
-CREATE USER 'gogrocery_dev'@'localhost' IDENTIFIED BY 'StrongDevPassword123!';
-GRANT ALL PRIVILEGES ON gogrocery.* TO 'gogrocery_dev'@'localhost';
-
 -- Customer User (limited access for frontend app)
 CREATE USER 'gogrocery_customer'@'localhost' IDENTIFIED BY 'StrongCustomerPassword123!';
 GRANT SELECT ON gogrocery.products TO 'gogrocery_customer'@'localhost';
@@ -51,7 +43,7 @@ GRANT SELECT, INSERT, DELETE ON gogrocery.wishlists TO 'gogrocery_customer'@'loc
 FLUSH PRIVILEGES;
 
 -- ========================================================================
--- Notes:
+-- Database Users Management:
 /* 'gogrocery_dev' 
 -> developer/admin, safer than using root
 -> Creating/modifying tables, Adding new columns, Updating products in bulk
