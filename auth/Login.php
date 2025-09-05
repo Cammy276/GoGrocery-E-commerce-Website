@@ -1,33 +1,40 @@
 <?php
-session_start();  // Start session to track the user
+session_start();  // Start session
 
 // Include the database connection
 include(__DIR__ . '/../ConnectDB.php');
 
-// Check if the form is submitted
+$message = "";
+$messageColor = "";
+
+// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Fetch user data from the database
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
-    $user = mysqli_fetch_assoc($result);
+    // Use prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM userauthentication WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-    // Verify password
     if ($user && password_verify($password, $user['password_hash'])) {
         // Successful login, create session
-        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['user_id'] = $user['id']; 
         $_SESSION['email'] = $user['email'];
-        header("Location: ../index.php");  // Redirect to homepage
+        header("Location: ../index.php");  
         exit();
     } else {
-        $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
         $message = "Invalid login credentials! Please try again.";
         $messageColor = "red";
     }
+
+    $stmt->close();
 }
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
