@@ -19,15 +19,15 @@ USE gogrocery;
 /* 2) Users & addresses */
 CREATE TABLE IF NOT EXISTS users (
   user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(120) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  password_hash VARBINARY(80) NOT NULL COMMENT 'bcrypt/argon2id hash – NEVER plaintext',
-  phone VARCHAR(20),
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  phone VARCHAR(20) UNIQUE NOT NULL,
   profile_image_url VARCHAR(500) NULL DEFAULT '/images/users/default.png'
     COMMENT 'Path or URL to user profile image',
+  password_hash VARBINARY(255) NOT NULL COMMENT 'bcrypt/argon2id hash – NEVER plaintext',
+  reset_token_hash VARCHAR(64),  
+  reset_token_expires_at DATETIME, 
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY uq_users_email (email),
-  UNIQUE KEY uq_users_phone (phone)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* 3) Product Brands */
@@ -222,25 +222,3 @@ CREATE TABLE IF NOT EXISTS contact_messages (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
     ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* 12) Useful sample data */
-INSERT INTO categories (name) VALUES
-  ('Fresh Produce'), ('Chilled & Frozen'), ('Food Essentials & Commodities'),
-  ('Snacks'), ('Beverages'), ('Household Products'), ('Beauty & Health')
-ON DUPLICATE KEY UPDATE name = VALUES(name);
-
-INSERT INTO brands (name) VALUES ('Generic'), ('Local Farm'), ('GoGrocery')
-ON DUPLICATE KEY UPDATE name = VALUES(name);
-
-INSERT INTO products (sku, product_name, brand_id, category_id, weight_volume, unit_price, product_description, is_new_arrival)
-VALUES
-  ('APL-RED-500G', 'Red Apples', 2, 1, '500 g', 5.90, 'Crisp and sweet red apples.', TRUE),
-  ('MLK-FRESH-1L', 'Fresh Milk', 1, 2, '1 L', 6.50, 'Pasteurized whole milk.', FALSE)
-ON DUPLICATE KEY UPDATE product_name = VALUES(product_name), unit_price = VALUES(unit_price);
-
-INSERT INTO product_images (product_id, image_url, alt_text, sort_order, is_primary)
-SELECT p.product_id, '/images/products/' || p.sku || '_1.jpg', CONCAT(p.product_name, ' image'), 1, TRUE
-FROM products p
-WHERE NOT EXISTS (
-  SELECT 1 FROM product_images i WHERE i.product_id = p.product_id AND i.sort_order = 1
-);
