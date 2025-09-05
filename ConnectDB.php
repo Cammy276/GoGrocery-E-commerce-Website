@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root"; 
 $password = ""; 
-$dbname = "gogrocery-e-commerce-website"; 
+$dbname = "gogrocery"; 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
