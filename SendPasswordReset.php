@@ -20,7 +20,7 @@ $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
 $mysqli = require __DIR__ . "/ConnectDB.php"; // Ensure this returns the connection
 
 // Prepare the SQL query to update the user's reset token and expiry time
-$sql = "UPDATE user SET reset_token_hash = ?, reset_token_expires_at = ? WHERE email = ?";
+$sql = "UPDATE userauthentication SET reset_token_hash = ?, reset_token_expires_at = ? WHERE email = ?";
 
 // Prepare and bind the statement
 $stmt = $mysqli->prepare($sql);

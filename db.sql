@@ -17,12 +17,12 @@ CREATE DATABASE IF NOT EXISTS gogrocery
 USE gogrocery;
 
 /* 2) Reference tables */
-CREATE TABLE user (
+CREATE TABLE userauthentication (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
     phone_number VARCHAR(15) UNIQUE NOT NULL,  
-    password_hash VARCHAR(255) NOT NULL,  
+    password_hash VARCHAR(200) NOT NULL,  
     reset_token_hash VARCHAR(64),  
     reset_token_expires_at DATETIME,  
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -106,8 +106,8 @@ CREATE TABLE IF NOT EXISTS products (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* Optional: Fulltext search */
-CREATE FULLTEXT INDEX IF NOT EXISTS ft_products_name_desc
-  ON products (product_name, product_description);
+CREATE FULLTEXT INDEX ft_products_name_desc
+ON products (product_name, product_description);
 
 /* 5) Product images (recommended: store URLs/paths, not BLOBs) */
 CREATE TABLE IF NOT EXISTS product_images (

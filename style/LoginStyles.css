@@ -123,9 +123,6 @@ input[type="password"].error {
     right: 40px; 
 }
 
-.password-container {
-    position: relative;
-}
 .forgot-password-link {
     width: 106%;
     text-align: right;

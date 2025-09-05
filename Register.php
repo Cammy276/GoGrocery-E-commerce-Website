@@ -1,6 +1,9 @@
 <?php
 include('ConnectDB.php');
 
+$message = "";
+$messageColor = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -9,26 +12,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_password = $_POST['confirm-password'];
 
     if ($password !== $confirm_password) {
-        echo "Passwords do not match!";
-        exit;
-    }
-
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    $stmt = $conn->prepare("INSERT INTO user (name, email, phone_number, password_hash) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $phone, $hashed_password);
-
-    if ($stmt->execute()) {
-        header("Location: Login.php");
-        exit;
+        $message = "Passwords do not match!";
+        $messageColor = "red";
     } else {
-        echo "Error: " . $stmt->error;
+        $checkEmail = $conn->prepare("SELECT id FROM userauthentication WHERE email = ?");
+        $checkEmail->bind_param("s", $email);
+        $checkEmail->execute();
+        $checkEmail->store_result();
+
+        $checkPhone = $conn->prepare("SELECT id FROM userauthentication WHERE phone_number = ?");
+        $checkPhone->bind_param("s", $phone);
+        $checkPhone->execute();
+        $checkPhone->store_result();
+
+        if ($checkEmail->num_rows > 0) {
+            $message = "Email already exists!";
+            $messageColor = "red";
+        } elseif ($checkPhone->num_rows > 0) {
+            $message = "Phone number already exists!";
+            $messageColor = "red";
+        } else {
+
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("INSERT INTO userauthentication(name, email, phone_number, password_hash) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $name, $email, $phone, $hashed_password);
+
+            if ($stmt->execute()) {
+                $message = "Registration Successful! <a href='Login.php'>Click here to login</a>.";
+                $messageColor = "green";
+            } else {
+                $message = "Error: " . $stmt->error;
+                $messageColor = "red";
+            }
+            $stmt->close();
+        }
+
+        $checkEmail->close();
+        $checkPhone->close();
     }
 
-    $stmt->close();
     $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="register-container">
         <div class="register-box">
             <h2>Sign Up</h2>
+            <p id="register-success-message" style="color: <?= htmlspecialchars($messageColor) ?>;">
+            <?= $message ?>
+            </p>
             <form id="register-form" method="POST">
                 <div class="input-container">
                     <label for="name">Name</label>
@@ -80,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="action-buttons">
                     <button type="submit" class="register-btn">Register</button>
-</div>
+                </div>
             </form>
             <div class="login-link">
                 <p>Already have an account? <a href="login.php">Log in <i class="bi bi-box-arrow-up-right"></i></a></p>

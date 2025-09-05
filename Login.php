@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Fetch user data from the database
-    $sql = "SELECT * FROM user WHERE email='$email'";
+    $sql = "SELECT * FROM userauthentication WHERE email='$email'";
     $result = mysqli_query($conn, $sql);
     $user = mysqli_fetch_assoc($result);
 
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Successful login, create session
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['email'] = $user['email'];
-        header("Location: Homepage.php");  // Redirect to homepage
+        header("Location: home.php");  // Redirect to homepage
         exit();
     } else {
         $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
@@ -50,18 +50,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="input-container">
                     <label for="password">Password</label>
-                    <div class="password-container">
+                    <div style="position: relative;">
                         <input type="password" id="password" name="password" placeholder="Enter your password">
                         <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:1px; top:45%; transform:translateY(-50%);"></i>
-                        <small id="password-error" class="error-message"></small>
                     </div>
+                    <small id="password-error" class="error-message"></small>
+                    
                     <div class="forgot-password-link">
                          <a href="ForgotPassword.php">Forgot your password? <i class="bi bi-box-arrow-up-right"></i></a>
                     </div>
                 </div>
                 <div class="action-buttons">
                     <button type="submit" class="login-btn">Log in</button>
-                    <button type="button" class="guest-btn" onclick="window.location.href='Homepage.php';">Continue as Guest</button>
+                    <button type="button" class="guest-btn" onclick="window.location.href='home.php';">Continue as Guest</button>
                 </div>
             </form>
             <div class="register-link">
