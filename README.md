@@ -4,7 +4,7 @@ GoGrocery E-Commerce Website
 GoGrocery is a PHP + MySQL e-commerce web application.  
 This repository includes everything needed to set up the project locally:
 - Database schema (db.sql)
-- User accounts (grocery_dev & grocery_customer)
+- User accounts (grocery_customer (default) & grocery_dev (optional))
 - .env configuration
 - Composer dependencies
 
