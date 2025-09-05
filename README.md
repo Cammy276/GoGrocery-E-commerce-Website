@@ -46,23 +46,18 @@ composer -V
 ------------------------------------------------------------
 🗄️ 3. Setup MySQL Database
 ------------------------------------------------------------
-Step 1: Create Database
-Log in as root (via phpMyAdmin or CLI):
-<pre>CREATE DATABASE gogrocery CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</pre>
+Step 1: Create Database & Import Schema
+The database & schema file db.sql is already prepared.  
+Import it as root:
+<pre>mysql -u root -p gogrocery < db.sql</pre>
 
 Step 2: Create Users
 Run the script provided in users.sql:
 <pre>mysql -u root -p < users.sql</pre>
 
 This creates:
-- grocery_customer → frontend customer access
-- grocery_dev → admin / development access
-
-Step 3: Import Schema
-The schema file db.sql is already prepared.  
-Import it as root:
-<pre>mysql -u root -p gogrocery < db.sql</pre>
-
+- grocery_customer → frontend customer access (use for backend development without modifying database schema)
+  
 ------------------------------------------------------------
 🔑 4. Setup Environment File
 ------------------------------------------------------------
@@ -75,12 +70,19 @@ Windows PowerShell:
 
 Default .env:
 <pre>
+# Database host and name
 DB_HOST=localhost
 DB_NAME=gogrocery
-DB_USER=grocery_customer
+
+# Developer / admin account (full privileges)
+DB_ADMIN_USER=root
+DB_ADMIN_PASS=
+
+# Application / customer account (limited privileges)
+DB_USER=gogrocery_customer
 DB_PASS=StrongCustomerPassword123!
 
-# Optional: admin creds (used only for migrations/scripts)
+# Optional (alternative for root if you don't want to mix with root account): admin creds (used only for migrations/scripts)
 DB_ADMIN_USER=grocery_dev
 DB_ADMIN_PASS=StrongDevPassword123!
 </pre>
@@ -108,7 +110,7 @@ Then open http://localhost:8000
 ------------------------------------------------------------
 🧪 7. Test Database Connection
 ------------------------------------------------------------
-<pre>php config.php</pre>
+<pre>php db_connect.php</pre>
 
 Expected:
 ✅ Database connection successful!
@@ -129,7 +131,7 @@ gogrocery/
 │── users.sql         # Creates MySQL users + grants privileges
 │── .env.example      # Template environment config
 │── .env              # Your environment file (not committed to git)
-│── config.php        # Database connection test
+│── db_connect.php        # Database connection test
 │── composer.json     # Composer dependencies
 │── composer.lock     # Composer lockfile
 │── public/           # Web root (index.php, assets, etc.)
@@ -148,7 +150,7 @@ Do not commit:
 ------------------------------------------------------------
 👥 Developer Notes
 ------------------------------------------------------------
-- Use grocery_dev for migrations/admin tasks
+- Use grocery_dev for migrations/admin tasks (optional: alternative for root)
 - Use grocery_customer for frontend testing
 - Each developer must:
   1. Run users.sql as root
@@ -244,7 +246,7 @@ composer install
 notepad .env
 
 # test
-php config.php
+php db_connect.php
 
 # start WAMP and visit in browser:
 http://localhost/GoGrocery-Ecommerce/
