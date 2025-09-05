@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #009c99;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+input[type="text"].error,
+input[type="password"].error {
+    border: 1px solid red;
+}
+.error-message {
+    display: none;
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.show-password {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.action-buttons {
+    margin-top: 20px;
+}
+
+.login-btn,
+.guest-btn {
+    width: 106%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.login-btn {
+    background-color:  #009c99;
+    color: white;
+}
+
+.login-btn:hover {
+    background-color:  #10adab;
+}
+.guest-btn {
+    background-color: #0c0b0b40;
+    color: #333;
+}
+
+.guest-btn:hover {
+    background-color: #c4c0c0;
+}
+
+.register-link {
+    margin-top: 20px;
+}
+
+.register-link a {
+    color: #009c99;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+.show-password,
+.clear-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.clear-password {
+    right: 40px; 
+}
+
+.password-container {
+    position: relative;
+}
+.forgot-password-link {
+    width: 106%;
+    text-align: right;
+    margin-top: 10px; 
+   
+    
+}
+
+.forgot-password-link a {
+    font-size: 14px;
+    color:  #009c99; 
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.forgot-password-link a:hover {
+    text-decoration: underline;
+}
