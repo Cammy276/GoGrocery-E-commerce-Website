@@ -123,6 +123,8 @@ Check:
 2. Users exist (users.sql executed)
 3. db.sql imported into gogrocery
 
+**You may need to run <pre>composer require vlucas/phpdotenv</pre> in the project root & run again the <pre>php connect_db.php</pre>
+
 ------------------------------------------------------------
 📂 Project Structure
 ------------------------------------------------------------
