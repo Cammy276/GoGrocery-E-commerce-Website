@@ -10,20 +10,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Fetch user data from the database
-    $sql = "SELECT * FROM userauthentication WHERE email='$email'";
+    $sql = "SELECT * FROM users WHERE email='$email'";
     $result = mysqli_query($conn, $sql);
     $user = mysqli_fetch_assoc($result);
 
     // Verify password
     if ($user && password_verify($password, $user['password_hash'])) {
         // Successful login, create session
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['email'] = $user['email'];
-        header("Location: ../home.php");  // Redirect to homepage
+        header("Location: ../index.php");  // Redirect to homepage
         exit();
     } else {
         $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
-        echo "<script>alert('Invalid login credentials!');</script>";
+        $message = "Invalid login credentials! Please try again.";
+        $messageColor = "red";
     }
 }
 ?>
@@ -42,6 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login-container">
         <div class="login-box">
             <h2>Log in</h2>
+             <p id="login-error-message" style="color: <?= htmlspecialchars($messageColor) ?>;">
+            <?= $message ?>
+            </p>
             <form method="POST">
                 <div class="input-container">
                     <label for="email">Email</label>

@@ -15,12 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Passwords do not match!";
         $messageColor = "red";
     } else {
-        $checkEmail = $conn->prepare("SELECT id FROM userauthentication WHERE email = ?");
+        $checkEmail = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
         $checkEmail->bind_param("s", $email);
         $checkEmail->execute();
         $checkEmail->store_result();
 
-        $checkPhone = $conn->prepare("SELECT id FROM userauthentication WHERE phone_number = ?");
+        $checkPhone = $conn->prepare("SELECT user_id FROM users WHERE phone = ?");
         $checkPhone->bind_param("s", $phone);
         $checkPhone->execute();
         $checkPhone->store_result();
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
 
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("INSERT INTO userauthentication(name, email, phone_number, password_hash) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO users(name, email, phone, password_hash) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $name, $email, $phone, $hashed_password);
 
             if ($stmt->execute()) {

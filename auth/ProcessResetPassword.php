@@ -34,7 +34,7 @@ $token_hash = hash("sha256", $token);
 
 $mysqli = require __DIR__ . '/../ConnectDB.php';
 
-$sql = "SELECT * FROM userauthentication WHERE reset_token_hash = ?";
+$sql = "SELECT * FROM users WHERE reset_token_hash = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("s", $token_hash);
 $stmt->execute();
@@ -49,11 +49,11 @@ if (!isset($_POST["password"]) || !isset($_POST["confirm-password"])) showError(
 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 // Update the database
-$updateSql = "UPDATE userauthentication
+$updateSql = "UPDATE users
               SET password_hash = ?, reset_token_hash = NULL, reset_token_expires_at = NULL
-              WHERE id = ?";
+              WHERE user_id = ?";
 $updateStmt = $mysqli->prepare($updateSql);
-$updateStmt->bind_param("si", $password_hash, $user["id"]);
+$updateStmt->bind_param("si", $password_hash, $user["user_id"]);
 $updateStmt->execute();
 ?>
 <!DOCTYPE html>

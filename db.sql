@@ -18,7 +18,7 @@ USE gogrocery;
 
 /* 2) Users & addresses */
 CREATE TABLE IF NOT EXISTS users (
-  user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   phone VARCHAR(20) UNIQUE NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS users (
   password_hash VARBINARY(255) NOT NULL COMMENT 'bcrypt/argon2id hash – NEVER plaintext',
   reset_token_hash VARCHAR(64),  
   reset_token_expires_at DATETIME, 
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* 3) Product Brands */
@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS brands (
   name VARCHAR(120) NOT NULL,
   slug VARCHAR(140) GENERATED ALWAYS AS (
   REGEXP_REPLACE(LOWER(name), '[^a-z0-9]+', '_')
-  ) STORED
+  ) STORED,
   UNIQUE KEY uq_brand_name (name),
-  UNIQUE KEY uq_brand_slug (slug),
+  UNIQUE KEY uq_brand_slug (slug)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*
 REPLACE(LOWER(name), ' ', '-'):
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS categories (
   parent_id INT UNSIGNED NULL,
   slug VARCHAR(140) GENERATED ALWAYS AS (
   REGEXP_REPLACE(LOWER(name), '[^a-z0-9]+', '_')
-  ) STORED
+  ) STORED,
   UNIQUE KEY uq_cat_name (name),
   UNIQUE KEY uq_cat_slug (slug),
   CONSTRAINT fk_categories_parent
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS orders (
   order_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id BIGINT UNSIGNED NOT NULL,
   address_id BIGINT UNSIGNED NULL,
-  status ENUM('paid','delivered') NOT NULL DEFAULT 'paid'
+  status ENUM('paid','delivered') NOT NULL DEFAULT 'paid',
   -- user places (and pays) the order → status = paid
   -- user later clicks “Received” → status = delivered
   payment_method ENUM('card','bank_transfer', 'e_wallet','grabpay','fpx') NOT NULL,
