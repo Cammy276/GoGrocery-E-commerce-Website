@@ -10,7 +10,7 @@ function showError($message) {
         <meta charset="UTF-8">
         <title>Error</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/ProcessResetPasswordStyles.css">
+        <link rel="stylesheet" href="../css/process_reset_password_styles.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
