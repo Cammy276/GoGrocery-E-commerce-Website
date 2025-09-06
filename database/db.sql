@@ -11,7 +11,7 @@ CREATE DATABASE IF NOT EXISTS gogrocery
 -- Selects the DB for all objects that follow
 USE gogrocery;
 
-/* 2) Users & addresses */
+/* 2) Users */
 CREATE TABLE IF NOT EXISTS users (
   user_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -161,17 +161,15 @@ CREATE TABLE IF NOT EXISTS wishlists (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* 10) Orders */
-/* 10) Orders */
 CREATE TABLE IF NOT EXISTS orders (
   order_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED NOT NULL,
   address_id INT UNSIGNED NOT NULL,                          -- required for delivery
-  status ENUM('paid','delivered') NOT NULL DEFAULT 'paid'
+  status ENUM('paid','delivered') NOT NULL DEFAULT 'paid',
     /*
     paid: Order has been placed and paid by the customer, but not yet confirmed received.
     delivered: Customer has clicked “Received,” confirming they got the order.
     */
-  ,
   payment_method ENUM('card','bank_transfer','e_wallet','grabpay','fpx') NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
