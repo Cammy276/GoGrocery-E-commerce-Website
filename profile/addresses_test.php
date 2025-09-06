@@ -1,11 +1,6 @@
 <?php
-// Database connection
-$host = 'localhost';
-$db   = 'gogrocery';
-$user = 'gogrocery_customer';
-$pass = 'StrongCustomerPassword123!';
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+// Include the database connection
+include(__DIR__ . '/../connect_db.php');
 
 // Fetch ENUM values for state_territory dynamically
 $enum_values = [];

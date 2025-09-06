@@ -2070,7 +2070,7 @@ INSERT INTO products
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-AS-001'),
-      'image/products/fresh_produces/vegetables/asparagus_shoots/green_asparagus_bunch.jpg',
+      '../images/products/fresh_produces/vegetables/asparagus_shoots/green_asparagus_bunch.png',
       'Green Asparagus Bunch',
       '2025-08-30 10:16:10'
     );
@@ -2078,7 +2078,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-BP-002'),
-      'image/products/fresh_produces/vegetables/beans_peas/sugar_snap_peas.jpg',
+      '../images/products/fresh_produces/vegetables/beans_peas/sugar_snap_peas.png',
       'Sugar Snap Peas',
       '2025-08-17 11:13:14'
     );
@@ -2086,7 +2086,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-BC-003'),
-      'image/products/fresh_produces/vegetables/broccoli_cabbages/broccoli_crown.jpg',
+      '../images/products/fresh_produces/vegetables/broccoli_cabbages/broccoli_crown.png',
       'Broccoli Crown',
       '2025-08-04 02:44:55'
     );
@@ -2094,7 +2094,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-CP-004'),
-      'image/products/fresh_produces/vegetables/carrots_potatoes/baby_carrots.jpg',
+      '../images/products/fresh_produces/vegetables/carrots_potatoes/baby_carrots.png',
       'Baby Carrots',
       '2025-08-04 02:53:49'
     );
@@ -2102,7 +2102,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-CS-005'),
-      'image/products/fresh_produces/vegetables/cucumbers_squash/japanese_cucumber.jpg',
+      '../images/products/fresh_produces/vegetables/cucumbers_squash/japanese_cucumber.png',
       'Japanese Cucumber',
       '2025-08-25 12:28:03'
     );
@@ -2110,7 +2110,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-CC-006'),
-      'image/products/fresh_produces/vegetables/chili_capsicum/red_capsicum.jpg',
+      '../images/products/fresh_produces/vegetables/chili_capsicum/red_capsicum.png',
       'Red Capsicum',
       '2025-08-26 05:51:03'
     );
@@ -2118,7 +2118,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-HX-007'),
-      'image/products/fresh_produces/vegetables/herbs/fresh_basil.jpg',
+      '../images/products/fresh_produces/vegetables/herbs/fresh_basil.png',
       'Fresh Basil',
       '2025-08-22 07:42:45'
     );
@@ -2126,7 +2126,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-LV-008'),
-      'image/products/fresh_produces/vegetables/leafy_vegetables/romaine_lettuce.jpg',
+      '../images/products/fresh_produces/vegetables/leafy_vegetables/romaine_lettuce.png',
       'Romaine Lettuce',
       '2025-08-03 21:39:00'
     );
@@ -2134,7 +2134,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-MF-009'),
-      'image/products/fresh_produces/vegetables/mushrooms_fungi/brown_button_mushrooms.jpg',
+      '../images/products/fresh_produces/vegetables/mushrooms_fungi/brown_button_mushrooms.png',
       'Brown Button Mushrooms',
       '2025-08-12 05:56:53'
     );
@@ -2142,7 +2142,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-VX-OG-010'),
-      'image/products/fresh_produces/vegetables/onions_garlic/yellow_onions.jpg',
+      '../images/products/fresh_produces/vegetables/onions_garlic/yellow_onions.png',
       'Yellow Onions',
       '2025-08-23 13:08:11'
     );
@@ -2150,7 +2150,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-FX-AX-011'),
-      'image/products/fresh_produces/fruits/apples/crisp_green_apples.jpg',
+      '../images/products/fresh_produces/fruits/apples/crisp_green_apples.png',
       'Crisp Green Apples',
       '2025-08-27 04:58:30'
     );
@@ -2158,7 +2158,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-FX-BG-012'),
-      'image/products/fresh_produces/fruits/berries_grapes/seedless_red_grapes.jpg',
+      '../images/products/fresh_produces/fruits/berries_grapes/seedless_red_grapes.png',
       'Seedless Red Grapes',
       '2025-08-26 12:24:15'
     );
@@ -2166,7 +2166,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-FX-CO-013'),
-      'image/products/fresh_produces/fruits/citrus_oranges/sweet_navel_oranges.jpg',
+      '../images/products/fresh_produces/fruits/citrus_oranges/sweet_navel_oranges.png',
       'Sweet Navel Oranges',
       '2025-08-19 06:15:37'
     );
@@ -2174,7 +2174,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-FX-MX-014'),
-      'image/products/fresh_produces/fruits/melons/honeydew_melon.jpg',
+      '../images/products/fresh_produces/fruits/melons/honeydew_melon.png',
       'Honeydew Melon',
       '2025-08-15 10:58:07'
     );
@@ -2182,7 +2182,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-FX-PX-015'),
-      'image/products/fresh_produces/fruits/pears/juicy_packham_pears.jpg',
+      '../images/products/fresh_produces/fruits/pears/juicy_packham_pears.png',
       'Juicy Packham Pears',
       '2025-08-29 03:59:30'
     );
@@ -2190,7 +2190,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-FX-SF-016'),
-      'image/products/fresh_produces/fruits/stone_fruits/yellow_peaches.jpg',
+      '../images/products/fresh_produces/fruits/stone_fruits/yellow_peaches.png',
       'Yellow Peaches',
       '2025-08-29 13:03:21'
     );
@@ -2198,7 +2198,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-FX-TF-017'),
-      'image/products/fresh_produces/fruits/tropical_fruits/ripe_mangos.jpg',
+      '../images/products/fresh_produces/fruits/tropical_fruits/ripe_mangos.png',
       'Ripe Mangos',
       '2025-08-21 02:41:14'
     );
@@ -2206,7 +2206,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-MP-CX-018'),
-      'image/products/fresh_produces/meat_poultry/chicken/chicken_breast_fillet.jpg',
+      '../images/products/fresh_produces/meat_poultry/chicken/chicken_breast_fillet.png',
       'Chicken Breast Fillet',
       '2025-08-27 01:56:05'
     );
@@ -2214,7 +2214,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-MP-PX-019'),
-      'image/products/fresh_produces/meat_poultry/pork/pork_loin_slices.jpg',
+      '../images/products/fresh_produces/meat_poultry/pork/pork_loin_slices.png',
       'Pork Loin Slices',
       '2025-08-31 00:08:33'
     );
@@ -2222,7 +2222,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-MP-BX-020'),
-      'image/products/fresh_produces/meat_poultry/beef/beef_sirloin.jpg',
+      '../images/products/fresh_produces/meat_poultry/beef/beef_sirloin.png',
       'Beef Sirloin',
       '2025-08-31 14:32:23'
     );
@@ -2230,7 +2230,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-MP-LX-021'),
-      'image/products/fresh_produces/meat_poultry/lamb/lamb_shoulder_chops.jpg',
+      '../images/products/fresh_produces/meat_poultry/lamb/lamb_shoulder_chops.png',
       'Lamb Shoulder Chops',
       '2025-08-19 04:26:30'
     );
@@ -2238,7 +2238,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-SX-FX-022'),
-      'image/products/fresh_produces/seafood/fish/salmon_fillet.jpg',
+      '../images/products/fresh_produces/seafood/fish/salmon_fillet.png',
       'Salmon Fillet',
       '2025-08-30 11:32:06'
     );
@@ -2246,7 +2246,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-SX-PX-023'),
-      'image/products/fresh_produces/seafood/prawn/large_tiger_prawns.jpg',
+      '../images/products/fresh_produces/seafood/prawn/large_tiger_prawns.png',
       'Large Tiger Prawns',
       '2025-08-10 03:08:20'
     );
@@ -2254,7 +2254,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-SX-CX-024'),
-      'image/products/fresh_produces/seafood/crab/cleaned_mud_crab.jpg',
+      '../images/products/fresh_produces/seafood/crab/cleaned_mud_crab.png',
       'Cleaned Mud Crab',
       '2025-08-18 00:26:50'
     );
@@ -2262,7 +2262,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-SX-SX-025'),
-      'image/products/fresh_produces/seafood/squid/cleaned_squid_rings.jpg',
+      '../images/products/fresh_produces/seafood/squid/cleaned_squid_rings.png',
       'Cleaned Squid Rings',
       '2025-08-10 01:24:12'
     );
@@ -2270,7 +2270,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-SX-CX-026'),
-      'image/products/fresh_produces/seafood/clam/live_clams.jpg',
+      '../images/products/fresh_produces/seafood/clam/live_clams.png',
       'Live Clams',
       '2025-08-28 09:00:21'
     );
@@ -2278,7 +2278,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FP-EX-EX-027'),
-      'image/products/fresh_produces/egg/farm_eggs_grade_a.jpg',
+      '../images/products/fresh_produces/egg/farm_eggs_grade_a.png',
       'Farm Eggs (Grade A)',
       '2025-08-04 20:43:38'
     );
@@ -2286,7 +2286,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-DP-MX-028'),
-      'image/products/chilled_frozen/dairy_produces/milk/full_cream_milk.jpg',
+      '../images/products/chilled_frozen/dairy_produces/milk/full_cream_milk.png',
       'Full Cream Milk',
       '2025-08-21 15:08:38'
     );
@@ -2294,7 +2294,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-DP-YX-029'),
-      'image/products/chilled_frozen/dairy_produces/yogurt/greek_style_yogurt.jpg',
+      '../images/products/chilled_frozen/dairy_produces/yogurt/greek_style_yogurt.png',
       'Greek-Style Yogurt',
       '2025-08-12 14:28:27'
     );
@@ -2302,7 +2302,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-DP-CX-030'),
-      'image/products/chilled_frozen/dairy_produces/cheese/mild_cheddar_cheese.jpg',
+      '../images/products/chilled_frozen/dairy_produces/cheese/mild_cheddar_cheese.png',
       'Mild Cheddar Cheese',
       '2025-08-03 23:27:31'
     );
@@ -2310,7 +2310,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-DP-BM-031'),
-      'image/products/chilled_frozen/dairy_produces/butter_margarine/creamy_salted_butter.jpg',
+      '../images/products/chilled_frozen/dairy_produces/butter_margarine/creamy_salted_butter.png',
       'Creamy Salted Butter',
       '2025-08-26 08:43:48'
     );
@@ -2318,7 +2318,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-DP-CX-032'),
-      'image/products/chilled_frozen/dairy_produces/cream/cooking_cream.jpg',
+      '../images/products/chilled_frozen/dairy_produces/cream/cooking_cream.png',
       'Cooking Cream',
       '2025-08-22 20:16:31'
     );
@@ -2326,7 +2326,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-CD-JX-033'),
-      'image/products/chilled_frozen/chilled_drinks/juice/apple_juice.jpg',
+      '../images/products/chilled_frozen/chilled_drinks/juice/apple_juice.png',
       'Apple Juice',
       '2025-09-02 07:03:28'
     );
@@ -2334,7 +2334,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-CD-YD-034'),
-      'image/products/chilled_frozen/chilled_drinks/yogurt_drink/strawberry_yogurt_drink.jpg',
+      '../images/products/chilled_frozen/chilled_drinks/yogurt_drink/strawberry_yogurt_drink.png',
       'Strawberry Yogurt Drink',
       '2025-08-03 09:53:56'
     );
@@ -2342,7 +2342,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-CD-SM-035'),
-      'image/products/chilled_frozen/chilled_drinks/soy_milk/original_soy_milk.jpg',
+      '../images/products/chilled_frozen/chilled_drinks/soy_milk/original_soy_milk.png',
       'Original Soy Milk',
       '2025-08-12 03:59:52'
     );
@@ -2350,7 +2350,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-FF-FM-036'),
-      'image/products/chilled_frozen/frozen_food/frozen_meals/frozen_chicken_lasagne.jpg',
+      '../images/products/chilled_frozen/frozen_food/frozen_meals/frozen_chicken_lasagne.png',
       'Frozen Chicken Lasagne',
       '2025-08-08 05:03:46'
     );
@@ -2358,7 +2358,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-FF-FMP-037'),
-      'image/products/chilled_frozen/frozen_food/frozen_meat_poultry/frozen_beef_meatballs.jpg',
+      '../images/products/chilled_frozen/frozen_food/frozen_meat_poultry/frozen_beef_meatballs.png',
       'Frozen Beef Meatballs',
       '2025-08-14 14:12:39'
     );
@@ -2366,7 +2366,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-FF-FMP-038'),
-      'image/products/chilled_frozen/frozen_food/frozen_meat_poultry/frozen_breaded_chicken.jpg',
+      '../images/products/chilled_frozen/frozen_food/frozen_meat_poultry/frozen_breaded_chicken.png',
       'Frozen Breaded Chicken',
       '2025-08-25 11:03:45'
     );
@@ -2374,7 +2374,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-FF-FPA-039'),
-      'image/products/chilled_frozen/frozen_food/frozen_puff_and_pastry/frozen_puff_pastry_sheets.jpg',
+      '../images/products/chilled_frozen/frozen_food/frozen_puff_pastry/frozen_puff_pastry_sheets.png',
       'Frozen Puff Pastry Sheets',
       '2025-08-31 22:31:56'
     );
@@ -2382,7 +2382,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-FF-FS-040'),
-      'image/products/chilled_frozen/frozen_food/frozen_seafood/frozen_fish_fillets.jpg',
+      '../images/products/chilled_frozen/frozen_food/frozen_seafood/frozen_fish_fillets.png',
       'Frozen Fish Fillets',
       '2025-08-22 02:24:19'
     );
@@ -2390,7 +2390,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-FF-FV-041'),
-      'image/products/chilled_frozen/frozen_food/frozen_vegetables/frozen_mixed_vegetables.jpg',
+      '../images/products/chilled_frozen/frozen_food/frozen_vegetables/frozen_mixed_vegetables.png',
       'Frozen Mixed Vegetables',
       '2025-08-19 08:04:26'
     );
@@ -2398,7 +2398,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='CF-FF-FF-042'),
-      'image/products/chilled_frozen/frozen_food/frozen_fruits/frozen_mixed_berries.jpg',
+      '../images/products/chilled_frozen/frozen_food/frozen_fruits/frozen_mixed_berries.png',
       'Frozen Mixed Berries',
       '2025-08-31 02:41:21'
     );
@@ -2406,7 +2406,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SH-045'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/spices_herbs/ground_turmeric_powder.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/spices_herbs/ground_turmeric_powder.png',
       'Ground Turmeric Powder',
       '2025-09-01 21:37:24'
     );
@@ -2414,7 +2414,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SDT-046'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/salad_dressings_toppings/classic_caesar_dressing.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/salad_dressings_toppings/classic_caesar_dressing.png',
       'Classic Caesar Dressing',
       '2025-08-26 21:30:15'
     );
@@ -2422,7 +2422,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-CP-047'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/cooking_pastes/aromatic_curry_paste.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/cooking_pastes/aromatic_curry_paste.png',
       'Aromatic Curry Paste',
       '2025-08-16 04:07:49'
     );
@@ -2430,7 +2430,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SG-048'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/stocks_gravies/chicken_stock_cubes.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/stocks_gravies/chicken_stock_cubes.png',
       'Chicken Stock Cubes',
       '2025-08-21 08:45:55'
     );
@@ -2438,7 +2438,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SS-049'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/soy_sauces/naturally_brewed_soy_sauce.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/soy_sauces/naturally_brewed_soy_sauce.png',
       'Naturally Brewed Soy Sauce',
       '2025-08-19 01:01:28'
     );
@@ -2446,7 +2446,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-HS-050'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/hot_sauces/hot_chili_sauce.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/hot_sauces/hot_chili_sauce.png',
       'Hot Chili Sauce',
       '2025-08-07 09:56:10'
     );
@@ -2454,7 +2454,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-DS-051'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/dipping_sauces/garlic_dipping_sauce.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/dipping_sauces/garlic_dipping_sauce.png',
       'Garlic Dipping Sauce',
       '2025-08-26 09:45:25'
     );
@@ -2462,7 +2462,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SB-052'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/soup_bases/miso_soup_base.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/soup_bases/miso_soup_base.png',
       'Miso Soup Base',
       '2025-08-21 04:35:25'
     );
@@ -2470,7 +2470,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-CO-053'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/cooking_oils/pure_sunflower_oil.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/cooking_oils/pure_sunflower_oil.png',
       'Pure Sunflower Oil',
       '2025-08-10 08:17:56'
     );
@@ -2478,7 +2478,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-CL-054'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/cooking_liquids/cooking_wine_substitute.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/cooking_liquids/cooking_wine_substitute.png',
       'Cooking Wine Substitute',
       '2025-08-12 08:45:53'
     );
@@ -2486,7 +2486,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SP-055'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/salt_pepper/sea_salt_grinder.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/salt_pepper/sea_salt_grinder.png',
       'Sea Salt Grinder',
       '2025-08-08 02:56:48'
     );
@@ -2494,7 +2494,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-VX-056'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/vinegar/apple_cider_vinegar.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/vinegar/apple_cider_vinegar.png',
       'Apple Cider Vinegar',
       '2025-08-06 03:13:43'
     );
@@ -2502,7 +2502,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SS-057'),
-      'image/products/food_essentials_commodities/cooking_ingredients_seasoning/sugar_sweeteners/fine_white_sugar.jpg',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/sugar_sweeteners/fine_white_sugar.png',
       'Fine White Sugar',
       '2025-08-26 23:05:28'
     );
@@ -2510,7 +2510,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-PIF-IN-059'),
-      'image/products/food_essentials_commodities/pasta_instant_food/instant_noodles/chicken_flavour_instant_noodles.jpg',
+      '../images/products/food_essentials_commodities/pasta_instant_food/instant_noodles/chicken_flavour_instant_noodles.png',
       'Chicken Flavour Instant Noodles',
       '2025-09-01 01:48:24'
     );
@@ -2518,7 +2518,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-PIF-PX-060'),
-      'image/products/food_essentials_commodities/pasta_instant_food/pasta/spaghetti_pasta.jpg',
+      '../images/products/food_essentials_commodities/pasta_instant_food/pasta/spaghetti_pasta.png',
       'Spaghetti Pasta',
       '2025-08-25 13:25:17'
     );
@@ -2526,7 +2526,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-PIF-IS-061'),
-      'image/products/food_essentials_commodities/pasta_instant_food/instant_soup/cream_of_mushroom_soup.jpg',
+      '../images/products/food_essentials_commodities/pasta_instant_food/instant_soup/cream_of_mushroom_soup.png',
       'Cream of Mushroom Soup',
       '2025-08-03 14:04:54'
     );
@@ -2534,7 +2534,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-PIF-IPR-062'),
-      'image/products/food_essentials_commodities/pasta_instant_food/instant_porridge_rice/instant_chicken_porridge.jpg',
+      '../images/products/food_essentials_commodities/pasta_instant_food/instant_porridge_rice/instant_chicken_porridge.png',
       'Instant Chicken Porridge',
       '2025-08-28 09:05:50'
     );
@@ -2542,7 +2542,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CF-CV-063'),
-      'image/products/food_essentials_commodities/canned_food/canned_vegetables/canned_sweet_corn.jpg',
+      '../images/products/food_essentials_commodities/canned_food/canned_vegetables/canned_sweet_corn.png',
       'Canned Sweet Corn',
       '2025-08-04 05:27:29'
     );
@@ -2550,7 +2550,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CF-CF-064'),
-      'image/products/food_essentials_commodities/canned_food/canned_fruits/canned_pineapple_slices.jpg',
+      '../images/products/food_essentials_commodities/canned_food/canned_fruits/canned_pineapple_slices.png',
       'Canned Pineapple Slices',
       '2025-08-22 02:15:57'
     );
@@ -2558,7 +2558,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CF-CM-065'),
-      'image/products/food_essentials_commodities/canned_food/canned_meat/canned_luncheon_meat.jpg',
+      '../images/products/food_essentials_commodities/canned_food/canned_meat/canned_luncheon_meat.png',
       'Canned Luncheon Meat',
       '2025-08-04 12:46:59'
     );
@@ -2566,7 +2566,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CF-CS-066'),
-      'image/products/food_essentials_commodities/canned_food/canned_seafood/canned_tuna_chunks.jpg',
+      '../images/products/food_essentials_commodities/canned_food/canned_seafood/canned_tuna_chunks.png',
       'Canned Tuna Chunks',
       '2025-08-05 08:46:47'
     );
@@ -2574,7 +2574,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-RX-BR-067'),
-      'image/products/food_essentials_commodities/rice/brown_rice/brown_rice.jpg',
+      '../images/products/food_essentials_commodities/rice/brown_rice/brown_rice.png',
       'Brown Rice',
       '2025-08-26 14:37:16'
     );
@@ -2582,7 +2582,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-RX-GR-068'),
-      'image/products/food_essentials_commodities/rice/glutinous_rice/glutinous_rice.jpg',
+      '../images/products/food_essentials_commodities/rice/glutinous_rice/glutinous_rice.png',
       'Glutinous Rice',
       '2025-09-01 11:46:45'
     );
@@ -2590,7 +2590,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-RX-WR-069'),
-      'image/products/food_essentials_commodities/rice/white_rice/white_rice.jpg',
+      '../images/products/food_essentials_commodities/rice/white_rice/white_rice.png',
       'White Rice',
       '2025-08-13 21:36:25'
     );
@@ -2598,7 +2598,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='SX-BC-BCW-070'),
-      'image/products/snacks/biscuits_cookies/butter_cookies_with_chocolate_chips.jpg',
+      '../images/products/snacks/biscuits_cookies/butter_cookies_with_chocolate_chips.png',
       'Butter Cookies with Chocolate Chips',
       '2025-08-05 14:07:16'
     );
@@ -2606,7 +2606,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='SX-CX-CX-071'),
-      'image/products/snacks/chocolates/milk_chocolate_bar.jpg',
+      '../images/products/snacks/chocolates/milk_chocolate_bar.png',
       'Milk Chocolate Bar',
       '2025-08-24 22:31:51'
     );
@@ -2614,7 +2614,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='SX-CS-CS-072'),
-      'image/products/snacks/candies_sweets/fruit_gummies.jpg',
+      '../images/products/snacks/candies_sweets/fruit_gummies.png',
       'Fruit Gummies',
       '2025-08-12 00:59:07'
     );
@@ -2622,7 +2622,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='SX-CC-PAC-073'),
-      'image/products/snacks/chips_crisps/potato_and_corn_chips/classic_potato_chips.jpg',
+      '../images/products/snacks/chips_crisps/potato_corn_chips/classic_potato_chips.png',
       'Classic Potato Chips',
       '2025-08-25 09:33:10'
     );
@@ -2630,7 +2630,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='SX-CC-CS-074'),
-      'image/products/snacks/chips_crisps/canister_snacks/stacked_potato_crisps.jpg',
+      '../images/products/snacks/chips_crisps/canister_snacks/stacked_potato_crisps.png',
       'Stacked Potato Crisps',
       '2025-08-08 18:52:39'
     );
@@ -2638,7 +2638,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='SX-CC-RTS-075'),
-      'image/products/snacks/chips_crisps/ring_twisted_snacks/cheese_rings.jpg',
+      '../images/products/snacks/chips_crisps/ring_twisted_snacks/cheese_rings.png',
       'Cheese Rings',
       '2025-08-17 17:48:02'
     );
@@ -2646,7 +2646,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BX-CD-SD-077'),
-      'image/products/beverages/carbonated_drinks/cola_flavoured_soda.jpg',
+      '../images/products/beverages/carbonated_drinks/cola_flavoured_soda.png',
       'Cola Flavoured Soda',
       '2025-08-26 10:20:52'
     );
@@ -2654,7 +2654,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BX-CX-BAG-082'),
-      'image/products/beverages/coffee/beans_and_ground/medium_roast_coffee_beans.jpg',
+      '../images/products/beverages/coffee/beans_and_ground/medium_roast_coffee_beans.png',
       'Medium Roast Coffee Beans',
       '2025-08-24 09:03:28'
     );
@@ -2662,7 +2662,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BX-CX-IC-083'),
-      'image/products/beverages/coffee/instant_coffee/classic_instant_coffee.jpg',
+      '../images/products/beverages/coffee/instant_coffee/classic_instant_coffee.png',
       'Classic Instant Coffee',
       '2025-08-29 07:31:51'
     );
@@ -2670,7 +2670,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BX-CX-RTD-085'),
-      'image/products/beverages/coffee/ready/to/drink_coffee/iced_latte_bottle.jpg',
+      '../images/products/beverages/coffee/ready_to_drink_coffee/iced_latte_bottle.png',
       'Iced Latte Bottle',
       '2025-08-17 02:39:41'
     );
@@ -2678,7 +2678,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BX-WX-MW-090'),
-      'image/products/beverages/water/natural_mineral_water.jpg',
+      '../images/products/beverages/water/natural_mineral_water.png',
       'Natural Mineral Water',
       '2025-09-02 02:35:02'
     );
@@ -2686,7 +2686,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-PP-BR-097'),
-      'image/products/household_products/paper_products/bathroom_roll/bathroom_tissue_rolls.jpg',
+      '../images/products/household_products/paper_products/bathroom_roll/bathroom_tissue_rolls.png',
       'Bathroom Tissue Rolls',
       '2025-08-05 05:21:20'
     );
@@ -2694,7 +2694,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-PP-FT-098'),
-      'image/products/household_products/paper_products/facial_tissue/soft_facial_tissue.jpg',
+      '../images/products/household_products/paper_products/facial_tissue/soft_facial_tissue.png',
       'Soft Facial Tissue',
       '2025-08-22 17:24:47'
     );
@@ -2702,7 +2702,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-PP-KR-099'),
-      'image/products/household_products/paper_products/kitchen_roll/kitchen_towels.jpg',
+      '../images/products/household_products/paper_products/kitchen_roll/kitchen_towels.png',
       'Kitchen Towels',
       '2025-08-09 04:33:49'
     );
@@ -2710,7 +2710,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-PP-PT-100'),
-      'image/products/household_products/paper_products/pocket_tissue/pocket_tissues.jpg',
+      '../images/products/household_products/paper_products/pocket_tissue/pocket_tissues.png',
       'Pocket Tissues',
       '2025-08-14 18:20:54'
     );
@@ -2718,7 +2718,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-PP-WX-101'),
-      'image/products/household_products/paper_products/wipes/antibacterial_wet_wipes.jpg',
+      '../images/products/household_products/paper_products/wipes/antibacterial_wet_wipes.png',
       'Antibacterial Wet Wipes',
       '2025-08-27 06:14:58'
     );
@@ -2726,7 +2726,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-LX-BX-102'),
-      'image/products/household_products/laundry/bleach/fabric_safe_bleach.jpg',
+      '../images/products/household_products/laundry/bleach/fabric_safe_bleach.png',
       'Fabric-Safe Bleach',
       '2025-08-19 15:35:26'
     );
@@ -2734,7 +2734,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-LX-SAD-103'),
-      'image/products/household_products/laundry/softener_and_delicate_care/clothing_softener.jpg',
+      '../images/products/household_products/laundry/softener_delicate_care/clothing_softener.png',
       'Clothing Softener',
       '2025-08-29 19:20:17'
     );
@@ -2742,7 +2742,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-LX-DX-104'),
-      'image/products/household_products/laundry/detergent/laundry_detergent.jpg',
+      '../images/products/household_products/laundry/detergent/laundry_detergent.png',
       'Laundry Detergent',
       '2025-08-10 01:30:15'
     );
@@ -2750,7 +2750,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-LX-LA-105'),
-      'image/products/household_products/laundry/laundry_accessories/laundry_mesh_bag.jpg',
+      '../images/products/household_products/laundry/laundry_accessories/laundry_mesh_bag.png',
       'Laundry Mesh Bag',
       '2025-08-12 08:13:49'
     );
@@ -2758,7 +2758,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-HCA-SS-106'),
-      'image/products/household_products/home_cleaning_accessories/sponge_scourer/non_scratch_scouring_sponge.jpg',
+      '../images/products/household_products/home_cleaning_accessories/sponge_scourer/non_scratch_scouring_sponge.png',
       'Non-Scratch Scouring Sponge',
       '2025-08-21 01:24:43'
     );
@@ -2766,7 +2766,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-HCA-MX-107'),
-      'image/products/household_products/home_cleaning_accessories/mops/microfiber_mop.jpg',
+      '../images/products/household_products/home_cleaning_accessories/mops/microfiber_mop.png',
       'Microfiber Mop',
       '2025-08-09 21:24:10'
     );
@@ -2774,7 +2774,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-HCA-BDS-108'),
-      'image/products/household_products/home_cleaning_accessories/brooms_dust_scoop/broom_and_dustpan_set.jpg',
+      '../images/products/household_products/home_cleaning_accessories/brooms_dust_scoop/broom_dustpan_set.png',
       'Broom and Dustpan Set',
       '2025-08-22 18:59:24'
     );
@@ -2782,7 +2782,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-HCA-GX-110'),
-      'image/products/household_products/home_cleaning_accessories/gloves/household_cleaning_gloves.jpg',
+      '../images/products/household_products/home_cleaning_accessories/gloves/household_cleaning_gloves.png',
       'Household Cleaning Gloves',
       '2025-08-08 05:16:52'
     );
@@ -2790,7 +2790,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-HCA-PWD-111'),
-      'image/products/household_products/home_cleaning_accessories/pail_water_dipper/cleaning_pail_with_dipper.jpg',
+      '../images/products/household_products/home_cleaning_accessories/pail_water_dipper/cleaning_pail_with_dipper.png',
       'Cleaning Pail with Dipper',
       '2025-08-20 21:54:35'
     );
@@ -2798,7 +2798,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='HP-HCA-DCC-112'),
-      'image/products/household_products/home_cleaning_accessories/duster_cleaning_cloth/microfiber_cleaning_cloth.jpg',
+      '../images/products/household_products/home_cleaning_accessories/duster_cleaning_cloth/microfiber_cleaning_cloth.png',
       'Microfiber Cleaning Cloth',
       '2025-08-04 06:07:15'
     );
@@ -2806,7 +2806,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-BC-SSA-113'),
-      'image/products/beauty_health/body_care/soaps_scrubs_and_gels/moisturizing_body_wash.jpg',
+      '../images/products/beauty_health/body_care/soaps_scrubs_gels/moisturizing_body_wash.png',
       'Moisturizing Body Wash',
       '2025-08-04 07:31:54'
     );
@@ -2814,7 +2814,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-BC-BLA-114'),
-      'image/products/beauty_health/body_care/body_lotion_and_cream/hydrating_body_lotion.jpg',
+      '../images/products/beauty_health/body_care/body_lotion_cream/hydrating_body_lotion.png',
       'Hydrating Body Lotion',
       '2025-08-18 14:31:19'
     );
@@ -2822,7 +2822,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-BC-DAF-115'),
-      'image/products/beauty_health/body_care/deo_and_fragrances/long_lasting_deodorant.jpg',
+      '../images/products/beauty_health/body_care/deo_fragrances/long_lasting_deodorant.png',
       'Long-Lasting Deodorant',
       '2025-08-18 10:35:28'
     );
@@ -2830,7 +2830,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-BC-HAF-116'),
-      'image/products/beauty_health/body_care/hand_and_foot_care/nourishing_hand_cream.jpg',
+      '../images/products/beauty_health/body_care/hand_foot_care/nourishing_hand_cream.png',
       'Nourishing Hand Cream',
       '2025-08-11 02:34:23'
     );
@@ -2838,7 +2838,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-BC-SX-117'),
-      'image/products/beauty_health/body_care/skincare/gentle_facial_cleanser.jpg',
+      '../images/products/beauty_health/body_care/skincare/gentle_facial_cleanser.png',
       'Gentle Facial Cleanser',
       '2025-08-06 07:06:04'
     );
@@ -2846,7 +2846,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-HC-CX-118'),
-      'image/products/beauty_health/hair_care/conditioner/hair_repair_conditioner.jpg',
+      '../images/products/beauty_health/hair_care/conditioner/hair_repair_conditioner.png',
       'Hair Repair Conditioner',
       '2025-08-09 11:24:05'
     );
@@ -2854,7 +2854,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-HC-SX-119'),
-      'image/products/beauty_health/hair_care/shampoo/daily_care_shampoo.jpg',
+      '../images/products/beauty_health/hair_care/shampoo/daily_care_shampoo.png',
       'Daily Care Shampoo',
       '2025-08-08 11:10:54'
     );
@@ -2862,7 +2862,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-HC-HS-120'),
-      'image/products/beauty_health/hair_care/hair_styling/strong_hold_hair_gel.jpg',
+      '../images/products/beauty_health/hair_care/hair_styling/strong_hold_hair_gel.png',
       'Strong Hold Hair Gel',
       '2025-08-25 11:54:06'
     );
@@ -2870,7 +2870,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-HC-HCT-121'),
-      'image/products/beauty_health/hair_care/hair_colour_treatments/natural_brown_hair_color.jpg',
+      '../images/products/beauty_health/hair_care/hair_color_treatments/natural_brown_hair_color.png',
       'Natural Brown Hair Color',
       '2025-08-05 18:35:04'
     );
@@ -2878,7 +2878,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-HC-HST-122'),
-      'image/products/beauty_health/hair_care/hair_scalp_treatments/hair_scalp_tonic.jpg',
+      '../images/products/beauty_health/hair_care/hair_scalp_treatments/hair_scalp_tonic.png',
       'Hair Scalp Tonic',
       '2025-08-23 17:04:26'
     );
@@ -2886,7 +2886,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-OC-MX-127'),
-      'image/products/beauty_health/oral_care/mouthwash/fresh_mint_mouthwash.jpg',
+      '../images/products/beauty_health/oral_care/mouth_wash/fresh_mint_mouthwash.png',
       'Fresh Mint Mouthwash',
       '2025-08-25 19:14:17'
     );
@@ -2894,7 +2894,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-OC-TA-128'),
-      'image/products/beauty_health/oral_care/toothbrush_accessories/soft_bristle_toothbrush.jpg',
+      '../images/products/beauty_health/oral_care/toothbrush_accessories/soft_bristle_toothbrush.png',
       'Soft Bristle Toothbrush',
       '2025-08-07 03:37:32'
     );
@@ -2902,7 +2902,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BH-OC-TX-129'),
-      'image/products/beauty_health/oral_care/toothpaste/whitening_toothpaste.jpg',
+      '../images/products/beauty_health/oral_care/toothpaste/whitening_toothpaste.png',
       'Whitening Toothpaste',
       '2025-08-13 23:17:56'
     );
