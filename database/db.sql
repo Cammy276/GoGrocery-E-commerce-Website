@@ -185,8 +185,7 @@ CREATE TABLE IF NOT EXISTS orders (
   discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00, -- includes voucher discount
   shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   delivery_duration VARCHAR(50) NOT NULL,
-  tax_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  grand_total DECIMAL(10,2) AS (subtotal - discount_total + shipping_fee + tax_total) STORED,
+  grand_total DECIMAL(10,2) AS (subtotal - discount_total + shipping_fee) STORED,
   placed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_orders_user (user_id),
   CONSTRAINT fk_orders_user
@@ -232,19 +231,20 @@ CREATE TABLE IF NOT EXISTS order_items (
 /* Cart Items */ 
 -- 1 user only can have 1 cart which stores all items pending to checkout
 -- only those selected items will bring to the checkout (orders + orders_item)
+-- display the total prices (line total) for each product (display the total for 3 units of Brocolli) 
+-- display the total prices for all products selected (you need to retrieve the line total for each product 
+-- & add them, I can't add the aggregated total for all cart items in database)
 CREATE TABLE IF NOT EXISTS cart_items (
   cart_item_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED NOT NULL,
   product_id INT UNSIGNED NOT NULL,
-  product_name VARCHAR(255) NOT NULL,      -- snapshot at time added
-  sku VARCHAR(64) NOT NULL,                -- snapshot at time added
-  unit_price DECIMAL(10,2) NOT NULL,       -- snapshot at time added
+  product_name VARCHAR(255) NOT NULL,     
+  sku VARCHAR(64) NOT NULL,                
+  unit_price DECIMAL(10,2) NOT NULL,       
   quantity INT UNSIGNED NOT NULL CHECK (quantity > 0),
   line_discount DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  line_total DECIMAL(10,2) AS (unit_price * quantity - line_discount) STORED,
   added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  voucher_id INT UNSIGNED NULL,             -- optional applied voucher for this cart item
   KEY idx_cart_user (user_id),
   KEY idx_cart_product (product_id),
   CONSTRAINT fk_cart_items_user
@@ -253,9 +253,6 @@ CREATE TABLE IF NOT EXISTS cart_items (
   CONSTRAINT fk_cart_items_product
     FOREIGN KEY (product_id) REFERENCES products(product_id)
     ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_cart_items_voucher
-    FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id)
-    ON DELETE SET NULL ON UPDATE CASCADE,
   UNIQUE KEY uq_cart_user_product (user_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

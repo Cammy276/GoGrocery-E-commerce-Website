@@ -2969,12 +2969,12 @@ INSERT INTO voucher_usages (voucher_id, user_id, order_id, used_at) VALUES
 ((SELECT voucher_id FROM vouchers WHERE code='NEWUSER123'), 1, 1, '2025-09-01 11:00:00');
 
 /* Cart Items */
-INSERT INTO cart_items (user_id, product_id, product_name, sku, unit_price, quantity, line_discount, voucher_id, added_at, updated_at)
+INSERT INTO cart_items (user_id, product_id, product_name, sku, unit_price, quantity, line_discount, added_at, updated_at)
 VALUES
-(1, (SELECT product_id FROM products WHERE sku='FP-VX-AS-001'), 'Green Asparagus Bunch', 'FP-VX-AS-001', 8.90, 2, 0.00, NULL, '2025-09-01 10:00:00', '2025-09-01 10:00:00'),
-(1, (SELECT product_id FROM products WHERE sku='FEC-RX-WR-069'), 'White Rice', 'FEC-RX-WR-069', 29.90, 1, 0.00, (SELECT voucher_id FROM vouchers WHERE code='NEWUSER123'), '2025-09-01 10:05:00', '2025-09-01 10:05:00'),
-(1, (SELECT product_id FROM products WHERE sku='BH-BC-SX-117'), 'Gentle Facial Cleanser', 'BH-BC-SX-117', 12.90, 3, 0.00, NULL, '2025-09-02 03:10:00', '2025-09-02 10:05:00'),
-(2, (SELECT product_id FROM products WHERE sku='BX-WX-MW-090'), 'Natural Mineral Water', 'BX-WX-MW-090', 2.50, 6, 0.00, NULL, '2025-09-01 12:00:00', '2025-09-01 12:00:00');
+(1, (SELECT product_id FROM products WHERE sku='FP-VX-AS-001'), 'Green Asparagus Bunch', 'FP-VX-AS-001', 8.90, 2, 0.00, '2025-09-01 10:00:00', '2025-09-01 10:00:00'),
+(1, (SELECT product_id FROM products WHERE sku='FEC-RX-WR-069'), 'White Rice', 'FEC-RX-WR-069', 29.90, 1, 0.00, '2025-09-01 10:05:00', '2025-09-01 10:05:00'),
+(1, (SELECT product_id FROM products WHERE sku='BH-BC-SX-117'), 'Gentle Facial Cleanser', 'BH-BC-SX-117', 12.90, 3, 0.00, '2025-09-02 03:10:00', '2025-09-02 10:05:00'),
+(2, (SELECT product_id FROM products WHERE sku='BX-WX-MW-090'), 'Natural Mineral Water', 'BX-WX-MW-090', 2.50, 6, 0.00, '2025-09-01 12:00:00', '2025-09-01 12:00:00');
 
 /* Contact form */
 INSERT INTO contact_messages (user_id, name, email, phone, subject, comment, contact_image_url) VALUES
