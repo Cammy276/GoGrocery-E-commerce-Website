@@ -12,31 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-<<<<<<< HEAD
-    // Fetch user data from the database
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
-    $user = mysqli_fetch_assoc($result);
-=======
     // Use prepared statement to prevent SQL injection
     $stmt = $conn->prepare("SELECT * FROM userauthentication WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
->>>>>>> d7c8e83c5d70af304d0d336edbdd4c62e8f22acc
 
     if ($user && password_verify($password, $user['password_hash'])) {
         // Successful login, create session
-<<<<<<< HEAD
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['email'] = $user['email'];
-        header("Location: ../index.php");  // Redirect to homepage
-=======
         $_SESSION['user_id'] = $user['id']; 
         $_SESSION['email'] = $user['email'];
         header("Location: ../index.php");  
->>>>>>> d7c8e83c5d70af304d0d336edbdd4c62e8f22acc
         exit();
     } else {
         $message = "Invalid login credentials! Please try again.";
