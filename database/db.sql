@@ -2,7 +2,7 @@
 -- Engine: InnoDB, Charset: utf8mb4, Collation: utf8mb4_unicode_ci
 -- Safe to run as a single script.
 
-/* 1) Create database */
+/* Create database */
 -- Creates the DB with full Unicode support (emojis, multilingual)
 CREATE DATABASE IF NOT EXISTS gogrocery
   CHARACTER SET utf8mb4
@@ -11,9 +11,9 @@ CREATE DATABASE IF NOT EXISTS gogrocery
 -- Selects the DB for all objects that follow
 USE gogrocery;
 
-/* 2) Users */
+/* Users */
 CREATE TABLE IF NOT EXISTS users (
-  user_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   phone VARCHAR(20) NOT NULL,
@@ -27,7 +27,23 @@ CREATE TABLE IF NOT EXISTS users (
   UNIQUE KEY uq_users_phone (phone)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 3) Product Brands */
+/* Addresses */
+CREATE TABLE IF NOT EXISTS addresses (
+  address_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  label VARCHAR(50) NOT NULL,                          -- e.g., "Home", "Office"
+  street VARCHAR(255) NOT NULL,
+  apartment VARCHAR(255) NULL,                          -- apartment/condo/garden
+  postcode VARCHAR(10) NOT NULL,
+  city VARCHAR(100) NOT NULL,
+  state_territory VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_addresses_user
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* Product Brands */
 CREATE TABLE IF NOT EXISTS brands (
   brand_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(120) NOT NULL,
@@ -49,7 +65,7 @@ Product URL:
 https://example.com/brands/go-grocery/products
 */
 
-/* 4) Product Categories */
+/* Product Categories */
 CREATE TABLE IF NOT EXISTS categories (
   category_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(120) NOT NULL,
@@ -77,7 +93,7 @@ UNIQUE KEY uq_cat_slug (slug)
 Ensures that no two rows can have the same slug (the URL-friendly version of the name).
 */
 
-/* 5) Products */
+/* Products */
 CREATE TABLE IF NOT EXISTS products (
   product_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   sku VARCHAR(64) NOT NULL,
@@ -102,7 +118,7 @@ CREATE TABLE IF NOT EXISTS products (
     ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 6) Product images (recommended: store URLs/paths, not BLOBs) */
+/* Product images */
 CREATE TABLE IF NOT EXISTS product_images (
   image_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   product_id INT UNSIGNED NOT NULL,
@@ -118,34 +134,8 @@ CREATE TABLE IF NOT EXISTS product_images (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 7) Addresses */
-CREATE TABLE IF NOT EXISTS addresses (
-  address_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id INT UNSIGNED NOT NULL,
-  label VARCHAR(50) NOT NULL,                          -- e.g., "Home", "Office"
-  street VARCHAR(255) NOT NULL,
-  apartment VARCHAR(255) NULL,                          -- apartment/condo/garden
-  postcode VARCHAR(10) NOT NULL,
-  city VARCHAR(100) NOT NULL,
-  state_territory VARCHAR(100) NOT NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_addresses_user
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-    ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* 8) Shipping Rates */
-CREATE TABLE IF NOT EXISTS shipping_rates (
-  rate_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  postcode VARCHAR(10) NOT NULL,
-  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  delivery_duration VARCHAR(50) NOT NULL,  -- e.g., "2-3 days"
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY uq_shipping_postcode (postcode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* 9) Wishlists */
-CREATE TABLE IF NOT EXISTS wishlists (
+/* Wishlist */
+CREATE TABLE IF NOT EXISTS wishlist (
   user_id INT UNSIGNED NOT NULL,
   product_id INT UNSIGNED NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -160,21 +150,60 @@ CREATE TABLE IF NOT EXISTS wishlists (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 10) Orders */
+/* Shipping Rates */
+CREATE TABLE IF NOT EXISTS shipping_rates (
+  rate_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  postcode VARCHAR(10) NOT NULL,
+  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  delivery_duration VARCHAR(50) NOT NULL,  -- e.g., "2-3 days"
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_shipping_postcode (postcode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* Vouchers */
+CREATE TABLE IF NOT EXISTS vouchers (
+  voucher_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(50) NOT NULL UNIQUE,          -- e.g., "WELCOME10"
+  description VARCHAR(255) NULL,
+  discount_type ENUM('PERCENT', 'FIXED') NOT NULL,  -- % or RM discount
+  discount_value DECIMAL(10,2) NOT NULL,     -- e.g., 10.00 = 10% if PERCENT, or RM10 if FIXED
+  min_order_amount DECIMAL(10,2) DEFAULT 0.00,      -- optional min spend
+  max_discount DECIMAL(10,2) NULL,           -- cap for % discount
+  usage_limit INT UNSIGNED DEFAULT NULL,     -- total times the voucher can be used (across all users)
+  per_user_limit INT UNSIGNED DEFAULT 1,     -- how many times one user can use it
+  start_date DATETIME NOT NULL,
+  end_date DATETIME NOT NULL,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* Voucher Usages */
+CREATE TABLE IF NOT EXISTS voucher_usages (
+  usage_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  voucher_id INT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NOT NULL,
+  order_id INT UNSIGNED NOT NULL,
+  used_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_usage_voucher FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_usage_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_usage_order FOREIGN KEY (order_id) REFERENCES orders(order_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* Orders */
 CREATE TABLE IF NOT EXISTS orders (
   order_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED NOT NULL,
-  address_id INT UNSIGNED NOT NULL,                          -- required for delivery
-  status ENUM('paid','delivered') NOT NULL DEFAULT 'paid',
-    /*
-    paid: Order has been placed and paid by the customer, but not yet confirmed received.
-    delivered: Customer has clicked “Received,” confirming they got the order.
-    */
+  address_id INT UNSIGNED NOT NULL,
+  status ENUM('paid','delivered') NOT NULL DEFAULT 'paid',  -- always paid because only paid orders are saved into this table
   payment_method ENUM('card','bank_transfer','e_wallet','grabpay','fpx') NOT NULL,
+  voucher_id INT UNSIGNED NULL,                     -- applied voucher
   subtotal DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,           -- fetched from shipping_rates
-  delivery_duration VARCHAR(50) NOT NULL,                           -- fetched from shipping_rates
+  discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00, -- includes voucher discount
+  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  delivery_duration VARCHAR(50) NOT NULL,
   tax_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   grand_total DECIMAL(10,2) AS (subtotal - discount_total + shipping_fee + tax_total) STORED,
   placed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -184,7 +213,10 @@ CREATE TABLE IF NOT EXISTS orders (
     ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT fk_orders_address
     FOREIGN KEY (address_id) REFERENCES addresses(address_id)
-    ON DELETE RESTRICT ON UPDATE CASCADE        -- prevent deletion of used addresses
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_orders_voucher
+    FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id)
+    ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*
@@ -195,7 +227,7 @@ Why order_items exists?
 - 1-to-many relationship: 1 order → many order_items.
 */
 
-/* 11) Order Items */
+/* Order Items */
 CREATE TABLE IF NOT EXISTS order_items (
   order_item_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   order_id INT UNSIGNED NOT NULL,
@@ -216,13 +248,43 @@ CREATE TABLE IF NOT EXISTS order_items (
     ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* 12) Contact form */
+/* Cart Items */ 
+-- 1 user only can have 1 cart which stores all items pending to checkout
+-- only those selected items will bring to the checkout (orders + orders_item)
+CREATE TABLE IF NOT EXISTS cart_items (
+  cart_item_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  product_id INT UNSIGNED NOT NULL,
+  product_name VARCHAR(255) NOT NULL,      -- snapshot at time added
+  sku VARCHAR(64) NOT NULL,                -- snapshot at time added
+  unit_price DECIMAL(10,2) NOT NULL,       -- snapshot at time added
+  quantity INT UNSIGNED NOT NULL CHECK (quantity > 0),
+  line_discount DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  line_total DECIMAL(10,2) AS (unit_price * quantity - line_discount) STORED,
+  added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  voucher_id INT UNSIGNED NULL,             -- optional applied voucher for this cart item
+  KEY idx_cart_user (user_id),
+  KEY idx_cart_product (product_id),
+  CONSTRAINT fk_cart_items_user
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_cart_items_product
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_cart_items_voucher
+    FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id)
+    ON DELETE SET NULL ON UPDATE CASCADE,
+  UNIQUE KEY uq_cart_user_product (user_id, product_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* Contact Form */
 CREATE TABLE IF NOT EXISTS contact_messages (
   message_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED NULL,
   name VARCHAR(120) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  phone VARCHAR(20) NULL,
+  phone VARCHAR(20) NOT NULL,
   subject VARCHAR(255) NOT NULL,
   comment TEXT NOT NULL,
   image_url VARCHAR(500) NULL,   

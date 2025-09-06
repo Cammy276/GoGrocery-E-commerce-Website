@@ -11,21 +11,13 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
   </head>
-  <script>
-  function openWithFallback(appLink, webLink) {
-    // Try to open the app deeplink
-    const opened = window.open(appLink);
-
-    // If the deeplink fails → open fallback URL in a new tab
-    if (!opened) {
-      window.open(webLink, "_blank");
-    }
-
-    // Prevent default link behavior
-   
-  }
-</script>
-
+    <script>
+      function openWithFallback(webLink) {
+        // Open official website in a new tab
+        window.open(webLink, "_blank");
+        return false; // Prevent default link behavior
+      }
+  </script>
   <body>
     <footer>
       <div class="footer-grid">
@@ -82,37 +74,49 @@
 
           <p id="email"><a href="mailto:customer.careline@gogrocery.com.my">customer.careline@gogrocery.com.my</a></p>
 
-           <!-- Social Icons -->
+          <!-- Social Icons -->
           <nav class="social-icons" aria-label="Social Media Links">
-            <a href="instagram://user?username=gogrocery"
-              onclick="return openWithFallback(this.href, 'https://instagram.com/gogrocery')"
-              aria-label="Instagram">
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com"
+              onclick="return openWithFallback(this.href)"
+              aria-label="Instagram"
+              title="Visit Instagram">
               <i class="bi bi-instagram"></i>
             </a>
 
-            <a href="fb://page/61550590304"
-              onclick="return openWithFallback(this.href, 'https://facebook.com/gogrocery')"
-              aria-label="Facebook">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com"
+              onclick="return openWithFallback(this.href)"
+              aria-label="Facebook"
+              title="Visit Facebook">
               <i class="bi bi-facebook"></i>
             </a>
 
-            <a href="linkedin://company/gogrocery"
-              onclick="return openWithFallback(this.href, 'https://linkedin.com/company/gogrocery')"
-              aria-label="LinkedIn">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com"
+              onclick="return openWithFallback(this.href)"
+              aria-label="LinkedIn"
+              title="Visit LinkedIn">
               <i class="bi bi-linkedin"></i>
             </a>
 
-            <a href="snssdk1128://user/profile/gogrocery"
-              onclick="return openWithFallback(this.href, 'https://tiktok.com/@gogrocery')"
-              aria-label="TikTok">
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com"
+              onclick="return openWithFallback(this.href)"
+              aria-label="TikTok"
+              title="Visit TikTok">
               <i class="bi bi-tiktok"></i>
             </a>
 
-            <a href="youtube://channel/gogrocery"
-              onclick="return openWithFallback(this.href, 'https://youtube.com/@gogrocery')"
-              aria-label="YouTube">
+            <!-- YouTube -->
+            <a href="https://www.youtube.com"
+              onclick="return openWithFallback(this.href)"
+              aria-label="YouTube"
+              title="Visit YouTube">
               <i class="bi bi-youtube"></i>
             </a>
+
           </nav>
         </section>
       </div>
