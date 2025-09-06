@@ -36,7 +36,11 @@ CREATE TABLE IF NOT EXISTS addresses (
   apartment VARCHAR(255) NULL,                          -- apartment/condo/garden
   postcode VARCHAR(10) NOT NULL,
   city VARCHAR(100) NOT NULL,
-  state_territory VARCHAR(100) NOT NULL,
+  state_territory ENUM(
+    'Johor','Kedah','Kelantan','Malacca','Negeri Sembilan','Pahang','Penang',
+    'Perak','Perlis','Sabah','Sarawak','Selangor','Terengganu',
+    'WP Kuala Lumpur','WP Labuan','WP Putrajaya'
+  ) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_addresses_user
     FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -122,7 +126,7 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS product_images (
   image_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   product_id INT UNSIGNED NOT NULL,
-  image_url VARCHAR(500) NOT NULL,        
+  product_image_url VARCHAR(500) NOT NULL,        
   alt_text VARCHAR(255) NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   -- Each product can have only 1 image
@@ -150,21 +154,13 @@ CREATE TABLE IF NOT EXISTS wishlist (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/* Shipping Rates */
-CREATE TABLE IF NOT EXISTS shipping_rates (
-  rate_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  postcode VARCHAR(10) NOT NULL,
-  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  delivery_duration VARCHAR(50) NOT NULL,  -- e.g., "2-3 days"
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY uq_shipping_postcode (postcode)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 /* Vouchers */
 CREATE TABLE IF NOT EXISTS vouchers (
   voucher_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   code VARCHAR(50) NOT NULL UNIQUE,          -- e.g., "WELCOME10"
-  description VARCHAR(255) NULL,
+  description VARCHAR(255) NOT NULL,
+  voucher_image_url VARCHAR(500) NOT NULL, 
+  terms_conditions VARCHAR(255) NOT NULL,
   discount_type ENUM('PERCENT', 'FIXED') NOT NULL,  -- % or RM discount
   discount_value DECIMAL(10,2) NOT NULL,     -- e.g., 10.00 = 10% if PERCENT, or RM10 if FIXED
   min_order_amount DECIMAL(10,2) DEFAULT 0.00,      -- optional min spend
@@ -175,21 +171,6 @@ CREATE TABLE IF NOT EXISTS vouchers (
   end_date DATETIME NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* Voucher Usages */
-CREATE TABLE IF NOT EXISTS voucher_usages (
-  usage_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  voucher_id INT UNSIGNED NOT NULL,
-  user_id INT UNSIGNED NOT NULL,
-  order_id INT UNSIGNED NOT NULL,
-  used_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_usage_voucher FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_usage_user FOREIGN KEY (user_id) REFERENCES users(user_id)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_usage_order FOREIGN KEY (order_id) REFERENCES orders(order_id)
-    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* Orders */
@@ -278,6 +259,21 @@ CREATE TABLE IF NOT EXISTS cart_items (
   UNIQUE KEY uq_cart_user_product (user_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+/* Voucher Usages */
+CREATE TABLE IF NOT EXISTS voucher_usages (
+  usage_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  voucher_id INT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NOT NULL,
+  order_id INT UNSIGNED NOT NULL,
+  used_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_usage_voucher FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_usage_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_usage_order FOREIGN KEY (order_id) REFERENCES orders(order_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /* Contact Form */
 CREATE TABLE IF NOT EXISTS contact_messages (
   message_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -287,7 +283,7 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   phone VARCHAR(20) NOT NULL,
   subject VARCHAR(255) NOT NULL,
   comment TEXT NOT NULL,
-  image_url VARCHAR(500) NULL,   
+  contact_image_url VARCHAR(500) NULL,   
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_contact_user (user_id),
   CONSTRAINT fk_contact_user

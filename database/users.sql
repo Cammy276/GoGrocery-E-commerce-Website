@@ -1,5 +1,5 @@
 -- Drop user if exist (for fresh setup)
-DROP USER IF EXISTS 'grocery_customer'@'localhost';
+DROP USER IF EXISTS 'gogrocery_customer'@'localhost';
 
 -- Create customer user (frontend app only)
 CREATE USER 'gogrocery_customer'@'localhost' IDENTIFIED BY 'StrongCustomerPassword123!';
@@ -9,7 +9,6 @@ GRANT SELECT ON gogrocery.products TO 'gogrocery_customer'@'localhost';
 GRANT SELECT ON gogrocery.categories TO 'gogrocery_customer'@'localhost';
 GRANT SELECT ON gogrocery.product_images TO 'gogrocery_customer'@'localhost';
 GRANT SELECT ON gogrocery.brands TO 'gogrocery_customer'@'localhost';
-GRANT SELECT ON gogrocery.shipping_rates TO 'gogrocery_customer'@'localhost';
 
 -- 🔹 Customer account (profile + addresses)
 GRANT SELECT, INSERT, UPDATE ON gogrocery.users TO 'gogrocery_customer'@'localhost';
@@ -24,7 +23,7 @@ GRANT SELECT, INSERT, UPDATE ON gogrocery.vouchers TO 'gogrocery_customer'@'loca
 GRANT SELECT, INSERT ON gogrocery.voucher_usages TO 'gogrocery_customer'@'localhost';
 
 -- 🔹 Wishlists & cart_items
-GRANT SELECT, INSERT, DELETE ON gogrocery.wishlists TO 'gogrocery_customer'@'localhost';
+GRANT SELECT, INSERT, DELETE ON gogrocery.wishlist TO 'gogrocery_customer'@'localhost';
 GRANT SELECT, INSERT, DELETE, UPDATE ON gogrocery.cart_items TO 'gogrocery_customer'@'localhost';
 
 -- 🔹 Contact form
@@ -37,7 +36,7 @@ Purpose: Limited database user used by the website backend (PHP) when handling c
 Never used for creating/modifying tables or schema changes.
 Used by the backend app while developing or running the website; simulates what a real customer can do.
 
-2) grocery_dev / root
+2) gogrocery_dev / root
 Purpose: Full privileges for database development and administration.
 Creating or modifying tables, indexes, foreign keys.
 Running migrations, resetting or cleaning data.
