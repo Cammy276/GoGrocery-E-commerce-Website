@@ -61,6 +61,12 @@ input[type="password"] {
     font-size: 12px;
     margin-top: 5px;
 }
+.tnc_confirmation {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+}
 
 .action-buttons {
     margin-top: 20px;

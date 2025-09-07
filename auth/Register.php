@@ -107,6 +107,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <small id="confirm-password-error" class="error-message"></small>
                 </div>
 
+                <div class="tnc_confirmation">
+                <label class="tnc-label">
+                    <input type="checkbox" id="tnc-check">
+                    I understand and agree to the 
+                    <a href="../policies/terms_conditions.php" target="_blank">Terms & Conditions</a> 
+                    and 
+                    <a href="../policies/privacy_notice.php" target="_blank">Privacy Notice</a>.
+                </label>
+                <small id="tnc-error" class="error-message"></small>
+                </div>
                 <div class="action-buttons">
                     <button type="submit" class="register-btn">Register</button>
                 </div>
@@ -123,12 +133,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const phoneInput = document.getElementById("phone");
         const passwordInput = document.getElementById("password");
         const confirmPasswordInput = document.getElementById("confirm-password");
+        const tncCheck = document.getElementById("tnc-check");
 
         const nameError = document.getElementById("name-error");
         const emailError = document.getElementById("email-error");
         const phoneError = document.getElementById("phone-error");
         const passwordError = document.getElementById("password-error");
         const confirmPasswordError = document.getElementById("confirm-password-error");
+        const tncError = document.getElementById("tnc-error")
+
 
         const namePattern = /^[A-Za-z\s]+$/;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -241,6 +254,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 isValid = false;
             }
 
+            if (!tncCheck.checked) {
+                tncError.innerText = "You must agree to the Terms & Conditions and Privacy Notice.";
+                tncError.style.display = "block";
+                tncCheck.classList.add("error")
+                isValid = false;
+            } else {
+                tncError.style.display = "none";
+            }
+
             if (!isValid) {
                 event.preventDefault();
             }
@@ -259,8 +281,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 icon.classList.add("bi-eye-fill");
             }
         }
-
     </script>
+
 
 </body>
 </html>
