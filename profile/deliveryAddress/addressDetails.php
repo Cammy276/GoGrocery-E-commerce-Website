@@ -1,259 +1,114 @@
+<!-- to get current user id -->
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    echo "Logged in as User ID: " . $user_id;
+} else {
+    echo "You are not logged in!";
+}
+?>
+
+<!-- to get address_id passed in -->
+ <?php
+if (isset($_GET['id'])) {
+    $address_id = intval($_GET['id']); // sanitize input
+} else {
+    die("Fail to get address id from delivery address page.");
+}
+
+?>
+
+<?php
+
+include(__DIR__ . '/../../connect_db.php');
+
+// Predefine variable for error message
+$errorMsg = null;
+
+//to get the address details by address id
+$getAddInfoStmt = $conn->prepare("SELECT * FROM addresses WHERE address_id = ?");
+$getAddInfoStmt->bind_param("i", $address_id);
+
+if ($getAddInfoStmt->execute()){
+    $addInfoResult = $getAddInfoStmt->get_result();
+
+    if ($addInfoResult->num_rows === 0) {
+        die("Delivery address not found.");
+    }
+
+    $address = $addInfoResult->fetch_assoc();
+
+}
+$getAddInfoStmt->close();
+
+
+// Fetch ENUM values for state_territory dynamically
+$enum_values = [];
+$enum_result = $conn->query("SHOW COLUMNS FROM addresses LIKE 'state_territory'");
+if ($enum_result) {
+    $row = $enum_result->fetch_assoc();
+    preg_match("/^enum\('(.*)'\)$/", $row['Type'], $matches);
+    if (isset($matches[1])) $enum_values = explode("','", $matches[1]);
+}
+
+
+// Handle Update
+if (isset($_POST['update'])) {
+    $address_id = $_POST['address_id'];
+    $label = $_POST['label'];
+    $street = $_POST['street'];
+    $apartment = $_POST['apartment'];
+    $postcode = $_POST['postcode'];
+    $city = $_POST['city'];
+    $state_territory = $_POST['state_territory'];
+
+    $stmt = $conn->prepare("UPDATE addresses SET label=?, street=?, apartment=?, postcode=?, city=?, state_territory=? WHERE address_id=?");
+    $stmt->bind_param("ssssssi", $label, $street, $apartment, $postcode, $city, $state_territory, $address_id);
+    if ($stmt->execute()) {
+        //if operation success, redirect to addressDetails page
+        header("Location: index.php?msg=updateSuccess");
+        exit();
+    } else {
+        //store error message in variable
+        $errorMsg = $stmt->error;
+    }
+    $stmt->close();
+}
+
+
+// Handle Delete
+if (isset($_POST['delete'])) {
+    $address_id = $_POST['address_id'];
+    $stmt = $conn->prepare("DELETE FROM addresses WHERE address_id=?");
+    $stmt->bind_param("i", $address_id);
+    if ($stmt->execute()) {
+        //if operation success, redirect to addressDetails page
+        header("Location: index.php?msg=deleteSuccess");
+        exit();
+    } else {
+        //store error message in variable
+        $errorMsg = $stmt->error;
+    }
+    $stmt->close();
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Order Page</title>
-        
-            <style>
-                * {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                }
-                
-                body {
-                    background-color: #f8f9fa;
-                    color: #333;
-                    line-height: 1.6;
-                }
-                
-                #header {
-                    background-color: #fff;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                    padding: 15px 30px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                
-                .logo {
-                    font-size: 24px;
-                    font-weight: bold;
-                    color: #4a6cf7;
-                }
-                
-                .nav-links {
-                    display: flex;
-                    gap: 25px;
-                }
-                
-                .nav-links a {
-                    text-decoration: none;
-                    color: #555;
-                    font-weight: 500;
-                    transition: color 0.3s;
-                }
-                
-                .nav-links a:hover {
-                    color: #4a6cf7;
-                }
-                
-                .main-container {
-                    display: flex;
-                    max-width: 1200px;
-                    margin: 30px auto;
-                    gap: 30px;
-                }
-                
-                #profileSettingSideBar {
-                    flex: 0 0 280px;
-                    background-color: #fff;
-                    border-radius: 10px;
-                    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-                    padding: 25px 0;
-                }
-                
-                .profile-header {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 0 20px 20px;
-                    border-bottom: 1px solid #eee;
-                    margin-bottom: 15px;
-                }
-                
-                .profile-avatar {
-                    width: 80px;
-                    height: 80px;
-                    border-radius: 50%;
-                    background-color: #e6e9ff;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-bottom: 15px;
-                    color: #4a6cf7;
-                    font-size: 30px;
-                    font-weight: bold;
-                }
-                
-                .profile-name {
-                    font-weight: 600;
-                    font-size: 18px;
-                    margin-bottom: 5px;
-                }
-                
-                .profile-email {
-                    color: #777;
-                    font-size: 14px;
-                }
-                
-                .menu-items {
-                    list-style: none;
-                    padding: 0 15px;
-                }
-                
-                .menu-items li {
-                    margin-bottom: 5px;
-                }
-                
-                .menu-items a {
-                    display: flex;
-                    align-items: center;
-                    padding: 12px 15px;
-                    text-decoration: none;
-                    color: #555;
-                    border-radius: 8px;
-                    transition: all 0.3s;
-                }
-                
-                .menu-items a:hover, .menu-items a.active {
-                    background-color: #f0f3ff;
-                    color: #4a6cf7;
-                }
-                
-                .menu-items a i {
-                    margin-right: 12px;
-                    font-size: 18px;
-                }
-                
-                #profileContent {
-                    flex: 1;
-                    background-color: #fff;
-                    border-radius: 10px;
-                    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-                    padding: 30px;
-                }
-                
-                .content-header {
-                    margin-bottom: 25px;
-                }
-                
-                .content-header h1 {
-                    font-size: 24px;
-                    color: #333;
-                    margin-bottom: 10px;
-                }
-                
-                .content-header p {
-                    color: #777;
-                }
-                
-                .settings-card {
-                    background-color: #f9fafc;
-                    border-radius: 10px;
-                    padding: 25px;
-                    margin-bottom: 25px;
-                    border: 1px solid #eee;
-                }
-                
-                .settings-card h2 {
-                    font-size: 18px;
-                    margin-bottom: 20px;
-                    color: #444;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                }
-                
-                .settings-card h2 span {
-                    font-size: 14px;
-                    color: #4a6cf7;
-                    cursor: pointer;
-                }
+        <title>Address Details Page</title>
 
-                
-                
-                form label {
-                    display: block;
-                    margin-bottom: 8px;
-                    font-weight: 500;
-                    color: #555;
-                }
-                .textInput{
-                    width: 100%;
-                    padding: 12px 15px;
-                    border: 1px solid #ddd;
-                    border-radius: 8px;
-                    font-size: 15px;
-                    transition: border 0.3s;
-                }
-                .textInput:focus {
-                    border-color: #4a6cf7;
-                    outline: none;
-                    border-width: 3px;
-                }
-                .button {
-                    color: white;
-                    border: none;
-                    padding: 12px 25px;
-                    border-radius: 8px;
-                    font-weight: 500;
-                    cursor: pointer;
-                }
-                .saveButton {
-                    background-color: #4a6cf7;
-                    transition: background-color 0.3s;
-                }
-                .saveButton:hover {
-                    background-color: #3048b4ff;
-                }
-                .deleteButton {
-                    background-color: #f74a4aff;
-                    transition: background-color 0.3s;
-                }
-                .deleteButton:hover {
-                    background-color: #b43030ff;
-                }
-                
-                @media (max-width: 900px) {
-                    .main-container {
-                        flex-direction: column;
-                    }
-                    
-                    #profileSettingSideBar {
-                        flex: 0 0 auto;
-                        width: 100%;
-                    }
-                    
-                    .two-columns {
-                        flex-direction: column;
-                        gap: 0;
-                    }
-                }
-                hr {
-                    color: grey;
-                }
-                
-                @media (max-width: 768px) {
-                    .nav-links {
-                        display: none;
-                    }
-                    
-                    #header {
-                        padding: 15px 20px;
-                    }
-                    
-                    .main-container {
-                        margin: 20px;
-                        gap: 20px;
-                    }
-                }
-            </style>
-            <!-- Bootstrap Icons -->
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-            <!-- Custom CSS -->
-            <link rel="stylesheet" href="./css/styles.css">
+        <!-- Bootstrap Icons -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../../css/deliveryAddress.css">
     </head>
     <body>
             <div id="header">
@@ -295,43 +150,75 @@
                     <h2>Delivery Address Form</h2>
                     <br/>
                     
-                    <div class="settings-card">
+                    <div class="card">
                         <form method='post'>
-                            <label>Receiver Name:</label>
-                            <input class="textInput" type='text' id='receiverName' name='receiverName' />
+
+                            <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo $user_id ?>" />
+                            <input class="textInput" type="hidden" name="address_id" value="<?php echo $address['address_id']; ?>">
+
+                            <label>Label:</label>
+                            <input class="textInput" type='text' id='label' name='label' 
+                                value="<?php echo htmlspecialchars($address['label'] ?? ''); ?>"
+                                placeholder='e.g. Home' required/>
                             <br/><br/>
 
-                            <label>Address line 1:</label>
-                            <input class="textInput" type='text' id='addLine1' name='addLine1' />
+                            <input class="textInput" type="text" id="apartment" name="apartment" 
+                                value="<?php echo htmlspecialchars($address['apartment'] ?? ''); ?>" 
+                                placeholder="e.g. Lot No. 241, Level 2 Menara Petronas" />
                             <br/><br/>
 
-                            <label>Address line 2:</label>
-                            <input class="textInput" type='text' id='addLine2' name='addLin2' />
+                            <label>Street:</label>
+                            <input class="textInput" type='text' id='street' name='street' 
+                                value="<?php echo htmlspecialchars($address['street'] ?? ''); ?>"
+                                placeholder="e.g. Kuala Lumpur City Centre" required/>
                             <br/><br/>
 
-                            
-                            <label>Postal Code:</label>
-                            <input class="textInput" type='text' id='postalCode' name='postalCode' />
+                            <label>Postcode:</label>
+                            <input class="textInput" type='text' id='postcode' name='postcode' 
+                                value="<?php echo htmlspecialchars($address['postcode'] ?? ''); ?>"
+                                placeholder="e.g. 50088" required/>
                             <br/><br/>
 
                             <label>City:</label>
-                            <input class="textInput" type='text' id='city' name='city' />
+                            <input class="textInput" type='text' id='city' name='city' 
+                                value="<?php echo htmlspecialchars($address['city'] ?? ''); ?>"
+                                placeholder="e.g. Kuala Lumpur" required/>
                             <br/><br/>
 
-                            <label>State:</label>
-                            <input class="textInput" type='text' id='state' name='state' />
+                            <label>State/Territory:</label>
+                            <select name="state_territory" required>
+                                <?php foreach($enum_values as $state): ?>
+                                    <option value="<?= htmlspecialchars($state) ?>"
+                                        <?= ($state === $address['state_territory']) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($state) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                             <br/><br/>
 
                             <label>Country:</label>
-                            <input class="textInput" type='text' id='country' name='country' />
-                            <br/><br/>
+                            <input class="textInput" type='text' id='state' name='state' value="Malaysia" disabled/>
+                            <br/>
+                            <p class="tips">GoGrocery's delivery service is currently available for Malaysia only. Thanks for your understanding!</p>
+                            <br/>
 
-                            <!-- submit button -->
-                            <input class="saveButton button" type='submit' name='submit' value='Save' />
-                            <!-- delete button -->
-                            <input class="deleteButton button" type='submit' name='submit' value='Delete' />
+                            
+                            <?php if($errorMsg != null): ?>
+                                <p class="errMessage">Save updated delivery address details fail. Please try again.</p>
+                                <pre class="errMessage"><?php echo htmlspecialchars($errorMsg)?> </pre>
+                            <?php endif; ?>
+
+                            
+                            <div class="buttonContainer">
+                                <!-- save button -->
+                                <input class="saveButton button" type='submit' name='update' value='Save' />
+                                <!-- delete button -->
+                                <input class="deleteButton button" type='submit' name='delete' value='Delete' />
+                            </div>
                         </form>
                     </div>
+
+                            
                 
                 </div>
             </div>
