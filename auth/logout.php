@@ -1,5 +1,5 @@
 <?php
-session_start();
+require __DIR__ . '/../init.php';
 
 // Prevent browser from caching this page
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");

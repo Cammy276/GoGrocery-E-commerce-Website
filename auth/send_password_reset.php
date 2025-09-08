@@ -16,7 +16,7 @@ $token_hash = hash("sha256", $token);
 $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
 
 // Include the database connection
-$mysqli = require __DIR__ . "/../connect_db.php"; // Ensure this returns the connection
+$mysqli = require __DIR__ . '/../init.php'; // Ensure this returns the connection
 
 // Step 1: Retrieve user by email
 $sql = "SELECT name FROM users WHERE email = ?";

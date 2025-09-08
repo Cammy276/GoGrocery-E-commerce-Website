@@ -34,10 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Database error: " . $conn->error;
         $messageColor = "red";
     }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }
 
 $conn->close();

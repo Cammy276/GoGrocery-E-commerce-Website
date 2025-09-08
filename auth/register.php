@@ -1,6 +1,7 @@
 <?php
-include(__DIR__ . '/../connect_db.php');
-//
+
+require __DIR__ . '/../init.php';
+
 $message = "";
 $messageColor = "";
 

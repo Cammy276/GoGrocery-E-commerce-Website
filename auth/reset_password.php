@@ -7,7 +7,7 @@ if (!$token) {
 
 $token_hash = hash("sha256", $token);
 
-$mysqli = require __DIR__ . "/../connect_db.php";
+$mysqli = require __DIR__ . '/../init.php';
 
 $sql = "SELECT * FROM users WHERE reset_token_hash = ?";
 $stmt = $mysqli->prepare($sql);
