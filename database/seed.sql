@@ -13,9 +13,9 @@ USE gogrocery;
 */
 INSERT INTO users (name, email, phone, profile_image_url, password_hash) VALUES
 ('Alice', 'alice@example.com', '+60123456789', '/images/users/default.png', 
- '$2y$10$wH9N3P4hXnJ9Qz6M5tB.uOepJb5g6VhT8oPpZyTqW0aR8F6lT3Yy'),  
+ '$2y$10$6CkW5A.62IDONpzZ2bWQ4ef5hd0yNr/pB7.Q9ejWR2zpvk8M0MzhS'),  
 ('Bob', 'bob@example.com', '+60198765432', '/images/users/default.png', 
- '$2y$10$7vH0Qw4XlR9yPq2D5tF3uOedKb6g9GfR7jPqZyTqW0bA5E6lU1Zy');  
+ '$2y$10$vJOFEwgNTbfd/DFXEX4Zh.EEMiVrRW/8suz8xpgTr9SDeWwjVzWv2');  
 
 /* Addresses */
 INSERT INTO addresses (user_id, label, street, apartment, postcode, city, state_territory) VALUES

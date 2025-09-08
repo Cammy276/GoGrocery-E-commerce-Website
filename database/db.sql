@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   email VARCHAR(255) NOT NULL,
   phone VARCHAR(20) NOT NULL,
   subject VARCHAR(255) NOT NULL,
-  comment TEXT NOT NULL,
+  comment VARCHAR(500) NOT NULL,
   contact_image_url VARCHAR(500) NULL,   
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_contact_user (user_id),

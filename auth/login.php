@@ -1,37 +1,47 @@
 <?php
-session_start();  // Start session
-//
-// Include the database connection
-include(__DIR__ . '/../connect_db.php');
+require __DIR__ . '/../init.php';
 
 $message = "";
 $messageColor = "";
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
-    // Fetch user data from the database
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
-    $user = mysqli_fetch_assoc($result);
+    // Use prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT user_id, email, password_hash FROM users WHERE email = ?");
+    if ($stmt) {
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
 
-    if ($user && password_verify($password, $user['password_hash'])) {
-        // Successful login, create session
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['email'] = $user['email'];
-        header("Location: ../index.php");  // Redirect to homepage
-        exit();
+        if ($user && password_verify($password, $user['password_hash'])) {
+            // Successful login, create session
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['email'] = $user['email'];
+            header("Location: ../index.php");  // Redirect to homepage
+            exit();
+        } else {
+            $message = "Invalid login credentials! Please try again.";
+            $messageColor = "red";
+        }
+
+        $stmt->close();
     } else {
-        $message = "Invalid login credentials! Please try again.";
+        // Fallback error handling
+        $message = "Database error: " . $conn->error;
         $messageColor = "red";
     }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 }
+
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +57,8 @@ $conn->close();
     <div class="login-container">
         <div class="login-box">
             <h2>Log in</h2>
-             <p id="login-error-message" style="color: <?= htmlspecialchars($messageColor) ?>;">
-            <?= $message ?>
+            <p id="login-error-message" style="color: <?= htmlspecialchars($messageColor) ?>;">
+                <?= htmlspecialchars($message) ?>
             </p>
             <form method="POST">
                 <div class="input-container">
@@ -63,9 +73,8 @@ $conn->close();
                         <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:1px; top:45%; transform:translateY(-50%);"></i>
                     </div>
                     <small id="password-error" class="error-message"></small>
-                    
                     <div class="forgot-password-link">
-                         <a href="./forgot_password.php">Forgot your password? <i class="bi bi-box-arrow-up-right"></i></a>
+                        <a href="./forgot_password.php">Forgot your password? <i class="bi bi-box-arrow-up-right"></i></a>
                     </div>
                 </div>
                 <div class="action-buttons">
