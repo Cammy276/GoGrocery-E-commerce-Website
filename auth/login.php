@@ -28,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $messageColor = "red";
     }
 
-    $stmt->close();
 }
 $conn->close();
 ?>
