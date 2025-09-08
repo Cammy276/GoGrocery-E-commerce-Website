@@ -7,7 +7,7 @@ USE gogrocery;
 /* Users */
 /*
 - password_hash: bcrypt hash for development/testing
-- Plain passwords (for dev use only):
+- Plain passwords (for dev use only):f
 1) Alice (user_id=1): Password123!
 2) Bob (user_id=2): Secret456!
 */
@@ -2654,7 +2654,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='BX-CX-BAG-082'),
-      '../images/products/beverages/coffee/beans_and_ground/medium_roast_coffee_beans.png',
+      '../images/products/beverages/coffee/beans_ground/medium_roast_coffee_beans.png',
       'Medium Roast Coffee Beans',
       '2025-08-24 09:03:28'
     );

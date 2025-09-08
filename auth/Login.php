@@ -1,6 +1,6 @@
 <?php
 session_start();  // Start session
-
+//
 // Include the database connection
 include(__DIR__ . '/../connect_db.php');
 
