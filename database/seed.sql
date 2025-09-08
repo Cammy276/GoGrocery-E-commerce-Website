@@ -2414,7 +2414,7 @@ INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
 INSERT INTO product_images (product_id, product_image_url, alt_text, created_at)
     VALUES (
       (SELECT product_id FROM products WHERE sku='FEC-CIS-SDT-046'),
-      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/salad_dressings_toppings/classic_caesar_dressing.png',
+      '../images/products/food_essentials_commodities/cooking_ingredients_seasoning/salad_dressings_toppings/classic _caesar_dressing.png',
       'Classic Caesar Dressing',
       '2025-08-26 21:30:15'
     );
