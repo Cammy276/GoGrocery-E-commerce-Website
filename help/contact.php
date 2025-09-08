@@ -1,5 +1,8 @@
 <?php
-require __DIR__ . '/../init.php';
+session_start();  // Start session
+
+// Include the database connection
+include(__DIR__ . '/../connect_db.php'); // $conn is available
 ?>
 <!DOCTYPE html>
 <html lang="en">
