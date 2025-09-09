@@ -85,7 +85,11 @@ $stmt->close();
                     <p>Set or update your default delivery address for future orders</p>
                 </div>
                 <div class="content">
-                    <h2>Delivery Address List</h2>
+                    <div class="delivery-header">
+                        <h2>Delivery Address List</h2>
+                        <a href="addForm.php"><i class="bi bi-plus-circle-fill"></i></a>
+                    </div>
+
                     <br/>
                     <!--- get message from addForm.php & addressDetails.php-->
                     <?php if (isset($_GET['msg']) && $_GET['msg'] === 'addSuccess'): ?>
@@ -126,11 +130,7 @@ $stmt->close();
                             </div>
                         </a>
                     <?php endforeach; ?>
-                        
                     
-
-                   
-                   <a href="addForm.php">Add new address</a>
                 </div>
             </div>
         </div>
