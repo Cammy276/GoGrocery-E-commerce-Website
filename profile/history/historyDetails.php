@@ -1,0 +1,250 @@
+<!-- to get current user id -->
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    echo "Logged in as User ID: " . $user_id;
+} else {
+    echo "You are not logged in!";
+}
+?>
+
+<!-- to get order_id passed in -->
+ <?php
+if (isset($_GET['id'])) {
+    $order_id = intval($_GET['id']); // sanitize input
+} else {
+    die("Fail to get order_id from order page.");
+}
+
+?>
+
+<?php 
+
+// Include the database connection
+include(__DIR__ . '/../../connect_db.php');
+
+// Predefine variable for error message
+$errorMsg = null;
+
+
+//to get the order details by order_id
+$orderStmt = $conn->prepare("SELECT * FROM orders WHERE order_id = ?");
+$orderStmt->bind_param("i", $order_id);
+
+if ($orderStmt->execute()){
+    $orderResult = $orderStmt->get_result();
+    $orderInfo = $orderResult->fetch_assoc();
+} else {
+    $errorMsg = $orderStmt->error;
+}
+$orderStmt->close();
+
+$address_id = $orderInfo['address_id'];
+
+
+//to get the delivery address
+$addressStmt = $conn->prepare("SELECT * FROM addresses WHERE address_id = ?");
+$addressStmt->bind_param("i", $address_id);
+
+if ($addressStmt->execute()){
+    $addressResult = $addressStmt->get_result();
+    $address = $addressResult->fetch_assoc();
+
+    $parts = [];
+    if (!empty($address['apartment'])) {
+        $parts[] = $address['apartment'];
+    }
+    $parts[] = $address['street'];
+    $parts[] = $address['postcode'];
+    $parts[] = $address['city'];
+    $parts[] = $address['state_territory'];
+
+    $address = implode(", ", $parts);
+} else {
+    $errorMsg = $addressStmt->error;
+}
+$addressStmt->close();
+
+
+
+
+
+//to get the order items by order_id
+$itemStmt = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
+$itemStmt->bind_param("i", $order_id);
+
+
+if ($itemStmt->execute()){
+    $itemResult = $itemStmt->get_result();
+    $orderItemList = [];
+
+    if ($itemResult->num_rows === 0) {
+        die("Order item not found.");
+    }
+    while($row = $itemResult->fetch_assoc()) { 
+        $orderItemList[] = $row;
+    }
+} else {
+    $errorMsg = $itemStmt->error;
+}
+$itemStmt->close();
+
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Order Page</title>
+
+        <!-- Bootstrap Icons -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../../css/profile.css">
+
+    </head>
+    <body>
+        <div id="header">
+            <div class="logo">GoGrocery</div>
+            <div class="nav-links">
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="">Help Center</a>
+                <a href="">Best Seller</a>
+                <a href="">Special Deal</a>
+                <a href="">New Product</a>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div id="profileSettingSideBar">  
+                <ul class="menu-items">
+                    <li><a href=""><i class="bi bi-gear-fill"></i> Profile Settings</a></li>
+                    <li><a href="../deliveryAddress/index.php"><i class="bi bi-geo-alt-fill"></i> Delivery Addresses</a></li>
+                    <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
+                    <li><a href="../order/index.php"><i class="bi bi-bag-fill"></i> Orders</a></li>
+                    <li><a href="../history/index.php" class="active"><i class="bi bi-clock-history"></i> History</a></li>
+                    <li><a href=""><i class="bi bi-heart"></i> Wishlist</a></li>
+                    <li><a href=""><i class="bi bi-award-fill"></i> Rewards</a></li>
+                    <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
+                </ul>
+            </div>
+
+            <div id="profileContent">
+                <div class="content-header">
+                    <h1>History</h1>
+                    <p>Review the orders that are already completed</p>
+                </div>
+
+                <div class="content">
+                    <h2>Your Previous Order</h2>
+                    
+                    <!--- shows message if error or no record -->
+                    <?php if (!empty($errorMsg)): ?>
+                        <p class="errMessage">Error occurred when fetching records. Please try again.</p>
+                        <pre class="errMessage"><?php echo htmlspecialchars($errorMsg); ?></pre>
+                    <?php elseif (empty($orderInfo)): ?>
+                        <p class="tips">No order record found</p>
+                    <?php else: ?>
+                        <br/>
+                    <?php endif; ?>
+
+
+                    <div class="card-order">
+                        <div class="order-header">
+                            <h3 class="order-orderId">Order ID: <?php echo $order_id; ?></h3>
+                            <span class="order-status status-delivered">Delivered</span>
+                        </div>
+
+                        <div class="order-body">
+                            <div class="order-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Placed On</span>
+                                    <span class="detail-value">
+                                        <?php echo isset($orderInfo['placed_at']) 
+                                            ? date('M j, Y g:i A', strtotime($orderInfo['placed_at'])) 
+                                            : '-'; ?>
+                                    </span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Number of Item</span>
+                                    <span class="detail-value"><?php echo count($orderItemList); ?></span>
+                                </div>
+                            </div>
+
+                            <!-- Order Items -->
+                            <div class="order-items">
+                                <h4 class="items-title"><i class="bi bi-list-check"></i> Order Items</h4>
+                                <ul class="item-list">
+                                    <?php foreach ($orderItemList as $item): ?>
+                                    <li>
+                                        <div class="item-info">
+                                            <div class="item-name"><?php echo htmlspecialchars($item['product_name']); ?></div>
+                                            <div class="item-sku">SKU: <?php echo $item['sku']; ?></div>
+                                        </div>
+                                        <div class="item-quantity">Qty: <?php echo $item['quantity']; ?></div>
+                                        <div class="item-price">RM <?php echo number_format($item['unit_price'], 2); ?></div>
+                                        <div class="item-total">RM <?php echo number_format($item['line_total'], 2); ?></div>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+
+                            <!-- Payment & Delivery -->
+                            <div class="order-payment-section">
+                                <h4 class="payment-title"><i class="bi bi-credit-card"></i> Payment & Delivery Information</h4>
+                                <div class="payment-item">
+                                    <span class="payment-label">Address</span>
+                                    <span class="payment-value"><?php echo isset($address) ? $address : '-'; ?></span>
+                                </div>
+                                <div class="payment-item">
+                                    <span class="payment-label">Payment Method</span>
+                                    <span class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></span>
+                                </div>
+                                <div class="payment-item">
+                                    <span class="payment-label">Voucher ID</span>
+                                    <span class="payment-value"><?php echo isset($orderInfo['voucher_id']) && !empty($orderInfo['voucher_id']) ? $orderInfo['voucher_id'] : '-'; ?></span>
+                                </div>
+                                <div class="payment-item">
+                                    <span class="payment-label">Delivery Duration</span>
+                                    <span class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'].' days' : '-'; ?></span>
+                                </div>
+                            </div>
+
+                            <!-- Price Breakdown -->
+                            <div class="breakdown-section">
+                                <h4 class="breakdown-title"><i class="bi bi-receipt"></i> Price Breakdown</h4>
+                                <div class="breakdown-vertical">
+                                    <div class="breakdown-item">
+                                        <span class="breakdown-label">Subtotal</span>
+                                        <span class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="breakdown-label">Discount Total</span>
+                                        <span class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['discount_total']) ? number_format($orderInfo['discount_total'], 2) : '0.00'; ?></span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="breakdown-label">Shipping Fee</span>
+                                        <span class="breakdown-value">RM <?php echo isset($orderInfo['shipping_fee']) ? number_format($orderInfo['shipping_fee'], 2) : '0.00'; ?></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="grand-total">
+                            Grand Total: RM <?php echo isset($orderInfo['grand_total']) ? number_format($orderInfo['grand_total'], 2) : '-'; ?>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
