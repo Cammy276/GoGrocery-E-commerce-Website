@@ -117,7 +117,7 @@ if (isset($_POST['update'])) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Order Page</title>
+        <title>Order Details</title>
 
         <!-- Bootstrap Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

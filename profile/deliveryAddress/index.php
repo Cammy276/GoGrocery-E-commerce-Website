@@ -41,7 +41,7 @@ $stmt->close();
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Delivery Address Page</title>
+        <title>Delivery Address</title>
     
         <!-- Bootstrap Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

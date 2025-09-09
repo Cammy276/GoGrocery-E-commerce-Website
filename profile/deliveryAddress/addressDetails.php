@@ -103,7 +103,7 @@ if (isset($_POST['delete'])) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Address Details Page</title>
+        <title>Delivery Address Details</title>
 
         <!-- Bootstrap Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

@@ -64,7 +64,7 @@ if (isset($_POST['insert'])) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Add New Delivert Address Page</title>
+        <title>Add New Delivery Address</title>
         
         <!-- Bootstrap Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
