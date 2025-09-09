@@ -244,7 +244,7 @@ if (isset($_POST['update'])) {
                                         <span class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></span>
                                     </div>
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Discount Total</span>
+                                        <span class="breakdown-label">Total Discount</span>
                                         <span class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['discount_total']) ? number_format($orderInfo['discount_total'], 2) : '0.00'; ?></span>
                                     </div>
                                     <div class="breakdown-item">
