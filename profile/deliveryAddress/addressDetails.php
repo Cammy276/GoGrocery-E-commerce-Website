@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
 if (isset($_GET['id'])) {
     $address_id = intval($_GET['id']); // sanitize input
 } else {
-    die("Fail to get address id from delivery address page.");
+    die("Fail to get address_id from delivery address page.");
 }
 
 ?>
