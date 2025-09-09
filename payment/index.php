@@ -560,19 +560,29 @@ if ($addressStmt->execute()) {
                                         <span class="summary-value discount-value">-RM <?php echo number_format($totalLineDiscount, 2); ?></span>
                                     </div>
                                     
-                                    <div class="summary-item">
-                                        <span class="summary-label">Shipping Fee</span>
-                                        <span class="summary-value">RM 5.00</span>
-                                    </div>
+                                    
                                     
                                     <div class="summary-item">
                                         <span class="summary-label">Voucher Discount</span>
                                         <span class="summary-value discount-value" id="voucherDiscountValue">-RM 0.00</span>
                                     </div>
+
+                                    <!--------- ---->
+                                    <div class="summary-item summary-total">
+                                        <span class="summary-label">Total Discount</span>
+                                        <span class="summary-value discount-value" id="voucherDiscountValue">- RM <?php echo number_format($totalLineDiscount + 5.00, 2); ?></span>
+                                    </div>
+
+
+
+                                    <div class="summary-item">
+                                        <span class="summary-label">Shipping Fee</span>
+                                        <span class="summary-value">RM 5.00</span>
+                                    </div>
                                     
                                     <div class="summary-item summary-total">
                                         <span class="summary-label">Total</span>
-                                        <span class="summary-value">RM <?php echo number_format($subtotal + 5.00, 2); ?></span>
+                                        <span class="summary-value" id = "grand-total">RM <?php echo number_format($subtotal + 5.00, 2); ?></span>
                                     </div>
                                     
 
@@ -589,8 +599,7 @@ if ($addressStmt->execute()) {
 document.addEventListener("DOMContentLoaded", function() {
     const voucherSelect = document.getElementById("voucher");
     const voucherDiscountEl = document.getElementById("voucherDiscountValue");
-    const totalEl = document.querySelector(".summary-total .summary-value");
-
+    const totalEl = document.getElementById("grand-total");
     const subtotal = <?php echo json_encode($subtotal); ?>;
     const totalLineDiscount = <?php echo json_encode($totalLineDiscount); ?>;
     const shippingFee = 5.00;
