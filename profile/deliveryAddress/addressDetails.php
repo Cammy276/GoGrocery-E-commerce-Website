@@ -108,7 +108,7 @@ if (isset($_POST['delete'])) {
         <!-- Bootstrap Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../../css/deliveryAddress.css">
+        <link rel="stylesheet" href="../../css/profile.css">
     </head>
     <body>
             <div id="header">

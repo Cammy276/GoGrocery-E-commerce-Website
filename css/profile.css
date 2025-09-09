@@ -58,34 +58,6 @@ body {
     padding: 25px 0;
 }
 
-.profile-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 20px 20px;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 15px;
-}
-
-.profile-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: #e6e9ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
-    color: #4a6cf7;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.profile-name {
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 5px;
-}
 
 .profile-email {
     color: #777;
@@ -261,36 +233,92 @@ form label {
 }
 
 
-@media (max-width: 900px) {
+/* Large desktops and wide screens */
+@media (max-width: 1200px) {
     .main-container {
-        flex-direction: column;
+        max-width: 95%;
+        gap: 20px;
     }
-    
-    #profileSettingSideBar {
-        flex: 0 0 auto;
-        width: 100%;
+    .nav-links {
+        gap: 15px;
     }
-    
-    .two-columns {
-        flex-direction: column;
-        gap: 0;
+    .content-header h1 {
+        font-size: 22px;
     }
-}
-hr {
-    color: grey;
 }
 
+/* Tablets and smaller laptops */
+@media (max-width: 1024px) {
+    #profileSettingSideBar {
+        flex: 0 0 240px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .textInput, select {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+}
+
+/* Large mobile devices (landscape phones / small tablets) */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
-    #header {
-        padding: 15px 20px;
-    }
-    
     .main-container {
-        margin: 20px;
-        gap: 20px;
+        flex-direction: column;
+        margin: 15px;
+        gap: 15px;
+    }
+    .nav-links {
+        display: none; /* hamburger menu can replace later */
+    }
+    .content-header h1 {
+        font-size: 20px;
+    }
+    .card h2 {
+        font-size: 16px;
+    }
+}
+
+/* Medium phones */
+@media (max-width: 576px) {
+    #profileSettingSideBar {
+        padding: 15px 0;
+    }
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    .profile-name {
+        font-size: 16px;
+    }
+    .profile-email {
+        font-size: 12px;
+    }
+    .saveButton, .deleteButton {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .buttonContainer {
+        text-align: center;
+    }
+}
+
+/* Small phones (iPhone SE, Galaxy Mini, etc.) */
+@media (max-width: 400px) {
+    body {
+        font-size: 14px;
+    }
+    .logo {
+        font-size: 20px;
+    }
+    .card {
+        padding: 15px;
+    }
+    .content-header h1 {
+        font-size: 18px;
+    }
+    .addressLabel {
+        font-size: 18px;
     }
 }
