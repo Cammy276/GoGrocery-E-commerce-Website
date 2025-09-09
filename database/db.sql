@@ -180,12 +180,12 @@ CREATE TABLE IF NOT EXISTS orders (
   address_id INT UNSIGNED NOT NULL,
   status ENUM('paid','delivered') NOT NULL DEFAULT 'paid',  -- always paid because only paid orders are saved into this table
   payment_method ENUM('card','bank_transfer','e_wallet','grabpay','fpx') NOT NULL,
-  voucher_id INT UNSIGNED NULL,                     -- applied voucher
+  voucher_id INT UNSIGNED NULL,                     
   subtotal DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00, -- includes voucher discount
+  voucher_discount_value DECIMAL(10,2) NOT NULL DEFAULT 0.00, -- subtotal * discount_value (of voucher)
   shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   delivery_duration VARCHAR(50) NOT NULL,
-  grand_total DECIMAL(10,2) AS (subtotal - discount_total + shipping_fee) STORED,
+  grand_total DECIMAL(10,2) AS (subtotal - voucher_discount_value + shipping_fee) STORED,
   placed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_orders_user (user_id),
   CONSTRAINT fk_orders_user

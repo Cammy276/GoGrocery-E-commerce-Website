@@ -12,9 +12,9 @@ USE gogrocery;
 2) Bob (user_id=2): Secret456!
 */
 INSERT INTO users (name, email, phone, profile_image_url, password_hash) VALUES
-('Alice', 'alice@example.com', '+60123456789', '/images/users/default.png', 
+('Alice', 'alice@example.com', '+60123456789', '/GoGrocery-E-commerce-Website/images/users/default.png', 
  '$2y$10$6CkW5A.62IDONpzZ2bWQ4ef5hd0yNr/pB7.Q9ejWR2zpvk8M0MzhS'),  
-('Bob', 'bob@example.com', '+60198765432', '/images/users/default.png', 
+('Bob', 'bob@example.com', '+60198765432', '/GoGrocery-E-commerce-Website/images/users/default.png', 
  '$2y$10$vJOFEwgNTbfd/DFXEX4Zh.EEMiVrRW/8suz8xpgTr9SDeWwjVzWv2');  
 
 /* Addresses */

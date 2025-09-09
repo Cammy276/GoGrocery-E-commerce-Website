@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Handle optional image upload
     $contact_image_url = null;
     if (isset($_FILES['contact_image_url']) && $_FILES['contact_image_url']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = __DIR__ . "/uploads/";
+        $uploadDir = __DIR__ . "/../images/contact/";
         if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
 
         $safeName    = preg_replace("/[^A-Za-z0-9_\-]/", "_", $name);
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if (move_uploaded_file($_FILES['contact_image_url']['tmp_name'], $targetPath)) {
             $baseURL = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
-            $contact_image_url = $baseURL . "/uploads/" . $filename;
+            $contact_image_url = $baseURL . "/../images/contact/" . $filename;
         }
     }
 
@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->AltBody = "Subject: $subject\nName: $name\nEmail: $email\nPhone: $phone\nComment: $comment";
 
         if ($contact_image_url) {
-            $absolutePath = __DIR__ . "/uploads/" . basename($contact_image_url);
+            $absolutePath = __DIR__ . "/../images/contact/" . basename($contact_image_url);
             if (file_exists($absolutePath)) $mail->addAttachment($absolutePath);
         }
 

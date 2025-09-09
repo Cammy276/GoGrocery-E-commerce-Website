@@ -67,7 +67,7 @@ $stmt->close();
             <div id="profileSettingSideBar">  
                 <ul class="menu-items">
                     <!-- use Bootstrap icons-->
-                    <li><a href=""><i class="bi bi-gear-fill"></i> Profile Settings</a></li>
+                    <li><a href="../settings/index.php"><i class="bi bi-gear-fill"></i> Profile Settings</a></li>
                     <li><a href="../deliveryAddress/index.php" class="active"><i class="bi bi-geo-alt-fill"></i> Delivery Addresses</a></li>
                     <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
                     <li><a href="../order/index.php"><i class="bi bi-bag-fill"></i> Orders</a></li>
