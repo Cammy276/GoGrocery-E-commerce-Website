@@ -16,7 +16,9 @@ function showError($message) {
     <body>
         <div class="reset-container">
             <h2>Error</h2>
-            <p class="error-message"><?= htmlspecialchars($message) ?></p>
+           <p class="error-message" style="color: red; font-size: 15px; margin-top: 5px; text-align: center;">
+                <?= htmlspecialchars($message) ?>
+            </p>
             <div class="login-link">
             <a class="button-link" href="./login.php">Go to Login <i class="bi bi-box-arrow-in-right"></i></a>
         </div>
@@ -62,7 +64,7 @@ $updateStmt->execute();
     <meta charset="UTF-8">
     <title>Password Reset Success</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/ProcessResetPasswordStyles.css">
+    <link rel="stylesheet" href="../css/process_reset_password_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -74,4 +76,4 @@ $updateStmt->execute();
         </div>
     </div>
 </body>
-</html>
+</html> 
