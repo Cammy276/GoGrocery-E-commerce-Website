@@ -86,7 +86,7 @@ $stmt->close();
                 </div>
                 <div class="content">
                     <h2>Delivery Address List</h2>
-
+                    <br/>
                     <!--- get message from addForm.php & addressDetails.php-->
                     <?php if (isset($_GET['msg']) && $_GET['msg'] === 'addSuccess'): ?>
                         <p class="successMessage">Address added successfully!</p>
@@ -108,7 +108,7 @@ $stmt->close();
                         <a href="addressDetails.php?id=<?php echo $address['address_id']; ?>" class="cardLink">
                             <div class="card">
                                 <p class="addressLabel"><?php echo $address['label'] ?></p>
-                                <br/>
+                                
                                 <p class="addressDetails">
                                     <?php
                                         $parts = [];
