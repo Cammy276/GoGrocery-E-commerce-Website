@@ -18,9 +18,8 @@ h1 {
 
 .faq-item {
     background: #fff;
-    border-radius: 2px;
     margin-bottom: 10px;
-border-bottom: 1px solid #858585ff;
+    border-bottom: 1px solid rgb(41, 41, 41);
     overflow: hidden;
 }
 
@@ -31,13 +30,15 @@ border-bottom: 1px solid #858585ff;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    color: #34495e;
+    font-size: 18px;
+    color: #000000;
 }
 
 .faq-answer {
     display: none;
     padding: 0 20px 15px 20px;
     color: #555;
+    font-size: 15px;
 }
 
 .faq-question:hover {
