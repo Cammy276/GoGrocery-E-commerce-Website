@@ -10,6 +10,7 @@
 </head>
 <body>
       <section class="experience-section">
+        
         <div class="experience-content">
             <h1>Over 10+ Years of <br>Fresh Grocery Service</h1>
             <p>
@@ -39,6 +40,7 @@
         <div class="experience-image">
             <img src="../images/company/experience.jpg" alt="Experience Image">
         </div>
+
   </section>
     <section class="about-section">
     <div class="about-us-container" id="about-container">

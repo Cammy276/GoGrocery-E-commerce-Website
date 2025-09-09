@@ -7,7 +7,7 @@ body {
 /* Experience Section */
 .experience-section {
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
   align-items: center;
   background:  #009c99;
   padding: 60px 40px;
@@ -67,7 +67,7 @@ body {
 .experience-image img {
   width:500px;
   height:300px;
-  border-radius: 10px;
+  padding: 20px;
   opacity: 0;
   transform: translateX(100px);
   animation: slideInRight 1s ease forwards;
