@@ -88,6 +88,116 @@ if ($addressStmt->execute()) {
 } else {
     $errorMsg = $addressStmt->error;
 }
+
+
+
+
+//handle confirm payment
+
+// 🔹 Step 1: Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $address_id     = $_POST['address_id'] ?? null;
+    $payment_method = $_POST['payment_method'] ?? null;
+    $voucher_id     = !empty($_POST['voucher_id']) ? $_POST['voucher_id'] : null;
+    $voucher_discount_value = floatval($_POST['voucher_discount'] ?? 0);
+    $shipping_fee   = 5.00;
+    $delivery_duration = "5-7";
+    $status         = "paid";
+    $placed_at      = date("Y-m-d H:i:s");
+
+    if (!$address_id || !$payment_method) {
+        die("Missing required fields.");
+    }
+
+    // Fetch cart items
+    $cartStmt = $conn->prepare("SELECT * FROM cart_items WHERE user_id = ?");
+    $cartStmt->bind_param("i", $user_id);
+    $cartStmt->execute();
+    $cartResult = $cartStmt->get_result();
+
+    $cartItems = [];
+    $subtotal = 0;
+    $totalLineDiscount = 0;
+
+    while ($item = $cartResult->fetch_assoc()) {
+        $cartItems[] = $item;
+        $lineTotal = $item['unit_price'] * $item['quantity'];
+        $subtotal += $lineTotal;
+        $totalLineDiscount += $item['line_discount'];
+    }
+    $cartStmt->close();
+
+    if (empty($cartItems)) {
+        die("Cart is empty.");
+    }
+
+    // Apply discounts
+    $subtotal -= $totalLineDiscount;
+    $grand_total = ($subtotal - $voucher_discount_value) + $shipping_fee;
+
+    // Insert into orders
+    $orderStmt = $conn->prepare("
+        INSERT INTO orders (
+            user_id, address_id, status, payment_method, voucher_id, 
+            subtotal, voucher_discount_value, shipping_fee, delivery_duration, placed_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+    $orderStmt->bind_param(
+        "iissidddss",
+        $user_id,
+        $address_id,
+        $status,
+        $payment_method,
+        $voucher_id,
+        $subtotal,
+        $voucher_discount_value,
+        $shipping_fee,
+        $delivery_duration,
+        $placed_at
+    );
+    if (!$orderStmt->execute()) {
+        die("Order insert failed: " . $orderStmt->error);
+    }
+    $order_id = $orderStmt->insert_id;
+    $orderStmt->close();
+
+    // Insert into order_items
+    $orderItemStmt = $conn->prepare("
+        INSERT INTO order_items (
+            order_id, product_id, product_name, sku, unit_price, quantity, line_discount
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    ");
+    foreach ($cartItems as $item) {
+        $line_total = ($item['unit_price'] * $item['quantity']) - $item['line_discount'];
+        $orderItemStmt->bind_param(
+            "iissdid",
+            $order_id,
+            $item['product_id'],
+            $item['product_name'],
+            $item['sku'],
+            $item['unit_price'],
+            $item['quantity'],
+            $item['line_discount'],
+        );
+        if (!$orderItemStmt->execute()) {
+            die("Order item insert failed: " . $orderItemStmt->error);
+        }
+    }
+    $orderItemStmt->close();
+
+    // Clear cart
+    $clearStmt = $conn->prepare("DELETE FROM cart_items WHERE user_id = ?");
+    $clearStmt->bind_param("i", $user_id);
+    $clearStmt->execute();
+    $clearStmt->close();
+
+    // Show success message (instead of redirecting)
+    echo "<h2>✅ Order placed successfully!</h2>";
+    echo "<p>Your order number is <strong>#{$order_id}</strong>.</p>";
+    echo "<p>Total paid: RM " . number_format($grand_total, 2) . "</p>";
+    echo "<p>Estimated delivery: {$delivery_duration} days</p>";
+    exit;
+}
 ?>
 
 
@@ -184,7 +294,7 @@ if ($addressStmt->execute()) {
                 margin-bottom: 4px;
             }
             
-            .payment-item-sku {
+            .payment-item-details {
                 font-size: 12px;
                 color: #6c757d;
             }
@@ -374,7 +484,7 @@ if ($addressStmt->execute()) {
                 </div>
                 
                 <div class="content">
-                    <form id="paymentForm" method="POST" action="process_payment.php">
+                    <form id="paymentForm" method="POST">
                         <div class="payment-container">
                             <div class="payment-left">
                                 <!-- Order Items Section -->
@@ -384,13 +494,17 @@ if ($addressStmt->execute()) {
                                     <?php
                                     $subtotal = 0;
                                     $totalLineDiscount = 0;
+                                    $itemNum = 0;
                                     
                                     foreach ($cartList as $item): 
-                                        $lineDiscountTotal = $item['line_discount'] * $item['quantity'];
-                                        $lineTotal = ($item['unit_price'] * $item['quantity']) - $lineDiscountTotal;
                                         
+                                        //$lineTotal = $item['unit_price']*$item['quantity'] - $item['line_discount'];
+                                        $lineTotal = $item['unit_price']*$item['quantity'];
+                                        $totalLineDiscount += $item['line_discount'];
                                         $subtotal += $lineTotal;
-                                        $totalLineDiscount += $lineDiscountTotal;
+
+                                        $itemNum += 1;
+                        
                                         
                                         // Fetch product image
                                         $productStmt = $conn->prepare("SELECT * FROM product_images WHERE product_id=?");
@@ -410,11 +524,13 @@ if ($addressStmt->execute()) {
                                         
                                         <div class="payment-item-details">
                                             <div class="payment-item-info">
-                                                <div class="payment-item-name"><?php echo htmlspecialchars($item['product_name']); ?></div>
-                                                <div class="payment-item-sku">SKU: <?php echo htmlspecialchars($item['sku']); ?></div>
-                                                <div class="payment-item-sku">
-                                                Unit discount: RM <?php echo number_format($item['line_discount'], 2); ?>
-                                            </div>
+                                                <p class="payment-item-name"><?php echo htmlspecialchars($item['product_name']); ?></p>
+                                                <p class="payment-item-details">SKU: <?php echo htmlspecialchars($item['sku']); ?></p>
+                                                <p class="payment-item-details">
+                                                    Unit discount: 
+                                                    <?php echo ($item['line_discount'] > 0) ? "RM " . number_format($item['line_discount'], 2) : "-"; ?>
+                                                </p>
+
                                             </div>
                                             
                                             <div class="payment-item-price">
@@ -432,6 +548,7 @@ if ($addressStmt->execute()) {
                                         </div>
                                     </div>
                                     <?php endforeach; ?>
+                                    <p class="tips">Each item's total price has not yet adjusted to include any applicable item discount</p>
                                 </div>
 
                                 <!-- Delivery Address Section -->
@@ -496,19 +613,19 @@ if ($addressStmt->execute()) {
                                             <!-- CARD -->
                                             <div id="cardFields" class="hidden">
                                                 <label>Card Number</label>
-                                                <input type="text" id="card_number" name="card_number" maxlength="16">
+                                                <input type="text" class="textInput" id="card_number" name="card_number" maxlength="16">
                                             <div id="error_card" class="error"></div>
 
                                             <label>Expiry (MM/YY)</label>
-                                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY">
+                                            <input type="text" class="textInput" id="expiry" name="expiry" placeholder="MM/YY">
                                             <div id="error_expiry" class="error"></div>
 
                                             <label>CVV</label>
-                                            <input type="password" id="cvv" name="cvv" maxlength="4">
+                                            <input type="password" class="textInput" id="cvv" name="cvv" maxlength="4">
                                             <div id="error_cvv" class="error"></div>
 
                                             <label>Name on Card</label>
-                                            <input type="text" id="name" name="name">
+                                            <input type="text" class="textInput" id="name" name="name">
                                             </div>
 
                                             <!-- BANK TRANSFER MANUAL -->
@@ -519,7 +636,7 @@ if ($addressStmt->execute()) {
                                             <p><strong>Account Name:</strong> MyShop Sdn Bhd</p>
 
                                             <label>Reference Number</label>
-                                            <input type="text" id="reference" name="reference">
+                                            <input type="text" class="textInput" id="reference" name="reference">
 
                                             <label>Upload Receipt (jpg/png/pdf)</label>
                                             <input type="file" id="receipt" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
@@ -551,29 +668,26 @@ if ($addressStmt->execute()) {
                                     <h2 class="payment-section-title"><i class="bi bi-receipt"></i> Order Summary</h2>
                                     
                                     <div class="summary-item">
+                                        <span class="summary-label">Your items (<?php echo $itemNum ?>)</span>
+                                        <span class="summary-value">RM <?php echo number_format($subtotal, 2); ?></span>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <span class="summary-label">Total Item Discount:</span>
+                                        <span class="summary-value discount-value">- RM <?php echo number_format($totalLineDiscount, 2); ?></span>
+                                    </div>
+
+                                    <?php $subtotal = $subtotal-$totalLineDiscount ?>
+                                    <div class="summary-item summary-total">
                                         <span class="summary-label">Subtotal</span>
                                         <span class="summary-value">RM <?php echo number_format($subtotal, 2); ?></span>
                                     </div>
-                                    
-                                    <div class="summary-item">
-                                        <span class="summary-label">Items Discount</span>
-                                        <span class="summary-value discount-value">-RM <?php echo number_format($totalLineDiscount, 2); ?></span>
-                                    </div>
-                                    
-                                    
+                                
                                     
                                     <div class="summary-item">
                                         <span class="summary-label">Voucher Discount</span>
-                                        <span class="summary-value discount-value" id="voucherDiscountValue">-RM 0.00</span>
+                                        <span class="summary-value discount-value isVoucher">- RM 0.00</span>
                                     </div>
-
-                                    <!--------- ---->
-                                    <div class="summary-item summary-total">
-                                        <span class="summary-label">Total Discount</span>
-                                        <span class="summary-value discount-value" id="voucherDiscountValue">- RM <?php echo number_format($totalLineDiscount + 5.00, 2); ?></span>
-                                    </div>
-
-
 
                                     <div class="summary-item">
                                         <span class="summary-label">Shipping Fee</span>
@@ -596,16 +710,19 @@ if ($addressStmt->execute()) {
         </div>
 
         <script>
+
+            const form = document.getElementById("paymentForm");
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const voucherSelect = document.getElementById("voucher");
-    const voucherDiscountEl = document.getElementById("voucherDiscountValue");
+    const voucherDiscountEl = document.querySelector(".isVoucher");
     const totalEl = document.getElementById("grand-total");
     const subtotal = <?php echo json_encode($subtotal); ?>;
-    const totalLineDiscount = <?php echo json_encode($totalLineDiscount); ?>;
     const shippingFee = 5.00;
 
     // Hidden inputs to pass to backend
-    const form = document.getElementById("paymentForm");
+
     const hiddenVoucherId = document.createElement("input");
     hiddenVoucherId.type = "hidden";
     hiddenVoucherId.name = "voucher_id";
@@ -621,8 +738,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const option = voucherSelect.options[voucherSelect.selectedIndex];
         hiddenVoucherId.value = option.value || "";
 
-        // Base amount is subtotal minus line discounts
-        const baseAmount = subtotal - totalLineDiscount;
+        // Base amount is subtotal (already after item discounts in PHP)
+        const baseAmount = subtotal;
 
         if (option.value) {
             const type = option.getAttribute("data-type");
@@ -631,7 +748,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (type === "PERCENT") {
                 discountValue = (baseAmount * value) / 100;
             } else if (type === "FIXED") {
-                discountValue = Math.min(baseAmount, value); // don’t allow over-discount
+                discountValue = Math.min(baseAmount, value);
             }
         }
 
@@ -639,13 +756,13 @@ document.addEventListener("DOMContentLoaded", function() {
         hiddenVoucherDiscount.value = discountValue.toFixed(2);
 
         // Update UI
-        voucherDiscountEl.textContent = "-RM " + discountValue.toFixed(2);
+        voucherDiscountEl.textContent = "- RM " + discountValue.toFixed(2);
 
         const finalTotal = (baseAmount - discountValue) + shippingFee;
         totalEl.textContent = "RM " + finalTotal.toFixed(2);
     }
 
-    // Trigger once on load in case default is selected
+    // Trigger once on load
     updateTotals();
 
     // Update whenever voucher changes
@@ -660,8 +777,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const cardFields = document.getElementById("cardFields");
     const bankFields = document.getElementById("bankFields");
     const fpxFields = document.getElementById("fpxFields");
-    const form = document.getElementById("paymentForm");
-
+    
     // Toggle fields
     methodSelect.addEventListener("change", function() {
       cardFields.classList.add("hidden");
