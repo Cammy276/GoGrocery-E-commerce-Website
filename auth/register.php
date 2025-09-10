@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     I understand and agree to the 
                     <a href="../policies/terms_conditions.php" target="_blank">Terms & Conditions</a> 
                     and 
-                    <a href="../policies/privacy_notice.php" target="_blank">Privacy Notice</a>.
+                    <a href="../policies/privacy_notice.php" target="_blank">Privacy Policy</a>.
                 </label>
                 <small id="tnc-error" class="error-message"></small>
                 </div>
