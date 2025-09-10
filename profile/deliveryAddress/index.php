@@ -17,7 +17,7 @@ include(__DIR__ . '/../../connect_db.php');
 $errorMsg = null;
 
 // Fetch all addresses
-$stmt = $conn->prepare("SELECT * FROM addresses WHERE user_id = ? ORDER BY label DESC");
+$stmt = $conn->prepare("SELECT * FROM addresses WHERE user_id = ? ORDER BY label ASC");
 $stmt->bind_param("i", $user_id); 
 
 if ($stmt->execute()) {

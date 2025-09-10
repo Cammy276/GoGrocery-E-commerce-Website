@@ -41,6 +41,7 @@ if ($orderStmt->execute()){
 $orderStmt->close();
 
 $address_id = $orderInfo['address_id'];
+$voucher_id = $orderInfo['voucher_id'];
 
 
 //to get the delivery address
@@ -89,6 +90,20 @@ if ($itemStmt->execute()){
     $errorMsg = $itemStmt->error;
 }
 $itemStmt->close();
+
+
+
+//to get the voucher by voucher_id
+$voucherStmt = $conn->prepare("SELECT * FROM vouchers WHERE voucher_id = ?");
+$voucherStmt->bind_param("i", $voucher_id);
+$voucher = null;
+if ($voucherStmt->execute()){
+    $voucherResult = $voucherStmt->get_result();
+    $voucher = $voucherResult->fetch_assoc();
+} else {
+    $errorMsg = $voucherStmt->error;
+}
+$voucherStmt->close();
 
 
 ?>
@@ -143,7 +158,6 @@ $itemStmt->close();
 
                 <div class="content">
                     <h2>Your Previous Order</h2>
-                    
                     <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>
                         <p class="errMessage">Error occurred when fetching records. Please try again.</p>
@@ -188,7 +202,7 @@ $itemStmt->close();
                                             <div class="item-sku">SKU: <?php echo $item['sku']; ?></div>
                                         </div>
                                         <div class="item-quantity">Qty: <?php echo $item['quantity']; ?></div>
-                                        <div class="item-price">RM <?php echo number_format($item['unit_price'], 2); ?></div>
+                                        <div class="item-price">RM <?php echo number_format($item['unit_price'], 2); ?>/unit</div>
                                         <div class="item-total">RM <?php echo number_format($item['line_total'], 2); ?></div>
                                     </li>
                                     <?php endforeach; ?>
@@ -207,8 +221,8 @@ $itemStmt->close();
                                     <span class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></span>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Voucher ID</span>
-                                    <span class="payment-value"><?php echo isset($orderInfo['voucher_id']) && !empty($orderInfo['voucher_id']) ? $orderInfo['voucher_id'] : '-'; ?></span>
+                                    <span class="payment-label">Voucher Applied</span>
+                                    <span class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></span>
                                 </div>
                                 <div class="payment-item">
                                     <span class="payment-label">Delivery Duration</span>
@@ -225,8 +239,8 @@ $itemStmt->close();
                                         <span class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></span>
                                     </div>
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Total Discount</span>
-                                        <span class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['discount_total']) ? number_format($orderInfo['discount_total'], 2) : '0.00'; ?></span>
+                                        <span class="breakdown-label">Voucher Discount</span>
+                                        <span class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['voucher_discount_value']) ? number_format($orderInfo['voucher_discount_value'], 2) : '0.00'; ?></span>
                                     </div>
                                     <div class="breakdown-item">
                                         <span class="breakdown-label">Shipping Fee</span>
