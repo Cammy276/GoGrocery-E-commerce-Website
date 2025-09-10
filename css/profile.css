@@ -486,6 +486,15 @@ form label {
     outline: none;
     border-width: 3px;
 }
+.input-error {
+    border-color: #dc3545;
+    box-shadow: 0 0 3px #dc3545;
+}
+.error {
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 5px;
+}
 .buttonContainer {
     text-align: right;
 }

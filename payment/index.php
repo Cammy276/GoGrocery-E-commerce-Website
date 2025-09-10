@@ -558,7 +558,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                     </div>
                                     <?php endforeach; ?>
-                                    <p class="tips">Each item's total price has not yet adjusted to include any applicable item discount</p>
+                                    <p class="tips">Note: Each item's total price has not yet adjusted to include any applicable item discount.</p>
                                 </div>
 
                                 <!-- Delivery Address Section -->
@@ -592,19 +592,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <h2 class="payment-section-title"><i class="bi bi-credit-card"></i> Payment Options</h2>
                                     
                                     <div class="payment-form-group">
-                                        <label class="payment-form-label" for="voucher">Select Voucher</label>
+                                        <label class="payment-form-label" for="voucher">Select Voucher Applicable</label>
                                         <select class="payment-form-select" id="voucher" name="voucher_id">
-                                            <option value="">No voucher</option>
-                                            <?php foreach ($availableVouchers as $voucher): ?>
-                                                <option 
-                                                    value="<?php echo $voucher['voucher_id']; ?>" 
-                                                    data-type="<?php echo $voucher['discount_type']; ?>" 
-                                                    data-value="<?php echo $voucher['discount_value']; ?>">
-                                                    <?php echo htmlspecialchars($voucher['description']) . " - " . htmlspecialchars($voucher['code']); ?>
-                                                </option>
-                                            <?php endforeach; ?>
+                                            <?php if(count($availableVouchers) === 0): ?>
+                                                <option value="">-- No Voucher is Applicable --</option>
+                                            <?php else: ?>
+                                                <option value="">-- Select Voucher --</option>
+                                                <?php foreach ($availableVouchers as $voucher): ?>
+                                                    <option 
+                                                        value="<?php echo $voucher['voucher_id']; ?>" 
+                                                        data-type="<?php echo $voucher['discount_type']; ?>" 
+                                                        data-value="<?php echo $voucher['discount_value']; ?>">
+                                                        <?php echo htmlspecialchars($voucher['description']) . " - " . htmlspecialchars($voucher['code']); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </select>
-
+                                        <p class="tips">Note: Only vouchers that meet the eligibility criteria will be displayed.</p>
                                     </div>
                                     
                                     <div class="payment-form-group">
@@ -806,7 +810,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let valid = true;
 
       if (methodSelect.value === "card") {
-        const card = document.getElementById("card_number").value;
+        const card = document.getElementById("card_number").value.trim();
         const cardInput = document.getElementById("card_number");
         if (!/^\d{16}$/.test(card)) {
           document.getElementById("error_card").textContent = "Card number must be 16 digits.";
@@ -817,7 +821,7 @@ document.addEventListener("DOMContentLoaded", function() {
             cardInput.classList.remove("input-error");
         }
 
-        const expiry = document.getElementById("expiry").value;
+        const expiry = document.getElementById("expiry").value.trim();
         const expiryInput = document.getElementById("expiry");
         if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
           document.getElementById("error_expiry").textContent = "Invalid expiry format (MM/YY).";
@@ -828,7 +832,7 @@ document.addEventListener("DOMContentLoaded", function() {
             expiryInput.classList.remove("input-error");
         }
 
-        const cvv = document.getElementById("cvv").value;
+        const cvv = document.getElementById("cvv").value.trim();
         const cvvInput = document.getElementById("cvv");
         if (!/^\d{3,4}$/.test(cvv)) {
           document.getElementById("error_cvv").textContent = "CVV must be 3 or 4 digits.";
@@ -852,7 +856,7 @@ document.addEventListener("DOMContentLoaded", function() {
             receiptInput.classList.remove("input-error");
         }
 
-        const reference = document.getElementById("reference").value;
+        const reference = document.getElementById("reference").value.trim();
         const referenceInput = document.getElementById("reference");
         if (!/^[A-Za-z0-9]{6,12}$/.test(reference)) {
           document.getElementById("error_reference").textContent = "Reference number must be 6–12 letters or digits.";
@@ -865,7 +869,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
       if (methodSelect.value === "fpx") {
-        const bank = document.getElementById("bank_list").value;
+        const bank = document.getElementById("bank_list").value.trim();
         const bankSelect = document.getElementById("bank_list");
         if (bank === "") {
           document.getElementById("error_bank").textContent = "Please select your bank.";
