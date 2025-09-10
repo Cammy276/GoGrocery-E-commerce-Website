@@ -155,7 +155,7 @@ $voucherStmt->close();
                 </div>
 
                 <div class="content">
-                    <h2>Your Previous Order</h2>
+                    <h2>My Previous Order Details</h2>
                     <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>
                         <p class="errMessage">Error occurred when fetching records. Please try again.</p>

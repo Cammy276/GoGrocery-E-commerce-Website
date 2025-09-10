@@ -293,6 +293,9 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
                 transition: color 0.2s ease;
                 padding: 8px;
             }
+            .cart-deleteButton:hover {
+                background-color: #f7bac0ff !important;
+            }
 
 
 
@@ -336,7 +339,7 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
                     <p>View the items you have added before proceeding to checkout</p>
                 </div>
                 <div class="content">
-                   <h2>Cart List</h2>
+                   <h2>My Cart</h2>
 
                    <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>

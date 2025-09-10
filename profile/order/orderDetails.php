@@ -169,7 +169,7 @@ if (isset($_POST['update'])) {
                 </div>
 
                 <div class="content">
-                    <h2>Your Orders</h2>
+                    <h2>My Order Details</h2>
                     
                     <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>

@@ -89,7 +89,7 @@ $orderStmt->close();
                     <p>Review the orders that are still pending delivery</p>
                 </div>
                 <div class="content">
-                   <h2>Order List</h2>
+                   <h2>My Orders</h2>
 
                     <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>

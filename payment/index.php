@@ -487,6 +487,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form id="paymentForm" method="POST">
                         <div class="payment-container">
                             <div class="payment-left">
+                                
                                 <!-- Order Items Section -->
                                 <div class="payment-items">
                                     <h2 class="payment-section-title"><i class="bi bi-cart-check"></i> Order Items</h2>

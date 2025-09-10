@@ -86,7 +86,7 @@ $stmt->close();
                 </div>
                 <div class="content">
                     <div class="delivery-header">
-                        <h2>Delivery Address List</h2>
+                        <h2>My Delivery Addresses</h2>
                         <a href="addForm.php"><i class="bi bi-plus-circle-fill"></i></a>
                     </div>
 

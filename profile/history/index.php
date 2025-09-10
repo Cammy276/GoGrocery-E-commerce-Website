@@ -86,7 +86,7 @@ $orderStmt->close();
                     <p>Review the order records that are already completed</p>
                 </div>
                 <div class="content">
-                   <h2>History List</h2>
+                   <h2>My History</h2>
 
                    <!--- get message from orderDetails.php -->
                     <?php if (isset($_GET['msg']) && $_GET['msg'] === 'updateSuccess'): ?>
