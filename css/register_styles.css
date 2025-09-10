@@ -101,3 +101,30 @@ input[type="password"] {
 .login-link a:hover {
     text-decoration: underline;
 }
+/* Responsive for tablets (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .register-box {
+        padding: 30px 20px;
+        width: 100%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+    }
+
+    .register-btn {
+        padding: 10px;
+    }
+}
+/* Responsive for tablets (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .register-box {
+        padding: 20px 30px;
+        width: 100%;
+    }
+
+    .register-btn {
+        padding: 10px;
+    }
+}
