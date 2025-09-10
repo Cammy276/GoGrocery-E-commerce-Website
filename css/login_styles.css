@@ -9,6 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
 .login-box {
@@ -46,16 +47,19 @@ input[type="password"] {
     border-radius: 4px;
     margin-bottom: 10px;
 }
+
 input[type="text"].error,
 input[type="password"].error {
     border: 1px solid red;
 }
+
 .error-message {
     display: none;
     color: red;
     font-size: 12px;
     margin-top: 5px;
 }
+
 .show-password {
     position: absolute;
     right: 10px;
@@ -79,13 +83,14 @@ input[type="password"].error {
 }
 
 .login-btn {
-    background-color:  #009c99;
+    background-color: #009c99;
     color: white;
 }
 
 .login-btn:hover {
-    background-color:  #10adab;
+    background-color: #10adab;
 }
+
 .guest-btn {
     background-color: #0c0b0b40;
     color: #333;
@@ -120,24 +125,66 @@ input[type="password"].error {
 }
 
 .clear-password {
-    right: 40px; 
+    right: 40px;
 }
 
 .forgot-password-link {
     width: 106%;
     text-align: right;
-    margin-top: 10px; 
-   
-    
+    margin-top: 10px;
+
+
 }
 
 .forgot-password-link a {
     font-size: 14px;
-    color:  #009c99; 
+    color: #009c99;
     font-weight: bold;
     text-decoration: none;
 }
 
 .forgot-password-link a:hover {
     text-decoration: underline;
+}
+
+
+/*Responsive styles*/
+
+
+/* Responsive for tablets (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .login-box {
+        padding: 20px;
+        width: 100%;
+        margin: 0 10px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+    }
+
+    .login-btn,
+    .guest-btn {
+        padding: 10px;
+    }
+
+}
+
+/* Responsive for tablets (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .login-box {
+        padding: 20px 30px;
+        width: 100%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+    }
+
+    .login-btn,
+    .guest-btn {
+        padding: 10px;
+    }
 }

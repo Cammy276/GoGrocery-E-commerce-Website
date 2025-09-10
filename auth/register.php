@@ -62,6 +62,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <header>
+        <?php include '../header.php'; ?>
+    </header>
+    <link rel="stylesheet" href="../css/header_styles.css">
     <link rel="stylesheet" href="../css/register_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -113,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     I understand and agree to the 
                     <a href="../policies/terms_conditions.php" target="_blank">Terms & Conditions</a> 
                     and 
-                    <a href="../policies/privacy_notice.php" target="_blank">Privacy Notice</a>.
+                    <a href="../policies/privacy_notice.php" target="_blank">Privacy Policy</a>.
                 </label>
                 <small id="tnc-error" class="error-message"></small>
                 </div>

@@ -7,6 +7,10 @@ $message = $_GET['message'] ?? 'Password reset link sent successfully.';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Reset Success</title>
+    <header>
+        <?php include '../header.php'; ?>
+    </header>
+    <link rel="stylesheet" href="../css/header_styles.css">
     <link rel="stylesheet" href="../css/success_password_reset_styles.css">
 </head>
 <body>
