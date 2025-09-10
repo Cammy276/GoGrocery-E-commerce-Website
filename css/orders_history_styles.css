@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.infoTwoColumn p {
+    margin: 0%;
+}
+
 .orderId {
     font-weight: 600;
     font-size: 18px;
@@ -55,6 +59,10 @@
     margin-bottom: 24px;
     overflow: hidden;
     border: 1px solid #eaeaea;
+}
+
+.card-order p {
+    margin: 0px;
 }
 
 .order-header {

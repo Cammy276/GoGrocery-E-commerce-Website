@@ -312,7 +312,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     
                                     <div class="payment-form-group">
                                         <label class="payment-form-label" for="delivery_address">Select Delivery Address</label>
-                                        <select class="payment-form-select" id="delivery_address" name="address_id" required>
+                                        <select class="payment-form-select" id="delivery_address" name="address_id" >
                                             <option value="">-- Select Address --</option>
                                             <?php foreach ($addressList as $address): ?>
                                                 <option value="<?php echo $address['address_id']; ?>">
@@ -328,6 +328,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
+                                        <div id="error_DeliveryAddress" class="error"></div>
                                     </div>
                                 </div>
 
@@ -358,8 +359,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     
                                     <div class="payment-form-group">
                                 
-                                            <label for="method">Select Payment Method2</label>
-                                            <select class="payment-form-select" id="method" name="payment_method" required>
+                                            <label for="method">Select Payment Method</label>
+                                            <select class="payment-form-select" id="method" name="payment_method" >
                                                 <option value="">-- Select --</option>
                                                 <option value="card">Credit/Debit Card</option>
                                                 <option value="bank_transfer">Bank Transfer (Manual)</option>
@@ -368,6 +369,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <option value="grabpay">GrabPay</option>
                                                 <option value="fpx">FPX Online Banking</option>
                                             </select>
+                                            <div id="error_paymentMethod" class="error"></div>
 
                                             <!-- CARD -->
                                             <div id="cardFields" class="hidden">
@@ -430,35 +432,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <h2 class="payment-section-title"><i class="bi bi-receipt"></i> Order Summary</h2>
                                     
                                     <div class="summary-item">
-                                        <span class="summary-label">Your items (<?php echo $itemNum ?>)</span>
-                                        <span class="summary-value">RM <?php echo number_format($subtotal, 2); ?></span>
+                                        <p class="summary-label">Your items (<?php echo $itemNum ?>)</p>
+                                        <p class="summary-value">RM <?php echo number_format($subtotal, 2); ?></p>
                                     </div>
 
                                     <div class="summary-item">
-                                        <span class="summary-label">Total Item Discount:</span>
-                                        <span class="summary-value discountValue">- RM <?php echo number_format($totalLineDiscount, 2); ?></span>
+                                        <p class="summary-label">Total Item Discount:</p>
+                                        <p class="summary-value discountValue">- RM <?php echo number_format($totalLineDiscount, 2); ?></p>
                                     </div>
 
                                     <?php $subtotal = $subtotal-$totalLineDiscount ?>
                                     <div class="summary-item summary-total">
-                                        <span class="summary-label">Subtotal</span>
-                                        <span class="summary-value">RM <?php echo number_format($subtotal, 2); ?></span>
+                                        <p class="summary-label">Subtotal</p>
+                                        <p class="summary-value">RM <?php echo number_format($subtotal, 2); ?></p>
                                     </div>
                                 
                                     
                                     <div class="summary-item">
-                                        <span class="summary-label">Voucher Discount</span>
-                                        <span class="summary-value discountValue isVoucher">- RM 0.00</span>
+                                        <p class="summary-label">Voucher Discount</p>
+                                        <p class="summary-value discountValue isVoucher">- RM 0.00</p>
                                     </div>
 
                                     <div class="summary-item">
-                                        <span class="summary-label">Shipping Fee</span>
-                                        <span class="summary-value">RM 5.00</span>
+                                        <p class="summary-label">Shipping Fee</p>
+                                        <p class="summary-value">RM 5.00</p>
                                     </div>
                                     
                                     <div class="summary-item summary-total">
-                                        <span class="summary-label">Grand Total</span>
-                                        <span class="summary-value" id = "grand-total">RM <?php echo number_format($subtotal + 5.00, 2); ?></span>
+                                        <p class="summary-label">Grand Total</p>
+                                        <p class="summary-value" id = "grand-total">RM <?php echo number_format($subtotal + 5.00, 2); ?></p>
                                     </div>
                                     
 
@@ -475,161 +477,187 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             const form = document.getElementById("paymentForm");
 
+            //to update summary value based on voucher
+            document.addEventListener("DOMContentLoaded", function() {
+                const voucherSelect = document.getElementById("voucher");
+                const voucherDiscountEl = document.querySelector(".isVoucher");
+                const totalEl = document.getElementById("grand-total");
+                const subtotal = <?php echo json_encode($subtotal); ?>;
+                const shippingFee = 5.00;
 
-document.addEventListener("DOMContentLoaded", function() {
-    const voucherSelect = document.getElementById("voucher");
-    const voucherDiscountEl = document.querySelector(".isVoucher");
-    const totalEl = document.getElementById("grand-total");
-    const subtotal = <?php echo json_encode($subtotal); ?>;
-    const shippingFee = 5.00;
+                // Hidden inputs to pass to backend
+                const hiddenVoucherId = document.createElement("input");
+                hiddenVoucherId.type = "hidden";
+                hiddenVoucherId.name = "voucher_id";
+                form.appendChild(hiddenVoucherId);
 
-    // Hidden inputs to pass to backend
+                const hiddenVoucherDiscount = document.createElement("input");
+                hiddenVoucherDiscount.type = "hidden";
+                hiddenVoucherDiscount.name = "voucher_discount";
+                form.appendChild(hiddenVoucherDiscount);
 
-    const hiddenVoucherId = document.createElement("input");
-    hiddenVoucherId.type = "hidden";
-    hiddenVoucherId.name = "voucher_id";
-    form.appendChild(hiddenVoucherId);
+                function updateTotals() {
+                    let discountValue = 0;
+                    const option = voucherSelect.options[voucherSelect.selectedIndex];
+                    hiddenVoucherId.value = option.value || "";
 
-    const hiddenVoucherDiscount = document.createElement("input");
-    hiddenVoucherDiscount.type = "hidden";
-    hiddenVoucherDiscount.name = "voucher_discount";
-    form.appendChild(hiddenVoucherDiscount);
+                    // Base amount is subtotal (already after item discounts in PHP)
+                    const baseAmount = subtotal;
 
-    function updateTotals() {
-        let discountValue = 0;
-        const option = voucherSelect.options[voucherSelect.selectedIndex];
-        hiddenVoucherId.value = option.value || "";
+                    if (option.value) {
+                        const type = option.getAttribute("data-type");
+                        const value = parseFloat(option.getAttribute("data-value"));
 
-        // Base amount is subtotal (already after item discounts in PHP)
-        const baseAmount = subtotal;
+                        if (type === "PERCENT") {
+                            discountValue = (baseAmount * value) / 100;
+                        } else if (type === "FIXED") {
+                            discountValue = Math.min(baseAmount, value);
+                        }
+                    }
 
-        if (option.value) {
-            const type = option.getAttribute("data-type");
-            const value = parseFloat(option.getAttribute("data-value"));
+                    // Update hidden input
+                    hiddenVoucherDiscount.value = discountValue.toFixed(2);
 
-            if (type === "PERCENT") {
-                discountValue = (baseAmount * value) / 100;
-            } else if (type === "FIXED") {
-                discountValue = Math.min(baseAmount, value);
-            }
-        }
+                    // Update UI
+                    voucherDiscountEl.textContent = "- RM " + discountValue.toFixed(2);
 
-        // Update hidden input
-        hiddenVoucherDiscount.value = discountValue.toFixed(2);
+                    const finalTotal = (baseAmount - discountValue) + shippingFee;
+                    totalEl.textContent = "RM " + finalTotal.toFixed(2);
+                }
 
-        // Update UI
-        voucherDiscountEl.textContent = "- RM " + discountValue.toFixed(2);
+                // Trigger once on load
+                updateTotals();
 
-        const finalTotal = (baseAmount - discountValue) + shippingFee;
-        totalEl.textContent = "RM " + finalTotal.toFixed(2);
-    }
-
-    // Trigger once on load
-    updateTotals();
-
-    // Update whenever voucher changes
-    voucherSelect.addEventListener("change", updateTotals);
-});
-
+                // Update whenever voucher changes
+                voucherSelect.addEventListener("change", updateTotals);
+            });
 
 
 
 
-    
-    const methodSelect = document.getElementById("method");
-    const cardFields = document.getElementById("cardFields");
-    const bankFields = document.getElementById("bankFields");
-    const fpxFields = document.getElementById("fpxFields");
-    
-    // Toggle fields
-    methodSelect.addEventListener("change", function() {
-      cardFields.classList.add("hidden");
-      bankFields.classList.add("hidden");
-      fpxFields.classList.add("hidden");
 
-      if (this.value === "card") cardFields.classList.remove("hidden");
-      if (this.value === "bank_transfer") bankFields.classList.remove("hidden");
-      if (this.value === "fpx") fpxFields.classList.remove("hidden");
-    });
+            // show / hide based on payment method
+            const methodSelect = document.getElementById("method");
+            const cardFields = document.getElementById("cardFields");
+            const bankFields = document.getElementById("bankFields");
+            const fpxFields = document.getElementById("fpxFields");
+            
+            // Toggle fields
+            methodSelect.addEventListener("change", function() {
+            cardFields.classList.add("hidden");
+            bankFields.classList.add("hidden");
+            fpxFields.classList.add("hidden");
 
-    // Validation
-    form.addEventListener("submit", function(e) {
-      let valid = true;
+            if (this.value === "card") cardFields.classList.remove("hidden");
+            if (this.value === "bank_transfer") bankFields.classList.remove("hidden");
+            if (this.value === "fpx") fpxFields.classList.remove("hidden");
+            });
 
-      if (methodSelect.value === "card") {
-        const card = document.getElementById("card_number").value.trim();
-        const cardInput = document.getElementById("card_number");
-        if (!/^\d{16}$/.test(card)) {
-          document.getElementById("error_card").textContent = "Card number must be 16 digits.";
-          cardInput.classList.add("input-error")
-          valid = false;
-        } else {
-            document.getElementById("error_card").textContent = "";
-            cardInput.classList.remove("input-error");
-        }
+            // Validation of payment method and delivery address
+            form.addEventListener("submit", function(e) {
+                let valid = true;
 
-        const expiry = document.getElementById("expiry").value.trim();
-        const expiryInput = document.getElementById("expiry");
-        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
-          document.getElementById("error_expiry").textContent = "Invalid expiry format (MM/YY).";
-          expiryInput.classList.add("input-error");
-          valid = false;
-        } else {
-            document.getElementById("error_expiry").textContent = "";
-            expiryInput.classList.remove("input-error");
-        }
+                //for delivery address
+                const deliveryAddress = document.querySelector("select[name='address_id']").value;
+                const deliveryAddressInput = document.querySelector("select[name='address_id']");
+                if (!deliveryAddress) { 
+                    document.getElementById("error_DeliveryAddress").textContent = "Please select a delivery address.";
+                    deliveryAddressInput.classList.add("input-error");
+                    valid = false; 
+                } else {
+                    document.getElementById("error_DeliveryAddress").textContent = "";
+                    deliveryAddressInput.classList.remove("input-error");
+                }
 
-        const cvv = document.getElementById("cvv").value.trim();
-        const cvvInput = document.getElementById("cvv");
-        if (!/^\d{3,4}$/.test(cvv)) {
-          document.getElementById("error_cvv").textContent = "CVV must be 3 or 4 digits.";
-          cvvInput.classList.add("input-error");
-          valid = false;
-        } else {
-            document.getElementById("error_cvv").textContent = "";
-            cvvInput.classList.remove("input-error");
-        }
-      }
+                //for payment method
+                const paymentMethod = document.querySelector("select[name='payment_method']").value;
+                const paymentMethodInput = document.querySelector("select[name='payment_method']");
+                if (!paymentMethod) { 
+                    document.getElementById("error_paymentMethod").textContent = "Please select a payment method.";
+                    paymentMethodInput.classList.add("input-error");
+                    valid = false; 
+                } else {
+                    document.getElementById("error_paymentMethod").textContent = "";
+                    paymentMethodInput.classList.remove("input-error");
+                }
 
-      if (methodSelect.value === "bank_transfer") {
-        const receipt = document.getElementById("receipt").files.length;
-        const receiptInput = document.getElementById("receipt");
-        if (receipt === 0) {
-          document.getElementById("error_receipt").textContent = "Please upload payment receipt.";
-          receiptInput.classList.add("input-error");
-          valid = false;
-        } else {
-            document.getElementById("error_receipt").textContent = "";
-            receiptInput.classList.remove("input-error");
-        }
 
-        const reference = document.getElementById("reference").value.trim();
-        const referenceInput = document.getElementById("reference");
-        if (!/^[A-Za-z0-9]{6,12}$/.test(reference)) {
-          document.getElementById("error_reference").textContent = "Reference number must be 6–12 letters or digits.";
-          referenceInput.classList.add("input-error");
-          valid = false;
-        } else {
-            document.getElementById("error_reference").textContent = "";
-            referenceInput.classList.remove("input-error");
-        }
-      }
+                if (methodSelect.value === "card") {
+                    const card = document.getElementById("card_number").value.trim();
+                    const cardInput = document.getElementById("card_number");
+                    if (!/^\d{16}$/.test(card)) {
+                    document.getElementById("error_card").textContent = "Card number must be 16 digits.";
+                    cardInput.classList.add("input-error")
+                    valid = false;
+                    } else {
+                        document.getElementById("error_card").textContent = "";
+                        cardInput.classList.remove("input-error");
+                    }
 
-      if (methodSelect.value === "fpx") {
-        const bank = document.getElementById("bank_list").value.trim();
-        const bankSelect = document.getElementById("bank_list");
-        if (bank === "") {
-          document.getElementById("error_bank").textContent = "Please select your bank.";
-          bankSelect.classList.add("input-error");
-          valid = false;
-        } else {
-            document.getElementById("error_bank").textContent = "";
-            bankSelect.classList.remove("input-error");
-        }
-      }
+                    const expiry = document.getElementById("expiry").value.trim();
+                    const expiryInput = document.getElementById("expiry");
+                    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
+                    document.getElementById("error_expiry").textContent = "Invalid expiry format (MM/YY).";
+                    expiryInput.classList.add("input-error");
+                    valid = false;
+                    } else {
+                        document.getElementById("error_expiry").textContent = "";
+                        expiryInput.classList.remove("input-error");
+                    }
 
-      if (!valid) e.preventDefault();
-    });
+                    const cvv = document.getElementById("cvv").value.trim();
+                    const cvvInput = document.getElementById("cvv");
+                    if (!/^\d{3,4}$/.test(cvv)) {
+                    document.getElementById("error_cvv").textContent = "CVV must be 3 or 4 digits.";
+                    cvvInput.classList.add("input-error");
+                    valid = false;
+                    } else {
+                        document.getElementById("error_cvv").textContent = "";
+                        cvvInput.classList.remove("input-error");
+                    }
+                }
+
+                if (methodSelect.value === "bank_transfer") {
+                    const receipt = document.getElementById("receipt").files.length;
+                    const receiptInput = document.getElementById("receipt");
+                    if (receipt === 0) {
+                    document.getElementById("error_receipt").textContent = "Please upload payment receipt.";
+                    receiptInput.classList.add("input-error");
+                    valid = false;
+                    } else {
+                        document.getElementById("error_receipt").textContent = "";
+                        receiptInput.classList.remove("input-error");
+                    }
+
+                    const reference = document.getElementById("reference").value.trim();
+                    const referenceInput = document.getElementById("reference");
+                    if (!/^[A-Za-z0-9]{6,12}$/.test(reference)) {
+                    document.getElementById("error_reference").textContent = "Reference number must be 6–12 letters or digits.";
+                    referenceInput.classList.add("input-error");
+                    valid = false;
+                    } else {
+                        document.getElementById("error_reference").textContent = "";
+                        referenceInput.classList.remove("input-error");
+                    }
+                }
+
+                if (methodSelect.value === "fpx") {
+                    const bank = document.getElementById("bank_list").value.trim();
+                    const bankSelect = document.getElementById("bank_list");
+                    if (bank === "") {
+                    document.getElementById("error_bank").textContent = "Please select your bank.";
+                    bankSelect.classList.add("input-error");
+                    valid = false;
+                    } else {
+                        document.getElementById("error_bank").textContent = "";
+                        bankSelect.classList.remove("input-error");
+                    }
+                }
+
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
         </script>
 
         <footer><?php include("../footer.php") ?> </footer>

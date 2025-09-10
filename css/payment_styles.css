@@ -146,6 +146,11 @@
     border-bottom: 1px solid #f1f1f1;
 }
 
+.summary-item p {
+    margin: 0px;
+    padding: 0px;
+}
+
 
 .summary-label {
     font-size: 15px;

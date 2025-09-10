@@ -188,42 +188,42 @@ if (isset($_POST['update'])) {
                     <div class="card-order">
                         <div class="order-header">
                             <h3 class="order-orderId">Order ID: <?php echo $order_id; ?></h3>
-                            <span class="order-status status-paid">Paid</span>
+                            <p class="order-status status-paid">Paid</p>
                         </div>
 
                         <div class="order-body">
                             <div class="order-details">
                                 <div class="detail-item">
-                                    <span class="detail-label">Placed On</span>
-                                    <span class="detail-value">
+                                    <p class="detail-label">Placed On</p>
+                                    <p class="detail-value">
                                         <?php echo isset($orderInfo['placed_at']) 
-                                            ? date('M j, Y g:i A', strtotime($orderInfo['placed_at'])) 
-                                            : '-'; ?>
-                                    </span>
+                                        ? date('M j, Y g:i A', strtotime($orderInfo['placed_at'])) 
+                                        : '-'; ?>
+                                    </p>
                                 </div>
                                 <div class="detail-item">
-                                    <span class="detail-label">Number of Item</span>
-                                    <span class="detail-value"><?php echo count($orderItemList); ?></span>
+                                    <p class="detail-label">Number of Item</p>
+                                    <p class="detail-value"><?php echo count($orderItemList); ?></p>
                                 </div>
                             </div>
 
                             <!-- Order Items -->
                             <div class="order-items">
-                                <h4 class="items-title"><i class="bi bi-list-check"></i> Order Items</h4>
+                                <h4 class="items-title"><i class="bi bi-list-check"></i> <p>Order Items</p></h4>
                                 <ul class="item-list">
                                     <?php foreach ($orderItemList as $item): ?>
                                     <li>
                                         <div class="item-info">
-                                            <div class="item-name"><?php echo htmlspecialchars($item['product_name']); ?></div>
-                                            <div class="item-details">SKU: <?php echo $item['sku']; ?></div>
+                                            <p class="item-name"><?php echo htmlspecialchars($item['product_name']); ?></p>
+                                            <p class="item-details">SKU: <?php echo $item['sku']; ?></p>
                                             <p class="item-details">
                                                 Unit discount: 
                                                 <?php echo ($item['line_discount'] > 0) ? "RM " . number_format($item['line_discount'], 2) : "-"; ?>
                                             </p>
                                         </div>
-                                        <div class="item-quantity">Qty: <?php echo $item['quantity']; ?></div>
-                                        <div class="item-price">RM <?php echo number_format($item['unit_price'], 2); ?>/unit</div>
-                                        <div class="item-total">RM <?php echo number_format($item['line_total'], 2); ?></div>
+                                        <p class="item-quantity">Qty: <?php echo $item['quantity']; ?></p>
+                                        <p class="item-price">RM <?php echo number_format($item['unit_price'], 2); ?>/unit</p>
+                                        <p class="item-total">RM <?php echo number_format($item['line_total'], 2); ?></p>
                                     </li>
                                     <?php endforeach; ?>
                                     <p class="tips">Each item's total price already adjusted to include any applicable item discount</p>
@@ -235,20 +235,20 @@ if (isset($_POST['update'])) {
                             <div class="order-payment-section">
                                 <h4 class="payment-title"><i class="bi bi-credit-card"></i> Payment & Delivery Information</h4>
                                 <div class="payment-item">
-                                    <span class="payment-label">Address</span>
-                                    <span class="payment-value"><?php echo isset($address) ? $address : '-'; ?></span>
+                                    <p class="payment-label">Address</p>
+                                    <p class="payment-value"><?php echo isset($address) ? $address : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Payment Method</span>
-                                    <span class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></span>
+                                    <p class="payment-label">Payment Method</p>
+                                    <p class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Voucher Applied</span>
-                                    <span class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></span>
+                                    <p class="payment-label">Voucher Applied</p>
+                                    <p class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Delivery Duration</span>
-                                    <span class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'].' days' : '-'; ?></span>
+                                    <p class="payment-label">Delivery Duration</p>
+                                    <p class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'].' days' : '-'; ?></p>
                                 </div>
                             </div>
 
@@ -257,16 +257,16 @@ if (isset($_POST['update'])) {
                                 <h4 class="breakdown-title"><i class="bi bi-receipt"></i> Price Breakdown</h4>
                                 <div class="breakdown-vertical">
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Subtotal</span>
-                                        <span class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></span>
+                                        <p class="breakdown-label">Subtotal</p>
+                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></p>
                                     </div>
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Voucher Discount</span>
-                                        <span class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['voucher_discount_value']) ? number_format($orderInfo['voucher_discount_value'], 2) : '0.00'; ?></span>
+                                        <p class="breakdown-label">Voucher Discount</p>
+                                        <p class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['voucher_discount_value']) ? number_format($orderInfo['voucher_discount_value'], 2) : '0.00'; ?></p>
                                     </div>
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Shipping Fee</span>
-                                        <span class="breakdown-value">RM <?php echo isset($orderInfo['shipping_fee']) ? number_format($orderInfo['shipping_fee'], 2) : '0.00'; ?></span>
+                                        <p class="breakdown-label">Shipping Fee</p>
+                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['shipping_fee']) ? number_format($orderInfo['shipping_fee'], 2) : '0.00'; ?></p>
                                     </div>
                                 </div>
                             </div>

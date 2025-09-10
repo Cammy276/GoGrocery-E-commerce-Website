@@ -226,29 +226,29 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
                 </div>
             </div>
         </div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Grab all quantity inputs
-    const quantityInputs = document.querySelectorAll(".cart-quantity-input");
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Grab all quantity inputs
+                const quantityInputs = document.querySelectorAll(".cart-quantity-input");
 
 
-    quantityInputs.forEach(input => {
-        input.addEventListener("change", function() {
-            // Submit the form immediately when quantity changes
-            const form = document.getElementById("cartForm");
+                quantityInputs.forEach(input => {
+                    input.addEventListener("change", function() {
+                        // Submit the form immediately when quantity changes
+                        const form = document.getElementById("cartForm");
 
-            // Create a hidden input so PHP knows this is a quantity update
-            let hidden = document.createElement("input");
-            hidden.type = "hidden";
-            hidden.name = "updateQuantity";
-            hidden.value = "1";
-            form.appendChild(hidden);
+                        // Create a hidden input so PHP knows this is a quantity update
+                        let hidden = document.createElement("input");
+                        hidden.type = "hidden";
+                        hidden.name = "updateQuantity";
+                        hidden.value = "1";
+                        form.appendChild(hidden);
 
-            form.submit();
-        });
-    });
-});
-</script>
+                        form.submit();
+                    });
+                });
+            });
+        </script>
 
         <footer><?php include("../../footer.php") ?> </footer>
     </body>

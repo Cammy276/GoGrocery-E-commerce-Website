@@ -171,22 +171,22 @@ $voucherStmt->close();
                     <div class="card-order">
                         <div class="order-header">
                             <h3 class="order-orderId">Order ID: <?php echo $order_id; ?></h3>
-                            <span class="order-status status-delivered">Delivered</span>
+                            <p class="order-status status-delivered">Delivered</p>
                         </div>
 
                         <div class="order-body">
                             <div class="order-details">
                                 <div class="detail-item">
-                                    <span class="detail-label">Placed On</span>
-                                    <span class="detail-value">
+                                    <p class="detail-label">Placed On</p>
+                                    <p class="detail-value">
                                         <?php echo isset($orderInfo['placed_at']) 
                                             ? date('M j, Y g:i A', strtotime($orderInfo['placed_at'])) 
                                             : '-'; ?>
-                                    </span>
+                                    </p>
                                 </div>
                                 <div class="detail-item">
-                                    <span class="detail-label">Number of Item</span>
-                                    <span class="detail-value"><?php echo count($orderItemList); ?></span>
+                                    <p class="detail-label">Number of Item</p>
+                                    <p class="detail-value"><?php echo count($orderItemList); ?></p>
                                 </div>
                             </div>
 
@@ -217,20 +217,20 @@ $voucherStmt->close();
                             <div class="order-payment-section">
                                 <h4 class="payment-title"><i class="bi bi-credit-card"></i> Payment & Delivery Information</h4>
                                 <div class="payment-item">
-                                    <span class="payment-label">Address</span>
-                                    <span class="payment-value"><?php echo isset($address) ? $address : '-'; ?></span>
+                                    <p class="payment-label">Address</p>
+                                    <p class="payment-value"><?php echo isset($address) ? $address : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Payment Method</span>
-                                    <span class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></span>
+                                    <p class="payment-label">Payment Method</p>
+                                    <p class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Voucher Applied</span>
-                                    <span class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></span>
+                                    <p class="payment-label">Voucher Applied</p>
+                                    <p class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Delivery Duration</span>
-                                    <span class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'].' days' : '-'; ?></span>
+                                    <p class="payment-label">Delivery Duration</p>
+                                    <p class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'].' days' : '-'; ?></p>
                                 </div>
                             </div>
 
@@ -239,16 +239,16 @@ $voucherStmt->close();
                                 <h4 class="breakdown-title"><i class="bi bi-receipt"></i> Price Breakdown</h4>
                                 <div class="breakdown-vertical">
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Subtotal</span>
-                                        <span class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></span>
+                                        <p class="breakdown-label">Subtotal</p>
+                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></p>
                                     </div>
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Voucher Discount</span>
-                                        <span class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['voucher_discount_value']) ? number_format($orderInfo['voucher_discount_value'], 2) : '0.00'; ?></span>
+                                        <p class="breakdown-label">Voucher Discount</p>
+                                        <p class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['voucher_discount_value']) ? number_format($orderInfo['voucher_discount_value'], 2) : '0.00'; ?></p>
                                     </div>
                                     <div class="breakdown-item">
-                                        <span class="breakdown-label">Shipping Fee</span>
-                                        <span class="breakdown-value">RM <?php echo isset($orderInfo['shipping_fee']) ? number_format($orderInfo['shipping_fee'], 2) : '0.00'; ?></span>
+                                        <p class="breakdown-label">Shipping Fee</p>
+                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['shipping_fee']) ? number_format($orderInfo['shipping_fee'], 2) : '0.00'; ?></p>
                                     </div>
                                 </div>
                             </div>
