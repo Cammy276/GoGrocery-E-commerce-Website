@@ -1,6 +1,7 @@
 <?php
-session_start();  // Start session
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Include the database connection
 include(__DIR__ . '/../connect_db.php'); // $conn is available
 
@@ -41,6 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login Page</title>
+<header>
+    <?php include '../header.php'; ?>
+</header>
+<link rel="stylesheet" href="../css/header_styles.css">
 <link rel="stylesheet" href="../css/login_styles.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
