@@ -36,7 +36,7 @@ $cartStmt->close();
 
 $errorMsgList = [];
 // Handle checkout
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['checkout'])) {
     foreach ($_POST['quantity'] as $cart_id => $qty) {
         $qty = max(1, intval($qty)); // ensure quantity is at least 1
         $updateStmt = $conn->prepare("UPDATE cart_items SET quantity = ? WHERE cart_item_id = ? AND user_id = ?");
@@ -54,8 +54,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 }
 
+// Handle delete
+if (isset($_POST['delete'])) {
+    $delete_id = intval($_POST['delete']);
+    $deleteStmt = $conn->prepare("DELETE FROM cart_items WHERE cart_item_id = ? AND user_id = ?");
+    $deleteStmt->bind_param("ii", $delete_id, $user_id);
+
+    if ($deleteStmt->execute()) {
+        // Refresh to update the cart list
+        header("Location: index.php");
+        exit;
+    } else {
+        $errorMsgList[] = "Failed to delete cart item #$delete_id: " . $deleteStmt->error;
+    }
+    $deleteStmt->close();
+}
 
 
+// Handle quantity update (auto-save)
+if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
+    foreach ($_POST['quantity'] as $cart_id => $qty) {
+        $qty = max(1, intval($qty));
+        $updateStmt = $conn->prepare("UPDATE cart_items SET quantity = ? WHERE cart_item_id = ? AND user_id = ?");
+        $updateStmt->bind_param("iii", $qty, $cart_id, $user_id);
+        $updateStmt->execute();
+        $updateStmt->close();
+    }
+
+    // Refresh the page after update
+    header("Location: index.php");
+    exit;
+}
 
 ?>
 
@@ -84,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 border: 1px solid #eaeaea;
                 background: white;
                 transition: all 0.3s ease;
+                position: relative; /* ensure button is placed inside */
             }
 
             .cart-item-card:hover {
@@ -236,6 +266,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .checkoutButton:hover {
                 background: #3048b4;
             }
+            .cart-deleteButton {
+                top: 8px;
+                left: 8px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                color: #dc3545;
+                font-size: 18px;
+                transition: color 0.2s ease;
+                padding: 8px;
+            }
+
+
 
             @media (max-width: 768px) {
                 .cart-item-card {
@@ -326,6 +369,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ?>
                 
                             <div class="cart-item-card">
+                            
+                                    
+                                
+                                <button type="submit" class="deleteButton cart-deleteButton" name="delete" value="<?php echo $item['cart_item_id']; ?>" >X</button>
+
+                        
+
+
                                 <div class="cart-item-image">
                                     <img src="<?php echo htmlspecialchars('../' . $productInfo['product_image_url']); ?>" 
                                         alt="<?php echo htmlspecialchars($productInfo['alt_text']); ?>" />
@@ -340,7 +391,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 Unit price: RM <?php echo number_format($item['unit_price'], 2); ?>
                                             </p>
                                             <p class="cart-detail-value discount-value">
-                                                Unit Discount: 
+                                                Product Discount: 
                                                 <?php echo !empty($item['line_discount']) && $item['line_discount'] > 0 ? 
                                                 '-RM ' . number_format($item['line_discount'], 2) : 
                                                 '-'; ?>
@@ -354,7 +405,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     <div class="cart-detail-item">
                                         <label class="cart-detail-label">Quantity</label>
-                                        <input type="number" class="cart-quantity-input" 
+                                        <input type="number" class="cart-quantity-input"
+                                            name="quantity[<?php echo $item['cart_item_id']; ?>]"
                                             value="<?php echo $item['quantity']; ?>" 
                                             min="1" 
                                             data-cart-id="<?php echo $item['cart_item_id']; ?>">
@@ -365,7 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         <?php endforeach; ?>
                     
-                        <input type="submit" class="checkoutButton" value="Proceed to Checkout">
+                        <input type="submit" class="checkoutButton" name="checkout" value="Proceed to Checkout">
 
                 
                     </form>
@@ -373,6 +425,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Grab all quantity inputs
+    const quantityInputs = document.querySelectorAll(".cart-quantity-input");
+
+
+    quantityInputs.forEach(input => {
+        input.addEventListener("change", function() {
+            // Submit the form immediately when quantity changes
+            const form = document.getElementById("cartForm");
+
+            // Create a hidden input so PHP knows this is a quantity update
+            let hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.name = "updateQuantity";
+            hidden.value = "1";
+            form.appendChild(hidden);
+
+            form.submit();
+        });
+    });
+});
+</script>
 
     </body>
 </html>
