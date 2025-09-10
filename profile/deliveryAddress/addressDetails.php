@@ -134,9 +134,9 @@ if (isset($_POST['delete'])) {
                     <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
                     <li><a href="../order/index.php"><i class="bi bi-bag-fill"></i> Orders</a></li>
                     <li><a href="../history/index.php"><i class="bi bi-clock-history"></i> History</a></li>
-                    <li><a href=""><i class="bi bi-heart"></i> Wishlist</a></li>
-                    <li><a href=""><i class="bi bi-award-fill"></i> Rewards</a></li>
-                    <li><a href=""><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
+                    <li><a href="../wishlist/index.php"><i class="bi bi-heart"></i> Wishlist</a></li>
+                    <li><a href="../reward/index.php"><i class="bi bi-award-fill"></i> Rewards</a></li>
+                    <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
                 </ul>
             </div>
             
