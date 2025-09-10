@@ -217,14 +217,20 @@ if (isset($_POST['update'])) {
                                     <li>
                                         <div class="item-info">
                                             <div class="item-name"><?php echo htmlspecialchars($item['product_name']); ?></div>
-                                            <div class="item-sku">SKU: <?php echo $item['sku']; ?></div>
+                                            <div class="item-details">SKU: <?php echo $item['sku']; ?></div>
+                                            <p class="item-details">
+                                                Unit discount: 
+                                                <?php echo ($item['line_discount'] > 0) ? "RM " . number_format($item['line_discount'], 2) : "-"; ?>
+                                            </p>
                                         </div>
                                         <div class="item-quantity">Qty: <?php echo $item['quantity']; ?></div>
                                         <div class="item-price">RM <?php echo number_format($item['unit_price'], 2); ?>/unit</div>
                                         <div class="item-total">RM <?php echo number_format($item['line_total'], 2); ?></div>
                                     </li>
                                     <?php endforeach; ?>
+                                    <p class="tips">Each item's total price already adjusted to include any applicable item discount</p>
                                 </ul>
+                                
                             </div>
 
                             <!-- Payment & Delivery -->
