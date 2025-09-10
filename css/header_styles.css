@@ -1,49 +1,66 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #FFFFE4;
-}
-
+/* HEADER TOP */
 .header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    background-color: #FFFFE4;
 }
 
 .header-left img {
     height: 50px;
 }
 
+/* HEADER MIDDLE */
 .header-middle {
     display: flex;
     gap: 10px;
     flex: 1;
     justify-content: center;
+    align-items: center;
 }
 
+/* CATEGORIES MENU & SEARCH BOX */
 .categories-menu,
 .search-box {
     background: #fff;
     border-radius: 8px;
     border: 1px solid #ccc;
-    padding: 5px 10px;
+    padding: 0 15px;
     position: relative;
 }
 
 .categories-btn {
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 15px;
+    background-color: pink;
+
 }
 
 .categories-btn i {
-    font-size: 16px;
+    justify-content: center !important;
+    margin: 8px !important;
+    cursor: pointer;
+    display: block;
+    height: 18px;
+    margin-block-end: 15px;
+    margin-block-start: 15px;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    unicode-bidi: isolate;
+
 }
 
+.categories-btn p {
+    padding: 0px;
+    margin: 0px;
+}
+
+/* DROPDOWN */
 .categories-dropdown {
     display: none;
     position: absolute;
@@ -55,8 +72,20 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     min-width: 220px;
     z-index: 100;
+
+    /* Scale animation */
+    transform: scale(0.95);
+    transform-origin: top left;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Show dropdown on parent hover */
+.categories-menu:hover .categories-dropdown {
+    display: block;
+    transform: scale(1);
+}
+
+/* DROPDOWN ITEMS */
 .categories-dropdown ul {
     list-style: none;
     margin: 0;
@@ -67,12 +96,25 @@ body {
     padding: 8px 12px;
     cursor: pointer;
     position: relative;
+    color: #000;
+    /* default black text */
+    text-decoration: none;
+    /* remove underline */
+    transition: color 0.2s, background-color 0.2s, transform 0.2s;
 }
 
+/* Only hovered dropdown item: red background, white text */
 .categories-dropdown li:hover {
-    background: #f7f7f7;
+    background-color: #FB585D;
+    color: #FFF;
 }
 
+/* Active/clicked dropdown item (if needed) */
+.categories-dropdown li.active {
+    color: #0B05B5;
+}
+
+/* Nested submenus */
 .categories-dropdown li.has-children>ul {
     display: none;
     position: absolute;
@@ -83,32 +125,56 @@ body {
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     min-width: 200px;
+
+    /* Scale animation */
+    transform: scale(0.95);
+    transform-origin: top left;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Show nested submenu on hover */
 .categories-dropdown li.has-children:hover>ul {
     display: block;
+    transform: scale(1);
 }
 
+/* Search Box wrapper */
 .search-box {
+    max-width: 500px;
+    /* Adjust width to fit nicely in header */
+    flex: 1;
+}
+
+/* Search Form - single flex container */
+.search-form {
     display: flex;
     align-items: center;
-    flex: 1;
-    max-width: 500px;
+    justify-content: center;
+    width: 100%;
+    background: transparent;
 }
 
-.search-box input {
+/* Input field */
+.search-form input {
+    flex: 1;
     border: none;
     outline: none;
-    padding: 5px;
-    flex: 1;
+    font-size: 14px;
+    background: transparent;
+    /* no background */
 }
 
-.search-box button {
+/* Submit button - aligned right */
+.search-form button {
     border: none;
-    background: none;
+    background: transparent;
     cursor: pointer;
+    font-size: 15px;
+    color: black;
+    transition: transform 0.2s, color 0.2s;
 }
 
+/* HEADER RIGHT */
 .header-right {
     display: flex;
     gap: 20px;
@@ -118,21 +184,24 @@ body {
 .icon-box {
     text-align: center;
     position: relative;
+    transition: transform 0.2s, color 0.2s;
 }
 
 .icon-box i {
     font-size: 20px;
+    transition: transform 0.2s, color 0.2s;
 }
 
 .icon-box span.label {
     display: block;
     font-size: 12px;
+    transition: transform 0.2s, color 0.2s;
 }
 
 .icon-badge {
     position: absolute;
-    top: -8px;
-    right: -2px;
+    top: 15px;
+    right: 5px;
     background: red;
     color: white;
     font-size: 12px;
@@ -140,12 +209,23 @@ body {
     padding: 2px 6px;
 }
 
+/* ICON HOVER: green + zoom 20% */
+.icon-box:hover i,
+.icon-box:hover span.label,
+.search-form button:hover i,
+.header-middle:hover i {
+    transform: scale(1.2);
+    color: #118997;
+}
+
+/* NAVBAR */
 .navbar {
     display: flex;
     justify-content: center;
     background: #fff;
-    padding: 8px 0;
+    padding: 5px 0;
     border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 .navbar a {
@@ -161,16 +241,7 @@ body {
 }
 
 .navbar i {
-    font-size: 18px;
+    font-size: 23px;
     margin: 0;
-}
-
-.navbar a:hover {
-    color: #d35400;
-}
-
-.navbar a.active {
-    color: #d35400;
-    font-weight: bold;
-    border-bottom: 2px solid #d35400;
+    padding-right: 5px;
 }
