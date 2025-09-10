@@ -276,6 +276,12 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
             .checkoutButton:hover {
                 background: #3048b4;
             }
+
+            .checkoutButton:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+
             .cart-deleteButton {
                 top: 8px;
                 left: 8px;
@@ -416,8 +422,9 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    
-                        <input type="submit" class="checkoutButton" name="checkout" value="Proceed to Checkout">
+
+                        
+                        <input type="submit" class="checkoutButton" name="checkout" value="Proceed to Checkout" <?php echo (count($cartList) === 0) ? 'disabled' : ''; ?>>
 
                 
                     </form>
