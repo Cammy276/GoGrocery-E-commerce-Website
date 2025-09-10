@@ -1,0 +1,47 @@
+.delivery-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;                    
+}
+.delivery-header h2 {
+    margin: 0;
+}
+.delivery-header i {
+    font-size: 1.5rem;
+    color: #049b9c;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff; 
+    transition: color 0.3s, box-shadow 0.2s ease;
+    position: relative; /* for tooltip positioning */
+    cursor: pointer;
+}
+.delivery-header i:hover {
+    color: #037a7b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.delivery-header i::after {
+    content: "Add new address"; /* text shown on hover */
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+}
+/* Show tooltip on hover */
+.delivery-header i:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px); 
+}

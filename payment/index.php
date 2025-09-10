@@ -217,268 +217,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../css/profile.css">
+                 <link rel="stylesheet" href="../css/payment_styles.css">
+        <link rel="stylesheet" href="../css/profile_styles.css">
+
         <link rel="stylesheet" href="../css/header_styles.css">
         <link rel="stylesheet" href="../css/footer_styles.css">
         <style>
-            /* Payment Page Specific Styles */
-            .payment-container {
-                display: grid;
-                grid-template-columns: 1fr 400px;
-                gap: 30px;
-            
-                
-            }
-            
-            @media (max-width: 992px) {
-                .payment-container {
-                    grid-template-columns: 1fr;
-                }
-            }
-            
-            .payment-items {
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                padding: 25px;
-                margin-bottom: 25px;
-                border: 1px solid #eaeaea;
-            }
-            
-            .payment-section-title {
-                font-size: 20px;
-                font-weight: 600;
-                margin-bottom: 20px;
-                color: #2c3e50;
-                display: flex;
-                align-items: center;
-            }
-            
-            .payment-section-title i {
-                margin-right: 10px;
-                color: #4a6cf7;
-            }
-            
-            .payment-item-card {
-                display: flex;
-                border-radius: 8px;
-                margin-bottom: 15px;
-                overflow: hidden;
-                border: 1px solid #eaeaea;
-                background: #fafafa;
-            }
-            
-            .payment-item-image {
-                flex: 0 0 80px;
-                background: #ffffffff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 10px;
-            }
-            
-            .payment-item-image img {
-                max-width: 100%;
-                max-height: 60px;
-                object-fit: contain;
-            }
-            
-            .payment-item-details {
-                flex: 1;
-                padding: 15px;
-                display: grid;
-                grid-template-columns: 2fr 1fr 1fr 1fr;
-                gap: 10px;
-                align-items: center;
-            }
-            
-            .payment-item-info {
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .payment-item-name {
-                font-weight: 600;
-                font-size: 16px;
-                color: #2c3e50;
-                margin-bottom: 4px;
-            }
-            
-            .payment-item-small {
-                font-size: 12px;
-                color: #6c757d;
-            }
-            
-            .payment-item-price, .payment-item-quantity, .payment-item-discount, .payment-item-discount-total, .payment-item-total {
-                font-size: 14px;
-                text-align: center;
-            }
-            
-            .payment-item-price {
-                font-weight: 600;
-            }
-            
-            .payment-item-discount, .payment-item-discount-total {
-                color: #dc3545;
-                font-weight: 500;
-            }
-            
-            .payment-item-total {
-                font-weight: 600;
-                color: #2c3e50;
-            }
-            
-            .payment-options {
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                padding: 25px;
-                margin-bottom: 25px;
-                border: 1px solid #eaeaea;
-            }
-            
-            .payment-form-group {
-                margin-bottom: 20px;
-            }
-            
-            .payment-form-label {
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 500;
-                color: #555;
-                font-size: 16px;
-            }
-            
-            .payment-form-select {
-                width: 100%;
-                padding: 12px 15px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                font-size: 15px;
-                transition: border 0.3s;
-                background-color: white;
-            }
-            
-            .payment-form-select:focus {
-                border-color: #4a6cf7;
-                outline: none;
-            }
-            
-            .order-summary {
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                padding: 25px;
-                border: 1px solid #eaeaea;
-                position: sticky;
-                top: 20px;
-            }
-            
-            .summary-item {
-                display: flex;
-                justify-content: space-between;
-                padding: 10px 0;
-                border-bottom: 1px solid #f1f1f1;
-            }
-            
-            .summary-item:last-child {
-                border-bottom: none;
-            }
-            
-            .summary-label {
-                font-size: 15px;
-                color: #6c757d;
-            }
-            
-            .summary-value {
-                font-size: 15px;
-                font-weight: 500;
-                color: #2c3e50;
-            }
-            
-            .summary-total {
-                font-weight: 700;
-                font-size: 18px;
-                color: #2c3e50;
-                margin-top: 10px;
-                padding-top: 15px;
-                border-top: 2px solid #eaeaea;
-            }
-            
-            .discount-value {
-                color: #dc3545;
-            }
-            
-            .place-order-btn {
-                background: #4a6cf7;
-                color: white;
-                border: none;
-                padding: 15px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
-                width: 100%;
-                margin-top: 20px;
-                transition: background-color 0.3s;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-            }
-            
-            .place-order-btn:hover {
-                background: #3048b4;
-            }
-            .error {
-                color: #dc3545;
-                font-size: 13px;
-                margin-top: 5px;
-            }
-            .input-error {
-                border-color: #dc3545;
-                box-shadow: 0 0 3px #dc3545;
-            }
 
-            @media (max-width: 768px) {
-                .payment-item-details {
-                    grid-template-columns: 1fr;
-                    text-align: left;
-                    gap: 5px;
-                }
-                
-                .payment-item-price, .payment-item-quantity, .payment-item-discount, 
-                .payment-item-discount-total, .payment-item-total {
-                    text-align: left;
-                    display: flex;
-                    justify-content: space-between;
-                }
-                
-                .payment-item-price::before {
-                    content: "Price: ";
-                    font-weight: normal;
-                }
-                
-                .payment-item-quantity::before {
-                    content: "Qty: ";
-                    font-weight: normal;
-                }
-                
-                .payment-item-discount::before {
-                    content: "Unit Discount: ";
-                    font-weight: normal;
-                }
-                
-                .payment-item-discount-total::before {
-                    content: "Discount Total: ";
-                    font-weight: normal;
-                }
-                
-                .payment-item-total::before {
-                    content: "Line Total: ";
-                    font-weight: normal;
-                }
-            }
-               .hidden { display: none; }
         </style>
     </head>
     <body>
@@ -614,7 +359,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <div class="payment-form-group">
                                 
                                             <label for="method">Select Payment Method2</label>
-                                            <select id="method" name="payment_method" required>
+                                            <select class="payment-form-select" id="method" name="payment_method" required>
                                                 <option value="">-- Select --</option>
                                                 <option value="card">Credit/Debit Card</option>
                                                 <option value="bank_transfer">Bank Transfer (Manual)</option>
@@ -626,54 +371,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                             <!-- CARD -->
                                             <div id="cardFields" class="hidden">
+                                                <br/>
                                                 <label>Card Number</label>
                                                 <input type="text" class="textInput" id="card_number" name="card_number" maxlength="16">
-                                            <div id="error_card" class="error"></div>
+                                                <div id="error_card" class="error"></div>
 
-                                            <label>Expiry (MM/YY)</label>
-                                            <input type="text" class="textInput" id="expiry" name="expiry" placeholder="MM/YY">
-                                            <div id="error_expiry" class="error"></div>
+                                                <label>Expiry (MM/YY)</label>
+                                                <input type="text" class="textInput" id="expiry" name="expiry" placeholder="MM/YY">
+                                                <div id="error_expiry" class="error"></div>
 
-                                            <label>CVV</label>
-                                            <input type="password" class="textInput" id="cvv" name="cvv" maxlength="4">
-                                            <div id="error_cvv" class="error"></div>
+                                                <label>CVV</label>
+                                                <input type="password" class="textInput" id="cvv" name="cvv" maxlength="4">
+                                                <div id="error_cvv" class="error"></div>
 
-                                            <label>Name on Card</label>
-                                            <input type="text" class="textInput" id="name" name="name">
+                                                <label>Name on Card</label>
+                                                <input type="text" class="textInput" id="name" name="name">
                                             </div>
 
                                             <!-- BANK TRANSFER MANUAL -->
                                             <div id="bankFields" class="hidden">
-                                            <p>Please transfer the amount to:</p>
-                                            <p><strong>Bank:</strong> Maybank</p>
-                                            <p><strong>Account No:</strong> 123456789</p>
-                                            <p><strong>Account Name:</strong> MyShop Sdn Bhd</p>
+                                                <br/>
+                                                <p>Please transfer the amount to:</p>
+                                                <p><strong>Bank:</strong> Maybank</p>
+                                                <p><strong>Account No:</strong> 123456789</p>
+                                                <p><strong>Account Name:</strong> MyShop Sdn Bhd</p>
 
-                                            <label>Reference Number</label>
-                                            <input type="text" class="textInput" id="reference" name="reference">
-                                            <div id="error_reference" class="error"></div>
+                                                <label>Reference Number</label>
+                                                <input type="text" class="textInput" id="reference" name="reference">
+                                                <div id="error_reference" class="error"></div>
 
-                                            <label>Upload Receipt (jpg/png/pdf)</label>
-                                            <input type="file" id="receipt" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
-                                            <div id="error_receipt" class="error"></div>
+                                                <label>Upload Receipt (jpg/png/pdf)</label>
+                                                <input type="file" id="receipt" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
+                                                <div id="error_receipt" class="error"></div>
                                             </div>
 
                                             <!-- FPX -->
                                             <div id="fpxFields" class="hidden">
-                                            <label>Select Bank</label>
-                                            <select id="bank_list" name="bank_list">
-                                                <option value="">-- Choose Your Bank --</option>
-                                                <option value="maybank2u">Maybank2u</option>
-                                                <option value="cimbclicks">CIMB Clicks</option>
-                                                <option value="rhb">RHB Now</option>
-                                                <option value="hongleong">Hong Leong Connect</option>
-                                                <option value="ambank">AmBank</option>
-                                                <option value="publicbank">Public Bank</option>
-                                            </select>
-                                            <div id="error_bank" class="error"></div>
+                                                <br/>
+                                                <label>Select Bank</label>
+                                                <select class="payment-form-select" id="bank_list" name="bank_list">
+                                                    <option value="">-- Choose Your Bank --</option>
+                                                    <option value="maybank2u">Maybank2u</option>
+                                                    <option value="cimbclicks">CIMB Clicks</option>
+                                                    <option value="rhb">RHB Now</option>
+                                                    <option value="hongleong">Hong Leong Connect</option>
+                                                    <option value="ambank">AmBank</option>
+                                                    <option value="publicbank">Public Bank</option>
+                                                </select>
+                                                <div id="error_bank" class="error"></div>
                                             </div>
 
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -689,7 +436,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     <div class="summary-item">
                                         <span class="summary-label">Total Item Discount:</span>
-                                        <span class="summary-value discount-value">- RM <?php echo number_format($totalLineDiscount, 2); ?></span>
+                                        <span class="summary-value discountValue">- RM <?php echo number_format($totalLineDiscount, 2); ?></span>
                                     </div>
 
                                     <?php $subtotal = $subtotal-$totalLineDiscount ?>
@@ -701,7 +448,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     
                                     <div class="summary-item">
                                         <span class="summary-label">Voucher Discount</span>
-                                        <span class="summary-value discount-value isVoucher">- RM 0.00</span>
+                                        <span class="summary-value discountValue isVoucher">- RM 0.00</span>
                                     </div>
 
                                     <div class="summary-item">

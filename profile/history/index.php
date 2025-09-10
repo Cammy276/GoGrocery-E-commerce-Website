@@ -55,7 +55,8 @@ $orderStmt->close();
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../../css/profile.css">
+        <link rel="stylesheet" href="../../css/profile_styles.css">
+        <link rel="stylesheet" href="../../css/orders_history_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
     </head>

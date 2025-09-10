@@ -35,7 +35,7 @@ body {
 }
 
 .nav-links a:hover {
-    color: #4a6cf7;
+    color: #037a7b;
 }
 
 .main-container {
@@ -80,13 +80,13 @@ body {
 
 .menu-items a:hover {
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(74, 108, 247, 0.2);
+    box-shadow: 0 2px 8px rgba(4, 155, 156, 0.2);
 }
 
 .menu-items a:hover, .menu-items a.active {
-    background-color: #f0f3ff;
-    color: #4a6cf7;
-    box-shadow: 0 2px 8px rgba(74, 108, 247, 0.3);
+    background-color: #e6f7f7;
+    color: #037a7b;
+    box-shadow: 0 2px 8px rgba(4, 155, 156, 0.3);
 }
 
 .menu-items a i {
@@ -142,7 +142,7 @@ body {
 
 .card h2 span {
     font-size: 14px;
-    color: #4a6cf7;
+    color: #049b9c;
     cursor: pointer;
 }
 
@@ -156,78 +156,17 @@ body {
     transition: all 0.3s ease;
 }
 .cardLink:hover .card{
-    border-color: #4a6cf7;      
+    border-color: #049b9c;      
     box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
     transform: translateY(-3px); 
-    background-color: #f9faff;  
+    background-color: #f0fafa;  
 }
 
 
 .discountValue {
-    color: #dc3545;
+    color: #dc3545 !important;
 }
 
-@media (max-width: 768px) {
-    .order-details, .order-payment-section {
-        grid-template-columns: 1fr;
-    }
-    .item-list li {
-        flex-direction: column;
-    }
-    .item-quantity, .item-price, .item-total {
-        text-align: left;
-        padding: 4px 0;
-    }
-}
-
-/** for delivery address */
-.delivery-header {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;                    
-}
-.delivery-header h2 {
-    margin: 0;
-}
-.delivery-header i {
-    font-size: 1.5rem;
-    color: #4a6cf7;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #fff; 
-    transition: color 0.3s, box-shadow 0.2s ease;
-    position: relative; /* for tooltip positioning */
-    cursor: pointer;
-}
-.delivery-header i:hover {
-    color: #3048b4ff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-.delivery-header i::after {
-    content: "Add new address"; /* text shown on hover */
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s;
-}
-/* Show tooltip on hover */
-.delivery-header i:hover::after {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-5px); 
-}
 
 
 form label {
@@ -245,7 +184,7 @@ form label {
     transition: border 0.3s;
 }
 .textInput:focus, select:focus {
-    border-color: #4a6cf7;
+    border-color: #049b9c;
     outline: none;
     border-width: 3px;
 }
@@ -262,7 +201,7 @@ form label {
     text-align: right;
 }
 .saveButton {
-    background-color: #4a6cf7;
+    background-color: #049b9c;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -272,7 +211,7 @@ form label {
     transition: background-color 0.3s;
 }
 .saveButton:hover {
-    background-color: #3048b4ff;
+    background-color: #037a7b;
 }
 .deleteButton {
     background-color: #f74a4aff;
