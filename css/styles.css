@@ -4,7 +4,7 @@ body {
 }
 
 .success-message {
-    color: green;
+    color: #118997;
 }
 
 .server-error {
@@ -22,10 +22,10 @@ body {
 }
 
 .message {
-    background: #fff3cd;
-    color: #856404;
+    background: #FFFFE4;
+    color: black;
     padding: 20px;
-    border: 1px solid #ffeeba;
+    border: 1px solid #ccc;
     border-radius: 6px;
     display: inline-block;
     max-width: 500px;

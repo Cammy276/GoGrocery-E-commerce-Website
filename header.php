@@ -55,6 +55,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <meta charset="UTF-8">
 <title>Header</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="./css/styles.css">
 <link rel="stylesheet" href="./css/header_styles.css">
 <script>
 function toggleCategories() {
@@ -81,7 +82,8 @@ document.addEventListener("click", function(e) {
   <div class="header-middle">
     <div class="categories-menu">
       <div class="categories-btn" onclick="toggleCategories()">
-        <i class="bi bi-list"></i> Categories
+        <p>bibi </p><i class="bi bi-list"></i> 
+  
       </div>
       <div class="categories-dropdown">
         <ul>
@@ -106,7 +108,7 @@ document.addEventListener("click", function(e) {
 
     <!-- Search Box -->
     <div class="search-box">
-      <form action="search.php" method="GET">
+      <form action="search.php" method="GET" class="search-form">
         <input type="text" name="q" placeholder="Search products, brands, categories...">
         <button type="submit"><i class="bi bi-search"></i></button>
       </form>
@@ -134,12 +136,24 @@ document.addEventListener("click", function(e) {
 
 <!-- NAVIGATION -->
 <div class="navbar">
-  <a href="index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-house-fill"></i><span>Home</span></a>
-  <a href="about.php" class="<?= ($current_page == 'about.php' ? 'active' : '') ?>"><i class="bi bi-file-earmark-fill"></i><span>About</span></a>
-  <a href="help.php" class="<?= ($current_page == 'help.php' ? 'active' : '') ?>"><i class="bi bi-exclamation-circle-fill"></i><span>Help Center</span></a>
-  <a href="best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span>Best Seller</span></a>
-  <a href="special-deal.php" class="<?= ($current_page == 'special-deal.php' ? 'active' : '') ?>"><i class="bi bi-tag-fill"></i><span>Special Deal</span></a>
-  <a href="new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span>New Product</span></a>
-</div>
+  <div class="icon-box">
+    <a href="index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-house-fill"></i><span class="label">Home</span></a>
+  </div>
+  <div class="icon-box">
+    <a href="about.php" class="<?= ($current_page == 'about.php' ? 'active' : '') ?>"><i class="bi bi-file-earmark-fill"></i><span class="label">About</span></a>
+  </div>
+  <div class="icon-box">
+    <a href="help.php" class="<?= ($current_page == 'help.php' ? 'active' : '') ?>"><i class="bi bi-exclamation-circle-fill"></i><span class="label">Help Center</span></a>
+  </div>
+  <div class="icon-box">
+    <a href="best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span class="label">Best Seller</span></a>
+  </div>
+  <div class="icon-box">
+    <a href="special-deal.php" class="<?= ($current_page == 'special-deal.php' ? 'active' : '') ?>"><i class="bi bi-tag-fill"></i><span class="label">Special Deal</span></a>
+  </div>
+  <div class="icon-box">
+    <a href="new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
+  </div>
+  </div>
 </body>
 </html>

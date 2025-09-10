@@ -23,7 +23,7 @@ GRANT SELECT, INSERT, UPDATE ON gogrocery.vouchers TO 'gogrocery_customer'@'loca
 GRANT SELECT, INSERT ON gogrocery.voucher_usages TO 'gogrocery_customer'@'localhost';
 
 -- 🔹 Wishlists & cart_items
-GRANT SELECT, INSERT, DELETE ON gogrocery.wishlist TO 'gogrocery_customer'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE ON gogrocery.wishlist TO 'gogrocery_customer'@'localhost';
 GRANT SELECT, INSERT, DELETE, UPDATE ON gogrocery.cart_items TO 'gogrocery_customer'@'localhost';
 
 -- 🔹 Contact form
