@@ -91,6 +91,11 @@ $orderStmt->close();
                 <div class="content">
                    <h2>My Orders</h2>
 
+                    <!--- get message from payment.php -->
+                    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'paymentSuccess'): ?>
+                        <p class="successMessage">Order with Order ID <?php echo htmlspecialchars($_GET['order_id']) ?> is paid! Thank you for your purchase.</p>
+                    <?php endif; ?>
+
                     <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>
                         <p class="errMessage">Error occurred when fetching order records. Please try again.</p>

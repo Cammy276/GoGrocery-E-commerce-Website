@@ -195,12 +195,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clearStmt->execute();
     $clearStmt->close();
 
-    // Show success message (instead of redirecting)
-    echo "<h2>✅ Order placed successfully!</h2>";
-    echo "<p>Your order number is <strong>#{$order_id}</strong>.</p>";
-    echo "<p>Total paid: RM " . number_format($grand_total, 2) . "</p>";
-    echo "<p>Estimated delivery: {$delivery_duration} days</p>";
-    exit;
+    //if operation success, redirect to order page
+    header("Location: ../profile/order/index.php?msg=paymentSuccess&order_id=".$order_id);
+    exit();
+
 }
 ?>
 
@@ -219,15 +217,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../../css/profile.css">
-        <link rel="stylesheet" href="../../css/header_styles.css">
-        <link rel="stylesheet" href="../../css/footer_styles.css">
+        <link rel="stylesheet" href="../css/profile.css">
+        <link rel="stylesheet" href="../css/header_styles.css">
+        <link rel="stylesheet" href="../css/footer_styles.css">
         <style>
             /* Payment Page Specific Styles */
             .payment-container {
                 display: grid;
                 grid-template-columns: 1fr 400px;
                 gap: 30px;
+            
+                
             }
             
             @media (max-width: 992px) {
@@ -304,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 margin-bottom: 4px;
             }
             
-            .payment-item-details {
+            .payment-item-small {
                 font-size: 12px;
                 color: #6c757d;
             }
@@ -429,7 +429,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .place-order-btn:hover {
                 background: #3048b4;
             }
-            
+            .error {
+                color: #dc3545;
+                font-size: 13px;
+                margin-top: 5px;
+            }
+            .input-error {
+                border-color: #dc3545;
+                box-shadow: 0 0 3px #dc3545;
+            }
+
             @media (max-width: 768px) {
                 .payment-item-details {
                     grid-template-columns: 1fr;
@@ -473,7 +482,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </style>
     </head>
     <body>
-        <header><?php include("../../header.php") ?></header>
+        <header><?php include("../header.php") ?></header>
 
         <div class="main-container">
  
@@ -487,7 +496,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form id="paymentForm" method="POST">
                         <div class="payment-container">
                             <div class="payment-left">
-                                
+
                                 <!-- Order Items Section -->
                                 <div class="payment-items">
                                     <h2 class="payment-section-title"><i class="bi bi-cart-check"></i> Order Items</h2>
@@ -526,8 +535,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <div class="payment-item-details">
                                             <div class="payment-item-info">
                                                 <p class="payment-item-name"><?php echo htmlspecialchars($item['product_name']); ?></p>
-                                                <p class="payment-item-details">SKU: <?php echo htmlspecialchars($item['sku']); ?></p>
-                                                <p class="payment-item-details">
+                                                <p class="payment-item-small">SKU: <?php echo htmlspecialchars($item['sku']); ?></p>
+                                                <p class="payment-item-small">
                                                     Unit discount: 
                                                     <?php echo ($item['line_discount'] > 0) ? "RM " . number_format($item['line_discount'], 2) : "-"; ?>
                                                 </p>
@@ -535,7 +544,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </div>
                                             
                                             <div class="payment-item-price">
-                                                RM <?php echo number_format($item['unit_price'], 2); ?>
+                                                RM <?php echo number_format($item['unit_price'], 2); ?> /unit
                                             </div>
                                             
                                             <div class="payment-item-quantity">
@@ -638,6 +647,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                             <label>Reference Number</label>
                                             <input type="text" class="textInput" id="reference" name="reference">
+                                            <div id="error_reference" class="error"></div>
 
                                             <label>Upload Receipt (jpg/png/pdf)</label>
                                             <input type="file" id="receipt" name="receipt" accept=".jpg,.jpeg,.png,.pdf">
@@ -696,7 +706,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     
                                     <div class="summary-item summary-total">
-                                        <span class="summary-label">Total</span>
+                                        <span class="summary-label">Grand Total</span>
                                         <span class="summary-value" id = "grand-total">RM <?php echo number_format($subtotal + 5.00, 2); ?></span>
                                     </div>
                                     
@@ -774,7 +784,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-            const methodSelect = document.getElementById("method");
+    
+    const methodSelect = document.getElementById("method");
     const cardFields = document.getElementById("cardFields");
     const bankFields = document.getElementById("bankFields");
     const fpxFields = document.getElementById("fpxFields");
@@ -796,44 +807,80 @@ document.addEventListener("DOMContentLoaded", function() {
 
       if (methodSelect.value === "card") {
         const card = document.getElementById("card_number").value;
+        const cardInput = document.getElementById("card_number");
         if (!/^\d{16}$/.test(card)) {
           document.getElementById("error_card").textContent = "Card number must be 16 digits.";
+          cardInput.classList.add("input-error")
           valid = false;
-        } else document.getElementById("error_card").textContent = "";
+        } else {
+            document.getElementById("error_card").textContent = "";
+            cardInput.classList.remove("input-error");
+        }
 
         const expiry = document.getElementById("expiry").value;
+        const expiryInput = document.getElementById("expiry");
         if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
           document.getElementById("error_expiry").textContent = "Invalid expiry format (MM/YY).";
+          expiryInput.classList.add("input-error");
           valid = false;
-        } else document.getElementById("error_expiry").textContent = "";
+        } else {
+            document.getElementById("error_expiry").textContent = "";
+            expiryInput.classList.remove("input-error");
+        }
 
         const cvv = document.getElementById("cvv").value;
+        const cvvInput = document.getElementById("cvv");
         if (!/^\d{3,4}$/.test(cvv)) {
           document.getElementById("error_cvv").textContent = "CVV must be 3 or 4 digits.";
+          cvvInput.classList.add("input-error");
           valid = false;
-        } else document.getElementById("error_cvv").textContent = "";
+        } else {
+            document.getElementById("error_cvv").textContent = "";
+            cvvInput.classList.remove("input-error");
+        }
       }
 
       if (methodSelect.value === "bank_transfer") {
         const receipt = document.getElementById("receipt").files.length;
+        const receiptInput = document.getElementById("receipt");
         if (receipt === 0) {
           document.getElementById("error_receipt").textContent = "Please upload payment receipt.";
+          receiptInput.classList.add("input-error");
           valid = false;
-        } else document.getElementById("error_receipt").textContent = "";
+        } else {
+            document.getElementById("error_receipt").textContent = "";
+            receiptInput.classList.remove("input-error");
+        }
+
+        const reference = document.getElementById("reference").value;
+        const referenceInput = document.getElementById("reference");
+        if (!/^[A-Za-z0-9]{6,12}$/.test(reference)) {
+          document.getElementById("error_reference").textContent = "Reference number must be 6–12 letters or digits.";
+          referenceInput.classList.add("input-error");
+          valid = false;
+        } else {
+            document.getElementById("error_reference").textContent = "";
+            referenceInput.classList.remove("input-error");
+        }
       }
 
       if (methodSelect.value === "fpx") {
         const bank = document.getElementById("bank_list").value;
+        const bankSelect = document.getElementById("bank_list");
         if (bank === "") {
           document.getElementById("error_bank").textContent = "Please select your bank.";
+          bankSelect.classList.add("input-error");
           valid = false;
-        } else document.getElementById("error_bank").textContent = "";
+        } else {
+            document.getElementById("error_bank").textContent = "";
+            bankSelect.classList.remove("input-error");
+        }
       }
 
       if (!valid) e.preventDefault();
     });
         </script>
 
-        <footer><?php include("../../footer.php") ?> </footer>
+        <footer><?php include("../footer.php") ?> </footer>
     </body>
 </html>

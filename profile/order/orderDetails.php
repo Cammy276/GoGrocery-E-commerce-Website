@@ -136,6 +136,8 @@ if (isset($_POST['update'])) {
         <meta charset="UTF-8">
         <title>Order Details</title>
 
+        <!-- Inter font -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -143,7 +145,7 @@ if (isset($_POST['update'])) {
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../../css/profile.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
-
+        <link rel="stylesheet" href="../../css/footer_styles.css">
     </head>
     <body>
         <header><?php include("../../header.php") ?></header>
