@@ -136,6 +136,8 @@ if (isset($_POST['update'])) {
         <meta charset="UTF-8">
         <title>Order Details</title>
 
+        <!-- Inter font -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -143,7 +145,7 @@ if (isset($_POST['update'])) {
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../../css/profile.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
-
+        <link rel="stylesheet" href="../../css/footer_styles.css">
     </head>
     <body>
         <header><?php include("../../header.php") ?></header>
@@ -156,8 +158,8 @@ if (isset($_POST['update'])) {
                     <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
                     <li><a href="../order/index.php" class="active"><i class="bi bi-bag-fill"></i> Orders</a></li>
                     <li><a href="../history/index.php"><i class="bi bi-clock-history"></i> History</a></li>
-                    <li><a href=""><i class="bi bi-heart"></i> Wishlist</a></li>
-                    <li><a href=""><i class="bi bi-award-fill"></i> Rewards</a></li>
+                    <li><a href="../wishlist/index.php"><i class="bi bi-heart"></i> Wishlist</a></li>
+                    <li><a href="../reward/index.php"><i class="bi bi-award-fill"></i> Rewards</a></li>
                     <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
                 </ul>
             </div>
@@ -240,7 +242,7 @@ if (isset($_POST['update'])) {
                                     <span class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></span>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Voucher ID</span>
+                                    <span class="payment-label">Voucher Applied</span>
                                     <span class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></span>
                                 </div>
                                 <div class="payment-item">

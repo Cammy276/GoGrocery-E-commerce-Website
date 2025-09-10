@@ -13,8 +13,9 @@ if (isset($_SESSION['user_id'])) {
 ?>
 
 
-
 <?php
+
+echo "Logged in as User ID: " . $user_id;
 // Include the database connection
 include(__DIR__ . '/../../connect_db.php');
 
@@ -22,7 +23,7 @@ include(__DIR__ . '/../../connect_db.php');
 $errorMsg = null;
 
 // Fetch all orders based on user id and status="paid"
-$order_status = "delivered";
+$order_status = "paid";
 $orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? AND status = ? ORDER BY placed_at DESC");
 $orderStmt->bind_param("is", $user_id, $order_status);
 if ($orderStmt->execute()) {
@@ -47,17 +48,19 @@ $orderStmt->close();
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>History</title>
+        <title>Order</title>
         
         <!-- Inter font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../../css/profile.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
+
     </head>
     <body>
         <header><?php include("../../header.php") ?></header>
@@ -72,9 +75,9 @@ $orderStmt->close();
                     <li><a href="../deliveryAddress/index.php"><i class="bi bi-geo-alt-fill"></i> Delivery Addresses</a></li>
                     <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
                     <li><a href="../order/index.php"><i class="bi bi-bag-fill"></i> Orders</a></li>
-                    <li><a href="../history/index.php" class="active"><i class="bi bi-clock-history"></i> History</a></li>
+                    <li><a href="../history/index.php"><i class="bi bi-clock-history"></i> History</a></li>
                     <li><a href="../wishlist/index.php"><i class="bi bi-heart"></i> Wishlist</a></li>
-                    <li><a href="../reward/index.php"><i class="bi bi-award-fill"></i> Rewards</a></li>
+                    <li><a href="../reward/index.php" class="active"><i class="bi bi-award-fill"></i> Rewards</a></li>
                     <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
                 </ul>
             </div>
@@ -82,20 +85,20 @@ $orderStmt->close();
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>History</h1>
-                    <p>Review the order records that are already completed</p>
+                    <h1>Rewards</h1>
+                    <p>Explore your rewards and redeem vouchers to enjoy exclusive benefits.</p>
                 </div>
                 <div class="content">
-                   <h2>My History</h2>
+                   <h2>My Rewards</h2>
 
-                   <!--- get message from orderDetails.php -->
-                    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'updateSuccess'): ?>
-                        <p class="successMessage">Order with Order ID <?php echo htmlspecialchars($_GET['order_id']) ?> is complete!</p>
+                    <!--- get message from payment.php -->
+                    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'paymentSuccess'): ?>
+                        <p class="successMessage">Order with Order ID <?php echo htmlspecialchars($_GET['order_id']) ?> is paid! Thank you for your purchase.</p>
                     <?php endif; ?>
 
                     <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>
-                        <p class="errMessage">Error occurred when fetching records. Please try again.</p>
+                        <p class="errMessage">Error occurred when fetching order records. Please try again.</p>
                         <pre class="errMessage"><?php echo htmlspecialchars($errorMsg); ?></pre>
                     <?php elseif (count($orderList) === 0): ?>
                         <p class="tips">No order record found</p>
@@ -104,7 +107,7 @@ $orderStmt->close();
                     <?php endif; ?>
 
                     <?php foreach ($orderList as $order): ?>
-                        <a href="historyDetails.php?id=<?php echo $order['order_id']; ?>" 
+                        <a href="orderDetails.php?id=<?php echo $order['order_id']; ?>" 
                             class="cardLink">
                             <div class="card">
                                 <div class="infoTwoColumn">
@@ -128,6 +131,9 @@ $orderStmt->close();
                 </div>
             </div>
         </div>
+
+
         <footer><?php include("../../footer.php") ?> </footer>
+
     </body>
 </html>

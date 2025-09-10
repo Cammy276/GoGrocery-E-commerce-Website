@@ -95,9 +95,9 @@ if (isset($_POST['insert'])) {
                     <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
                     <li><a href="../order/index.php"><i class="bi bi-bag-fill"></i> Orders</a></li>
                     <li><a href="../history/index.php"><i class="bi bi-clock-history"></i> History</a></li>
-                    <li><a href=""><i class="bi bi-heart"></i> Wishlist</a></li>
-                    <li><a href=""><i class="bi bi-award-fill"></i> Rewards</a></li>
-                    <li><a href=""><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
+                    <li><a href="../wishlist/index.php"><i class="bi bi-heart"></i> Wishlist</a></li>
+                    <li><a href="../reward/index.php"><i class="bi bi-award-fill"></i> Rewards</a></li>
+                    <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
                 </ul>
             </div>
             
@@ -112,37 +112,48 @@ if (isset($_POST['insert'])) {
                     <br/>
                     
                     <div class="card">
-                        <form method='post'>
+                        <form id="addressForm" method='post'>
 
                             <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo $user_id ?>" />
                             
                             <label>Label:</label>
-                            <input class="textInput" type='text' id='label' name='label' placeholder="e.g. Home" required/>
-                            <br/><br/>
+                            <input class="textInput" type='text' id='label' name='label' placeholder="e.g. Home" />
+                            <br/>
+                            <div id="error_Label" class="error"></div>
+                            <br/>
 
                             <label>Apartment/Unit (Optional):</label>
                             <input class="textInput" type='text' id='apartment' name='apartment' placeholder="e.g. Lot No. 241, Level 2 Menara Petronas"/>
                             <br/><br/>
 
                             <label>Street:</label>
-                            <input class="textInput" type='text' id='street' name='street' placeholder="e.g. Kuala Lumpur City Centre" required/>
-                            <br/><br/>
+                            <input class="textInput" type='text' id='street' name='street' placeholder="e.g. Kuala Lumpur City Centre" />
+                            <br/>
+                            <div id="error_Street" class="error"></div>
+                            <br/>
 
                             <label>Postcode:</label>
-                            <input class="textInput" type='text' id='postcode' name='postcode' placeholder="e.g. 50088" required/>
-                            <br/><br/>
+                            <input class="textInput" type='text' id='postcode' name='postcode' placeholder="e.g. 50088" />
+                            <br/>
+                            <div id="error_Postcode" class="error"></div>
+                            <br/>
 
                             <label>City:</label>
-                            <input class="textInput" type='text' id='city' name='city' placeholder="e.g. Kuala Lumpur" required/>
-                            <br/><br/>
+                            <input class="textInput" type='text' id='city' name='city' placeholder="e.g. Kuala Lumpur" />
+                            <br/>
+                            <div id="error_City" class="error"></div>
+                            <br/>
 
                             <label>State/Territory:</label>
-                            <select name="state_territory" required>
+                            <select name="state_territory" >
+                                <option value="">-- Select State / Territory --</option>
                                 <?php foreach($enum_values as $state): ?>
                                     <option value="<?= $state ?>"><?= $state ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <br/><br/>
+                            <br/>
+                            <div id="error_State_Territory" class="error"></div>
+                            <br/>
 
                             <label>Country:</label>
                             <input class="textInput" type='text' id='state' name='state' value="Malaysia" disabled/>
@@ -167,6 +178,73 @@ if (isset($_POST['insert'])) {
                 </div>
             </div>
         </div>
+
+
+        <script>
+            // to validate the input
+            const form = document.getElementById("addressForm");
+            form.addEventListener("submit", function(e) {
+                let valid = true;
+                
+                const label = document.getElementById("label").value.trim();
+                const street = document.getElementById("street").value.trim();
+                const postcode = document.getElementById("postcode").value.trim();
+                const city = document.getElementById("city").value.trim();
+                const state_territory = document.querySelector("select[name='state_territory']").value;
+
+
+                const labelInput = document.getElementById("label");
+                const streetInput = document.getElementById("street");
+                const postcodeInput = document.getElementById("postcode");
+                const cityInput = document.getElementById("city");
+                const state_territoryInput = document.querySelector("select[name='state_territory']");
+
+                document.getElementById("error_Label").textContent = "";
+                document.getElementById("error_Street").textContent = "";
+                document.getElementById("error_Postcode").textContent = "";
+                document.getElementById("error_City").textContent = "";
+                document.getElementById("error_State_Territory").textContent = "";
+
+                labelInput.classList.remove("input-error");
+                streetInput.classList.remove("input-error");
+                postcodeInput.classList.remove("input-error");
+                cityInput.classList.remove("input-error");
+                state_territoryInput.classList.remove("input-error");
+
+                
+                if (!/^[\w\s]{1,50}$/.test(label)) { 
+                    document.getElementById("error_Label").textContent = "Please enter a label. Maximum 50 characters.";
+                    labelInput.classList.add("input-error")
+                    valid = false; 
+                }
+                if (!/^[\w\s.,-]{1,100}$/.test(street)) { 
+                    document.getElementById("error_Street").textContent = "Please enter a valid street. Maximum 100 characters.";
+                    streetInput.classList.add("input-error")
+                    valid = false; 
+                }
+                if (!/^\d{5}$/.test(postcode)) { 
+                    document.getElementById("error_Postcode").textContent = "Please enter a valid postcode. Postcode must be exactly 5 digits.";
+                    postcodeInput.classList.add("input-error")
+                    valid = false; 
+                }
+                if (!/^[A-Za-z\s-]{1,50}$/.test(city)) { 
+                    document.getElementById("error_City").textContent = "Please enter a valid city. City must be 6–12 letters and space only.";
+                    cityInput.classList.add("input-error")
+                    valid = false; 
+                }
+                if (!state_territory) { 
+                    document.getElementById("error_State_Territory").textContent = "Please select a state or territory.";
+                    state_territoryInput.classList.add("input-error")
+                    valid = false; 
+                }
+
+                if (!valid) {
+                    e.preventDefault();
+                }
+
+            });
+
+        </script>
         <footer><?php include("../../footer.php") ?> </footer>
     </body>
 </html>
