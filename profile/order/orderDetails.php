@@ -242,7 +242,7 @@ if (isset($_POST['update'])) {
                                     <span class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></span>
                                 </div>
                                 <div class="payment-item">
-                                    <span class="payment-label">Voucher ID</span>
+                                    <span class="payment-label">Voucher Applied</span>
                                     <span class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></span>
                                 </div>
                                 <div class="payment-item">
