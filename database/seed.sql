@@ -12,10 +12,10 @@ USE gogrocery;
 2) Bob (user_id=2): Secret456!
 */
 INSERT INTO users (name, email, phone, profile_image_url, password_hash) VALUES
-('Alice', 'alice@example.com', '+60123456789', '/images/users/default.png', 
- '$2y$10$wH9N3P4hXnJ9Qz6M5tB.uOepJb5g6VhT8oPpZyTqW0aR8F6lT3Yy'),  
-('Bob', 'bob@example.com', '+60198765432', '/images/users/default.png', 
- '$2y$10$7vH0Qw4XlR9yPq2D5tF3uOedKb6g9GfR7jPqZyTqW0bA5E6lU1Zy');  
+('Alice', 'alice@example.com', '+60123456789', '/GoGrocery-E-commerce-Website/images/users/default.png', 
+ '$2y$10$6CkW5A.62IDONpzZ2bWQ4ef5hd0yNr/pB7.Q9ejWR2zpvk8M0MzhS'),  
+('Bob', 'bob@example.com', '+60198765432', '/GoGrocery-E-commerce-Website/images/users/default.png', 
+ '$2y$10$vJOFEwgNTbfd/DFXEX4Zh.EEMiVrRW/8suz8xpgTr9SDeWwjVzWv2');  
 
 /* Addresses */
 INSERT INTO addresses (user_id, label, street, apartment, postcode, city, state_territory) VALUES
@@ -2939,7 +2939,7 @@ Subtotal = mineral water (2.50 × 6) = 15.00
 No discount, shipping = RM8.00 (Johor)
 Grand total = 15.00 + 8.00 = 23.00
 */
-INSERT INTO orders (user_id, address_id, status, payment_method, voucher_id, subtotal, discount_total, shipping_fee, delivery_duration, placed_at)
+INSERT INTO orders (user_id, address_id, status, payment_method, voucher_id, subtotal, voucher_discount_value, shipping_fee, delivery_duration, placed_at)
 VALUES
 (1, 2, 'paid', 'card', (SELECT voucher_id FROM vouchers WHERE code='NEWUSER123'), 47.70, 4.77, 5.00, '1-2 days', '2025-09-01 11:00:00'),
 (2, 3, 'delivered', 'grabpay', NULL, 15.00, 0.00, 8.00, '2-3 days', '2025-09-02 14:30:00');

@@ -4,18 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GoGrocery FAQ</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/footer_styles.css">
   <link rel="stylesheet" href="../css/faq_styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
   <h1>Frequently Asked Questions</h1>
 
   <div class="faq-container">
     <div class="faq-item">
-      <div class="faq-question">
-        <span>What is GoGrocery?</span>
-        <span class="icon">▼</span>
-      </div>
+    <div class="faq-question">
+      <span>What is GoGrocery?</span>
+      <span class="icon"><i class="bi bi-chevron-down"></i></span>
+    </div>
       <div class="faq-answer">
         GoGrocery is an online grocery platform that delivers fresh, high-quality products to your doorstep with ease and convenience.
       </div>
@@ -24,7 +25,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>How do I place an order?</span>
-        <span class="icon">▼</span>
+        <span class="icon"><i class="bi bi-chevron-down"></i></span>
       </div>
       <div class="faq-answer">
         Simply browse products, add them to your cart, and proceed to checkout. You’ll receive an order confirmation once payment is completed.
@@ -34,7 +35,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>What payment methods do you accept?</span>
-        <span class="icon">▼</span>
+        <span class="icon"><i class="bi bi-chevron-down"></i></span>
       </div>
       <div class="faq-answer">
         We accept credit/debit cards, online banking, e-wallets, and other secure digital payment options.
@@ -44,7 +45,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>How do I know my groceries are fresh?</span>
-        <span class="icon">▼</span>
+        <span class="icon"><i class="bi bi-chevron-down"></i></span>
       </div>
       <div class="faq-answer">
         We guarantee freshness by carefully selecting, storing, and delivering products straight from trusted suppliers.
@@ -54,7 +55,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>How can I track my order?</span>
-        <span class="icon">▼</span>
+        <span class="icon"><i class="bi bi-chevron-down"></i></span>
       </div>
       <div class="faq-answer">
         After checkout, you’ll receive a tracking number via email or SMS, so you can easily track your groceries and know exactly when to expect them.
@@ -64,7 +65,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>What is your return or refund policy?</span>
-        <span class="icon">▼</span>
+        <span class="icon"><i class="bi bi-chevron-down"></i></span>
       </div>
       <div class="faq-answer">
         If you receive damaged, expired, or wrong items, you can request a return or refund within 24 hours of delivery.
@@ -74,7 +75,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>How do I contact customer support?</span>
-        <span class="icon">▼</span>
+        <span class="icon"><i class="bi bi-chevron-down"></i></span>
       </div>
       <div class="faq-answer">
 
@@ -100,7 +101,7 @@
     });
   </script>
   <footer>
-    <?php include '../footer.php'; ?>
+  <?php include '../footer.php'; ?>
 </footer>
 </body>
 </html>

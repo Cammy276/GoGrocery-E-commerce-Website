@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
@@ -46,16 +46,19 @@ input[type="password"] {
     border-radius: 4px;
     margin-bottom: 10px;
 }
+
 input[type="text"].error,
 input[type="password"].error {
     border: 1px solid red;
 }
+
 .error-message {
     display: none;
     color: red;
     font-size: 12px;
     margin-top: 5px;
 }
+
 .show-password {
     position: absolute;
     right: 10px;
@@ -79,13 +82,14 @@ input[type="password"].error {
 }
 
 .login-btn {
-    background-color:  #009c99;
+    background-color: #009c99;
     color: white;
 }
 
 .login-btn:hover {
-    background-color:  #10adab;
+    background-color: #10adab;
 }
+
 .guest-btn {
     background-color: #0c0b0b40;
     color: #333;
@@ -120,24 +124,87 @@ input[type="password"].error {
 }
 
 .clear-password {
-    right: 40px; 
+    right: 40px;
 }
 
 .forgot-password-link {
     width: 106%;
     text-align: right;
-    margin-top: 10px; 
-   
-    
+    margin-top: 10px;
+
+
 }
 
 .forgot-password-link a {
     font-size: 14px;
-    color:  #009c99; 
+    color: #009c99;
     font-weight: bold;
     text-decoration: none;
 }
 
 .forgot-password-link a:hover {
     text-decoration: underline;
+}
+
+/* ==============================
+   Responsive styles
+   ============================== */
+
+/* Tablets: width <= 768px */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 30px;
+        max-width: 100%;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .login-btn,
+    .guest-btn {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+}
+
+/* Mobile: width <= 480px */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 20px;
+        width: 100%;
+        margin: 0 10px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .login-btn,
+    .guest-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .forgot-password-link a {
+        font-size: 13px;
+    }
+
+    .register-link a {
+        font-size: 14px;
+    }
 }

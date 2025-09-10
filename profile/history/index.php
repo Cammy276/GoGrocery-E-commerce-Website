@@ -1,155 +1,54 @@
+<!-- to get current user id -->
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    echo "Logged in as User ID: " . $user_id;
+} else {
+    echo "You are not logged in!";
+}
+?>
+
+
+<?php
+// Include the database connection
+include(__DIR__ . '/../../connect_db.php');
+
+// Predefine variable for error message
+$errorMsg = null;
+
+// Fetch all orders based on user id and status="paid"
+$order_status = "delivered";
+$orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? AND status = ? ORDER BY placed_at DESC");
+$orderStmt->bind_param("is", $user_id, $order_status);
+if ($orderStmt->execute()) {
+    $orderResult = $orderStmt->get_result();
+    $orderList = [];
+
+    while ($order = $orderResult->fetch_assoc()) {
+        $orderList[] = $order; //store order in orderList
+    }
+} else {
+    $errorMsg = $orderStmt->error;
+}
+
+
+$orderStmt->close();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Order Page</title>
+        <title>History</title>
         
-            <style>
-                * {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                }
-                
-                body {
-                    background-color: #f8f9fa;
-                    color: #333;
-                    line-height: 1.6;
-                }
-                
-                #header {
-                    background-color: #fff;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                    padding: 15px 30px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                
-                .logo {
-                    font-size: 24px;
-                    font-weight: bold;
-                    color: #4a6cf7;
-                }
-                
-                .nav-links {
-                    display: flex;
-                    gap: 25px;
-                }
-                
-                .nav-links a {
-                    text-decoration: none;
-                    color: #555;
-                    font-weight: 500;
-                    transition: color 0.3s;
-                }
-                
-                .nav-links a:hover {
-                    color: #4a6cf7;
-                }
-                
-                .main-container {
-                    display: flex;
-                    max-width: 1200px;
-                    margin: 30px auto;
-                    gap: 30px;
-                }
-                
-                #profileSettingSideBar {
-                    flex: 0 0 280px;
-                    background-color: #fff;
-                    border-radius: 10px;
-                    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-                    padding: 25px 0;
-                }
-                
-                .menu-items {
-                    list-style: none;
-                    padding: 0 15px;
-                }
-                
-                .menu-items li {
-                    margin-bottom: 5px;
-                }
-                
-                .menu-items a {
-                    display: flex;
-                    align-items: center;
-                    padding: 12px 15px;
-                    text-decoration: none;
-                    color: #555;
-                    border-radius: 8px;
-                    transition: all 0.3s;
-                }
-                
-                .menu-items a:hover, .menu-items a.active {
-                    background-color: #f0f3ff;
-                    color: #4a6cf7;
-                }
-                
-                .menu-items a i {
-                    margin-right: 12px;
-                    font-size: 18px;
-                }
-                
-                #profileContent {
-                    flex: 1;
-                    background-color: #fff;
-                    border-radius: 10px;
-                    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-                    padding: 30px;
-                }
-                
-                .content-header {
-                    margin-bottom: 25px;
-                }
-                
-                .content-header h1 {
-                    font-size: 24px;
-                    color: #333;
-                    margin-bottom: 10px;
-                }
-                
-                .content-header p {
-                    color: #777;
-                }
-                
-                .tips {
-                    color: grey;
-                    padding: 12px 15px;
-                }
-                
-                @media (max-width: 900px) {
-                    .main-container {
-                        flex-direction: column;
-                    }
-                    
-                    #profileSettingSideBar {
-                        flex: 0 0 auto;
-                        width: 100%;
-                    }
-                }
-                
-                @media (max-width: 768px) {
-                    .nav-links {
-                        display: none;
-                    }
-                    
-                    #header {
-                        padding: 15px 20px;
-                    }
-                    
-                    .main-container {
-                        margin: 20px;
-                        gap: 20px;
-                    }
-                }
-            </style>
-            <!-- Bootstrap Icons -->
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-            <!-- Custom CSS -->
-            <link rel="stylesheet" href="./css/styles.css">
+        <!-- Bootstrap Icons -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../../css/profile.css">
     </head>
     <body>
             <div id="header">
@@ -170,14 +69,14 @@
             <div id="profileSettingSideBar">  
                 <ul class="menu-items">
                     <!-- use Bootstrap icons-->
-                    <li><a href=""><i class="bi bi-gear-fill"></i> Profile Settings</a></li>
+                    <li><a href="../settings/index.php"><i class="bi bi-gear-fill"></i> Profile Settings</a></li>
                     <li><a href="../deliveryAddress/index.php"><i class="bi bi-geo-alt-fill"></i> Delivery Addresses</a></li>
                     <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
                     <li><a href="../order/index.php"><i class="bi bi-bag-fill"></i> Orders</a></li>
                     <li><a href="../history/index.php" class="active"><i class="bi bi-clock-history"></i> History</a></li>
                     <li><a href=""><i class="bi bi-heart"></i> Wishlist</a></li>
                     <li><a href=""><i class="bi bi-award-fill"></i> Rewards</a></li>
-                    <li><a href=""><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
+                     <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
                 </ul>
             </div>
             
@@ -185,11 +84,48 @@
             <div id="profileContent">
                 <div class="content-header">
                     <h1>History</h1>
-                    <p>Review the record of your past purchases and deliveries</p>
+                    <p>Review the order records that are already completed</p>
                 </div>
                 <div class="content">
-                   <h2>Order List</h2>
-                   <p class="tips">No history record found<p>
+                   <h2>History List</h2>
+
+                   <!--- get message from orderDetails.php -->
+                    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'updateSuccess'): ?>
+                        <p class="successMessage">Order with Order ID <?php echo htmlspecialchars($_GET['order_id']) ?> is complete!</p>
+                    <?php endif; ?>
+
+                    <!--- shows message if error or no record -->
+                    <?php if (!empty($errorMsg)): ?>
+                        <p class="errMessage">Error occurred when fetching records. Please try again.</p>
+                        <pre class="errMessage"><?php echo htmlspecialchars($errorMsg); ?></pre>
+                    <?php elseif (count($orderList) === 0): ?>
+                        <p class="tips">No order record found</p>
+                    <?php else: ?>
+                        <br/>
+                    <?php endif; ?>
+
+                    <?php foreach ($orderList as $order): ?>
+                        <a href="historyDetails.php?id=<?php echo $order['order_id']; ?>" 
+                            class="cardLink">
+                            <div class="card">
+                                <div class="infoTwoColumn">
+                                    <div class="infoLeft">
+                                        <h3 class="orderId">Order ID: <?php echo $order['order_id']; ?></h3>
+                                        <span class="orderDate"><?php echo date('M j, Y g:i A', strtotime($order['placed_at'])); ?></span>
+                                    </div>
+                                    <div class="infoRight">
+                                        <span class="orderStatus status-<?php echo strtolower($order['status']); ?>">
+                                            <?php echo ucfirst($order['status']); ?>
+                                        </span>
+                                        <span class="grandTotal">RM <?php echo number_format($order['grand_total'], 2); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                    <?php endforeach; ?>
+
+
                 </div>
             </div>
         </div>

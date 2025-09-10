@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/footer_styles.css">
   </head>
     <script>
       function openWithFallback(webLink) {

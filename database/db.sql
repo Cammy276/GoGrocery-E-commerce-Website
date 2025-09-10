@@ -102,6 +102,9 @@ CREATE TABLE IF NOT EXISTS products (
   product_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   sku VARCHAR(64) NOT NULL,
   product_name VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) GENERATED ALWAYS AS (
+    REGEXP_REPLACE(LOWER(product_name), '[^a-z0-9]+', '_')
+  ) STORED,
   brand_id INT UNSIGNED NULL,
   category_id INT UNSIGNED NULL,
   weight_volume VARCHAR(50) NULL,                       -- e.g., "500 g" or "1 L"
@@ -112,6 +115,7 @@ CREATE TABLE IF NOT EXISTS products (
   special_offer_label VARCHAR(120) NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_products_sku (sku),
+  UNIQUE KEY uq_products_slug (slug),
   KEY idx_products_category (category_id),
   KEY idx_products_brand (brand_id),
   CONSTRAINT fk_products_brand
@@ -180,12 +184,12 @@ CREATE TABLE IF NOT EXISTS orders (
   address_id INT UNSIGNED NOT NULL,
   status ENUM('paid','delivered') NOT NULL DEFAULT 'paid',  -- always paid because only paid orders are saved into this table
   payment_method ENUM('card','bank_transfer','e_wallet','grabpay','fpx') NOT NULL,
-  voucher_id INT UNSIGNED NULL,                     -- applied voucher
+  voucher_id INT UNSIGNED NULL,                     
   subtotal DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  discount_total DECIMAL(10,2) NOT NULL DEFAULT 0.00, -- includes voucher discount
+  voucher_discount_value DECIMAL(10,2) NOT NULL DEFAULT 0.00, -- subtotal * discount_value (of voucher)
   shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   delivery_duration VARCHAR(50) NOT NULL,
-  grand_total DECIMAL(10,2) AS (subtotal - discount_total + shipping_fee) STORED,
+  grand_total DECIMAL(10,2) AS (subtotal - voucher_discount_value + shipping_fee) STORED,
   placed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_orders_user (user_id),
   CONSTRAINT fk_orders_user
@@ -279,7 +283,7 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   email VARCHAR(255) NOT NULL,
   phone VARCHAR(20) NOT NULL,
   subject VARCHAR(255) NOT NULL,
-  comment TEXT NOT NULL,
+  comment VARCHAR(500) NOT NULL,
   contact_image_url VARCHAR(500) NULL,   
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_contact_user (user_id),
