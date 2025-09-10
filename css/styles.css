@@ -55,7 +55,8 @@ div p a:visited {
 }
 
 /* Social icons styling */
-.social-icons a {
+.social-icons a,
+i {
     color: black;
     /* default color */
     font-size: 1rem;
@@ -71,7 +72,8 @@ div p a:visited {
 
 /* Zoom on hover */
 .social-icons a:hover,
-p a:hover {
+p a:hover,
+i:hover {
     transform: scale(1.2);
     /* zoom in 20% */
 }

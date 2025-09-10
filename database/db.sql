@@ -102,6 +102,9 @@ CREATE TABLE IF NOT EXISTS products (
   product_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   sku VARCHAR(64) NOT NULL,
   product_name VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) GENERATED ALWAYS AS (
+    REGEXP_REPLACE(LOWER(product_name), '[^a-z0-9]+', '_')
+  ) STORED,
   brand_id INT UNSIGNED NULL,
   category_id INT UNSIGNED NULL,
   weight_volume VARCHAR(50) NULL,                       -- e.g., "500 g" or "1 L"
@@ -112,6 +115,7 @@ CREATE TABLE IF NOT EXISTS products (
   special_offer_label VARCHAR(120) NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_products_sku (sku),
+  UNIQUE KEY uq_products_slug (slug),
   KEY idx_products_category (category_id),
   KEY idx_products_brand (brand_id),
   CONSTRAINT fk_products_brand

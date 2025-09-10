@@ -2939,7 +2939,7 @@ Subtotal = mineral water (2.50 × 6) = 15.00
 No discount, shipping = RM8.00 (Johor)
 Grand total = 15.00 + 8.00 = 23.00
 */
-INSERT INTO orders (user_id, address_id, status, payment_method, voucher_id, subtotal, discount_total, shipping_fee, delivery_duration, placed_at)
+INSERT INTO orders (user_id, address_id, status, payment_method, voucher_id, subtotal, voucher_discount_value, shipping_fee, delivery_duration, placed_at)
 VALUES
 (1, 2, 'paid', 'card', (SELECT voucher_id FROM vouchers WHERE code='NEWUSER123'), 47.70, 4.77, 5.00, '1-2 days', '2025-09-01 11:00:00'),
 (2, 3, 'delivered', 'grabpay', NULL, 15.00, 0.00, 8.00, '2-3 days', '2025-09-02 14:30:00');

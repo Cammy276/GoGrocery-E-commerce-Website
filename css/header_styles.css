@@ -1,0 +1,176 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FFFFE4;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.header-left img {
+    height: 50px;
+}
+
+.header-middle {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+    justify-content: center;
+}
+
+.categories-menu,
+.search-box {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.categories-btn {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.categories-btn i {
+    font-size: 16px;
+}
+
+.categories-dropdown {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 220px;
+    z-index: 100;
+}
+
+.categories-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.categories-dropdown li {
+    padding: 8px 12px;
+    cursor: pointer;
+    position: relative;
+}
+
+.categories-dropdown li:hover {
+    background: #f7f7f7;
+}
+
+.categories-dropdown li.has-children>ul {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.categories-dropdown li.has-children:hover>ul {
+    display: block;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 500px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    flex: 1;
+}
+
+.search-box button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.header-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.icon-box {
+    text-align: center;
+    position: relative;
+}
+
+.icon-box i {
+    font-size: 20px;
+}
+
+.icon-box span.label {
+    display: block;
+    font-size: 12px;
+}
+
+.icon-badge {
+    position: absolute;
+    top: -8px;
+    right: -2px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 2px 6px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    padding: 8px 0;
+    border-top: 1px solid #ccc;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    gap: 6px;
+    transition: color 0.2s, border-bottom 0.2s;
+}
+
+.navbar i {
+    font-size: 18px;
+    margin: 0;
+}
+
+.navbar a:hover {
+    color: #d35400;
+}
+
+.navbar a.active {
+    color: #d35400;
+    font-weight: bold;
+    border-bottom: 2px solid #d35400;
+}
