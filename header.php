@@ -60,7 +60,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <title>Header</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="./css/styles.css">
-<link rel="stylesheet" href="./css/header_styles.css">
+<link rel="stylesheet" href="./css/header_styles(2).css">
 <script>
 function toggleCategories() {
     const dropdown = document.querySelector('.categories-dropdown');
@@ -86,7 +86,7 @@ document.addEventListener("click", function(e) {
   <div class="header-middle">
     <div class="categories-menu">
       <div class="categories-btn" onclick="toggleCategories()">
-        <p>bibi </p><i class="bi bi-list"></i> 
+        <i class="bi bi-list"></i>Categories
   
       </div>
       <div class="categories-dropdown">

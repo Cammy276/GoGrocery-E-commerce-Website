@@ -41,7 +41,8 @@
 
 }
 
-.categories-btn i {
+.categories-btn i,
+.search-box i {
     justify-content: center !important;
     margin: 8px !important;
     cursor: pointer;
@@ -188,7 +189,7 @@
 }
 
 .icon-box i {
-    font-size: 20px;
+    font-size: 50px;
     transition: transform 0.2s, color 0.2s;
 }
 

@@ -293,8 +293,8 @@ INSERT INTO products
       8.9,
       'The Green Asparagus Bunch from FarmFresh comes in a 500g pack and is part of our fresh produces – vegetables – asparagus & shoots. Freshly harvested and carefully selected, this green asparagus bunch delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per 100g: Energy 50 kcal, Carbohydrates 12g, Sugars 9g, Fiber 2g, Vitamin C 10% RDI',
-      25.0,
-      'Limited Time Deal',
+      10.0,
+      '10% Dicsount Deal',
       '2025-08-30 10:15:10'
     );
 
@@ -362,7 +362,7 @@ INSERT INTO products
       'The Japanese Cucumber from GreenLeaf comes in a 500g pack and is part of our fresh produces – vegetables – cucumbers & squash. Freshly harvested and carefully selected, this japanese cucumber delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per 100g: Energy 50 kcal, Carbohydrates 12g, Sugars 9g, Fiber 2g, Vitamin C 10% RDI',
       NULL,
-      'Bundle Pack (2 for 1)',
+      NULL,
       '2025-08-25 12:27:03'
     );
 
@@ -430,7 +430,7 @@ INSERT INTO products
       'The Brown Button Mushrooms from VeggieWorld comes in a 500g pack and is part of our fresh produces – vegetables – mushrooms & fungi. Freshly harvested and carefully selected, this brown button mushrooms delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per 100g: Energy 50 kcal, Carbohydrates 12g, Sugars 9g, Fiber 2g, Vitamin C 10% RDI',
       5.0,
-      NULL,
+      "5% Discount Deal",
       '2025-08-12 05:55:53'
     );
 
@@ -447,7 +447,7 @@ INSERT INTO products
       'The Yellow Onions from VeggieWorld comes in a 500g pack and is part of our fresh produces – vegetables – onions & garlic. Freshly harvested and carefully selected, this yellow onions delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per 100g: Energy 50 kcal, Carbohydrates 12g, Sugars 9g, Fiber 2g, Vitamin C 10% RDI',
       25.0,
-      NULL,
+      "25% Discount Deal",
       '2025-08-23 13:07:11'
     );
 
@@ -515,7 +515,7 @@ INSERT INTO products
       'The Honeydew Melon from FreshFields comes in a 1kg pack and is part of our fresh produces – fruits – melons. Freshly harvested and carefully selected, this honeydew melon delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per 100g: Energy 50 kcal, Carbohydrates 12g, Sugars 9g, Fiber 2g, Vitamin C 10% RDI',
       5.0,
-      NULL,
+      "5% Discount Deal",
       '2025-08-15 10:57:07'
     );
 
@@ -685,7 +685,7 @@ INSERT INTO products
       'The Cleaned Mud Crab from BlueWave comes in a 500g pack and is part of our fresh produces – seafood – crab. Freshly harvested and carefully selected, this cleaned mud crab delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per 100g: Energy 120 kcal, Protein 22g, Fat 3g, Omega-3 0.8g',
       NULL,
-      'Bundle Pack (2 for 1)',
+      NULL,
       '2025-08-18 00:25:50'
     );
 
@@ -718,8 +718,8 @@ INSERT INTO products
       19.9,
       'The Live Clams from OceanCatch comes in a 500g pack and is part of our fresh produces – seafood – clam. Freshly harvested and carefully selected, this live clams delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per 100g: Energy 120 kcal, Protein 22g, Fat 3g, Omega-3 0.8g',
-      NULL,
-      'Buy 1 Free 1',
+      5.00,
+      "5% Dicsount Deal",
       '2025-08-28 08:59:21'
     );
 
@@ -940,7 +940,7 @@ INSERT INTO products
       'The Frozen Puff Pastry Sheets from ChillCo comes in a 450g pack and is part of our chilled & frozen – frozen food – frozen puff and pastry. Freshly harvested and carefully selected, this frozen puff pastry sheets delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per serving (150g): Energy 290 kcal, Protein 12g, Fat 12g, Carbs 32g',
       20.0,
-      NULL,
+      "20% Discount Deal",
       '2025-08-31 22:30:56'
     );
 
@@ -1024,8 +1024,8 @@ INSERT INTO products
       7.5,
       'The Classic Caesar Dressing from PantryCo comes in a 200g pack and is part of our food essentials & commodities – cooking ingredients & seasoning – salad dressings & toppings. Freshly harvested and carefully selected, this classic caesar dressing delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per serving: values vary by recipe',
-      10.0,
-      NULL,
+      8.0,
+      "8% Discount Deal",
       '2025-08-26 21:29:15'
     );
 
@@ -1041,8 +1041,8 @@ INSERT INTO products
       7.5,
       'The Aromatic Curry Paste from PantryCo comes in a 200g pack and is part of our food essentials & commodities – cooking ingredients & seasoning – cooking pastes. Freshly harvested and carefully selected, this aromatic curry paste delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per serving: values vary by recipe',
-      25.0,
-      NULL,
+      11.0,
+      "11% Discount Deal",
       '2025-08-16 04:06:49'
     );
 
@@ -1059,7 +1059,7 @@ INSERT INTO products
       'The Chicken Stock Cubes from PantryCo comes in a 200g pack and is part of our food essentials & commodities – cooking ingredients & seasoning – stocks & gravies. Freshly harvested and carefully selected, this chicken stock cubes delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per serving: values vary by recipe',
       20.0,
-      NULL,
+      "20% Discount Deal",
       '2025-08-21 08:44:55'
     );
 
@@ -1195,7 +1195,7 @@ INSERT INTO products
       'The Apple Cider Vinegar from PantryCo comes in a 500ml pack and is part of our food essentials & commodities – cooking ingredients & seasoning – vinegar. Freshly harvested and carefully selected, this apple cider vinegar delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Per serving: values vary by recipe',
       15.0,
-      NULL,
+      "15% Dicsount Deal",
       '2025-08-06 03:12:43'
     );
 
@@ -1772,8 +1772,8 @@ INSERT INTO products
       6.9,
       'The Microfiber Mop from Sparkle comes in a 1 unit pack and is part of our household products – home cleaning accessories – mops. Freshly harvested and carefully selected, this microfiber mop delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Not applicable',
-      NULL,
-      'Buy 1 Free 1',
+      50.00,
+      'Buy 1 Free 1: Get 2 Microfiber Mop at only price of 1.',
       '2025-08-09 21:23:10'
     );
 
@@ -1875,7 +1875,7 @@ INSERT INTO products
       'The Hydrating Body Lotion from GlowWell comes in a 250ml pack and is part of our beauty & health – body care – body lotion and cream. Freshly harvested and carefully selected, this hydrating body lotion delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Not applicable',
       NULL,
-      NULL,
+      "Free Gift with Purchase",
       '2025-08-18 14:30:19'
     );
 
@@ -2061,8 +2061,8 @@ INSERT INTO products
       12.9,
       'The Whitening Toothpaste from CarePlus comes in a 250ml pack and is part of our beauty & health – oral care – toothpaste. Freshly harvested and carefully selected, this whitening toothpaste delivers excellent taste and nutrition. Perfect for a wide variety of recipes — whether steamed, roasted, stir-fried, or enjoyed raw — it brings convenience and health benefits to your meals. A wholesome choice for everyday cooking, it’s ideal for families and health-conscious individuals looking for both flavor and nourishment.',
       'Not applicable',
-      NULL,
-      'Buy 2 Get 10% Off',
+      10.0,
+      '10% Discount Deal',
       '2025-08-13 23:16:56'
     );
 
@@ -2921,18 +2921,77 @@ INSERT INTO wishlist (user_id, product_id, created_at) VALUES
 
 /* Vouchers */
 INSERT INTO vouchers 
-(code, description, voucher_image_url, terms_conditions, discount_type, discount_value, min_order_amount, max_discount, start_date, end_date, is_active)
+(voucher_name, description, terms_conditions, voucher_image_url, discount_type, discount_value, min_subtotal, start_date, end_date, all_user_limit)
 VALUES
-('NEWUSER123', '10% off for first order', '/images/vouchers/newuser123.png', 'Valid for new users only. Minimum spend RM30.', 'percent', 10.00, 30.00, 25.00, '2025-08-01', '2025-12-31', TRUE),
-('RM5OFF', 'Flat RM5 off any order under Fresh Produces products above RM20', '/images/vouchers/rm5off.png', 'Minimum spend RM20.', 'fixed', 5.00, 20.00, NULL, '2025-08-01', '2025-09-30', TRUE);
+-- 1. New User Login (10%, no condition, active)
+('NEWUSER10', 
+ 'Welcome Gift - Enjoy 10% off your first order as a new member!', 
+ 'Valid for online purchases only. Not valid with any other offers or discounts.', 
+ '../../images/vouchers/new_user.png', 
+ 'PERCENT', 10.00, 
+ 0.00, 
+ DATE_SUB(NOW(), INTERVAL 2 MONTH), 
+ DATE_ADD(NOW(), INTERVAL 1 YEAR), 
+ 1000),
+
+-- 2. 5th Anniversary (-RM50, min spend RM200, active, limited to 500 redemptions)
+('ANNIV50', 
+ 'Celebrate our 5th Anniversary with RM50 off when you spend RM200 or more!', 
+ 'Valid for online purchases only. Not valid with any other offers or discounts.', 
+ '../../images/vouchers/5th_anniversary.png', 
+ 'FIXED', 50.00, 
+ 10.00, 
+ NOW(), 
+ DATE_ADD(NOW(), INTERVAL 6 MONTH), 
+ 5),
+
+-- 3. Mother's Day (-20%, min spend RM10, expired, limited to 300 redemptions)
+('MOTHERS20', 
+ 'Mother’s Day Special - Get 20% off on your order with min spend of RM10.', 
+ 'Valid for online purchases only. Not valid with any other offers or discounts.', 
+ '../../images/vouchers/mother_day.png', 
+ 'PERCENT', 20.00, 
+ 10.00, 
+ DATE_SUB(NOW(), INTERVAL 2 MONTH), 
+ DATE_SUB(NOW(), INTERVAL 1 MONTH), 
+ 199),
+
+-- 4. Halloween (15%, min spend RM20, upcoming, limited to 31 redemptions)
+(
+  'HALLOWEEN15',
+  'Spooktacular Halloween Deal – Get 15% off your order!',
+  'Valid for online purchases only. Not valid with any other offers or discounts.',
+  '../../images/vouchers/halloween.png',
+  'PERCENT',
+  15.00,
+  20.00,
+  DATE_ADD(NOW(), INTERVAL 1 MONTH),
+  DATE_ADD(NOW(), INTERVAL 2 MONTH),
+  31
+);
+
+/* User Vouchers */
+/*Alice*/
+INSERT INTO user_vouchers (user_id, voucher_id, isUsed)
+VALUES (1, 1, TRUE);
+
+INSERT INTO user_vouchers (user_id, voucher_id, isUsed)
+VALUES (1, 2, FALSE);
+
+/*Bob*/
+INSERT INTO user_vouchers (user_id, voucher_id, isUsed)
+VALUES (2, 1, FALSE);
+
+INSERT INTO user_vouchers (user_id, voucher_id, isUsed)
+VALUES (2, 2, FALSE);
 
 /* Orders */
 /* 
 1) Alice:
-Subtotal = asparagus (8.9 × 2) + white rice (29.9 × 1) = 47.70
-Discount = 10% (NEWUSER123) = 4.77
+Subtotal = asparagus ((8.9 - 0.89) (after discounted 10%) × 2) + white rice (29.9 × 1) = 45.92
+Discount = 10% (NEWUSER10) = 4.77
 Shipping = RM5.00 (KL)
-Grand total = 47.70 - 4.77 + 5.00 = 47.93
+Grand total = 45.92 - 4.77 + 5.00 = 46.15
 
 2) Bob:
 Subtotal = mineral water (2.50 × 6) = 15.00
@@ -2941,37 +3000,23 @@ Grand total = 15.00 + 8.00 = 23.00
 */
 INSERT INTO orders (user_id, address_id, status, payment_method, voucher_id, subtotal, voucher_discount_value, shipping_fee, delivery_duration, placed_at)
 VALUES
-(1, 2, 'paid', 'card', (SELECT voucher_id FROM vouchers WHERE code='NEWUSER123'), 47.70, 4.77, 5.00, '1-2 days', '2025-09-01 11:00:00'),
+(1, 2, 'paid', 'card', (SELECT voucher_id FROM vouchers WHERE voucher_name='NEWUSER10'), 45.92, 4.77, 5.00, '1-2 days', '2025-09-01 11:00:00'),
 (2, 3, 'delivered', 'grabpay', NULL, 15.00, 0.00, 8.00, '2-3 days', '2025-09-02 14:30:00');
 
 /* Order Items */
 INSERT INTO order_items (order_id, product_id, product_name, sku, unit_price, quantity, line_discount)
 VALUES
 -- Alice’s order
-(1, (SELECT product_id FROM products WHERE sku='FP-VX-AS-001'), 'Green Asparagus Bunch', 'FP-VX-AS-001', 8.90, 2, 0.00),
+(1, (SELECT product_id FROM products WHERE sku='FP-VX-AS-001'), 'Green Asparagus Bunch', 'FP-VX-AS-001', 8.90, 2, 1.78),
 (1, (SELECT product_id FROM products WHERE sku='FEC-RX-WR-069'), 'White Rice', 'FEC-RX-WR-069', 29.90, 1, 0.00),
 
 -- Bob’s order
 (2, (SELECT product_id FROM products WHERE sku='BX-WX-MW-090'), 'Natural Mineral Water', 'BX-WX-MW-090', 2.50, 6, 0.00);
 
-/* Voucher Usages */
--- Since only Alice applied the NEWUSER123 voucher, hence only 1 record here for the used voucher's details
-/* 
-1) Alice (user_id=1)
-Used voucher NEWUSER123 (10% off first order).
-Order #1 applied correctly with RM4.77 discount.
-
-2) Bob (user_id=2)
-Did not use any voucher.
-Order #2 subtotal RM15, shipping RM8, no discounts applied.
-*/
-INSERT INTO voucher_usages (voucher_id, user_id, order_id, used_at) VALUES
-((SELECT voucher_id FROM vouchers WHERE code='NEWUSER123'), 1, 1, '2025-09-01 11:00:00');
-
 /* Cart Items */
 INSERT INTO cart_items (user_id, product_id, product_name, sku, unit_price, quantity, line_discount, added_at, updated_at)
 VALUES
-(1, (SELECT product_id FROM products WHERE sku='FP-VX-AS-001'), 'Green Asparagus Bunch', 'FP-VX-AS-001', 8.90, 2, 0.00, '2025-09-01 10:00:00', '2025-09-01 10:00:00'),
+(1, (SELECT product_id FROM products WHERE sku='FP-VX-AS-001'), 'Green Asparagus Bunch', 'FP-VX-AS-001', 8.90, 2, 0.89, '2025-09-01 10:00:00', '2025-09-01 10:00:00'),
 (1, (SELECT product_id FROM products WHERE sku='FEC-RX-WR-069'), 'White Rice', 'FEC-RX-WR-069', 29.90, 1, 0.00, '2025-09-01 10:05:00', '2025-09-01 10:05:00'),
 (1, (SELECT product_id FROM products WHERE sku='BH-BC-SX-117'), 'Gentle Facial Cleanser', 'BH-BC-SX-117', 12.90, 3, 0.00, '2025-09-02 03:10:00', '2025-09-02 10:05:00'),
 (2, (SELECT product_id FROM products WHERE sku='BX-WX-MW-090'), 'Natural Mineral Water', 'BX-WX-MW-090', 2.50, 6, 0.00, '2025-09-01 12:00:00', '2025-09-01 12:00:00');

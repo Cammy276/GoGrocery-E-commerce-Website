@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS products (
   unit_price DECIMAL(10,2) NOT NULL,
   product_description TEXT NULL,
   nutritional_info TEXT NULL,                           
-  discount_percent DECIMAL(5,2) NULL,                   
+  discount_percent DECIMAL(5,2) NULL,                  -- e.g., "10.0" = 10% discount
   special_offer_label VARCHAR(120) NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_products_sku (sku),
@@ -158,24 +158,33 @@ CREATE TABLE IF NOT EXISTS wishlist (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+/* After user registered, then the valid vouchers with valid start_date & end_date will be auto assigned to them, allUserLimit-1*/
 /* Vouchers */
 CREATE TABLE IF NOT EXISTS vouchers (
   voucher_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  code VARCHAR(50) NOT NULL UNIQUE,          -- e.g., "WELCOME10"
+  voucher_name VARCHAR(100) NOT NULL UNIQUE,   
   description VARCHAR(255) NOT NULL,
+  terms_conditions TEXT NOT NULL,             
   voucher_image_url VARCHAR(500) NOT NULL, 
-  terms_conditions VARCHAR(255) NOT NULL,
-  discount_type ENUM('PERCENT', 'FIXED') NOT NULL,  -- % or RM discount
-  discount_value DECIMAL(10,2) NOT NULL,     -- e.g., 10.00 = 10% if PERCENT, or RM10 if FIXED
-  min_order_amount DECIMAL(10,2) DEFAULT 0.00,      -- optional min spend
-  max_discount DECIMAL(10,2) NULL,           -- cap for % discount
-  usage_limit INT UNSIGNED DEFAULT NULL,     -- total times the voucher can be used (across all users)
-  per_user_limit INT UNSIGNED DEFAULT 1,     -- how many times one user can use it
-  start_date DATETIME NOT NULL,
-  end_date DATETIME NOT NULL,
-  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  discount_type ENUM('PERCENT','FIXED') NOT NULL,
+  discount_value DECIMAL(10,2) NOT NULL,
+  min_subtotal DECIMAL(10,2) DEFAULT 0.00,    
+  start_date TIMESTAMP NOT NULL,
+  end_date TIMESTAMP NOT NULL,
+  all_user_limit INT UNSIGNED DEFAULT NULL,   
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* User vouchers */
+CREATE TABLE IF NOT EXISTS user_vouchers (
+  user_id INT UNSIGNED NOT NULL,
+  voucher_id INT UNSIGNED NOT NULL,
+  isUsed BOOLEAN NOT NULL DEFAULT FALSE,
+  
+  PRIMARY KEY (user_id, voucher_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id) ON DELETE CASCADE
+);
 
 /* Orders */
 CREATE TABLE IF NOT EXISTS orders (
@@ -236,8 +245,7 @@ CREATE TABLE IF NOT EXISTS order_items (
 -- 1 user only can have 1 cart which stores all items pending to checkout
 -- only those selected items will bring to the checkout (orders + orders_item)
 -- display the total prices (line total) for each product (display the total for 3 units of Brocolli) 
--- display the total prices for all products selected (you need to retrieve the line total for each product 
--- & add them, I can't add the aggregated total for all cart items in database)
+-- line total = (unit_price - (unit_price * line_discount))*quantity
 CREATE TABLE IF NOT EXISTS cart_items (
   cart_item_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED NOT NULL,
@@ -258,21 +266,6 @@ CREATE TABLE IF NOT EXISTS cart_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
     ON DELETE RESTRICT ON UPDATE CASCADE,
   UNIQUE KEY uq_cart_user_product (user_id, product_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* Voucher Usages */
-CREATE TABLE IF NOT EXISTS voucher_usages (
-  usage_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  voucher_id INT UNSIGNED NOT NULL,
-  user_id INT UNSIGNED NOT NULL,
-  order_id INT UNSIGNED NOT NULL,
-  used_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_usage_voucher FOREIGN KEY (voucher_id) REFERENCES vouchers(voucher_id)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_usage_user FOREIGN KEY (user_id) REFERENCES users(user_id)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_usage_order FOREIGN KEY (order_id) REFERENCES orders(order_id)
-    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /* Contact Form */
