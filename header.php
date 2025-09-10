@@ -1,5 +1,9 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 include(__DIR__ . '/connect_db.php');
 
 $user_id = $_SESSION['user_id'] ?? null;

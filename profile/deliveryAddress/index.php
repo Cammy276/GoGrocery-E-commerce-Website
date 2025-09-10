@@ -1,13 +1,17 @@
 <!-- to get current user id -->
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    echo "Logged in as User ID: " . $user_id;
+    
 } else {
     echo "You are not logged in!";
 }
 ?>
+
 
 <?php
 // Include the database connection
@@ -43,23 +47,19 @@ $stmt->close();
         <meta charset="UTF-8">
         <title>Delivery Address</title>
     
-        <!-- Bootstrap Icons -->
+        <!-- Inter font -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../../css/profile.css">
+        <link rel="stylesheet" href="../../css/header_styles.css">
+        <link rel="stylesheet" href="../../css/footer_styles.css">
     </head>
     <body>
-            <div id="header">
-            <div class="logo">GoGrocery</div>
-            <div class="nav-links">
-                <a href="">Home</a>
-                <a href="">About</a>
-                <a href="">Help Center</a>
-                <a href="">Best Seller</a>
-                <a href="">Special Deal</a>
-                <a href="">New Product</a>
-            </div>
-        </div>
+        <header><?php include("../../header.php") ?></header>
 
         <div class="main-container">
 
@@ -134,6 +134,6 @@ $stmt->close();
                 </div>
             </div>
         </div>
-
+        <footer><?php include("../../footer.php") ?> </footer>
     </body>
 </html>
