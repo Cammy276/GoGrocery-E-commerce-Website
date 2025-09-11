@@ -91,7 +91,7 @@ if (isset($_POST['insert'])) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Add New Delivery Address</title>
+        <title>Redeem Rewards</title>
         
         <!-- Inter font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -114,12 +114,12 @@ if (isset($_POST['insert'])) {
                 <ul class="menu-items">
                     <!-- use Bootstrap icons-->
                     <li><a href=""><i class="bi bi-gear-fill"></i> Profile Settings</a></li>
-                    <li><a href="../deliveryAddress/index.php" class="active"><i class="bi bi-geo-alt-fill"></i> Delivery Addresses</a></li>
+                    <li><a href="../deliveryAddress/index.php"><i class="bi bi-geo-alt-fill"></i> Delivery Addresses</a></li>
                     <li><a href="../cart/index.php"><i class="bi bi-cart3"></i> Cart</a></li>
                     <li><a href="../order/index.php"><i class="bi bi-bag-fill"></i> Orders</a></li>
                     <li><a href="../history/index.php"><i class="bi bi-clock-history"></i> History</a></li>
                     <li><a href="../wishlist/index.php"><i class="bi bi-heart"></i> Wishlist</a></li>
-                    <li><a href="../reward/index.php"><i class="bi bi-award-fill"></i> Rewards</a></li>
+                    <li><a href="../reward/index.php" class="active"><i class="bi bi-award-fill"></i> Rewards</a></li>
                     <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
                 </ul>
             </div>
@@ -140,10 +140,12 @@ if (isset($_POST['insert'])) {
                             <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo $user_id ?>" />
                             
                             <label>Voucher code:</label>
-                            <input class="textInput" type='text' id='voucher_name' name='voucher_name' placeholder="Try entering any secret code you have discovered..." />
+                            <input class="textInput" type='text' id='voucher_name' name='voucher_name' placeholder="Try any secret code you have discovered..." />
                             <br/>
                             <div id="error_voucher" class="error"></div>
                             <br/>
+
+                            <p class="tips">No code yet? Keep your eyes open, hidden surprises might be waiting for you.</p>
                             
                             <?php if($errorMsg != null): ?>
                                 <p class="errMessage">Add new reward fail. Please try again.</p>

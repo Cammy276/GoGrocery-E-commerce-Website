@@ -230,7 +230,7 @@ $voucherStmt->close();
                                 </div>
                                 <div class="payment-item">
                                     <p class="payment-label">Delivery Duration</p>
-                                    <p class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'].' days' : '-'; ?></p>
+                                    <p class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'] : '-'; ?></p>
                                 </div>
                             </div>
 

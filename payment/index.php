@@ -42,26 +42,24 @@ if ($cartStmt->execute()) {
 
 // get available voucher
 $sql = "
-    SELECT v.*
-    FROM vouchers v
-    LEFT JOIN (
-        SELECT voucher_id, COUNT(*) AS used_count
-        FROM voucher_usages
-        GROUP BY voucher_id
-    ) vu_total ON v.voucher_id = vu_total.voucher_id
-    LEFT JOIN (
-        SELECT voucher_id, COUNT(*) AS user_used_count
-        FROM voucher_usages
-        WHERE user_id = ?
-        GROUP BY voucher_id
-    ) vu_user ON v.voucher_id = vu_user.voucher_id
-    WHERE v.is_active = 1
+    SELECT
+        v.voucher_id,
+        v.voucher_name,
+        v.description,
+        v.terms_conditions,
+        v.voucher_image_url,
+        v.discount_type,
+        v.discount_value,
+        v.min_subtotal,
+        v.start_date,
+        v.end_date
+    FROM user_vouchers uv
+    JOIN vouchers v ON uv.voucher_id = v.voucher_id
+    WHERE uv.user_id = ?
+      AND uv.isUsed = 0
       AND NOW() BETWEEN v.start_date AND v.end_date
-      AND v.min_order_amount <= ?
-      -- Check global usage limit if set
-      AND (v.usage_limit IS NULL OR COALESCE(vu_total.used_count, 0) < v.usage_limit)
-      -- Check per-user usage limit
-      AND (COALESCE(vu_user.user_used_count, 0) < v.per_user_limit OR v.per_user_limit IS NULL)
+      AND v.min_subtotal <= ?
+    ORDER BY v.start_date ASC
 ";
 
 $voucherStmt = $conn->prepare($sql);
@@ -73,13 +71,15 @@ if ($voucherStmt->execute()) {
     while ($voucher = $voucherResult->fetch_assoc()) {
         $availableVouchers[] = $voucher;
     }
+} else {
+    $errorMsg = $voucherStmt->error;
 }
 $voucherStmt->close();
 
 
 
 
-$addressStmt = $conn->prepare("SELECT * FROM addresses WHERE user_id = ? ORDER BY label DESC");
+$addressStmt = $conn->prepare("SELECT * FROM addresses WHERE user_id = ? ORDER BY label ASC");
 $addressStmt->bind_param("i", $user_id); 
 
 if ($addressStmt->execute()) {
@@ -104,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $payment_method = $_POST['payment_method'] ?? null;
     $voucher_id     = !empty($_POST['voucher_id']) ? $_POST['voucher_id'] : null;
     $voucher_discount_value = floatval($_POST['voucher_discount'] ?? 0);
-    $shipping_fee   = 5.00;
-    $delivery_duration = "5-7";
+    $shipping_fee = isset($_POST['shipping_fee']) ? floatval($_POST['shipping_fee']) : 4.50;
+    $delivery_duration = ($shipping_fee === 4.50)  ? "3-7 working days" : "5-15 working days";
     $status         = "paid";
     $placed_at      = date("Y-m-d H:i:s");
 
@@ -164,6 +164,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $order_id = $orderStmt->insert_id;
     $orderStmt->close();
+
+    // Mark voucher as used 
+    if (!empty($voucher_id)) {
+        $updateVoucherStmt = $conn->prepare("
+            UPDATE user_vouchers 
+            SET isUsed = 1 
+            WHERE user_id = ? AND voucher_id = ?
+        ");
+        $updateVoucherStmt->bind_param("ii", $user_id, $voucher_id);
+        if (!$updateVoucherStmt->execute()) {
+            die("Failed to update voucher status: " . $updateVoucherStmt->error);
+        }
+        $updateVoucherStmt->close();
+    }
+
 
     // Insert into order_items
     $orderItemStmt = $conn->prepare("
@@ -315,17 +330,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <select class="payment-form-select" id="delivery_address" name="address_id" >
                                             <option value="">-- Select Address --</option>
                                             <?php foreach ($addressList as $address): ?>
-                                                <option value="<?php echo $address['address_id']; ?>">
-                                                    <?php 
-                                                        $parts = [];
-                                                        if (!empty($address['apartment'])) $parts[] = $address['apartment'];
-                                                        $parts[] = $address['street'];
-                                                        $parts[] = $address['postcode'];
-                                                        $parts[] = $address['city'];
-                                                        $parts[] = $address['state_territory'];
-                                                        echo htmlspecialchars($address['label'] . " - " . implode(", ", $parts));
-                                                    ?>
-                                                </option>
+                                                <option 
+    value="<?php echo $address['address_id']; ?>" 
+    data-state="<?php echo htmlspecialchars($address['state_territory']); ?>">
+    <?php 
+        $parts = [];
+        if (!empty($address['apartment'])) $parts[] = $address['apartment'];
+        $parts[] = $address['street'];
+        $parts[] = $address['postcode'];
+        $parts[] = $address['city'];
+        $parts[] = $address['state_territory'];
+        echo htmlspecialchars($address['label'] . " - " . implode(", ", $parts));
+    ?>
+</option>
+
                                             <?php endforeach; ?>
                                         </select>
                                         <div id="error_DeliveryAddress" class="error"></div>
@@ -349,7 +367,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                         value="<?php echo $voucher['voucher_id']; ?>" 
                                                         data-type="<?php echo $voucher['discount_type']; ?>" 
                                                         data-value="<?php echo $voucher['discount_value']; ?>">
-                                                        <?php echo htmlspecialchars($voucher['description']) . " - " . htmlspecialchars($voucher['code']); ?>
+                                                        <?php echo htmlspecialchars($voucher['description']); ?>
                                                     </option>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
@@ -454,9 +472,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
 
                                     <div class="summary-item">
-                                        <p class="summary-label">Shipping Fee</p>
-                                        <p class="summary-value">RM 5.00</p>
-                                    </div>
+    <p class="summary-label">Shipping Fee</p>
+    <p class="summary-value" id="shipping-fee-display">RM 4.50</p>
+    <input type="hidden" name="shipping_fee" id="shipping_fee" value="4.50">
+</div>
+
                                     
                                     <div class="summary-item summary-total">
                                         <p class="summary-label">Grand Total</p>
@@ -532,7 +552,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 voucherSelect.addEventListener("change", updateTotals);
             });
 
+            // update summary based on shipping fee (depends on delivery-address)
+            document.addEventListener("DOMContentLoaded", function () {
+                const addressSelect = document.getElementById("delivery_address");
+                const shippingFeeEl = document.getElementById("shipping-fee-display"); // ✅ more precise
+                const totalEl = document.getElementById("grand-total");
+                const voucherSelect = document.getElementById("voucher");
+                const hiddenShippingFee = document.getElementById("shipping_fee");
 
+                const baseSubtotal = <?php echo json_encode($subtotal); ?>;
+
+                function getVoucherDiscount() {
+                    let discountValue = 0;
+                    const option = voucherSelect.options[voucherSelect.selectedIndex];
+                    if (option && option.value) {
+                        const type = option.getAttribute("data-type");
+                        const value = parseFloat(option.getAttribute("data-value"));
+                        if (type === "PERCENT") {
+                            discountValue = (baseSubtotal * value) / 100;
+                        } else if (type === "FIXED") {
+                            discountValue = Math.min(baseSubtotal, value);
+                        }
+                    }
+                    return discountValue;
+                }
+
+                function updateTotals() {
+                    const option = addressSelect.options[addressSelect.selectedIndex];
+                    let shippingFee = 4.50; // default
+
+                    if (option) {
+                        const state = option.getAttribute("data-state");
+                        if (state === "Sabah" || state === "Sarawak") {
+                            shippingFee = 15.00;
+                        }
+                    }
+
+                    const discountValue = getVoucherDiscount();
+                    const finalTotal = (baseSubtotal - discountValue) + shippingFee;
+
+                    // Update hidden shipping fee
+                    hiddenShippingFee.value = shippingFee.toFixed(2);
+
+                    // Update UI
+                    shippingFeeEl.textContent = "RM " + shippingFee.toFixed(2);
+                    totalEl.textContent = "RM " + finalTotal.toFixed(2);
+                }
+
+                // Run on load + when address/voucher changes
+                updateTotals();
+                addressSelect.addEventListener("change", updateTotals);
+                voucherSelect.addEventListener("change", updateTotals);
+            });
 
 
 
