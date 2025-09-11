@@ -8,10 +8,8 @@ header("Pragma: no-cache");
 
 $accountDeleted = false;
 
-// Include your database connection
 include(__DIR__ . '/../connect_db.php');
 
-// Handle confirm
 if (isset($_POST['action']) && $_POST['action'] === 'confirm') {
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
@@ -28,6 +26,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'confirm') {
         }
         $stmt->close();
     }
+if (!isset($_SESSION['user_id']) && !$accountDeleted) {
+    $accountDeleted = true;
+}
 }
 ?>
 <!DOCTYPE html>
@@ -54,7 +55,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'confirm') {
       <?php else: ?>
         <!-- Step 2: Account Deleted -->
         <h1>Your account has been deleted</h1>
-        <p>We’re sorry to see you go. You can create a new account anytime.</p>
+        <p>We regret to see you leave. Should you wish to return, you are welcome to create a new account at any time.</p>
         <div class="button-group">
           <button class="btn-home" onclick="window.location.href='/GoGrocery-E-commerce-Website/index.php'">Home</button>
           <button class="btn-signup" onclick="window.location.href='/GoGrocery-E-commerce-Website/auth/register.php'">Sign Up</button>
