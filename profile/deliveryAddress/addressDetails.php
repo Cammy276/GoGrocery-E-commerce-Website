@@ -70,7 +70,7 @@ if (isset($_POST['update'])) {
     $stmt = $conn->prepare("UPDATE addresses SET label=?, street=?, apartment=?, postcode=?, city=?, state_territory=? WHERE address_id=?");
     $stmt->bind_param("ssssssi", $label, $street, $apartment, $postcode, $city, $state_territory, $address_id);
     if ($stmt->execute()) {
-        //if operation success, redirect to addressDetails page
+        //if operation success, redirect to delivery address page
         header("Location: index.php?msg=updateSuccess");
         exit();
     } else {
@@ -87,7 +87,7 @@ if (isset($_POST['delete'])) {
     $stmt = $conn->prepare("DELETE FROM addresses WHERE address_id=?");
     $stmt->bind_param("i", $address_id);
     if ($stmt->execute()) {
-        //if operation success, redirect to addressDetails page
+        //if operation success, redirect to delivery address page
         header("Location: index.php?msg=deleteSuccess");
         exit();
     } else {

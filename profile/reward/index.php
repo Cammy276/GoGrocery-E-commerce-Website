@@ -22,23 +22,79 @@ include(__DIR__ . '/../../connect_db.php');
 // Predefine variable for error message
 $errorMsg = null;
 
-// Fetch all orders based on user id and status="paid"
-$order_status = "paid";
-$orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? AND status = ? ORDER BY placed_at DESC");
-$orderStmt->bind_param("is", $user_id, $order_status);
-if ($orderStmt->execute()) {
-    $orderResult = $orderStmt->get_result();
-    $orderList = [];
+// Fetch all non-used voucher based on user_id
+$rewardStmt = $conn->prepare("
+    SELECT v.voucher_id, v.voucher_name, v.description, v.terms_conditions,
+           v.voucher_image_url, v.discount_type, v.discount_value,
+           v.min_subtotal, v.start_date, v.end_date
+    FROM user_vouchers uv
+    JOIN vouchers v ON uv.voucher_id = v.voucher_id
+    WHERE uv.user_id = ?
+      AND uv.isUsed = FALSE
+      AND NOW() BETWEEN v.start_date AND v.end_date
+");
 
-    while ($order = $orderResult->fetch_assoc()) {
-        $orderList[] = $order; //store order in orderList
+$rewardStmt->bind_param("i", $user_id);
+
+if ($rewardStmt->execute()) {
+    $rewardResult = $rewardStmt->get_result();
+    $rewardList = [];
+
+    while ($reward = $rewardResult->fetch_assoc()) {
+        $rewardList[] = $reward;
     }
 } else {
-    $errorMsg = $orderStmt->error;
+    $errorMsg = $rewardStmt->error;
 }
 
 
-$orderStmt->close();
+$rewardStmt->close();
+
+
+
+
+//handle insert
+if (isset($_POST['insert'])) {
+    // Assume you already have $user_id and $voucher_name from form/input
+    $voucher_name = trim($_POST['voucher_name']);
+
+    // 1. Check if voucher exists
+    $voucherStmt = $conn->prepare("SELECT voucher_id FROM vouchers WHERE voucher_name = ?");
+    $voucherStmt->bind_param("s", $voucher_name);
+    $voucherStmt->execute();
+    $voucherResult = $voucherStmt->get_result();
+
+    if ($voucherResult->num_rows === 0) {
+        // Voucher not found
+        $errorMsg = "Voucher Code does not exist.";
+    } else {
+        $voucher = $voucherResult->fetch_assoc();
+        $voucher_id = $voucher['voucher_id'];
+
+        // 2. Check if user already has this voucher
+        $UserVoucherStmt = $conn->prepare("SELECT * FROM user_vouchers WHERE user_id = ? AND voucher_id = ?");
+        $UserVoucherStmt->bind_param("ii", $user_id, $voucher_id);
+        $UserVoucherStmt->execute();
+        $UserVoucherResult = $UserVoucherStmt->get_result();
+
+        if ($UserVoucherResult->num_rows > 0) {
+            // Already claimed
+            $errorMsg = "You have already claimed this voucher.";
+        } else {
+            // 3. Insert new record
+            $addUVStmt = $conn->prepare("INSERT INTO user_vouchers (user_id, voucher_id) VALUES (?, ?)");
+            $addUVStmt->bind_param("ii", $user_id, $voucher_id);
+
+            if ($addUVStmt->execute()) {
+                header("Location: index.php?msg=addSuccess");
+                exit();
+            } else {
+                $errorMsg = "Error adding voucher: " . $addUVStmt->error;
+            }
+        }
+    }
+
+}
 
 ?>
 
@@ -48,7 +104,7 @@ $orderStmt->close();
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Order</title>
+        <title>Rewards</title>
         
         <!-- Inter font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -59,9 +115,10 @@ $orderStmt->close();
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../../css/profile_styles.css">
         <link rel="stylesheet" href="../../css/cart_styles.css">
+        <link rel="stylesheet" href="../../css/reward_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
-
+css\reward_style.css
     </head>
     <body>
         <header><?php include("../../header.php") ?></header>
@@ -90,44 +147,53 @@ $orderStmt->close();
                     <p>Explore your rewards and redeem vouchers to enjoy exclusive benefits.</p>
                 </div>
                 <div class="content">
-                   <h2>My Rewards</h2>
-
-                    <!--- get message from payment.php -->
-                    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'paymentSuccess'): ?>
-                        <p class="successMessage">Order with Order ID <?php echo htmlspecialchars($_GET['order_id']) ?> is paid! Thank you for your purchase.</p>
+                    <div class="reward-header">
+                        <h2>My Rewards</h2>
+                        <a href="addVoucher.php"><i class="bi bi-plus-circle-fill"></i></a>
+                    </div>
+                    <!--- get message from reward/index.php -->
+                    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'addSuccess'): ?>
+                        <p class="successMessage">Voucher has been successfully claim.</p>
                     <?php endif; ?>
 
                     <!--- shows message if error or no record -->
                     <?php if (!empty($errorMsg)): ?>
-                        <p class="errMessage">Error occurred when fetching order records. Please try again.</p>
+                        <p class="errMessage">Error occurred when claiming voucher. Please try again.</p>
                         <pre class="errMessage"><?php echo htmlspecialchars($errorMsg); ?></pre>
-                    <?php elseif (count($orderList) === 0): ?>
-                        <p class="tips">No order record found</p>
+                    <?php elseif (count($rewardList) === 0): ?>
+                        <p class="tips">No voucher record found</p>
                     <?php else: ?>
                         <br/>
                     <?php endif; ?>
 
-                    <?php foreach ($orderList as $order): ?>
-                        <a href="orderDetails.php?id=<?php echo $order['order_id']; ?>" 
-                            class="cardLink">
-                            <div class="card">
-                                <div class="infoTwoColumn">
-                                    <div class="infoLeft">
-                                        <h3 class="orderId">Order ID: <?php echo $order['order_id']; ?></h3>
-                                        <span class="orderDate"><?php echo date('M j, Y g:i A', strtotime($order['placed_at'])); ?></span>
+                    <?php foreach ($rewardList as $voucher): ?>
+                        <a href="rewardDetails.php?id=<?php echo $voucher['voucher_id'] ?>" class="cardLink">
+                            <div class="voucher-card">
+                                <!-- Image on the left -->
+                                <img class="voucher-image" 
+                                    src="<?php echo htmlspecialchars($voucher['voucher_image_url']); ?>" 
+                                    alt="Voucher Image">
+
+                                <!-- Content on the right -->
+                                <div class="voucher-content">
+                                    <!-- Top row: Title + Badge -->
+                                    <div class="voucher-header">
+                                        <p class="voucher-title">
+                                            <?php echo htmlspecialchars($voucher['voucher_name']); ?>
+                                        </p>
+                                        <p class="badge <?php echo $voucher['discount_type']; ?>">
+                                            <?php echo $voucher['discount_type'] == 'PERCENT' ? 'Percentage' : 'Fixed'; ?>
+                                        </p>
                                     </div>
-                                    <div class="infoRight">
-                                        <span class="orderStatus status-<?php echo strtolower($order['status']); ?>">
-                                            <?php echo ucfirst($order['status']); ?>
-                                        </span>
-                                        <span class="grandTotal">RM <?php echo number_format($order['grand_total'], 2); ?></span>
-                                    </div>
+
+                                    <!-- Valid Until -->
+                                    <p class="voucher-valid">
+                                        Valid until <?php echo date('M j, Y', strtotime($voucher['end_date'])); ?>
+                                    </p>
                                 </div>
                             </div>
                         </a>
-
                     <?php endforeach; ?>
-
 
                 </div>
             </div>
