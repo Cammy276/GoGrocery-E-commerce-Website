@@ -11,7 +11,7 @@ GRANT SELECT ON gogrocery.product_images TO 'gogrocery_customer'@'localhost';
 GRANT SELECT ON gogrocery.brands TO 'gogrocery_customer'@'localhost';
 
 -- 🔹 Customer account (profile + addresses)
-GRANT SELECT, INSERT, UPDATE ON gogrocery.users TO 'gogrocery_customer'@'localhost';
+GRANT SELECT, INSERT, UPDATE,DELETE ON gogrocery.users TO 'gogrocery_customer'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON gogrocery.addresses TO 'gogrocery_customer'@'localhost';
 
 -- 🔹 Orders & order items
