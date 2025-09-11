@@ -45,12 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <header>
     <?php include '../header.php'; ?>
 </header>
-<link rel="stylesheet" href="../css/header_styles.css">
-<link rel="stylesheet" href="../css/login_styles.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/login_styles.css">
+<link rel="stylesheet" href="../css/header_styles.css">
+<link rel="stylesheet" href="../css/footer_styles.css">
 </head>
 <body>
-
 <div class="login-container">
     <div class="login-box">
         <h2>Log in</h2>
@@ -161,6 +162,6 @@ function togglePassword(inputId, iconId) {
     }
 }
 </script>
-
+<?php include '../footer.php'; ?>
 </body>
 </html>

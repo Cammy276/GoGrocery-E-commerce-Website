@@ -1,3 +1,7 @@
+<?php
+include("header.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,6 +63,9 @@
         </button>
     </div>
 
+    <?php 
+        include("index_display.php")
+    ?>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

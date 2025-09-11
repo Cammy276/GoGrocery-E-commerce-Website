@@ -1,6 +1,6 @@
 body {
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .success-message {
@@ -33,21 +33,6 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-div p a {
-    margin: 0.rem 0;
-    font-size: 0.70rem;
-    font-weight: 500;
-    color: #118997;
-    text-decoration: underline;
-    display: inline-block;
-    /* needed for transform to work */
-}
-
-div p a:visited {
-    color: #0B05B5;
-    /* dark blue for visited links */
-}
-
 /* Logo */
 .logo img {
     max-width: 230px;
@@ -72,13 +57,13 @@ i {
 
 /* Zoom on hover */
 .social-icons a:hover,
-p a:hover,
+a:hover,
 i:hover {
     transform: scale(1.2);
     /* zoom in 20% */
 }
 
-p a:hover {
+footer p a:hover {
     background-color: #FB585D;
     /* light gray background on hover */
     color: #FFF;
@@ -101,7 +86,8 @@ p a:hover {
     /* LinkedIn blue */
 }
 
-.social-icons a:hover .bi-tiktok {
+.social-icons a:hover .bi-tiktok,
+.social-icons a:hover .bi-twitter-x {
     color: #000000;
     /* TikTok black */
 }
@@ -109,4 +95,16 @@ p a:hover {
 .social-icons a:hover .bi-youtube {
     color: #FF0000;
     /* YouTube red */
+}
+
+.social-icons a:hover .bi-whatsapp {
+    color: #25D366;
+}
+
+.social-icons a:hover .bi-line {
+    color: #00C300;
+}
+
+.social-icons a:hover .bi-telegram {
+    color: #0088cc;
 }

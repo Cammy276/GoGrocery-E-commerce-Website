@@ -25,7 +25,22 @@ footer p {
     color: black;
 }
 
-hr {
+footer div p a {
+    margin: 0.rem 0;
+    font-size: 0.70rem;
+    font-weight: 500;
+    color: #118997;
+    text-decoration: underline;
+    display: inline-block;
+    /* needed for transform to work */
+}
+
+footer div p a:visited {
+    color: #0B05B5;
+    /* dark blue for visited links */
+}
+
+footer hr {
     height: 0.8px;
     background-color: #837E7E;
     border: none;

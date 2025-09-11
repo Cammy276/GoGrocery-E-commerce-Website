@@ -1,17 +1,17 @@
-/* HEADER TOP */
+/* ================= HEADER TOP ================= */
 .header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
     background-color: #FFFFE4;
+    height: 80px;
 }
 
 .header-left img {
     height: 50px;
 }
 
-/* HEADER MIDDLE */
+/* ================= HEADER MIDDLE ================= */
 .header-middle {
     display: flex;
     gap: 10px;
@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-/* CATEGORIES MENU & SEARCH BOX */
+/* ================= CATEGORIES MENU & SEARCH BOX ================= */
 .categories-menu,
 .search-box {
     background: #fff;
@@ -32,36 +32,28 @@
 
 .categories-btn {
     cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 15px;
-    background-color: pink;
-
+    gap: 10px;
 }
 
 .categories-btn i,
 .search-box i {
     justify-content: center !important;
-    margin: 8px !important;
+    margin: 6px !important;
     cursor: pointer;
     display: block;
-    height: 18px;
-    margin-block-end: 15px;
-    margin-block-start: 15px;
-    margin-inline-end: 0px;
-    margin-inline-start: 0px;
-    unicode-bidi: isolate;
-
+    height: 16px;
 }
 
 .categories-btn p {
-    padding: 0px;
-    margin: 0px;
+    margin: 0;
+    padding: 0;
 }
 
-/* DROPDOWN */
+/* ================= DROPDOWN ================= */
 .categories-dropdown {
     display: none;
     position: absolute;
@@ -71,51 +63,66 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    min-width: 220px;
+    min-width: 200px;
     z-index: 100;
-
-    /* Scale animation */
     transform: scale(0.95);
     transform-origin: top left;
-    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
-/* Show dropdown on parent hover */
 .categories-menu:hover .categories-dropdown {
     display: block;
-    transform: scale(1);
+    transform: scale(1.2);
 }
 
-/* DROPDOWN ITEMS */
+/* ---------------- Dropdown Items ---------------- */
 .categories-dropdown ul {
     list-style: none;
     margin: 0;
-    padding: 5px 0;
+    padding: 4px 0;
 }
 
 .categories-dropdown li {
-    padding: 8px 12px;
     cursor: pointer;
     position: relative;
     color: #000;
-    /* default black text */
-    text-decoration: none;
-    /* remove underline */
-    transition: color 0.2s, background-color 0.2s, transform 0.2s;
+    font-size: 13px;
+    line-height: 1.3;
+    transition: color 0.2s, background-color 0.2s;
 }
 
-/* Only hovered dropdown item: red background, white text */
+/* Links inside dropdown, including submenus */
+.categories-dropdown li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    padding: 5px 9px;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: break-word;
+    transition: transform 0.2s ease;
+    /* smooth slide */
+}
+
+/* Hover effect: background + text color + slide */
 .categories-dropdown li:hover {
     background-color: #FB585D;
+    color: #FFF !important;
+}
+
+.categories-dropdown li:hover>a {
+    transform: translateX(5px);
+    /* slide slightly right */
+}
+
+.categories-dropdown li:hover>a::after {
     color: #FFF;
 }
 
-/* Active/clicked dropdown item (if needed) */
-.categories-dropdown li.active {
-    color: #0B05B5;
-}
-
-/* Nested submenus */
+/* ================= NESTED SUBMENUS ================= */
 .categories-dropdown li.has-children>ul {
     display: none;
     position: absolute;
@@ -125,47 +132,75 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    min-width: 200px;
-
-    /* Scale animation */
-    transform: scale(0.95);
+    min-width: 180px;
     transform-origin: top left;
-    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
-/* Show nested submenu on hover */
 .categories-dropdown li.has-children:hover>ul {
     display: block;
     transform: scale(1);
 }
 
-/* Search Box wrapper */
+/* Nested submenu items */
+.categories-dropdown li.has-children>ul li a {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+.categories-dropdown li.has-children>ul li:hover {
+    background-color: #FB585D;
+    color: #FFF !important;
+}
+
+/* RIGHT ARROWS */
+.categories-dropdown li.has-children>a::after {
+    content: "›";
+    font-size: 12px;
+    color: #666;
+    margin-left: 6px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.categories-dropdown li.has-children>ul li.has-children>a::after {
+    content: "›";
+    font-size: 11px;
+    color: #666;
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.categories-dropdown li.has-children:hover>a::after,
+.categories-dropdown li.has-children>ul li.has-children:hover>a::after {
+    color: #FFF;
+}
+
+/* ================= SEARCH BOX ================= */
 .search-box {
     max-width: 500px;
-    /* Adjust width to fit nicely in header */
     flex: 1;
 }
 
-/* Search Form - single flex container */
 .search-form {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    background: transparent;
 }
 
-/* Input field */
 .search-form input {
     flex: 1;
     border: none;
     outline: none;
     font-size: 14px;
     background: transparent;
-    /* no background */
 }
 
-/* Submit button - aligned right */
 .search-form button {
     border: none;
     background: transparent;
@@ -175,7 +210,7 @@
     transition: transform 0.2s, color 0.2s;
 }
 
-/* HEADER RIGHT */
+/* ================= HEADER RIGHT ================= */
 .header-right {
     display: flex;
     gap: 20px;
@@ -185,64 +220,67 @@
 .icon-box {
     text-align: center;
     position: relative;
-    transition: transform 0.2s, color 0.2s;
+    width: 60px;
+    min-width: 60px;
 }
 
 .icon-box i {
-    font-size: 50px;
+    font-size: 26px;
+    line-height: 1;
+    display: block;
+    margin: 0 auto;
     transition: transform 0.2s, color 0.2s;
 }
 
 .icon-box span.label {
     display: block;
-    font-size: 12px;
-    transition: transform 0.2s, color 0.2s;
+    font-size: 11px;
+    margin-top: 3px;
+    transition: color 0.2s;
 }
 
 .icon-badge {
     position: absolute;
-    top: 15px;
-    right: 5px;
+    top: 0;
+    right: 8px;
     background: red;
     color: white;
-    font-size: 12px;
+    font-size: 11px;
     border-radius: 50%;
-    padding: 2px 6px;
+    padding: 2px 5px;
 }
 
-/* ICON HOVER: green + zoom 20% */
+/* ICON HOVER */
 .icon-box:hover i,
 .icon-box:hover span.label,
 .search-form button:hover i,
 .header-middle:hover i {
-    transform: scale(1.2);
+    transform: scale(1.1);
     color: #118997;
 }
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 .navbar {
     display: flex;
     justify-content: center;
     background: #fff;
-    padding: 5px 0;
+    padding: 8px 0;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    gap: 60px;
 }
 
 .navbar a {
     text-decoration: none;
     color: #333;
-    padding: 8px 20px;
+    padding: 8px 30px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    font-size: 14px;
     gap: 6px;
     transition: color 0.2s, border-bottom 0.2s;
 }
 
 .navbar i {
-    font-size: 23px;
-    margin: 0;
-    padding-right: 5px;
+    font-size: 24px;
+    padding: 3px;
 }
