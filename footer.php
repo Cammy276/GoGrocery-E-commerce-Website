@@ -25,7 +25,7 @@
 
         <!-- Column 1: Logo -->
         <section class="logo" aria-label="GoGrocery logo">
-          <img src="./images/logo/gogrocery_logo.png" alt="GoGrocery logo" loading="lazy" class="logo-img" />
+          <a href="index.php"><img src="<?= BASE_URL ?>/images/logo/gogrocery_logo.png" alt="GoGrocery logo" loading="lazy" class="logo-img" />
         </section>
 
         <!-- Column 2: Company -->

@@ -1,8 +1,9 @@
 <?php
+define('BASE_URL', '/GoGrocery-E-commerce-Website/'); // adjust to your root
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 
 include(__DIR__ . '/connect_db.php');
 
@@ -41,8 +42,13 @@ if ($user_id) {
 $cart_count = 0;
 $cart_total = 0.00;
 if ($user_id) {
-    $stmt = $conn->prepare("SELECT SUM(quantity) AS total_qty, SUM((unit_price - line_discount) * quantity) AS total_price 
-                            FROM cart_items WHERE user_id = ?");
+    $stmt = $conn->prepare("
+        SELECT 
+            COALESCE(SUM(quantity),0) AS total_qty, 
+            COALESCE(SUM((unit_price - line_discount) * quantity),0) AS total_price 
+        FROM cart_items 
+        WHERE user_id = ?
+    ");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $cart_data = $stmt->get_result()->fetch_assoc();
@@ -60,7 +66,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <title>Header</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="./css/styles.css">
-<link rel="stylesheet" href="./css/header_styles(2).css">
+<link rel="stylesheet" href="./css/header_styles.css">
 <script>
 function toggleCategories() {
     const dropdown = document.querySelector('.categories-dropdown');
@@ -79,7 +85,7 @@ document.addEventListener("click", function(e) {
 <!-- TOP HEADER -->
 <div class="header-top">
   <div class="header-left">
-    <a href="index.php"><img src="./images/logo/gogrocery_logo.png" alt="Company Logo"></a>
+    <a href="index.php"><img src="<?= BASE_URL ?>images/logo/gogrocery_logo.png" alt="GoGrocery Logo"></a>
   </div>
 
   <!-- Categories + Search -->
@@ -87,18 +93,22 @@ document.addEventListener("click", function(e) {
     <div class="categories-menu">
       <div class="categories-btn" onclick="toggleCategories()">
         <i class="bi bi-list"></i>Categories
-  
       </div>
       <div class="categories-dropdown">
         <ul>
           <?php
           function renderCategoryMenu($cats) {
               foreach ($cats as $cat) {
-                  $cat_link = "./products-listing/category.php?slug=" . urlencode($cat['slug']);
+                  $cat_link = BASE_URL . "products-listing/category.php?slug=" . urlencode($cat['slug']);
                   if (!empty($cat['children'])) {
-                      echo "<li class='has-children'><a href='$cat_link'>{$cat['name']}</a> <i class='bi bi-chevron-right'></i><ul>";
+                      echo "<li class='has-children'>
+                              <a href='$cat_link'>
+                                  {$cat['name']}
+                              </a>
+                              <ul>";
                       renderCategoryMenu($cat['children']);
-                      echo "</ul></li>";
+                      echo "</ul>
+                            </li>";
                   } else {
                       echo "<li><a href='$cat_link'>{$cat['name']}</a></li>";
                   }
@@ -127,13 +137,15 @@ document.addEventListener("click", function(e) {
     </div>
     <div class="icon-box">
       <a href="wishlist.php"><i class="bi bi-heart-fill"></i></a>
-      <span class="icon-badge"><?= $wishlist_count ?></span>
+      <span class="icon-badge" id="wishlist-count"><?= $wishlist_count ?></span>
       <span class="label">Wishlist</span>
     </div>
     <div class="icon-box">
       <a href="cart.php"><i class="bi bi-cart-fill"></i></a>
-      <span class="icon-badge"><?= $cart_count ?></span>
-      <span class="label">RM <?= number_format($cart_total,2) ?></span>
+      <!-- ID so JS can update it immediately -->
+      <span class="icon-badge" id="cart-count"><?= (int)$cart_count ?></span>
+      <!-- expose the cart total with an id -->
+      <span class="label" id="cart-total">RM <?= number_format((float)$cart_total, 2) ?></span>
     </div>
   </div>
 </div>
@@ -158,6 +170,6 @@ document.addEventListener("click", function(e) {
   <div class="icon-box">
     <a href="new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
   </div>
-  </div>
+</div>
 </body>
 </html>
