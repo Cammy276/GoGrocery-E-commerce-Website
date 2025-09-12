@@ -84,7 +84,7 @@ $orderStmt->close();
             <div id="profileContent">
                 <div class="content-header">
                     <h1>History</h1>
-                    <p>Review the order records that are already completed</p>
+                    <p>Review the order records that are already completed.</p>
                 </div>
                 <div class="content">
                    <h2>My History</h2>

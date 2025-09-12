@@ -139,7 +139,7 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
             <div id="profileContent">
                 <div class="content-header">
                     <h1>Cart</h1>
-                    <p>View the items you have added before proceeding to checkout</p>
+                    <p>View the items you have added before proceeding to checkout.</p>
                 </div>
                 <div class="content">
                    <h2>My Cart</h2>

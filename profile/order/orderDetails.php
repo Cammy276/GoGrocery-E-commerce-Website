@@ -168,7 +168,7 @@ if (isset($_POST['update'])) {
             <div id="profileContent">
                 <div class="content-header">
                     <h1>Orders</h1>
-                    <p>Review the orders that are still pending delivery</p>
+                    <p>Review the orders that are still pending delivery.</p>
                 </div>
 
                 <div class="content">

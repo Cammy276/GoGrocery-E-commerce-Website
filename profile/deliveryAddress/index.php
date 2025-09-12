@@ -83,7 +83,7 @@ $stmt->close();
             <div id="profileContent">
                 <div class="content-header">
                     <h1>Delivery Address</h1>
-                    <p>Set or update your default delivery address for future orders</p>
+                    <p>Set or update your default delivery address for future orders.</p>
                 </div>
                 <div class="content">
                     <div class="delivery-header">
