@@ -331,18 +331,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <option value="">-- Select Address --</option>
                                             <?php foreach ($addressList as $address): ?>
                                                 <option 
-    value="<?php echo $address['address_id']; ?>" 
-    data-state="<?php echo htmlspecialchars($address['state_territory']); ?>">
-    <?php 
-        $parts = [];
-        if (!empty($address['apartment'])) $parts[] = $address['apartment'];
-        $parts[] = $address['street'];
-        $parts[] = $address['postcode'];
-        $parts[] = $address['city'];
-        $parts[] = $address['state_territory'];
-        echo htmlspecialchars($address['label'] . " - " . implode(", ", $parts));
-    ?>
-</option>
+                                                    value="<?php echo $address['address_id']; ?>" 
+                                                    data-state="<?php echo htmlspecialchars($address['state_territory']); ?>">
+                                                    <?php 
+                                                        $parts = [];
+                                                        if (!empty($address['apartment'])) $parts[] = $address['apartment'];
+                                                        $parts[] = $address['street'];
+                                                        $parts[] = $address['postcode'];
+                                                        $parts[] = $address['city'];
+                                                        $parts[] = $address['state_territory'];
+                                                        echo htmlspecialchars($address['label'] . " - " . implode(", ", $parts));
+                                                    ?>
+                                                </option>
 
                                             <?php endforeach; ?>
                                         </select>
@@ -406,6 +406,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                                 <label>Name on Card</label>
                                                 <input type="text" class="textInput" id="name" name="name">
+                                                <div id="error_cardName" class="error"></div>
                                             </div>
 
                                             <!-- BANK TRANSFER MANUAL -->
@@ -472,10 +473,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
 
                                     <div class="summary-item">
-    <p class="summary-label">Shipping Fee</p>
-    <p class="summary-value" id="shipping-fee-display">RM 4.50</p>
-    <input type="hidden" name="shipping_fee" id="shipping_fee" value="4.50">
-</div>
+                                        <p class="summary-label">Shipping Fee</p>
+                                        <p class="summary-value" id="shipping-fee-display">RM 4.50</p>
+                                        <input type="hidden" name="shipping_fee" id="shipping_fee" value="4.50">
+                                    </div>
 
                                     
                                     <div class="summary-item summary-total">
@@ -653,55 +654,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
 
+                const cardInput = document.getElementById("card_number");
+                const expiryInput = document.getElementById("expiry");
+                const cvvInput = document.getElementById("cvv");
+                const cardNameInput = document.getElementById("name");
+                const receiptInput = document.getElementById("receipt");
+                const referenceInput = document.getElementById("reference");
+                const bankSelect = document.getElementById("bank_list");
+
                 if (methodSelect.value === "card") {
                     const card = document.getElementById("card_number").value.trim();
-                    const cardInput = document.getElementById("card_number");
                     if (!/^\d{16}$/.test(card)) {
-                    document.getElementById("error_card").textContent = "Card number must be 16 digits.";
-                    cardInput.classList.add("input-error")
-                    valid = false;
+                        document.getElementById("error_card").textContent = "Card number must be 16 digits.";
+                        cardInput.classList.add("input-error")
+                        valid = false;
                     } else {
                         document.getElementById("error_card").textContent = "";
                         cardInput.classList.remove("input-error");
                     }
 
                     const expiry = document.getElementById("expiry").value.trim();
-                    const expiryInput = document.getElementById("expiry");
                     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
-                    document.getElementById("error_expiry").textContent = "Invalid expiry format (MM/YY).";
-                    expiryInput.classList.add("input-error");
-                    valid = false;
+                        document.getElementById("error_expiry").textContent = "Invalid expiry format (MM/YY).";
+                        expiryInput.classList.add("input-error");
+                        valid = false;
                     } else {
                         document.getElementById("error_expiry").textContent = "";
                         expiryInput.classList.remove("input-error");
                     }
 
                     const cvv = document.getElementById("cvv").value.trim();
-                    const cvvInput = document.getElementById("cvv");
                     if (!/^\d{3,4}$/.test(cvv)) {
-                    document.getElementById("error_cvv").textContent = "CVV must be 3 or 4 digits.";
-                    cvvInput.classList.add("input-error");
-                    valid = false;
+                        document.getElementById("error_cvv").textContent = "CVV must be 3 or 4 digits.";
+                        cvvInput.classList.add("input-error");
+                        valid = false;
                     } else {
                         document.getElementById("error_cvv").textContent = "";
                         cvvInput.classList.remove("input-error");
                     }
+
+                    const cardName = document.getElementById("name").value.trim();
+                    if (!/^[A-Za-z\s'-]+$/.test(cardName)) {
+                        document.getElementById("error_cardName").textContent = "Name on card can only contain letters, spaces, hyphens, and apostrophes";
+                        cardNameInput.classList.add("input-error");
+                        valid = false;
+                    } else {
+                        document.getElementById("error_cardName").textContent = "";
+                        cardNameInput.classList.remove("input-error");
+                    }
+
+
                 }
 
                 if (methodSelect.value === "bank_transfer") {
                     const receipt = document.getElementById("receipt").files.length;
-                    const receiptInput = document.getElementById("receipt");
                     if (receipt === 0) {
-                    document.getElementById("error_receipt").textContent = "Please upload payment receipt.";
-                    receiptInput.classList.add("input-error");
-                    valid = false;
+                        document.getElementById("error_receipt").textContent = "Please upload payment receipt.";
+                        receiptInput.classList.add("input-error");
+                        valid = false;
                     } else {
                         document.getElementById("error_receipt").textContent = "";
                         receiptInput.classList.remove("input-error");
                     }
 
                     const reference = document.getElementById("reference").value.trim();
-                    const referenceInput = document.getElementById("reference");
                     if (!/^[A-Za-z0-9]{6,12}$/.test(reference)) {
                     document.getElementById("error_reference").textContent = "Reference number must be 6–12 letters or digits.";
                     referenceInput.classList.add("input-error");
@@ -714,7 +730,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if (methodSelect.value === "fpx") {
                     const bank = document.getElementById("bank_list").value.trim();
-                    const bankSelect = document.getElementById("bank_list");
                     if (bank === "") {
                     document.getElementById("error_bank").textContent = "Please select your bank.";
                     bankSelect.classList.add("input-error");
@@ -727,6 +742,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if (!valid) {
                     e.preventDefault();
+                    if (deliveryAddressInput.classList.contains("input-error")) {
+                        deliveryAddressInput.focus();
+                    } else if (paymentMethodInput.classList.contains("input-error")) {
+                        paymentMethodInput.focus();
+                    } else if (cardInput.classList.contains("input-error")) {
+                        cardInput.focus();
+                    } else if (expiryInput.classList.contains("input-error")) {
+                        expiryInput.focus();
+                    } else if (cvvInput.classList.contains("input-error")) {
+                        cvvInput.focus();
+                    } else if (cardNameInput.classList.contains("input-error")) {
+                        cardNameInput.focus();
+                    } else if (referenceInput.classList.contains("input-error")) {
+                        referenceInput.focus();
+                    } else if (receiptInput.classList.contains("input-error")) {
+                        receiptInput.focus();
+                    } else if (bankSelect.classList.contains("input-error")) {
+                        bankSelect.focus();
+                    }
                 }
             });
         </script>

@@ -241,6 +241,17 @@ if (isset($_POST['insert'])) {
 
                 if (!valid) {
                     e.preventDefault();
+                    if (labelInput.classList.contains("input-error")) {
+                        labelInput.focus();
+                    } else if (streetInput.classList.contains("input-error")) {
+                        streetInput.focus();
+                    } else if (postcodeInput.classList.contains("input-error")) {
+                        postcodeInput.focus();
+                    } else if (cityInput.classList.contains("input-error")) {
+                        cityInput.focus();
+                    } else if (state_territoryInput.classList.contains("input-error")) {
+                        state_territoryInput.focus();
+                    }
                 }
 
             });
