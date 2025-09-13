@@ -101,6 +101,41 @@ input[type="password"] {
 .login-link a:hover {
     text-decoration: underline;
 }
+/* Responsive for large screens (min-width: 1280px) */
+@media screen and (min-width: 1280px) {
+    .register-box {
+        padding: 60px;         
+        max-width: 500px;      
+        margin: 0 auto;
+    }
+
+    .register-box h2 {
+        font-size: 32px;       
+        margin-bottom: 25px;
+    }
+
+    p {
+        font-size: 18px;       
+        margin-bottom: 25px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    .register-btn {
+        padding: 14px;
+        font-size: 18px;
+    }
+
+    .login-link a,
+    .tnc_confirmation {
+        font-size: 16px;
+    }
+}
+
 /* Responsive for tablets (max-width: 768px) */
 @media screen and (max-width: 768px) {
     .register-box {

@@ -417,7 +417,138 @@ align-items: center;
     gap: 15px;
   }
 }
+/* Responsive for large screens (min-width: 1280px) */
+@media (min-width: 1280px) {
+  /* Experience Section */
+  .experience-section {
+    padding: 80px 60px; 
+  }
 
+  .experience-content {
+    max-width: 700px; 
+  }
+
+  .experience-content h1 {
+    font-size: 42px;
+  }
+
+  .experience-content p {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  .experience-highlights {
+    gap: 50px;
+  }
+
+  .highlight h3 {
+    font-size: 18px;
+  }
+
+  .highlight p {
+    font-size: 16px;
+  }
+
+  .experience-image img {
+    width: 600px;
+    height: auto;
+    padding: 30px;
+  }
+
+  /* About Us Section */
+  .about-us-container {
+    max-width: 1400px;
+    padding: 40px;
+    margin: 60px auto;
+  }
+
+  .about-us-container h2 {
+    font-size: 32px;
+  }
+
+  .about-container p,
+  .mission-container p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  #about-values li {
+    font-size: 16px;
+    padding: 12px;
+    border-left: 12px solid #009c99;
+  }
+
+  /* Process Section */
+  .process-section {
+    padding: 80px 60px;
+  }
+
+  .process-section h2 {
+    font-size: 32px;
+    margin-bottom: 60px;
+  }
+
+  .process-section p.subtitle {
+    font-size: 18px;
+    margin-bottom: 50px;
+  }
+
+  .process-flow {
+    gap: 50px;
+  }
+
+  .step {
+    max-width: 220px;
+  }
+
+  .step h3 {
+    font-size: 20px;
+  }
+
+  .step p {
+    font-size: 16px;
+  }
+
+  .step .icon {
+    width: 120px;
+    height: 120px;
+  }
+
+  .step .icon img {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    padding: 80px 40px;
+  }
+
+  .stats-section h2 {
+    font-size: 32px;
+    margin-bottom: 50px;
+  }
+
+  .stat-card {
+    width: 200px;
+    padding: 25px;
+  }
+
+  .stat-card h3 {
+    font-size: 28px;
+  }
+
+  .stat-card p {
+    font-size: 16px;
+  }
+
+  /* Buttons */
+  .btn-experience,
+  .shopping-btn {
+    font-size: 16px;
+    padding: 14px 25px;
+  }
+}
 /* Responsive for tablets (max-width: 768px) */
 @media (max-width: 768px) {
   h1, h2 {
