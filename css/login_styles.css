@@ -68,7 +68,8 @@ input[type="password"].error {
 }
 
 .action-buttons {
-    margin-top: 20px;
+    margin-top: 1px;
+    margin-bottom:1px;
 }
 
 .login-btn,
@@ -94,20 +95,20 @@ input[type="password"].error {
 .guest-btn {
     background-color: #0c0b0b40;
     color: #333;
+    
 }
 
 .guest-btn:hover {
     background-color: #d2cbcb;
 }
-
-.register-link {
-    margin-top: 20px;
+.register-link{
+    margin-top:1px;
 }
-
 .register-link a {
     color: #009c99;
     font-weight: bold;
     text-decoration: none;
+    text-align: center;
 }
 
 .register-link a:hover {
@@ -131,9 +132,7 @@ input[type="password"].error {
 .forgot-password-link {
     width: 106%;
     text-align: right;
-    margin-top: 10px;
-
-
+    margin-top:1px;
 }
 
 .forgot-password-link a {
