@@ -182,8 +182,8 @@ form label {
     border-width: 3px;
 }
 .input-error {
-    border-color: #dc3545;
-    box-shadow: 0 0 3px #dc3545;
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 3px #dc3545 !important;
 }
 .error {
     color: #dc3545;
@@ -246,6 +246,7 @@ form label {
 .addressDetails {
     color: grey;
 }
+
 
 
 /* Large desktops and wide screens */
