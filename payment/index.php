@@ -237,9 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <link rel="stylesheet" href="../css/header_styles.css">
         <link rel="stylesheet" href="../css/footer_styles.css">
-        <style>
 
-        </style>
     </head>
     <body>
         <header><?php include("../header.php") ?></header>
@@ -762,8 +760,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         bankSelect.focus();
                     }
                 }
+
+                //if all pass, pop up windows
+                e.preventDefault();
+                const confirmWindow = new bootstrap.Modal(document.getElementById("confirmPaymentWindow"));
+                confirmWindow.show();
+                document.getElementById("doubleConfirmButton").onclick = function() {
+                    confirmWindow.hide();
+                    form.submit(); // proceed with actual submission
+                };
             });
         </script>
+
+        <!-- pop up windwos for double confirm-->
+        <div class="modal fade" id="confirmPaymentWindow" tabindex="-1" aria-labelledby="confirmPaymentLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header" style="background-color: #049b9c; color: white;">
+                    <h5 class="modal-title" id="confirmPaymentLabel">Confirm Payment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to proceed with this payment?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding: 10px 20px;">Cancel</button>
+                    <button type="button" id="doubleConfirmButton" class="btn btn-primary saveButton">Confirm</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
         <footer><?php include("../footer.php") ?> </footer>
     </body>
