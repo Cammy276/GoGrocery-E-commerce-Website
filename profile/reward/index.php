@@ -137,6 +137,7 @@ css\reward_style.css
                     <li><a href="../wishlist/index.php"><i class="bi bi-heart"></i> Wishlist</a></li>
                     <li><a href="../reward/index.php" class="active"><i class="bi bi-award-fill"></i> Rewards</a></li>
                     <li><a href="../../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
+                    <li><a href="../../auth/delete_account.php"><i class="bi bi-trash"></i> Delete Account</a></li>
                 </ul>
             </div>
             
