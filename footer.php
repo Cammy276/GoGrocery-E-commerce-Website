@@ -52,7 +52,7 @@
           <p><a href="<?= BASE_URL ?>policies/terms_conditions">Terms & Conditions</a></p>
           <p><a href="<?= BASE_URL ?>policies/privacy">Privacy Notice</a></p>
           <p><a href="<?= BASE_URL ?>policies/return_refund">Return & Refund Policy</a></p>
-          <p><a href="<?= BASE_URL ?>policies/shipping">Shipping Policy</a></p>
+          <p><a href="<?= BASE_URL ?>policies/shipping_policies">Shipping Policy</a></p>
         </section>
 
         <!-- Column 5: Help Center -->
