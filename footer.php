@@ -31,36 +31,36 @@
         <!-- Column 2: Company -->
         <section aria-labelledby="footer-company">
           <h2 id="footer-company">Company</h2>
-          <p><a href="company/about">About Us</a></p>
+          <p><a href="<?= BASE_URL ?>company/about">About Us</a></p>
         </section>
 
         <!-- Column 3: Products -->
         <section aria-labelledby="footer-products">
           <h2 id="footer-products">Products</h2>
-          <p><a href="products-listing/fresh_produces">Fresh Produces</a></p>
-          <p><a href="products-listing/chilled_frozen">Chilled & Frozen</a></p>
-          <p><a href="products-listing/essentials_commodities">Food Essentials & Commodities</a></p>
-          <p><a href="products-listing/snacks">Snacks</a></p>
-          <p><a href="products-listing/beverages">Beverages</a></p>
-          <p><a href="products-listing/household">Household Products</a></p>
-          <p><a href="products-listing/beauty_health">Beauty & Health</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/fresh_produces">Fresh Produces</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/chilled_frozen">Chilled & Frozen</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/essentials_commodities">Food Essentials & Commodities</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/snacks">Snacks</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/beverages">Beverages</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/household">Household Products</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/beauty_health">Beauty & Health</a></p>
         </section>
 
         <!-- Column 4: Policies -->
         <section aria-labelledby="footer-policies">
           <h2 id="footer-policies">Policies</h2>
-          <p><a href="policies/terms_conditions">Terms & Conditions</a></p>
-          <p><a href="policies/privacy">Privacy Notice</a></p>
-          <p><a href="policies/return_refund">Return & Refund Policy</a></p>
-          <p><a href="policies/shipping">Shipping Policy</a></p>
+          <p><a href="<?= BASE_URL ?>policies/terms_conditions">Terms & Conditions</a></p>
+          <p><a href="<?= BASE_URL ?>policies/privacy">Privacy Notice</a></p>
+          <p><a href="<?= BASE_URL ?>policies/return_refund">Return & Refund Policy</a></p>
+          <p><a href="<?= BASE_URL ?>policies/shipping">Shipping Policy</a></p>
         </section>
 
         <!-- Column 5: Help Center -->
         <section aria-labelledby="footer-help">
           <h2 id="footer-help">Help Center</h2>
-          <p><a href="help/contact">Contact Us</a></p>
-          <p><a href="help/faq">FAQs</a></p>
-          <p><a href="help/live_chat">Live Chat</a></p>
+          <p><a href="<?= BASE_URL ?>help/contact">Contact Us</a></p>
+          <p><a href="<?= BASE_URL ?>help/faq">FAQs</a></p>
+          <p><a href="<?= BASE_URL ?>help/live_chat">Live Chat</a></p>
         </section>
 
         <!-- Column 6: Contact Details + Social Icons -->
@@ -125,10 +125,10 @@
       <div class="footer-bottom">
         <p>Copyright &copy; 2025 GoGrocery. All rights reserved.</p>
         <p>
-          <a href="policies/terms_conditions">Terms & Conditions</a>  | 
-          <a href="policies/privacy">Privacy Policy</a> | 
-          <a href="policies/return_refund">Return & Refund Policy</a> | 
-          <a href="policies/shipping">Shipping Policy</a>
+          <a href="<?= BASE_URL ?>policies/terms_conditions">Terms & Conditions</a>  | 
+          <a href="<?= BASE_URL ?>policies/privacy_notice">Privacy Policy</a> | 
+          <a href="<?= BASE_URL ?>policies/return_refund">Return & Refund Policy</a> | 
+          <a href="<?= BASE_URL ?>policies/shipping_policies">Shipping Policy</a>
         </p>      
     </footer>
   </body>

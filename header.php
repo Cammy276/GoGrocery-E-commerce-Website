@@ -153,22 +153,22 @@ document.addEventListener("click", function(e) {
 <!-- NAVIGATION -->
 <div class="navbar">
   <div class="icon-box">
-    <a href="index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-house-fill"></i><span class="label">Home</span></a>
+    <a href="<?= BASE_URL ?>index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-house-fill"></i><span class="label">Home</span></a>
   </div>
   <div class="icon-box">
-    <a href="about.php" class="<?= ($current_page == 'about.php' ? 'active' : '') ?>"><i class="bi bi-file-earmark-fill"></i><span class="label">About</span></a>
+    <a href="<?= BASE_URL ?>company/about.php" class="<?= ($current_page == 'about.php' ? 'active' : '') ?>"><i class="bi bi-file-earmark-fill"></i><span class="label">About</span></a>
   </div>
   <div class="icon-box">
-    <a href="help.php" class="<?= ($current_page == 'help.php' ? 'active' : '') ?>"><i class="bi bi-exclamation-circle-fill"></i><span class="label">Help Center</span></a>
+    <a href="<?= BASE_URL ?>help/contact.php" class="<?= ($current_page == 'help.php' ? 'active' : '') ?>"><i class="bi bi-exclamation-circle-fill"></i><span class="label">Help Center</span></a>
   </div>
   <div class="icon-box">
-    <a href="best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span class="label">Best Seller</span></a>
+    <a href="<?= BASE_URL ?>best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span class="label">Best Seller</span></a>
   </div>
   <div class="icon-box">
-    <a href="special-deal.php" class="<?= ($current_page == 'special-deal.php' ? 'active' : '') ?>"><i class="bi bi-tag-fill"></i><span class="label">Special Deal</span></a>
+    <a href="<?= BASE_URL ?>special-deal.php" class="<?= ($current_page == 'special-deal.php' ? 'active' : '') ?>"><i class="bi bi-tag-fill"></i><span class="label">Special Deal</span></a>
   </div>
   <div class="icon-box">
-    <a href="new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
+    <a href="<?= BASE_URL ?>new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
   </div>
 </div>
 </body>
