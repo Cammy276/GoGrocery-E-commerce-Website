@@ -71,6 +71,17 @@ include("header.php");
     <?php 
         include("footer.php");
     ?>
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" id="backToTopBtn" class="btn btn-primary">
+        ↑
+    </button>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    </script>
 </body>
-
 </html>

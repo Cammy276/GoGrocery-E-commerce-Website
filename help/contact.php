@@ -8,9 +8,13 @@ include(__DIR__ . '/../connect_db.php'); // $conn is available
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact Us</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <title>Contact Us</title>
+  <header>
+    <?php include '../header.php'; ?>
+  </header>
+  <link rel="stylesheet" href="../css/header_styles.css">
+  <link rel="stylesheet" href="../css/footer_styles.css">
   <!-- Bootstrap CSS (for grid and card styling only) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">

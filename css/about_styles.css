@@ -4,14 +4,16 @@ body {
   padding: 0;
   background: #ffffff;
 }
+
 /* Experience Section */
 .experience-section {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  background:  #009c99;
+  background: #009c99;
   padding: 60px 40px;
   flex-wrap: wrap;
+  color: #fff;
 }
 
 .experience-content {
@@ -23,13 +25,13 @@ body {
 .experience-content h1 {
   font-size: 36px;
   font-weight: bold;
-  color: #111;
+  color: #fff;
   margin-bottom: 20px;
 }
 
 .experience-content p {
   font-size: 16px;
-  color: #171717;
+  color: #fff;
   margin-bottom: 30px;
   line-height: 1.6;
 }
@@ -56,27 +58,31 @@ body {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
-  color: #000;
+  color: #fff;
 }
 
 .highlight p {
   margin: 4px 0 0;
   font-size: 14px;
-  color: #171717;
+  color: #fff;
 }
+
 .experience-image img {
-  width:500px;
-  height:300px;
+  width: 500px;
+  height: 300px;
   padding: 20px;
   opacity: 0;
   transform: translateX(100px);
   animation: slideInRight 1s ease forwards;
-  animation-delay: 0.3s; /* Delay so it comes after text */
+  animation-delay: 0.3s;
+  /* Delay so it comes after text */
 }
+
 .experience-content,
 .experience-image {
   opacity: 0;
-  transform: translateX(0); /* reset so we can reuse */
+  transform: translateX(0);
+  /* reset so we can reuse */
 }
 
 /* When in view */
@@ -94,6 +100,7 @@ body {
     opacity: 0;
     transform: translateX(-100px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -105,6 +112,7 @@ body {
     opacity: 0;
     transform: translateX(100px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -122,9 +130,10 @@ body {
   font-weight: bold;
   font-size: 15px;
 }
-.btn-experience:hover{
-    background: #dedddd;
-    transition: 0.3s;
+
+.btn-experience:hover {
+  background: #dedddd;
+  transition: 0.3s;
 }
 
 .about-us-container {
@@ -133,7 +142,7 @@ body {
   padding: 20px;
   background: #fff;
   border-radius: 10px;
-  
+
 }
 
 .about-us-container h2 {
@@ -143,11 +152,13 @@ body {
   color: #000;
   text-align: center;
 }
+
 .about-container,
 .mission-container,
 .values-container {
-   border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
 }
+
 .about-container p,
 .mission-container p {
   font-size: 15px;
@@ -177,45 +188,46 @@ body {
   border-left: 10px solid #009c99;
   background: #fff;
   border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  transition: background 0.3s, padding 0.3s, transform 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s, padding 0.3s, transform 0.3s;
 }
 
 .process-section {
-align-items: center;
-  background:  #009c99;
+  align-items: center;
+  background: #009c99;
   padding: 60px 40px;
-    
 }
 
 .process-section h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 50px;
-    text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  text-align: center;
+  color: #fff;
 }
 
 .process-section p.subtitle {
-    font-size: 16px;
-    color: #777;
-    margin-bottom: 40px;
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 40px;
 }
 
 .process-flow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .step {
-    max-width: 200px;
-    text-align: center;
-    position: relative;
-    opacity: 0;
-    transform: translateX(0);
+  max-width: 200px;
+  text-align: center;
+  position: relative;
+  opacity: 0;
+  transform: translateX(0);
 }
+
 .step.slide-left.animate {
   animation: slideInLeft 0.9s ease forwards;
 }
@@ -229,6 +241,7 @@ align-items: center;
     opacity: 0;
     transform: translateX(-80px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -240,6 +253,7 @@ align-items: center;
     opacity: 0;
     transform: translateX(80px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -247,52 +261,57 @@ align-items: center;
 }
 
 .step .icon {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #ffe9b3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 15px;
-    border: 2px dashed #3b82f6;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ffe9b3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px;
+  border: 2px dashed #3b82f6;
 }
+
 .step .icon:hover {
-    background: #ffd166;              
-    transform: scale(1.1) rotate(25deg); 
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    border-color: #2563eb;            
+  background: #ffd166;
+  transform: scale(1.1) rotate(25deg);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  border-color: #2563eb;
 }
+
 .step .icon img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .step h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff;
 }
 
 .step p {
-    font-size: 14px;
-    color: #000000;
-    line-height: 1.5;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.5;
+  color: #fff;
 }
 
 .step::after {
-    content: "→";
-    position: absolute;
-    right: -35px;
-    top: 40%;
-    font-size: 22px;
-    color: #ffffff;
+  content: "→";
+  position: absolute;
+  right: -35px;
+  top: 40%;
+  font-size: 22px;
+  color: #ffffff;
 }
 
 .step:last-child::after {
-    content: "";
+  content: "";
 }
+
 .stats-section {
-  background: #ffffff; 
+  background: #ffffff;
   color: #000000;
   text-align: center;
   padding: 60px 20px;
@@ -320,19 +339,22 @@ align-items: center;
   width: 180px;
   transition: transform 0.5s, background 0.5s;
 }
+
 .stat-card {
   opacity: 0;
-  transform: translateY(-60px); 
+  transform: translateY(-60px);
 }
 
 .stat-card.animate {
   animation: slideInDown 0.8s ease forwards;
 }
+
 @keyframes slideInDown {
   from {
     opacity: 0;
     transform: translateY(-60px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -417,6 +439,7 @@ align-items: center;
     gap: 15px;
   }
 }
+
 /* Responsive for mobile (max-width: 480px) */
 @media (max-width: 480px) {
   body {

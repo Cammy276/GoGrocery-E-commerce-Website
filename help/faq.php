@@ -14,7 +14,6 @@
 </head>
 <body>
   <h1>Frequently Asked Questions</h1>
-
   <div class="faq-container">
     <div class="faq-item">
     <div class="faq-question">

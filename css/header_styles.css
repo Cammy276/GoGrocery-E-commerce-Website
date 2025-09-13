@@ -53,7 +53,7 @@
     padding: 0;
 }
 
-/* ================= DROPDOWN ================= */
+/* ================= CATEGORIES DROPDOWN ================= */
 .categories-dropdown {
     display: none;
     position: absolute;
@@ -64,15 +64,11 @@
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     min-width: 200px;
-    z-index: 100;
-    transform: scale(0.95);
-    transform-origin: top left;
-    transition: transform 0.2s ease;
+    z-index: 1000;
 }
 
 .categories-menu:hover .categories-dropdown {
     display: block;
-    transform: scale(1.2);
 }
 
 /* ---------------- Dropdown Items ---------------- */
@@ -88,10 +84,8 @@
     color: #000;
     font-size: 13px;
     line-height: 1.3;
-    transition: color 0.2s, background-color 0.2s;
 }
 
-/* Links inside dropdown, including submenus */
 .categories-dropdown li a {
     display: flex;
     align-items: center;
@@ -101,13 +95,9 @@
     padding: 5px 9px;
     width: 100%;
     box-sizing: border-box;
-    white-space: normal;
-    overflow-wrap: break-word;
-    transition: transform 0.2s ease;
-    /* smooth slide */
 }
 
-/* Hover effect: background + text color + slide */
+/* Hover effects */
 .categories-dropdown li:hover {
     background-color: #FB585D;
     color: #FFF !important;
@@ -115,14 +105,9 @@
 
 .categories-dropdown li:hover>a {
     transform: translateX(5px);
-    /* slide slightly right */
 }
 
-.categories-dropdown li:hover>a::after {
-    color: #FFF;
-}
-
-/* ================= NESTED SUBMENUS ================= */
+/* Nested submenus */
 .categories-dropdown li.has-children>ul {
     display: none;
     position: absolute;
@@ -133,51 +118,17 @@
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     min-width: 180px;
-    transform-origin: top left;
-    transition: transform 0.2s ease;
 }
 
 .categories-dropdown li.has-children:hover>ul {
     display: block;
-    transform: scale(1);
 }
 
-/* Nested submenu items */
-.categories-dropdown li.has-children>ul li a {
-    font-size: 12px;
-    padding: 4px 8px;
-}
-
-.categories-dropdown li.has-children>ul li:hover {
-    background-color: #FB585D;
-    color: #FFF !important;
-}
-
-/* RIGHT ARROWS */
 .categories-dropdown li.has-children>a::after {
     content: "›";
     font-size: 12px;
     color: #666;
     margin-left: 6px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.categories-dropdown li.has-children>ul li.has-children>a::after {
-    content: "›";
-    font-size: 11px;
-    color: #666;
-    margin-left: 5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.categories-dropdown li.has-children:hover>a::after,
-.categories-dropdown li.has-children>ul li.has-children:hover>a::after {
-    color: #FFF;
 }
 
 /* ================= SEARCH BOX ================= */
@@ -207,7 +158,6 @@
     cursor: pointer;
     font-size: 15px;
     color: black;
-    transition: transform 0.2s, color 0.2s;
 }
 
 /* ================= HEADER RIGHT ================= */
@@ -215,6 +165,9 @@
     display: flex;
     gap: 20px;
     align-items: center;
+    overflow: visible;
+    /* ensure dropdown shows */
+    z-index: 1000;
 }
 
 .icon-box {
@@ -225,18 +178,15 @@
 }
 
 .icon-box i {
-    font-size: 26px;
-    line-height: 1;
+    font-size: 20px;
     display: block;
     margin: 0 auto;
-    transition: transform 0.2s, color 0.2s;
 }
 
 .icon-box span.label {
     display: block;
     font-size: 11px;
     margin-top: 3px;
-    transition: color 0.2s;
 }
 
 .icon-badge {
@@ -250,15 +200,6 @@
     padding: 2px 5px;
 }
 
-/* ICON HOVER */
-.icon-box:hover i,
-.icon-box:hover span.label,
-.search-form button:hover i,
-.header-middle:hover i {
-    transform: scale(1.1);
-    color: #118997;
-}
-
 /* ================= NAVBAR ================= */
 .navbar {
     display: flex;
@@ -268,6 +209,8 @@
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     gap: 60px;
+    overflow: visible;
+    /* important for dropdown */
 }
 
 .navbar a {
@@ -277,10 +220,70 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: color 0.2s, border-bottom 0.2s;
 }
 
-.navbar i {
-    font-size: 24px;
-    padding: 3px;
+/* ================= HELP CENTER DROPDOWN ================= */
+.icon-box.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-box.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-box.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    min-width: 150px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    /* Ensure it appears above page content */
+}
+
+.icon-box.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown-toggle .dropdown-arrow {
+    margin-left: 5px;
+    font-size: 10px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    min-width: 160px;
+    z-index: 9999;
+    padding: 5px 0;
+}
+
+.dropdown-menu.show {
+    display: block !important;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu a.active {
+    background-color: #118997;
+    color: #fff;
 }

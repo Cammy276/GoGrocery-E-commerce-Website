@@ -13,7 +13,6 @@
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: #118997;
-    /* teal */
     border-radius: 30%;
     width: 40px;
     height: 40px;
@@ -33,4 +32,43 @@
 
 .carousel-indicators .active {
     opacity: 1;
+}
+
+#backToTopBtn {
+    position: fixed;
+    top: 50%;
+    /* vertically centered */
+    right: 20px;
+    /* stick to right side */
+    transform: translateY(-50%);
+    z-index: 1000;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 30%;
+    /* circular button */
+    background-color: black;
+    /* teal background */
+    color: white;
+    /* white icon */
+    font-size: 22px;
+    border: 2px solid white;
+    /* border for contrast */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    /* floating effect */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#backToTopBtn:hover {
+    background-color: #118997;
+    /* Bootstrap blue on hover */
+    transform: translateY(-50%) scale(1.1);
+    /* slight zoom on hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }

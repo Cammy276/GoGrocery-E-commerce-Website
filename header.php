@@ -102,13 +102,10 @@ document.addEventListener("click", function(e) {
                   $cat_link = BASE_URL . "products-listing/category.php?slug=" . urlencode($cat['slug']);
                   if (!empty($cat['children'])) {
                       echo "<li class='has-children'>
-                              <a href='$cat_link'>
-                                  {$cat['name']}
-                              </a>
+                              <a href='$cat_link'>{$cat['name']}</a>
                               <ul>";
                       renderCategoryMenu($cat['children']);
-                      echo "</ul>
-                            </li>";
+                      echo "</ul></li>";
                   } else {
                       echo "<li><a href='$cat_link'>{$cat['name']}</a></li>";
                   }
@@ -133,11 +130,9 @@ document.addEventListener("click", function(e) {
   <div class="header-right">
     <div class="icon-box">
         <?php if (isset($_SESSION['user_id'])): ?>
-            <!-- User is logged in -->
             <a href="<?=BASE_URL?>profile/settings"><i class="bi bi-person-fill"></i></a>
             <span class="label">Profile</span>
         <?php else: ?>
-            <!-- User not logged in -->
             <a href="<?=BASE_URL?>auth/login.php"><i class="bi bi-person-fill"></i></a>
             <span class="label">Login</span>
         <?php endif; ?>
@@ -149,9 +144,7 @@ document.addEventListener("click", function(e) {
     </div>
     <div class="icon-box">
       <a href="cart.php"><i class="bi bi-cart-fill"></i></a>
-      <!-- ID so JS can update it immediately -->
       <span class="icon-badge" id="cart-count"><?= (int)$cart_count ?></span>
-      <!-- expose the cart total with an id -->
       <span class="label" id="cart-total">RM <?= number_format((float)$cart_total, 2) ?></span>
     </div>
   </div>
@@ -165,8 +158,19 @@ document.addEventListener("click", function(e) {
   <div class="icon-box">
     <a href="<?= BASE_URL ?>company/about.php" class="<?= ($current_page == 'about.php' ? 'active' : '') ?>"><i class="bi bi-file-earmark-fill"></i><span class="label">About</span></a>
   </div>
-  <div class="icon-box">
-    <a href="<?= BASE_URL ?>help/contact.php" class="<?= ($current_page == 'help.php' ? 'active' : '') ?>"><i class="bi bi-exclamation-circle-fill"></i><span class="label">Help Center</span></a>
+  <?php
+  $help_pages = ['faq.php', 'contact.php'];
+  ?>
+  <div class="icon-box dropdown">
+    <a href="javascript:void(0)" class="dropdown-toggle">
+      <i class="bi bi-exclamation-circle-fill"></i>
+      <span class="label">Help Center</span>
+      <i class="bi bi-caret-down-fill dropdown-arrow"></i>
+    </a>
+    <div class="dropdown-menu">
+      <a href="<?= BASE_URL ?>help/faq.php" class="<?= ($current_page == 'faq.php' ? 'active' : '') ?>">FAQs</a>
+      <a href="<?= BASE_URL ?>help/contact.php" class="<?= ($current_page == 'contact.php' ? 'active' : '') ?>">Contact Form</a>
+    </div>
   </div>
   <div class="icon-box">
     <a href="<?= BASE_URL ?>best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span class="label">Best Seller</span></a>
@@ -178,5 +182,24 @@ document.addEventListener("click", function(e) {
     <a href="<?= BASE_URL ?>new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
   </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".icon-box.dropdown").forEach(dropdown => {
+    const toggle = dropdown.querySelector(".dropdown-toggle");
+    const menu = dropdown.querySelector(".dropdown-menu");
+
+    toggle.addEventListener("click", function(e) {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+    });
+
+    // Close dropdown if clicking outside
+    document.addEventListener("click", function(e) {
+      if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
+    });
+  });
+});
+</script>
 </body>
 </html>
