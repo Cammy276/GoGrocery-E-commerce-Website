@@ -27,6 +27,26 @@ function getAllCategoryIds($conn, $parent_id) {
 }
 $all_category_ids = getAllCategoryIds($conn, $category['category_id']);
 
+$order_sql = "";
+if(!empty($_GET['sort'])) {
+    switch ($_GET['sort']) {
+        case 'price_asc':
+            $order_sql = " ORDER BY p.unit_price ASC ";
+            break;
+        case 'price_desc':
+            $order_sql = " ORDER BY p.unit_price DESC ";
+            break;
+        case 'newest':
+            $order_sql = " ORDER BY p.created_at DESC";
+            break;
+        case 'popular':
+            $order_sql = " ORDER BY p.product_id DESC ";
+            break;   
+    }
+}
+
+$sortApplied = !empty($_GET['sort']);
+
 // --- Fetch products ---
 $products = [];
 if (!empty($all_category_ids)) {
@@ -36,7 +56,7 @@ if (!empty($all_category_ids)) {
     $sql = "SELECT p.*, pi.product_image_url, pi.alt_text 
             FROM products p 
             LEFT JOIN product_images pi ON p.product_id = pi.product_id 
-            WHERE p.category_id IN ($placeholders)";
+            WHERE p.category_id IN ($placeholders) $order_sql";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param($types, ...$all_category_ids);
     $stmt->execute();
@@ -77,16 +97,17 @@ if ($category['parent_id'] === null) {
 <head>
 <meta charset="UTF-8">
 <title><?= htmlspecialchars($category['name']) ?></title>
-<header>
-    <?php include '../header.php'; ?>
-</header>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../css/styles.css">
 <link rel="stylesheet" href="../css/header_styles.css">
 <link rel="stylesheet" href="../css/footer_styles.css">
 <link rel="stylesheet" href="../css/category_styles.css">
+<link rel="stylesheet" href="../css/filter_sort.css">
 </head>
 <body>
+<header>
+    <?php include '../header.php'; ?>
+</header>
 <h1><?= htmlspecialchars($category['name']) ?></h1>
 
 <?php if (!empty($subcategories)): ?>
@@ -98,6 +119,21 @@ if ($category['parent_id'] === null) {
     <?php endforeach; ?>
 </div>
 <?php endif; ?>
+
+<div class="category-header">
+    <h1><?= htmlspecialchars($category['name']) ?></h1>
+    <div class="filter-sort">
+        <button id="filterSortBtn" class="<?= $sortApplied ? 'active' : '' ?>">
+            <i class="bi <?= $sortApplied ? 'bi-funnel-fill' : 'bi-funnel' ?>"></i> Sort
+        </button>
+        <div class="filter-sort-dropdown" id="filterSortDropdown">
+            <a href="?slug=<?= urlencode($slug) ?>&sort=price_asc">Price: Low to High</a>
+            <a href="?slug=<?= urlencode($slug) ?>&sort=price_desc">Price: High to Low</a>
+            <a href="?slug=<?= urlencode($slug) ?>&sort=newest">Newest</a>
+            <a href="?slug=<?= urlencode($slug) ?>&sort=popular">Most Popular</a>
+        </div>
+    </div>
+</div>
 
 <div class="products-grid">
 <?php if (!empty($products)): ?>
@@ -131,6 +167,14 @@ if ($category['parent_id'] === null) {
 </div>
 
 <script>
+document.getElementById("filterSortBtn").addEventListener("click", () => {
+    document.getElementById("filterSortDropdown").classList.toggle("show");
+});
+window.addEventListener("click", (e) => {
+    if (!e.target.closest(".filter-sort")) {
+        document.getElementById("filterSortDropdown").classList.remove("show");
+    }
+});
 document.querySelectorAll('.wishlist-icon').forEach(btn => {
     btn.addEventListener('click', function(e){
         e.preventDefault();
