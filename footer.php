@@ -50,7 +50,7 @@
         <section aria-labelledby="footer-policies">
           <h2 id="footer-policies">Policies</h2>
           <p><a href="<?= BASE_URL ?>policies/terms_conditions">Terms & Conditions</a></p>
-          <p><a href="<?= BASE_URL ?>policies/privacy">Privacy Notice</a></p>
+          <p><a href="<?= BASE_URL ?>policies/privacy_notice">Privacy Notice</a></p>
           <p><a href="<?= BASE_URL ?>policies/return_refund">Return & Refund Policy</a></p>
           <p><a href="<?= BASE_URL ?>policies/shipping_policies">Shipping Policy</a></p>
         </section>
