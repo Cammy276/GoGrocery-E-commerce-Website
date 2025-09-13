@@ -1,5 +1,5 @@
 <?php
-define('BASE_URL', '/GoGrocery-E-commerce-Website/'); // adjust to your root
+define('BASE_URL', '/GoGrocery-E-commerce-Website/'); 
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
