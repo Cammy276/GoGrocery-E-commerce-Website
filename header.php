@@ -132,8 +132,15 @@ document.addEventListener("click", function(e) {
   <!-- Right Icons -->
   <div class="header-right">
     <div class="icon-box">
-      <a href="login.php"><i class="bi bi-person-fill"></i></a>
-      <span class="label">Login</span>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <!-- User is logged in -->
+            <a href="<?=BASE_URL?>profile/settings"><i class="bi bi-person-fill"></i></a>
+            <span class="label">Profile</span>
+        <?php else: ?>
+            <!-- User not logged in -->
+            <a href="<?=BASE_URL?>auth/login.php"><i class="bi bi-person-fill"></i></a>
+            <span class="label">Login</span>
+        <?php endif; ?>
     </div>
     <div class="icon-box">
       <a href="wishlist.php"><i class="bi bi-heart-fill"></i></a>

@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?= htmlspecialchars($message) ?>
             </p>
         <?php endif; ?>
-        <form method="POST">
+        <form id= "login-form" method="POST">
             <div class="input-container">
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" placeholder="Enter your email">
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="password">Password</label>
                 <div style="position: relative;">
                     <input type="password" id="password" name="password" placeholder="Enter your password">
-                    <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:1px; top:45%; transform:translateY(-50%);"></i>
+                    <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:0; top:5%; transform:translateY(-50%);"></i>
                 </div>
                 <small id="password-error" class="error-message"></small>
                 
@@ -112,7 +112,7 @@ passwordInput.addEventListener("input", () => {
     }
 });
 
-document.querySelector("form").addEventListener("submit", function(event) {
+document.getElementById("login-form").addEventListener("submit", function(event) {
     let isValid = true;
 
     // Reset error messages
