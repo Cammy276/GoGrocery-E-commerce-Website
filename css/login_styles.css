@@ -148,28 +148,6 @@ input[type="password"].error {
 
 
 /*Responsive styles*/
-
-
-/* Responsive for tablets (max-width: 768px) */
-@media screen and (max-width: 768px) {
-    .login-box {
-        padding: 20px;
-        width: 100%;
-        margin: 0 10px;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-        padding: 10px;
-    }
-
-    .login-btn,
-    .guest-btn {
-        padding: 10px;
-    }
-
-}
-
 /* Responsive for tablets (max-width: 480px) */
 @media screen and (max-width: 480px) {
     .login-box {

@@ -1,0 +1,78 @@
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.filter-sort {
+    position: relative;
+    display: inline-block;
+}
+
+.filter-sort button {
+    background: #28a7b5;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.filter-sort button:hover{
+    background: #0d6f79;
+}
+
+.filter-sort button i {
+    font-size: 1.3rem;
+    margin: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.filter-sort button.active {
+    background: #0b5c65;
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+.filter-sort button.active:hover {
+    background: #096671;
+    transform: scale(1.08);
+}
+
+.filter-sort-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    min-width: 180px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.filter-sort-dropdown a {
+    display: block;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.filter-sort-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+.filter-sort-dropdown.show {
+    display: block;
+}
