@@ -198,34 +198,6 @@ p {
 }
 
 /* Responsive Styles */
-/* Responsive for large screens (min-width: 1280px) */
-@media screen and (min-width: 1280px) {
-  .container {
-    max-width: 500px;     
-    padding: 40px 30px;   
-    border-radius: 20px;
-  }
-
-  h1 {
-    font-size: 28px;      
-  }
-
-  p {
-    font-size: 18px;      
-    margin-bottom: 30px;
-  }
-
-  .button-group {
-    gap: 16px;          
-  }
-
-  .button-group button {
-    font-size: 18px;      
-    padding: 14px 0;
-    min-width: 140px;
-    border-radius: 10px;
-  }
-}
 /* Responsive for tablets (max-width: 768px) */
 @media screen and (max-width: 768px) {
   .container {

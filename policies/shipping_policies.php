@@ -15,7 +15,7 @@
 <body>
   <section class="shipping-section">
   <div class="shipping-container">
-    <h1>Shipping Policies</h1>
+    <h1>Shipping Policy</h1>
     <p class="subtitle">Welcome to GoGrocery! Please read the following Shipping Policies carefully before using our services.</p>
 <div class="policy-section">
   <div class="tnc-card">

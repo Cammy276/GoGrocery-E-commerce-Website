@@ -53,37 +53,6 @@ body {
   line-height: 1.6;
   text-align: justify;
 }
-/* Responsive for desktop (min-width: 1280px) */
-@media screen and (min-width: 1280px) {
-  .privacy-container {
-    max-width: 1280px; 
-    padding: 30px;     
-    margin: 50px auto; 
-  }
-
-  .privacy-container h1 {
-    font-size: 40px;   
-  }
-
-  .privacy-container .subtitle {
-    font-size: 18px;   
-    margin-bottom: 60px;
-  }
-
-  .tnc-card {
-    padding: 25px;     
-  }
-
-  .tnc-card h3 {
-    font-size: 22px;   
-  }
-
-  .tnc-card p,
-  .tnc-card ul li {
-    font-size: 16px;  
-    line-height: 1.8;  
-  }
-}
 /* Responsive for tablets (max-width: 768px) */
 @media screen and (max-width: 768px) {
   .privacy-container {

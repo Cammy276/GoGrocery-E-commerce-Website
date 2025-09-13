@@ -56,29 +56,7 @@ h1 {
 .faq-item.active .faq-answer {
     display: block;
 }
-/* Responsive for desktop (min-width: 1280px) */
-@media screen and (min-width: 1280px) {
-  h1 {
-    font-size: 36px;
-    margin-bottom: 30px;
-  }
 
-  .faq-container {
-    max-width: 1400px;
-    padding: 30px;
-    margin: 50px auto;
-  }
-
-  .faq-question {
-    font-size: 20px;
-    padding: 20px 25px;
-  }
-
-  .faq-answer {
-    font-size: 16px;
-    padding: 0 25px 20px 25px;
-  }
-}
 /* Responsive for tablets (max-width: 768px) */
 @media screen and (max-width: 768px) {
   h1 {
