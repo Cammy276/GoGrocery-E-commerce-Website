@@ -224,26 +224,36 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
         </div>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                // Grab all quantity inputs
                 const quantityInputs = document.querySelectorAll(".cart-quantity-input");
-
 
                 quantityInputs.forEach(input => {
                     input.addEventListener("change", function() {
-                        // Submit the form immediately when quantity changes
-                        const form = document.getElementById("cartForm");
+                        const cartId = this.dataset.cartId;
+                        const qty = this.value;
 
-                        // Create a hidden input so PHP knows this is a quantity update
-                        let hidden = document.createElement("input");
-                        hidden.type = "hidden";
-                        hidden.name = "updateQuantity";
-                        hidden.value = "1";
-                        form.appendChild(hidden);
-
-                        form.submit();
+                        fetch("updateQuantity.php", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            body: `cart_id=${encodeURIComponent(cartId)}&quantity=${encodeURIComponent(qty)}`
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log(`Cart item ${cartId} updated successfully`);
+                            } else {
+                                alert("Failed to update cart: " + (data.error || "Unknown error"));
+                            }
+                        })
+                        .catch(err => {
+                            console.error("AJAX error:", err);
+                            alert("Failed to update cart due to network error");
+                        });
                     });
                 });
             });
+
         </script>
 
         <footer><?php include("../../footer.php") ?> </footer>
