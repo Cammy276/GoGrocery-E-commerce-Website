@@ -113,6 +113,7 @@ include __DIR__ . '../../../livechat/chat_UI.php';
         <link rel="stylesheet" href="../../css/styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
+        <link rel="stylesheet" href="../../css/livechat_styles.css">
 
 
     </head>

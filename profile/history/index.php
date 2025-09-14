@@ -42,7 +42,7 @@ $orderStmt->close();
 ?>
 
 <?php
-    include __DIR__ . '../../livechat/chat_UI.php';
+    include __DIR__ . '../../../livechat/chat_UI.php';
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +61,7 @@ $orderStmt->close();
         <link rel="stylesheet" href="../../css/orders_history_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
+        <link rel="stylesheet" href="../../css/livechat_styles.css">
     </head>
     <body>
         <header><?php include("../../header.php") ?></header>

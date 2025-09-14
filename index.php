@@ -15,6 +15,7 @@ include("header.php");
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/footer_styles.css">
     <link rel="stylesheet" href="./css/home_styles.css">
+    <link rel="stylesheet" href="./css/livechat_styles.css">
 </head>
 
 <body>
@@ -70,8 +71,11 @@ include("header.php");
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <?php 
-        include("footer.php");
+
+    <footer><?php include("footer.php") ?> </footer>
+
+    <?php
+        include __DIR__ . '/livechat/chat_UI.php';
     ?>
     <!-- Back to Top Button -->
     <button onclick="scrollToTop()" id="backToTopBtn" class="btn btn-primary">

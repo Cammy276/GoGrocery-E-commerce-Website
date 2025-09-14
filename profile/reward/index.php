@@ -94,6 +94,9 @@ if (isset($_POST['insert'])) {
 }
 
 ?>
+<?php
+include __DIR__ . '../../../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -112,6 +115,7 @@ if (isset($_POST['insert'])) {
         <link rel="stylesheet" href="../../css/reward_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
+        <link rel="stylesheet" href="../../css/livechat_styles.css">
     </head>
     <body>
         <header><?php include("../../header.php") ?></header>

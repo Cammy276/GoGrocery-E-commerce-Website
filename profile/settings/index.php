@@ -30,8 +30,9 @@ if (isset($_SESSION['user_id'])) {
   }
 ?>
 <?php
-    include __DIR__ . '../../livechat/chat_UI.php';
+    include __DIR__ . '../../../livechat/chat_UI.php';
 ?>
+
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -51,6 +52,7 @@ if (isset($_SESSION['user_id'])) {
         <link rel="stylesheet" href="../../css/reward_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
+        <link rel="stylesheet" href="../../css/livechat_styles.css">
     </head>
     <body>
 
