@@ -305,22 +305,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <p class="payment-item-small">SKU: <?php echo htmlspecialchars($item['sku']); ?></p>
                                                 <p class="payment-item-small">
                                                     Unit discount: 
-                                                    <?php echo ($item['line_discount'] > 0) ? "RM " . number_format($item['line_discount'], 2) : "-"; ?>
+                                                    <?php echo ($item['line_discount'] > 0) ? "RM " . htmlspecialchars(number_format($item['line_discount'], 2)) : "-"; ?>
                                                 </p>
 
                                             </div>
                                             
                                             <div class="payment-item-price">
-                                                RM <?php echo number_format($item['unit_price'], 2); ?> /unit
+                                                RM <?php echo htmlspecialchars(number_format($item['unit_price'], 2)); ?> /unit
                                             </div>
                                             
                                             <div class="payment-item-quantity">
-                                                x <?php echo $item['quantity']; ?> unit(s)
+                                                x <?php echo htmlspecialchars($item['quantity']); ?> unit(s)
                                             </div>
                                         
                                             
                                             <div class="payment-item-total">
-                                                Total<br/>RM <?php echo number_format($lineTotal, 2); ?>
+                                                Total<br/>RM <?php echo htmlspecialchars(number_format($lineTotal, 2)); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -338,15 +338,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <option value="">-- Select Address --</option>
                                             <?php foreach ($addressList as $address): ?>
                                                 <option 
-                                                    value="<?php echo $address['address_id']; ?>" 
+                                                    value="<?php echo htmlspecialchars($address['address_id']); ?>" 
                                                     data-state="<?php echo htmlspecialchars($address['state_territory']); ?>">
                                                     <?php 
                                                         $parts = [];
-                                                        if (!empty($address['apartment'])) $parts[] = $address['apartment'];
-                                                        $parts[] = $address['street'];
-                                                        $parts[] = $address['postcode'];
-                                                        $parts[] = $address['city'];
-                                                        $parts[] = $address['state_territory'];
+                                                        if (!empty($address['apartment'])) {
+                                                            $parts[] = htmlspecialchars($address['apartment']);
+                                                        }
+                                                        $parts[] = htmlspecialchars($address['street']);
+                                                        $parts[] = htmlspecialchars($address['postcode']);
+                                                        $parts[] = htmlspecialchars($address['city']);
+                                                        $parts[] = htmlspecialchars($address['state_territory']);
                                                         echo htmlspecialchars($address['label'] . " - " . implode(", ", $parts));
                                                     ?>
                                                 </option>
@@ -371,9 +373,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <option value="">-- Select Voucher --</option>
                                                 <?php foreach ($availableVouchers as $voucher): ?>
                                                     <option 
-                                                        value="<?php echo $voucher['voucher_id']; ?>" 
-                                                        data-type="<?php echo $voucher['discount_type']; ?>" 
-                                                        data-value="<?php echo $voucher['discount_value']; ?>">
+                                                        value="<?php echo htmlspecialchars($voucher['voucher_id']); ?>" 
+                                                        data-type="<?php echo htmlspecialchars($voucher['discount_type']); ?>" 
+                                                        data-value="<?php echo htmlspecialchars($voucher['discount_value']); ?>">
                                                         <?php echo htmlspecialchars($voucher['description']); ?>
                                                     </option>
                                                 <?php endforeach; ?>

@@ -111,14 +111,14 @@ $orderStmt->close();
                             <div class="card">
                                 <div class="infoTwoColumn">
                                     <div class="infoLeft">
-                                        <h3 class="orderId">Order ID: <?php echo $order['order_id']; ?></h3>
-                                        <span class="orderDate"><p><?php echo date('M j, Y g:i A', strtotime($order['placed_at'])); ?></p></span>
+                                        <h3 class="orderId">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h3>
+                                        <span class="orderDate"><p><?php echo htmlspecialchars(date('M j, Y g:i A', strtotime($order['placed_at']))); ?></p></span>
                                     </div>
                                     <div class="infoRight">
-                                        <span class="orderStatus status-<?php echo strtolower($order['status']); ?>">
+                                        <span class="orderStatus status-<?php echo htmlspecialchars(strtolower($order['status'])); ?>">
                                             <p><?php echo ucfirst($order['status']); ?></p>
                                         </span>
-                                        <span class="grandTotal"><p>RM <?php echo number_format($order['grand_total'], 2); ?></p></span>
+                                        <span class="grandTotal"><p>RM <?php echo htmlspecialchars(number_format($order['grand_total'], 2)); ?></p></span>
                                     </div>
                                 </div>
                             </div>

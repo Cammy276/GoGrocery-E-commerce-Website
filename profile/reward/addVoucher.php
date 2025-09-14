@@ -27,7 +27,7 @@ if (isset($_POST['insert'])) {
     $user_id = intval($_POST['user_id']);
     $voucher_name = trim($_POST['voucher_name']);
 
-    // Step 1: Check if voucher exists
+    // check if voucher exists
     $checkVoucher = $conn->prepare("SELECT voucher_id, all_user_limit FROM vouchers WHERE voucher_name = ?");
     $checkVoucher->bind_param("s", $voucher_name);
     $checkVoucher->execute();
@@ -40,7 +40,7 @@ if (isset($_POST['insert'])) {
         $voucher_id = $voucherRow['voucher_id'];
         $all_user_limit = $voucherRow['all_user_limit'];
 
-        // Step 2: Check if user already has this voucher
+        // check if user already has this voucher
         $checkUserVoucher = $conn->prepare("SELECT * FROM user_vouchers WHERE user_id = ? AND voucher_id = ?");
         $checkUserVoucher->bind_param("ii", $user_id, $voucher_id);
         $checkUserVoucher->execute();
@@ -49,16 +49,16 @@ if (isset($_POST['insert'])) {
         if ($userVoucherResult->num_rows > 0) {
             $errorMsg = "You have already claimed this voucher.";
         } else {
-            // Step 3: Check if voucher still available
+            // check if voucher still available
             if ($all_user_limit !== null && $all_user_limit <= 0) {
                 $errorMsg = "Oops, the voucher code is already out of stock.";
             } else {
-                // Step 4: Insert into user_vouchers
+                // insert into user_vouchers
                 $insertUV = $conn->prepare("INSERT INTO user_vouchers (user_id, voucher_id, isUsed) VALUES (?, ?, 0)");
                 $insertUV->bind_param("ii", $user_id, $voucher_id);
 
                 if ($insertUV->execute()) {
-                    // Step 5: Decrease all_user_limit (if not NULL)
+                    // decrease all_user_limit
                     if ($all_user_limit !== null) {
                         $updateVoucher = $conn->prepare("UPDATE vouchers SET all_user_limit = all_user_limit - 1 WHERE voucher_id = ?");
                         $updateVoucher->bind_param("i", $voucher_id);
@@ -66,7 +66,6 @@ if (isset($_POST['insert'])) {
                         $updateVoucher->close();
                     }
 
-                    // Redirect after success
                     header("Location: index.php?msg=addSuccess");
                     exit();
                 } else {
@@ -137,7 +136,7 @@ if (isset($_POST['insert'])) {
                     <div class="card">
                         <form id="redeemForm" method='post'>
 
-                            <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo $user_id ?>" />
+                            <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo htmlspecialchars($user_id) ?>" />
                             
                             <label>Voucher code:</label>
                             <input class="textInput" type='text' id='voucher_name' name='voucher_name' placeholder="Try any secret code you have discovered..." />

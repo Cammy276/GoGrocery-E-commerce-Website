@@ -187,7 +187,7 @@ if (isset($_POST['update'])) {
 
                     <div class="card-order">
                         <div class="order-header">
-                            <h3 class="order-orderId">Order ID: <?php echo $order_id; ?></h3>
+                            <h3 class="order-orderId">Order ID: <?php echo htmlspecialchars($order_id); ?></h3>
                             <p class="order-status status-paid">Paid</p>
                         </div>
 
@@ -197,13 +197,13 @@ if (isset($_POST['update'])) {
                                     <p class="detail-label">Placed On</p>
                                     <p class="detail-value">
                                         <?php echo isset($orderInfo['placed_at']) 
-                                        ? date('M j, Y g:i A', strtotime($orderInfo['placed_at'])) 
+                                        ? htmlspecialchars(date('M j, Y g:i A', strtotime($orderInfo['placed_at']))) 
                                         : '-'; ?>
                                     </p>
                                 </div>
                                 <div class="detail-item">
                                     <p class="detail-label">Number of Item</p>
-                                    <p class="detail-value"><?php echo count($orderItemList); ?></p>
+                                    <p class="detail-value"><?php echo htmlspecialchars(count($orderItemList)); ?></p>
                                 </div>
                             </div>
 
@@ -215,15 +215,15 @@ if (isset($_POST['update'])) {
                                     <li>
                                         <div class="item-info">
                                             <p class="item-name"><?php echo htmlspecialchars($item['product_name']); ?></p>
-                                            <p class="item-details">SKU: <?php echo $item['sku']; ?></p>
+                                            <p class="item-details">SKU: <?php echo htmlspecialchars($item['sku']); ?></p>
                                             <p class="item-details">
                                                 Unit discount: 
-                                                <?php echo ($item['line_discount'] > 0) ? "RM " . number_format($item['line_discount'], 2) : "-"; ?>
+                                                <?php echo ($item['line_discount'] > 0) ? "RM " . htmlspecialchars(number_format($item['line_discount'], 2)) : "-"; ?>
                                             </p>
                                         </div>
-                                        <p class="item-quantity">Qty: <?php echo $item['quantity']; ?></p>
-                                        <p class="item-price">RM <?php echo number_format($item['unit_price'], 2); ?>/unit</p>
-                                        <p class="item-total">RM <?php echo number_format($item['line_total'], 2); ?></p>
+                                        <p class="item-quantity">Qty: <?php echo htmlspecialchars($item['quantity']); ?></p>
+                                        <p class="item-price">RM <?php echo htmlspecialchars(number_format($item['unit_price'], 2)); ?>/unit</p>
+                                        <p class="item-total">RM <?php echo htmlspecialchars(number_format($item['line_total'], 2)); ?></p>
                                     </li>
                                     <?php endforeach; ?>
                                     <p class="tips">Each item's total price already adjusted to include any applicable item discount</p>
@@ -236,19 +236,19 @@ if (isset($_POST['update'])) {
                                 <h4 class="payment-title"><i class="bi bi-credit-card"></i> Payment & Delivery Information</h4>
                                 <div class="payment-item">
                                     <p class="payment-label">Address</p>
-                                    <p class="payment-value"><?php echo isset($address) ? $address : '-'; ?></p>
+                                    <p class="payment-value"><?php echo isset($address) ? htmlspecialchars($address) : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
                                     <p class="payment-label">Payment Method</p>
-                                    <p class="payment-value"><?php echo isset($orderInfo['payment_method']) ? ucfirst($orderInfo['payment_method']) : '-'; ?></p>
+                                    <p class="payment-value"><?php echo isset($orderInfo['payment_method']) ? htmlspecialchars(ucfirst($orderInfo['payment_method'])) : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
                                     <p class="payment-label">Voucher Applied</p>
-                                    <p class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? ucwords($voucher['description']) : '-'; ?></p>
+                                    <p class="payment-value"><?php echo isset($voucher) && !empty($voucher) ? htmlspecialchars(ucwords($voucher['description'])) : '-'; ?></p>
                                 </div>
                                 <div class="payment-item">
                                     <p class="payment-label">Delivery Duration</p>
-                                    <p class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? $orderInfo['delivery_duration'] : '-'; ?></p>
+                                    <p class="payment-value"><?php echo isset($orderInfo['delivery_duration']) ? htmlspecialchars($orderInfo['delivery_duration']) : '-'; ?></p>
                                 </div>
                             </div>
 
@@ -258,15 +258,15 @@ if (isset($_POST['update'])) {
                                 <div class="breakdown-vertical">
                                     <div class="breakdown-item">
                                         <p class="breakdown-label">Subtotal</p>
-                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? number_format($orderInfo['subtotal'], 2) : '0.00'; ?></p>
+                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['subtotal']) ? htmlspecialchars(number_format($orderInfo['subtotal'], 2)) : '0.00'; ?></p>
                                     </div>
                                     <div class="breakdown-item">
                                         <p class="breakdown-label">Voucher Discount</p>
-                                        <p class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['voucher_discount_value']) ? number_format($orderInfo['voucher_discount_value'], 2) : '0.00'; ?></p>
+                                        <p class="breakdown-value discountValue">- RM <?php echo isset($orderInfo['voucher_discount_value']) ? htmlspecialchars(number_format($orderInfo['voucher_discount_value'], 2)) : '0.00'; ?></p>
                                     </div>
                                     <div class="breakdown-item">
                                         <p class="breakdown-label">Shipping Fee</p>
-                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['shipping_fee']) ? number_format($orderInfo['shipping_fee'], 2) : '0.00'; ?></p>
+                                        <p class="breakdown-value">RM <?php echo isset($orderInfo['shipping_fee']) ? htmlspecialchars(number_format($orderInfo['shipping_fee'], 2)) : '0.00'; ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +274,7 @@ if (isset($_POST['update'])) {
                         </div>
 
                         <div class="grand-total">
-                            Grand Total: RM <?php echo isset($orderInfo['grand_total']) ? number_format($orderInfo['grand_total'], 2) : '-'; ?>
+                            Grand Total: RM <?php echo isset($orderInfo['grand_total']) ? htmlspecialchars(number_format($orderInfo['grand_total'], 2)) : '-'; ?>
                         </div>
                     </div>
 

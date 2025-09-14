@@ -169,6 +169,8 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
 
+        <footer><?php include("../../footer.php") ?> </footer>
+
         <?php if (!$isGuest): ?>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {

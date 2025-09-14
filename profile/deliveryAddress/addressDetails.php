@@ -154,8 +154,8 @@ if (isset($_POST['delete'])) {
                     <div class="card">
                         <form id="addressForm" method='post'>
 
-                            <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo $user_id ?>" />
-                            <input class="textInput" type="hidden" name="address_id" value="<?php echo $address['address_id']; ?>">
+                            <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo htmlspecialchars($user_id) ?>" />
+                            <input class="textInput" type="hidden" name="address_id" value="<?php echo htmlspecialchars($address['address_id']); ?>">
 
                             <label>Label:</label>
                             <input class="textInput" type='text' id='label' name='label' 

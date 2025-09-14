@@ -207,10 +207,10 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
                 <div class="cart-detail-item">
                     <label class="cart-detail-label">Quantity</label>
                     <input type="number" class="cart-quantity-input"
-                        name="quantity[<?= $item['cart_item_id']; ?>]"
-                        value="<?= $item['quantity']; ?>" 
+                        name="quantity[<?= htmlspecialchars($item['cart_item_id']); ?>]"
+                        value="<?= htmlspecialchars($item['quantity']); ?>" 
                         min="1" 
-                        data-cart-id="<?= $item['cart_item_id']; ?>">
+                        data-cart-id="<?= htmlspecialchars($item['cart_item_id']); ?>">
                 </div>
             </div>
         </div>

@@ -26,7 +26,6 @@ if (isset($_GET['id'])) {
 
 <?php
 
-echo "Logged in as User ID: " . $user_id;
 // Include the database connection
 include(__DIR__ . '/../../connect_db.php');
 
@@ -143,19 +142,19 @@ $voucherStmt->close();
                 <p class="voucher-detail-label details">Discount</p>
                 <p class="voucher-detail-value discount-value details">
                     <?php echo $voucherInfo['discount_type'] == 'PERCENT'
-                        ? $voucherInfo['discount_value'] . '% OFF'
-                        : 'RM' . $voucherInfo['discount_value'] . ' OFF'; ?>
+                        ? htmlspecialchars($voucherInfo['discount_value']) . '% OFF'
+                        : 'RM' . htmlspecialchars($voucherInfo['discount_value']) . ' OFF'; ?>
                 </p>
             </div>
             
             <div class="voucher-detail-item details">
                 <p class="voucher-detail-label details">Minimum Spend</p>
-                <p class="voucher-detail-value min-spend details">RM<?php echo $voucherInfo['min_subtotal']; ?></p>
+                <p class="voucher-detail-value min-spend details">RM<?php echo htmlspecialchars($voucherInfo['min_subtotal']); ?></p>
             </div>
             
             <div class="voucher-detail-item details">
                 <p class="voucher-detail-label details">Valid Until</p>
-                <p class="voucher-detail-value duration details"><?php echo date('M j, Y', strtotime($voucherInfo['end_date'])); ?></p>
+                <p class="voucher-detail-value duration details"><?php echo htmlspecialchars(date('M j, Y', strtotime($voucherInfo['end_date']))); ?></p>
             </div>
         </div>
 

@@ -112,9 +112,9 @@ $stmt->close();
                     <?php endif; ?>
 
                     <?php foreach($addressList as $address): ?>
-                        <a href="addressDetails.php?id=<?php echo $address['address_id']; ?>" class="cardLink">
+                        <a href="addressDetails.php?id=<?php echo htmlspecialchars($address['address_id']); ?>" class="cardLink">
                             <div class="card">
-                                <p class="addressLabel"><?php echo $address['label'] ?></p>
+                                <p class="addressLabel"><?php echo htmlspecialchars($address['label']) ?></p>
                                 
                                 <p class="addressDetails">
                                     <?php
@@ -122,10 +122,10 @@ $stmt->close();
                                         if (!empty($address['apartment'])) {
                                             $parts[] = $address['apartment'];
                                         }
-                                        $parts[] = $address['street'];
-                                        $parts[] = $address['postcode'];
-                                        $parts[] = $address['city'];
-                                        $parts[] = $address['state_territory'];
+                                        $parts[] = htmlspecialchars($address['street']);
+                                        $parts[] = htmlspecialchars($address['postcode']);
+                                        $parts[] = htmlspecialchars($address['city']);
+                                        $parts[] = htmlspecialchars($address['state_territory']);
 
                                         echo implode(", ", $parts);
                                     ?>

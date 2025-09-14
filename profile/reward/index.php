@@ -15,7 +15,6 @@ if (isset($_SESSION['user_id'])) {
 
 <?php
 
-echo "Logged in as User ID: " . $user_id;
 // Include the database connection
 include(__DIR__ . '/../../connect_db.php');
 
@@ -118,7 +117,6 @@ if (isset($_POST['insert'])) {
         <link rel="stylesheet" href="../../css/reward_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
-css\reward_style.css
     </head>
     <body>
         <header><?php include("../../header.php") ?></header>
@@ -182,14 +180,14 @@ css\reward_style.css
                                         <p class="voucher-title">
                                             <?php echo htmlspecialchars($voucher['voucher_name']); ?>
                                         </p>
-                                        <p class="badge <?php echo $voucher['discount_type']; ?>">
+                                        <p class="badge <?php echo htmlspecialchars($voucher['discount_type']); ?>">
                                             <?php echo $voucher['discount_type'] == 'PERCENT' ? 'Percentage' : 'Fixed'; ?>
                                         </p>
                                     </div>
 
                                     <!-- Valid Until -->
                                     <p class="voucher-valid">
-                                        Valid until <?php echo date('M j, Y', strtotime($voucher['end_date'])); ?>
+                                        Valid until <?php echo htmlspecialchars(date('M j, Y', strtotime($voucher['end_date']))); ?>
                                     </p>
                                 </div>
                             </div>

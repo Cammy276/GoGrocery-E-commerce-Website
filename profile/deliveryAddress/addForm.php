@@ -115,7 +115,7 @@ if (isset($_POST['insert'])) {
                     <div class="card">
                         <form id="addressForm" method='post'>
 
-                            <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo $user_id ?>" />
+                            <input class="textInput" type='hidden' id='user_id' name='user_id' value="<?php echo htmlspecialchars($user_id) ?>" />
                             
                             <label>Label:</label>
                             <input class="textInput" type='text' id='label' name='label' placeholder="e.g. Home" />
@@ -149,7 +149,7 @@ if (isset($_POST['insert'])) {
                             <select name="state_territory" >
                                 <option value="">-- Select State / Territory --</option>
                                 <?php foreach($enum_values as $state): ?>
-                                    <option value="<?= $state ?>"><?= $state ?></option>
+                                    <option value="<?= htmlspecialchars($state) ?>"><?= htmlspecialchars($state) ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <br/>
