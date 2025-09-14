@@ -64,6 +64,9 @@
 
             if (!isValid) {
                 event.preventDefault();
+                if (emailInput.classList.contains("error")) {
+                    emailInput.focus();
+                }
             }
         });  
     </script>

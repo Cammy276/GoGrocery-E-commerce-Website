@@ -28,6 +28,7 @@ $user = $result->fetch_assoc();
 
 if (!$user) {
     // If no user found, redirect gracefully
+    $_SESSION['email_not_registered'] = "This email is not registered.";
     header("Location: ./error.php?message=No user found with the provided email");
     exit;
 }

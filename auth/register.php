@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="password">Password</label>
                     <div style="position: relative;">
                         <input type="password" id="password" name="password" placeholder="Enter your password">
-                        <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:1px; top:45%; transform:translateY(-50%);"></i>
+                        <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:-30px; top:45%; transform:translateY(-50%);"></i>
                     </div>
                     <small id="password-error" class="error-message"></small>
                 </div>
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="confirm-password">Confirm Password</label>
                     <div style="position: relative;">
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
-                        <i id="confirm-password-icon" class="bi bi-eye-fill" onclick="togglePassword('confirm-password','confirm-password-icon')" style="cursor:pointer; position:absolute; right:1px; top:45%; transform:translateY(-50%);"></i>
+                        <i id="confirm-password-icon" class="bi bi-eye-fill" onclick="togglePassword('confirm-password','confirm-password-icon')" style="cursor:pointer; position:absolute; right: -30px;; top:45%; transform:translateY(-50%);"></i>
                     </div>
                     <small id="confirm-password-error" class="error-message"></small>
                 </div>
@@ -271,6 +271,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (!isValid) {
                 event.preventDefault();
+                if (nameInput.classList.contains("error")) {
+                    nameInput.focus();
+                } else if (emailInput.classList.contains("error")) {
+                    emailInput.focus();
+                } else if (phoneInput.classList.contains("error")) {
+                    phoneInput.focus();
+                } else if (passwordInput.classList.contains("error")) {
+                    passwordInput.focus();
+                } else if (confirmPasswordInput.classList.contains("error")) {
+                    confirmPasswordInput.focus();
+                } else if (tncCheck.classList.contains("error")) {
+                    tncCheck.focus();
+                }
             }
         });
 
