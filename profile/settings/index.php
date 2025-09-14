@@ -49,7 +49,7 @@ if (isset($_SESSION['user_id'])) {
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
     </head>
-    <body class="p-4">
+    <body>
 
         <header><?php include("../../header.php") ?></header>
 
@@ -86,7 +86,7 @@ if (isset($_SESSION['user_id'])) {
                         <div class="errMessage"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
                     <?php endif; ?>
 
-                    <div class="card p-4 mb-4 text-center">
+                    <div class="card mb-4 text-center">
                         <form action="<?= $isGuest ? '#' : './update_profile.php' ?>" method="POST" enctype="multipart/form-data" id="profileForm">
 
                             <!-- profile picture --->
