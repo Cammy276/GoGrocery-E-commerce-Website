@@ -161,6 +161,6 @@ function togglePassword(inputId, iconId) {
     }
 }
 </script>
-<?php include './footer.php'; ?>
+<?php include '../footer.php'; ?>
 </body>
 </html>
