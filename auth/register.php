@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="register-container">
         <div class="register-box">
             <h2>Sign Up</h2>
-            <p id="register-success-message" style="color: <?= htmlspecialchars($messageColor) ?>;">
+            <p id="register-success-message" class="login-link" style="color: <?= htmlspecialchars($messageColor) ?>;">
             <?= $message ?>
             </p>
             <form id="register-form" method="POST">
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="password">Password</label>
                     <div style="position: relative;">
                         <input type="password" id="password" name="password" placeholder="Enter your password">
-                        <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:-30px; top:45%; transform:translateY(-50%);"></i>
+                        <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:15px; bottom:10px; transform:translateY(-50%);"></i>
                     </div>
                     <small id="password-error" class="error-message"></small>
                 </div>
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="confirm-password">Confirm Password</label>
                     <div style="position: relative;">
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
-                        <i id="confirm-password-icon" class="bi bi-eye-fill" onclick="togglePassword('confirm-password','confirm-password-icon')" style="cursor:pointer; position:absolute; right: -30px;; top:45%; transform:translateY(-50%);"></i>
+                        <i id="confirm-password-icon" class="bi bi-eye-fill" onclick="togglePassword('confirm-password','confirm-password-icon')" style="cursor:pointer; position:absolute; right:15px; bottom:10px; transform:translateY(-50%);"></i>
                     </div>
                     <small id="confirm-password-error" class="error-message"></small>
                 </div>

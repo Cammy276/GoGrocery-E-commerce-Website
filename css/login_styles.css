@@ -12,6 +12,13 @@ div.login-container .login-box {
     max-width: 400px;
     text-align: center;
     position: relative;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background-color: #f9fafc;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #eee;
 }
 
 div.login-container h2 {
@@ -22,7 +29,7 @@ div.login-container h2 {
 }
 
 div.login-container .input-container {
-    width: 100%;
+    width: 95%;
     margin-bottom: 20px;
     text-align: left;
     position: relative;
@@ -43,22 +50,23 @@ div.login-container input[type="password"] {
     border-radius: 4px;
     margin-bottom: 10px;
     box-sizing: border-box;
+    transition: border 0.3s;
 }
 
 div.login-container input[type="text"]:focus,
 div.login-container input[type="password"]:focus {
-    border: 3px solid #009c99; 
+    border: 3px solid #049b9c; 
     outline: none; 
 }
 div.login-container input[type="text"].error:focus,
 div.login-container input[type="password"].error:focus {
-    border: 3px solid red;
+    border: 3px solid #dc3545;
     outline: none;
-    box-shadow: 0 0 3px red;
+    box-shadow: 0 0 3px #dc3545;
 }
 div.login-container .error-message {
     display: none;
-    color: red;
+    color: #dc3545;
     font-size: 13px;
     margin-top: 5px;
 }
@@ -83,7 +91,7 @@ div.login-container .action-buttons {
 
 div.login-container .login-btn,
 div.login-container .guest-btn {
-    width: 106%;
+    width: 99%;
     padding: 12px;
     font-size: 16px;
     border: none;
@@ -93,12 +101,12 @@ div.login-container .guest-btn {
 }
 
 div.login-container .login-btn {
-    background-color: #009c99;
+    background-color: #049b9c;
     color: white;
 }
 
 div.login-container .login-btn:hover {
-    background-color: #10adab;
+    background-color: #037a7b;
 }
 
 div.login-container .guest-btn {
@@ -107,7 +115,7 @@ div.login-container .guest-btn {
 }
 
 div.login-container .guest-btn:hover {
-    background-color: #d2cbcb;
+    background-color: #a9a2a2;
 }
 
 div.login-container .register-link {
