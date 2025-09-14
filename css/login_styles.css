@@ -47,12 +47,12 @@ div.login-container input[type="password"] {
 
 div.login-container input[type="text"]:focus,
 div.login-container input[type="password"]:focus {
-    border: 2px solid #009c99; 
+    border: 3px solid #009c99; 
     outline: none; 
 }
 div.login-container input[type="text"].error:focus,
 div.login-container input[type="password"].error:focus {
-    border: 2px solid red;
+    border: 3px solid red;
     outline: none;
 }
 div.login-container .error-message {
