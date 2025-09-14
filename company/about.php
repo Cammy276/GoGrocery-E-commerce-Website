@@ -159,7 +159,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
     </div>
 
     <div class="cta">
-      <a href="../products-listing/fresh_produces.php" class="shopping-btn">Shop Now</a>
+      <a href="../products-listing/category.php?slug=fresh_produces" class="shopping-btn">Shop Now</a>
     </div>
   </section>
   <footer>
