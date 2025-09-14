@@ -58,7 +58,7 @@ div.login-container input[type="password"].error:focus {
 div.login-container .error-message {
     display: none;
     color: red;
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 5px;
 }
 
