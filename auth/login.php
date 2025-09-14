@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 // Include the database connection
 include(__DIR__ . '/../connect_db.php'); // $conn is available
-
+include __DIR__ . '/../livechat/chat_UI.php';
 $message = "";
 $messageColor = "";
 

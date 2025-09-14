@@ -128,7 +128,9 @@ if ($user_id) {
     while ($row = $res->fetch_assoc()) $wishlist_items[] = $row['product_id'];
 }
 ?>
-
+<?php
+include __DIR__ . '/../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

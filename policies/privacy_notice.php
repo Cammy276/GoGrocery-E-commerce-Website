@@ -1,3 +1,6 @@
+<?php
+    include __DIR__ . '/../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

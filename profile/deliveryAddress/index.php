@@ -39,8 +39,9 @@ if ($stmt->execute()) {
 $stmt->close();
 
 ?>
-
-
+<?php
+    include __DIR__ . '../../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>

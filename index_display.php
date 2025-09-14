@@ -101,6 +101,9 @@ function getCartInfo($conn, $user_id){
 }
 $cart_data = $user_id ? getCartInfo($conn,$user_id) : ['total_qty'=>0,'total_price'=>0.00];
 ?>
+<?php
+    include __DIR__ . '/../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

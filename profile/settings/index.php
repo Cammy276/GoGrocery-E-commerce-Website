@@ -29,6 +29,9 @@ if (isset($_SESSION['user_id'])) {
   $stmt->close();
   }
 ?>
+<?php
+    include __DIR__ . '../../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
     <html lang="en">
     <head>

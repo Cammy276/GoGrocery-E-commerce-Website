@@ -14,10 +14,8 @@ if (isset($_SESSION['user_id'])) {
 
 
 <?php
-
 // Include the database connection
 include(__DIR__ . '/../../connect_db.php');
-
 // Predefine variable for error message
 $errorMsg = null;
 
@@ -96,9 +94,6 @@ if (isset($_POST['insert'])) {
 }
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html>
     <head>

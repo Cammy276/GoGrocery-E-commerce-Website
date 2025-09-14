@@ -1,5 +1,6 @@
 <?php
 include(__DIR__ . '/../connect_db.php');
+include __DIR__ . '/../livechat/chat_UI.php';
 
 $message = "";
 $messageColor = "";

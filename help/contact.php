@@ -3,6 +3,7 @@ session_start();  // Start session
 
 // Include the database connection
 include(__DIR__ . '/../connect_db.php'); // $conn is available
+include __DIR__ . '/../livechat/chat_UI.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

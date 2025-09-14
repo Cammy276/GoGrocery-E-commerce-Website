@@ -91,7 +91,9 @@ if ($category['parent_id'] === null) {
     $subcategories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 ?>
-
+<?php
+include __DIR__ . '/../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

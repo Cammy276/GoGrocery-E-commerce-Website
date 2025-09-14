@@ -91,7 +91,9 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
 }
 
 ?>
-
+<?php
+include __DIR__ . '../../../livechat/chat_UI.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
