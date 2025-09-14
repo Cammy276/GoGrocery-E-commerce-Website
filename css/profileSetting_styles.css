@@ -1,3 +1,10 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+
 .profile-pic-container {
     position: relative;
     display: inline-block;
