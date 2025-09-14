@@ -14,6 +14,8 @@ include __DIR__ . '/../livechat/chat_UI.php';
   <link rel="stylesheet" href="../css/header_styles.css">
   <link rel="stylesheet" href="../css/footer_styles.css">
   <link rel="stylesheet" href="../css/about_styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -157,7 +159,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
     </div>
 
     <div class="cta">
-      <a href="../products-listing/fresh_produces.php" class="shopping-btn">Shop Now</a>
+      <a href="../products-listing/category.php?slug=fresh_produces" class="shopping-btn">Shop Now</a>
     </div>
   </section>
   <footer>
