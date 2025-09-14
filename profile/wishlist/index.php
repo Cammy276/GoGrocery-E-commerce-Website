@@ -203,7 +203,7 @@ if (isset($_POST['moveToCart'])) {
                                         <p class="cart-item-price"> Final Price: RM <?php echo number_format($final_price, 2); ?></p>
                                     </div>                                  
                                 </div>
-                                <button type="submit" class="btn btn-primary" name="moveToCart" value="<?php echo $item['product_id']; ?>">Move to Cart</button>
+                                <button type="submit" class="btn saveButton" name="moveToCart" value="<?php echo $item['product_id']; ?>">Move to Cart</button>
                             </div>
                         </div>
                     <?php endforeach; ?>            

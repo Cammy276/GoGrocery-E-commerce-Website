@@ -105,7 +105,7 @@ if (isset($_POST['insert'])) {
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Add New Delivery Address</h1>
+                    <h1 style="text-align: left;">Add New Delivery Address</h1>
                     <p>Add a new delivery address for future orders</p>
                 </div>
                 <div class="content">

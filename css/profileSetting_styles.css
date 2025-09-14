@@ -1,27 +1,27 @@
-div.profile-settings-container .profile-pic-container {
+.profile-pic-container {
     position: relative;
     display: inline-block;
 }
-div.profile-settings-container .edit-icon {
+.edit-icon {
     cursor: pointer;
     margin-left: 8px;
     color: #a8b0b8ff;
 }
-div.profile-settings-container .edit-icon:hover {
+.edit-icon:hover {
     color: #037a7b;
 }
-div.profile-settings-container .form-control:focus {
+.form-control:focus {
     box-shadow: none !important; 
 }
 
-div.profile-settings-container .field-row {
+.field-row {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
 }
 
-div.profile-settings-container .field-row .textInput {
+.field-row .textInput {
     flex: 1; 
     width: auto;
     padding: 8px 12px;
@@ -31,22 +31,36 @@ div.profile-settings-container .field-row .textInput {
     transition: border 0.3s;
     box-shadow: none !important;
 }
-div.profile-settings-container .field-row .textInput:focus {
+.field-row .textInput:focus {
     border-color: #049b9c;
     border-width: 3px;
     outline: none;
 }
 
-div.profile-settings-container .input-error-wrapper {
+.input-error-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
     flex:1;
 }
 
-div.profile-settings-container  .input-error-wrapper .error-message {
+ .input-error-wrapper .error-message {
     margin-top: 4px;
     font-size: 13px;
     color: #dc3545;
     text-align: left;
+}
+
+.changePasswordBtn {
+    background-color: #049b9c !important;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.changePasswordBtn:hover {
+    background-color: #037a7b;
 }

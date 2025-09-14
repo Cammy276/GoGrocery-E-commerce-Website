@@ -136,7 +136,7 @@ $voucherStmt->close();
     <body>
         <header><?php include("../../header.php") ?></header>
 
-        <div class="order-history-container">
+        <div class="main-container">
             <div id="profileSettingSideBar">  
                 <ul class="menu-items">
                     <li><a href=""><i class="bi bi-gear-fill"></i> Profile Settings</a></li>
@@ -152,7 +152,7 @@ $voucherStmt->close();
 
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>History</h1>
+                    <h1 style="text-align: left;">History</h1>
                     <p>Review the orders that are already completed.</p>
                 </div>
 

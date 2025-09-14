@@ -232,19 +232,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../css/payment_styles.css">
+                 <link rel="stylesheet" href="../css/payment_styles.css">
         <link rel="stylesheet" href="../css/profile_styles.css">
-        <link rel="stylesheet" href="../css/styles.css">
+
         <link rel="stylesheet" href="../css/header_styles.css">
         <link rel="stylesheet" href="../css/footer_styles.css">
 
     </head>
-    <header><?php include("../header.php") ?></header>
     <body>
-        <div class="payment-page-container">
+        <header><?php include("../header.php") ?></header>
+
+        <div class="main-container">
+ 
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Payment</h1>
+                    <h1 style="text-align: left;">Payment</h1>
                     <p>Review your order and complete your purchase</p>
                 </div>
                 
@@ -272,20 +274,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $itemNum += 1;
                         
                                         
-                                        // Fetch product image
-                                        $productStmt = $conn->prepare("SELECT * FROM product_images WHERE product_id=?");
+                                        // Fetch product image for this cart item
+                                        $productStmt = $conn->prepare("SELECT * FROM product_images WHERE product_id = ?");
                                         $productStmt->bind_param("i", $item['product_id']);
+                                        $productInfo = null;
+
                                         if ($productStmt->execute()) {
                                             $productResult = $productStmt->get_result();
                                             $productInfo = $productResult->fetch_assoc();
                                         }
                                         $productStmt->close();
+
+                                        // Determine image path, fallback to placeholder if missing
+                                        $imagePath = $productInfo['product_image_url'] ?? 'images/products/placeholder.png';
+                                        $altText = $productInfo['alt_text'] ?? 'Product Image';
+
+                                        // Build full URL
+                                        $imageUrl = rtrim(BASE_URL, '/') . '/' . ltrim($imagePath, '/');
                                     ?>
                                     
                                     <div class="payment-item-card">
                                         <div class="payment-item-image">
-                                            <img src="<?php echo htmlspecialchars($productInfo['product_image_url']); ?>" 
-                                                alt="<?php echo htmlspecialchars($productInfo['alt_text']); ?>" />
+                                            <img src="<?= htmlspecialchars($imageUrl) ?>" 
+                                                alt="<?= htmlspecialchars($altText) ?>" />
                                         </div>
                                         
                                         <div class="payment-item-details">
@@ -757,6 +768,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } else if (bankSelect.classList.contains("input-error")) {
                         bankSelect.focus();
                     }
+                    return;
                 }
 
                 //if all pass, pop up windows

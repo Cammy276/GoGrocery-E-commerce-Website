@@ -84,10 +84,10 @@ $orderStmt->close();
                 </ul>
             </div>
             
-            <!--- right content space -->
+            <!---right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Orders</h1>
+                    <h1 style="text-align: left;">Orders</h1>
                     <p>Review the orders that are still pending delivery.</p>
                 </div>
                 <div class="content">

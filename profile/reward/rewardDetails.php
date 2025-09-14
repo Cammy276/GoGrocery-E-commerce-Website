@@ -108,7 +108,7 @@ $voucherStmt->close();
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Rewards</h1>
+                    <h1 style="text-align: left;">Rewards</h1>
                     <p>Explore your rewards and redeem vouchers to enjoy exclusive benefits.</p>
                 </div>
                 <div class="content">
@@ -127,7 +127,7 @@ $voucherStmt->close();
      
 
     <div class="card">
-        <img class="voucher-image details" src="<?php echo htmlspecialchars($voucherInfo['voucher_image_url']); ?>" alt="Voucher Image">
+        <img class="voucher-image details" src="../<?php echo htmlspecialchars($voucherInfo['voucher_image_url']); ?>" alt="Voucher Image">
 
         <h3 class="voucher-title details"><?php echo htmlspecialchars($voucherInfo['voucher_name']); ?></h3>
         <p class="voucher-description details"><?php echo htmlspecialchars($voucherInfo['description']); ?></p>

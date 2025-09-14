@@ -144,7 +144,7 @@ if (isset($_POST['delete'])) {
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Edit delivery address details</h1>
+                    <h1 style="text-align: left;">Edit delivery address details</h1>
                     <p>Edit existing delivery address details for future orders</p>
                 </div>
                 <div class="content">

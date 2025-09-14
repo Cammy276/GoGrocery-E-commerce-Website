@@ -1,12 +1,12 @@
-div.delivery-address-container .delivery-header {
+ .delivery-header {
     display: flex;
     justify-content: space-between; 
     align-items: center;                    
 }
-div.delivery-address-container .delivery-header h2 {
+ .delivery-header h2 {
     margin: 0;
 }
-div.delivery-address-container .delivery-header i {
+ .delivery-header i {
     font-size: 1.5rem;
     color: #049b9c;
     display: inline-flex;
@@ -20,11 +20,11 @@ div.delivery-address-container .delivery-header i {
     position: relative; /* for tooltip positioning */
     cursor: pointer;
 }
-div.delivery-address-container .delivery-header i:hover {
+ .delivery-header i:hover {
     color: #037a7b;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
-div.delivery-address-container .delivery-header i::after {
+ .delivery-header i::after {
     content: "Add new address"; /* text shown on hover */
     position: absolute;
     bottom: 110%;
@@ -41,7 +41,7 @@ div.delivery-address-container .delivery-header i::after {
     transition: opacity 0.2s, transform 0.2s;
 }
 /* Show tooltip on hover */
-div.delivery-address-container .delivery-header i:hover::after {
+ .delivery-header i:hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(-5px); 
 }

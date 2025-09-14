@@ -144,7 +144,7 @@ css\reward_style.css
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Rewards</h1>
+                    <h1 style="text-align: left;">Rewards</h1>
                     <p>Explore your rewards and redeem vouchers to enjoy exclusive benefits.</p>
                 </div>
                 <div class="content">
@@ -172,7 +172,7 @@ css\reward_style.css
                             <div class="voucher-card">
                                 <!-- Image on the left -->
                                 <img class="voucher-image" 
-                                    src="<?php echo htmlspecialchars(BASE_URL . ltrim($voucher['voucher_image_url'], '/')); ?>" alt="Voucher Image"
+                                    src="../<?php echo htmlspecialchars(ltrim($voucher['voucher_image_url'], '/')); ?>" alt="Voucher Image"
                                     alt="Voucher Image">
 
                                 <!-- Content on the right -->

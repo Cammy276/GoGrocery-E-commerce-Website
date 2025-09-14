@@ -1,59 +1,61 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
 
-/** for order and history */
-div.order-history-container .infoTwoColumn {
+.infoTwoColumn {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-div.order-history-container .infoTwoColumn p {
+.infoTwoColumn p {
     margin: 0%;
 }
 
-div.order-history-container .orderId {
+.orderId {
     font-weight: 600;
     font-size: 18px;
     margin: 0;
 }
 
-div.order-history-container .orderDate {
+.orderDate {
     font-size: 12px;
     color: #6c757d;
     margin-top: 4px;
 }
 
-div.order-history-container .infoLeft {
+.infoLeft {
     display: flex;
     flex-direction: column;
 }
-div.order-history-container .infoRight {
+.infoRight {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-div.order-history-container .orderStatus {
+.orderStatus {
     padding: 6px 12px;
     border-radius: 50px;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 8px;
 }
-div.order-history-container .status-paid { 
+.status-paid { 
     background-color: #fff3cd; 
     color: #856404; 
 }
-div.order-history-container .status-delivered { 
+.status-delivered { 
     background-color: #d1ecf1; color: #0c5460; 
 }
 
-div.order-history-container.grandTotal {
+.grandTotal {
     font-weight: 600;
     font-size: 16px;
     color: #2c3e50;
 }
 
-div.order-history-container.card-order {
+.card-order {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     margin-bottom: 24px;
@@ -61,11 +63,11 @@ div.order-history-container.card-order {
     border: 1px solid #eaeaea;
 }
 
-div.order-history-container.card-order p {
+.card-order p {
     margin: 0px;
 }
 
-div.order-history-container.order-header {
+.order-header {
     background-color: #f8f9fa;
     padding: 16px 20px;
     display: flex;
@@ -73,95 +75,95 @@ div.order-history-container.order-header {
     align-items: center;
     border-bottom: 1px solid #eaeaea;
 }
-div.order-history-container.order-orderId {
+.order-orderId {
     font-weight: 600;
     color: #2c3e50;
     font-size: 18px;
 }
-div.order-history-container.order-status {
+.order-status {
     padding: 6px 12px;
     border-radius: 50px;
     font-size: 14px;
     font-weight: 500;
 }
-div.order-history-container.status-paid {
+.status-paid {
     background-color: #fff3cd;
     color: #856404;
 }
 
-div.order-history-container .order-body {
+.order-body {
     padding: 20px;
 }
 
-div.order-history-container .order-details {
+.order-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin-bottom: 20px;
 }
-div.order-history-container .detail-item {
+.detail-item {
     display: flex;
     flex-direction: column;
 }
-div.order-history-container .detail-label {
+.detail-label {
     font-size: 12px;
     color: #6c757d;
     margin-bottom: 4px;
 }
-div.order-history-container .detail-value {
+.detail-value {
     font-size: 16px;
     font-weight: 500;
     color: #2c3e50;
 }
 
-div.order-history-container .order-items {
+.order-items {
     margin-top: 16px;
 }
 
-div.order-history-container .items-title {
+.items-title {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
 }
-div.order-history-container .items-title i {
+.items-title i {
     margin-right: 8px;
 }
-div.order-history-container .item-list {
+.item-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-div.order-history-container .item-list li {
+.item-list li {
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #f1f1f1;
 }
-div.order-history-container .item-list li:last-child {
+.item-list li:last-child {
     border-bottom: none;
 }
-div.order-history-container .item-info {
+.item-info {
     flex: 2;
 }
-div.order-history-container .item-name {
+.item-name {
     font-weight: 500;
     margin-bottom: 4px;
 }
-div.order-history-container .item-sku {
+.item-sku {
     font-size: 12px;
     color: #6c757d;
 }
-div.order-history-container .item-quantity, div.order-history-container .item-price, div.order-history-container .item-total {
+.item-quantity, .item-price, .item-total {
     flex: 1;
     text-align: right;
 }
-div.order-history-container .item-price, div.order-history-container .item-total {
+.item-price, .item-total {
     font-weight: 500;
 }
 
-div.order-history-container .order-payment-section {
+.order-payment-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -171,7 +173,7 @@ div.order-history-container .order-payment-section {
     border-radius: 10px;
     border: 1px solid #eaeaea;
 }
-div.order-history-container .payment-title {
+.payment-title {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 15px;
@@ -179,62 +181,62 @@ div.order-history-container .payment-title {
     display: flex;
     align-items: center;
 }
-div.order-history-container .payment-title i {
+.payment-title i {
     margin-right: 10px;
     color: #6f42c1;
 }
-div.order-history-container .payment-item {
+.payment-item {
     display: flex;
     flex-direction: column;
 }
-div.order-history-container .payment-label {
+.payment-label {
     font-size: 12px;
     color: #6c757d;
     margin-bottom: 5px;
 }
-div.order-history-container .payment-value {
+.payment-value {
     font-size: 16px;
     font-weight: 500;
     color: #2c3e50;
 }
 
-div.order-history-container .breakdown-section {
+.breakdown-section {
     margin-top: 25px;
     padding: 20px;
     background-color: #f9fafb;
     border-radius: 10px;
     border: 1px solid #eaeaea;
 }
-div.order-history-container .breakdown-title {
+.breakdown-title {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
 }
-div.order-history-container .breakdown-title i {
+.breakdown-title i {
     margin-right: 10px;
     color: #6f42c1;
 }
-div.order-history-container .breakdown-vertical {
+.breakdown-vertical {
     display: flex;
     flex-direction: column;
     gap: 8px; 
 }
-div.order-history-container .breakdown-item {
+.breakdown-item {
     display: flex;
     justify-content: space-between;
 }
-div.order-history-container .breakdown-label {
+.breakdown-label {
     font-size: 14px;
     color: #6c757d;
 }
-div.order-history-container .breakdown-value {
+.breakdown-value {
     font-size: 16px;
     font-weight: 500;
     color: #2c3e50;
 }
-div.order-history-container .grand-total {
+.grand-total {
     background-color: #f8f9fa;
     padding: 16px 20px;
     text-align: right;
@@ -248,67 +250,67 @@ div.order-history-container .grand-total {
 
 /* Large desktops and wide screens (1200px) */
 @media (max-width: 1200px) {
-    div.order-history-container .card-order {
+    .card-order {
         margin-bottom: 20px;
     }
 
-    div.order-history-container .order-payment-section {
+    .order-payment-section {
         gap: 15px;
         padding: 15px;
     }
 
-    div.order-history-container .breakdown-section {
+    .breakdown-section {
         padding: 15px;
     }
 }
 
 /* Tablets and smaller laptops (1024px) */
 @media (max-width: 1024px) {
-    div.order-history-container .order-header {
+    .order-header {
         padding: 12px 15px;
     }
 
-    div.order-history-container .order-body {
+    .order-body {
         padding: 15px;
     }
 
-    div.order-history-container .order-details {
+    .order-details {
         gap: 12px;
     }
 
-    div.order-history-container .detail-value,
-    div.order-history-container .payment-value,
-    div.order-history-container .breakdown-value {
+    .detail-value,
+    .payment-value,
+    .breakdown-value {
         font-size: 15px;
     }
 }
 
 /* Large mobile devices (768px) */
 @media (max-width: 768px) {
-    div.order-history-container .order-header {
+    .order-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
 
-    div.order-history-container .order-status {
+    .order-status {
         align-self: flex-start;
     }
 
-    div.order-history-container .order-details, 
-    div.order-history-container .order-payment-section {
+    .order-details, 
+    .order-payment-section {
         grid-template-columns: 1fr;
     }
 
-    div.order-history-container .item-list li {
+    .item-list li {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
     }
 
-    div.order-history-container .item-quantity, 
-    div.order-history-container .item-price, 
-    div.order-history-container .item-total {
+    .item-quantity, 
+    .item-price, 
+    .item-total {
         text-align: left;
         padding: 4px 0;
         width: 100%;
@@ -316,25 +318,25 @@ div.order-history-container .grand-total {
         justify-content: space-between;
     }
 
-    div.order-history-container .item-quantity::before {
+    .item-quantity::before {
         content: "Quantity: ";
         font-weight: normal;
         color: #6c757d;
     }
 
-    div.order-history-container .item-price::before {
+    .item-price::before {
         content: "Unit Price: ";
         font-weight: normal;
         color: #6c757d;
     }
 
-    div.order-history-container .item-total::before {
+    .item-total::before {
         content: "Total: ";
         font-weight: normal;
         color: #6c757d;
     }
 
-    div.order-history-container .grand-total {
+    .grand-total {
         padding: 12px 15px;
         font-size: 16px;
     }
@@ -342,50 +344,50 @@ div.order-history-container .grand-total {
 
 /* Medium phones (576px) */
 @media (max-width: 576px) {
-    div.order-history-container .order-orderId {
+    .order-orderId {
         font-size: 16px;
     }
     
-    div.order-history-container .items-title {
+    .items-title {
         font-size: 15px;
     }
 
-    div.order-history-container .payment-title,
-    div.order-history-container .breakdown-title {
+    .payment-title,
+    .breakdown-title {
         font-size: 16px;
     }
 }
 
 /* Small phones (400px) */
 @media (max-width: 400px) {
-    div.order-history-container .order-header {
+    .order-header {
         padding: 10px;
     }
     
-    div.order-history-container .order-body {
+    .order-body {
         padding: 10px;
     }
 
-    div.order-history-container .order-payment-section,
-    div.order-history-container .breakdown-section {
+    .order-payment-section,
+    .breakdown-section {
         padding: 12px;
     }
     
-    div.order-history-container .detail-value,
-    div.order-history-container .payment-value,
-    div.order-history-container .breakdown-value {
+    .detail-value,
+    .payment-value,
+    .breakdown-value {
         font-size: 14px;
     }
 
-    div.order-history-container .item-name {
+    .item-name {
         font-size: 15px;
     }
 
-    div.order-history-container .item-sku {
+    .item-sku {
         font-size: 13px;
     }
 
-    div.order-history-container .grand-total {
+    .grand-total {
         font-size: 15px;
         padding: 10px;
     }

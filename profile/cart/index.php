@@ -105,8 +105,9 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../../css/profile_styles.css">
+
         <link rel="stylesheet" href="../../css/cart_styles.css">
+        <link rel="stylesheet" href="../../css/profile_styles.css">
         <link rel="stylesheet" href="../../css/styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
@@ -116,7 +117,7 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
     <body>
         <header><?php include("../../header.php") ?></header>
 
-        <div class="cart-container">
+        <div class="main-container">
 
             <!-- left side bar setting -->
             <div id="profileSettingSideBar">  
@@ -137,7 +138,7 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Cart</h1>
+                    <h1 style="text-align: left;">Cart</h1>
                     <p>View the items you have added before proceeding to checkout.</p>
                 </div>
                 <div class="content">
@@ -180,7 +181,7 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
 ?>
     <div class="cart-item-card">  
         <!-- Delete button -->
-        <button type="submit" class="deleteButton cart-deleteButton" 
+        <button type="submit" class="cart-deleteButton" 
                 name="delete" value="<?= $item['cart_item_id']; ?>">X</button>
 
         <!-- Product Image -->

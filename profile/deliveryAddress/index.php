@@ -63,7 +63,7 @@ $stmt->close();
     <body>
         <header><?php include("../../header.php") ?></header>
 
-        <div class="delivery-address-container">
+        <div class="main-container">
 
             <!-- left side bar setting -->
             <div id="profileSettingSideBar">  
@@ -84,7 +84,7 @@ $stmt->close();
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Delivery Address</h1>
+                    <h1 style="text-align: left;">Delivery Address</h1>
                     <p>Set or update your default delivery address for future orders.</p>
                 </div>
                 <div class="content">

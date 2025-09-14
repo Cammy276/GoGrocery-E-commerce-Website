@@ -53,7 +53,7 @@ if (isset($_SESSION['user_id'])) {
 
         <header><?php include("../../header.php") ?></header>
 
-        <div class="profile-settings-container">
+        <div class="main-container">
 
             <!-- left side bar setting -->
             <div id="profileSettingSideBar">  
@@ -74,7 +74,7 @@ if (isset($_SESSION['user_id'])) {
             <!--- right content space -->
             <div id="profileContent">
                 <div class="content-header">
-                    <h1>Profile Settings</h1>
+                    <h1 style="text-align: left;">Profile Settings</h1>
                     <p>Manage your profile</p>
                 </div>
                 <div class="content">
@@ -157,7 +157,7 @@ if (isset($_SESSION['user_id'])) {
 
                             <?php if (!$isGuest): ?>
                                 <button type="submit" class="btn btn-success mt-3 w-100 d-none saveButton">Save Changes</button>
-                                <a href="../../auth/forgot_password.php" class="btn btn-primary mt-3 w-100 changePasswordBtn">Change Password</a>
+                                <a href="../../auth/forgot_password.php" class="btn mt-3 w-100 changePasswordBtn">Change Password</a>
                             <?php else: ?>
 
                             <a href="../../auth/login.php" class="btn btn-primary mt-3 w-100 saveButton">Log In</a>
