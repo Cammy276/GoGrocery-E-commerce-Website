@@ -73,13 +73,13 @@ div.delete-account-container .btn-home:hover {
 }
 
 div.delete-account-container .btn-confirm,
-div.delete-account-container .btn-login {
+div.delete-account-container .btn-signup {
   background:  #009c99;
   color: #fff;
 }
 
 div.delete-account-container .btn-confirm:hover,
-div.delete-account-container .btn-login:hover {
+div.delete-account-container .btn-signup:hover {
   background: #10adab;
 }
 
