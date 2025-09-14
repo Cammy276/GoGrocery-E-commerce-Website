@@ -1,7 +1,6 @@
 <?php
 
 require_once(__DIR__ . '/connect_db.php');
-require_once(__DIR__ . '/header.php'); // Include the header
 
 $user_id = $_SESSION['user_id'] ?? null;
 
@@ -46,12 +45,13 @@ while ($cat = $topCategories->fetch_assoc()) {
         $placeholders = implode(',', array_fill(0, count($all_category_ids), '?'));
         $types = str_repeat('i', count($all_category_ids));
         $sql = "SELECT p.product_id, p.product_name, p.unit_price, p.slug,
-                       pi.product_image_url, pi.alt_text
-                FROM products p
-                LEFT JOIN product_images pi ON p.product_id = pi.product_id
-                WHERE p.category_id IN ($placeholders)
-                ORDER BY RAND()
-                LIMIT 10";
+               p.special_offer_label,  -- <-- new
+               pi.product_image_url, pi.alt_text
+        FROM products p
+        LEFT JOIN product_images pi ON p.product_id = pi.product_id
+        WHERE p.category_id IN ($placeholders)
+        ORDER BY RAND()
+        LIMIT 10";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param($types, ...$all_category_ids);
         $stmt->execute();
@@ -101,7 +101,17 @@ function getCartInfo($conn, $user_id){
 }
 $cart_data = $user_id ? getCartInfo($conn,$user_id) : ['total_qty'=>0,'total_price'=>0.00];
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Page</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/styles.css">
+<link rel="stylesheet" href="./css/index_display_styles.css">
+</head>
+<body>
 <div class="container my-4">
 <?php foreach ($categoryData as $cat): ?>
     <div class="category-section">
@@ -124,59 +134,37 @@ $cart_data = $user_id ? getCartInfo($conn,$user_id) : ['total_qty'=>0,'total_pri
             <button class="scroll-btn right" onclick="scrollRight(this)"><i class="bi bi-chevron-right"></i></button>
         </div>
         <?php endif; ?>
-
         <div class="carousel-wrapper">
-            <button class="scroll-btn left" onclick="scrollLeft(this)"><i class="bi bi-chevron-left"></i></button>
-            <div class="scroll-container">
-                <?php foreach($cat['products'] as $p):
-                    $slug = $p['slug'] ?? $p['product_id'];
-                    $link = BASE_URL . "products-listing/product.php?slug=" . urlencode($slug);
-                    $img  = getImageUrl($p['product_image_url']);
-                    $alt  = $p['alt_text'] ?? $p['product_name'];
-                    $in_wishlist = in_array($p['product_id'], $wishlist_items);
-                ?>
-                <div class="product-item">
-                    <a href="<?= $link ?>" style="text-decoration:none;color:inherit;">
-                        <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($alt) ?>">
-                        <h5><?= htmlspecialchars($p['product_name']) ?></h5>
-                        <p>RM <?= number_format($p['unit_price'],2) ?></p>
-                    </a>
-                    <button class="wishlist-icon <?= $in_wishlist ? 'filled' : '' ?>" data-product-id="<?= $p['product_id'] ?>">
-                        <i class="bi bi-heart<?= $in_wishlist ? '-fill' : '' ?>"></i>
-                    </button>
-                </div>
-                <?php endforeach; ?>
+    <button class="scroll-btn left" onclick="scrollLeft(this)"><i class="bi bi-chevron-left"></i></button>
+    <div class="scroll-container">
+        <?php foreach($cat['products'] as $p):
+            $slug = $p['slug'] ?? $p['product_id'];
+            $link = BASE_URL . "products-listing/product.php?slug=" . urlencode($slug);
+            $img  = getImageUrl($p['product_image_url']);
+            $alt  = $p['alt_text'] ?? $p['product_name'];
+            $in_wishlist = in_array($p['product_id'], $wishlist_items);
+        ?>
+        <div class="product-item">
+            <a href="<?= $link ?>" style="text-decoration:none;color:inherit;">
+                <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($alt) ?>">
+                <h5><?= htmlspecialchars($p['product_name']) ?></h5>
+                <p>RM <?= number_format($p['unit_price'],2) ?></p>
+            </a>
+            <div class="product-footer">
+                <?php if(!empty($p['special_offer_label'])): ?>
+                    <span class="special-offer"><?= htmlspecialchars($p['special_offer_label']) ?></span>
+                <?php endif; ?>
+                <button class="wishlist-icon <?= $in_wishlist ? 'filled' : '' ?>" data-product-id="<?= $p['product_id'] ?>">
+                    <i class="bi bi-heart<?= $in_wishlist ? '-fill' : '' ?>"></i>
+                </button>
             </div>
-            <button class="scroll-btn right" onclick="scrollRight(this)"><i class="bi bi-chevron-right"></i></button>
         </div>
+        <?php endforeach; ?>
     </div>
+    <button class="scroll-btn right" onclick="scrollRight(this)"><i class="bi bi-chevron-right"></i></button>
+</div>
 <?php endforeach; ?>
 </div>
-
-<style>
-/* Minimal styling */
-body { background:#f8f8f8; }
-.category-section { margin-bottom:60px; }
-.category-title { font-size:24px; margin-bottom:15px; }
-.carousel-wrapper { position:relative; }
-.scroll-container { display:flex; gap:15px; overflow-x:auto; scroll-behavior:smooth; padding-bottom:10px; }
-.scroll-container::-webkit-scrollbar { display:none; }
-.scroll-btn { display: none; position:absolute; top:40%; transform:translateY(-50%); background:rgba(255,255,255,0.8); border:none; padding:5px; border-radius:50%; cursor:pointer; z-index:10; }
-.scroll-btn.left { left:-15px; }
-.scroll-btn.right { right:-15px; }
-.subcategories { display:flex; gap:10px; flex-wrap:nowrap; }
-.subcategories a { flex: 0 0 auto; background-color: #FFFFE4; border: 1px solid #ddd; border-radius: 6px; padding: 6px 12px; font-size: 14px; color: #333; text-decoration: none; height:50px; line-height:1.1; display:flex; justify-content:center; align-items:center; transition: all 0.2s ease; }
-.subcategories a:hover { background-color: #118997; color: #fff; }
-.product-card, .product-item { flex:0 0 200px; border:1px solid #ddd; border-radius:8px; background:#fff; padding:10px; text-align:center; transition: transform 0.2s, background-color 0.2s, color 0.2s; position:relative; }
-.product-card:hover, .product-item:hover { transform:scale(1.05); }
-.product-card img, .product-item img { width:100%; height:150px; object-fit:cover; margin-bottom:10px; border-radius:4px; background:#fff; }
-.product-card h3, .product-card p, .product-item h5, .product-item p { text-align:center; margin:5px 0; }
-.wishlist-icon { position:absolute; top:10px; right:10px; background:none; border:none; cursor:pointer; transition: transform 0.2s, color 0.2s; }
-.wishlist-icon i { font-size:20px; color:#dc3545; }
-.wishlist-icon.filled i { color:#e60023; }
-.wishlist-icon:hover { transform:scale(1.2); }
-</style>
-
 <script>
 // Scroll functions
 function scrollLeft(btn){ btn.nextElementSibling.scrollBy({ left:-300, behavior:'smooth' }); }
@@ -240,4 +228,5 @@ document.querySelectorAll('.wishlist-icon').forEach(btn => {
     });
 });
 </script>
-
+</body>
+</html>
