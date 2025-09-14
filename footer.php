@@ -37,13 +37,13 @@
         <!-- Column 3: Products -->
         <section aria-labelledby="footer-products">
           <h2 id="footer-products">Products</h2>
-          <p><a href="<?= BASE_URL ?>products-listing/fresh_produces">Fresh Produces</a></p>
-          <p><a href="<?= BASE_URL ?>products-listing/chilled_frozen">Chilled & Frozen</a></p>
-          <p><a href="<?= BASE_URL ?>products-listing/essentials_commodities">Food Essentials & Commodities</a></p>
-          <p><a href="<?= BASE_URL ?>products-listing/snacks">Snacks</a></p>
-          <p><a href="<?= BASE_URL ?>products-listing/beverages">Beverages</a></p>
-          <p><a href="<?= BASE_URL ?>products-listing/household">Household Products</a></p>
-          <p><a href="<?= BASE_URL ?>products-listing/beauty_health">Beauty & Health</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/category.php?slug=fresh_produces">Fresh Produces</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/category.php?slug=chilled_frozen">Chilled & Frozen</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/category.php?slug=food_essentials_commodities">Food Essentials & Commodities</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/category.php?slug=snacks">Snacks</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/category.php?slug=beverages">Beverages</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/category.php?slug=household_products">Household Products</a></p>
+          <p><a href="<?= BASE_URL ?>products-listing/category.php?slug=beauty_health">Beauty & Health</a></p>
         </section>
 
         <!-- Column 4: Policies -->
@@ -60,7 +60,6 @@
           <h2 id="footer-help">Help Center</h2>
           <p><a href="<?= BASE_URL ?>help/contact">Contact Us</a></p>
           <p><a href="<?= BASE_URL ?>help/faq">FAQs</a></p>
-          <p><a href="<?= BASE_URL ?>help/live_chat">Live Chat</a></p>
         </section>
 
         <!-- Column 6: Contact Details + Social Icons -->

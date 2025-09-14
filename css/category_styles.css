@@ -88,3 +88,75 @@ div.category-container .subcategories a {
 div.category-container .subcategories a:hover {
     background: #ddd;
 }
+
+/* Header container: subcategories left, sort button right */
+div.category-container .category-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* allow wrapping on small screens */
+    margin-bottom: 15px;
+}
+
+/* Keep subcategories in a row */
+div.category-container .category-header-inner .subcategories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    /* allow horizontal scroll if too long */
+    flex: 1;
+    /* take all remaining space */
+}
+
+div.category-container .category-header-inner {
+    display: flex;
+    justify-content: space-between;
+    /* left = subcategories, right = sort button */
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: nowrap;
+    /* prevent wrapping */
+}
+
+div.category-container .category-header-inner .subcategories::-webkit-scrollbar {
+    display: none;
+    /* hide scrollbar */
+}
+
+/* Filter/sort button alignment */
+div.category-container .filter-sort {
+    flex: 0 0 0 auto;
+    /* keep sort button at natural width */
+    margin-left: 850px;
+    /* optional spacing */
+}
+
+/* Dropdown positioning */
+div.category-container .filter-sort-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+div.category-container .filter-sort-dropdown.show {
+    display: block;
+}
+
+div.category-container .filter-sort-dropdown a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+}
+
+div.category-container .filter-sort-dropdown a:hover {
+    background: #118997;
+    color: #fff;
+}

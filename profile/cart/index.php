@@ -92,9 +92,6 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
 
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -160,71 +157,67 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
                     <?php else: ?>
                         <br/>
                     <?php endif; ?>
+                     
+                    <form id="cartForm" method="POST">
+<?php foreach ($cartList as $item): 
+    // Fetch product image for this cart item
+    $productStmt = $conn->prepare("SELECT * FROM product_images WHERE product_id = ?");
+    $productStmt->bind_param("i", $item['product_id']);
+    $productInfo = null;
 
-                    <form id="cartForm" method = "POST">
-                        <?php 
-                            // get product image
-                            foreach ($cartList as $item): 
-                                $productStmt = $conn->prepare("SELECT * FROM product_images WHERE product_id=?");
-                                $productStmt->bind_param("i", $item['product_id']);
-                                if ($productStmt->execute()) {
-                                    $productResult = $productStmt->get_result();
-                                    $productInfo = $productResult->fetch_assoc();
-                                } else {
-                                    $errorMsg = $productStmt->error;
-                                }
-                        ?>
-                
-                            <div class="cart-item-card">  
-                                <!--- delete item --->                          
-                                <button type="submit" class="deleteButton cart-deleteButton" name="delete" value="<?php echo $item['cart_item_id']; ?>" >X</button>
+    if ($productStmt->execute()) {
+        $productResult = $productStmt->get_result();
+        $productInfo = $productResult->fetch_assoc();
+    }
+    $productStmt->close();
 
-                                <div class="cart-item-image">
-                                    <img src="<?php echo htmlspecialchars('../' . $productInfo['product_image_url']); ?>" 
-                                        alt="<?php echo htmlspecialchars($productInfo['alt_text']); ?>" />
-                                </div>
-                                
-                                <div class="cart-item-content">
-                                    <div class="cart-item-header">
-                                        <div class="cart-item-info">
-                                            <p class="cart-item-name"><?php echo htmlspecialchars($item['product_name']); ?></p>
-                                            <p class="cart-item-sku">SKU: <?php echo htmlspecialchars($item['sku']); ?></p>
-                                            <p class="cart-item-price">
-                                                Unit price: RM <?php echo number_format($item['unit_price'], 2); ?>
-                                            </p>
-                                            <p class="cart-item-price">
-                                                Product Discount: 
-                                                <?php echo !empty($item['line_discount']) && $item['line_discount'] > 0 ? 
-                                                '-RM ' . number_format($item['line_discount'], 2) : 
-                                                '-'; ?>
-                                            </p>
-                                        </div>
+    // Determine image path, fallback to placeholder if missing
+    $imagePath = $productInfo['product_image_url'] ?? 'images/products/placeholder.png';
+    $altText = $productInfo['alt_text'] ?? 'Product Image';
 
-                                        <div class="cart-item-details">
-                                        
-                                        
-                                        
-                                    </div>
-                                    <div class="cart-detail-item">
-                                        <label class="cart-detail-label">Quantity</label>
-                                        <input type="number" class="cart-quantity-input"
-                                            name="quantity[<?php echo $item['cart_item_id']; ?>]"
-                                            value="<?php echo $item['quantity']; ?>" 
-                                            min="1" 
-                                            data-cart-id="<?php echo $item['cart_item_id']; ?>">
-                                    </div>
+    // Build full URL
+    $imageUrl = rtrim(BASE_URL, '/') . '/' . ltrim($imagePath, '/');
+?>
+    <div class="cart-item-card">  
+        <!-- Delete button -->
+        <button type="submit" class="deleteButton cart-deleteButton" 
+                name="delete" value="<?= $item['cart_item_id']; ?>">X</button>
 
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+        <!-- Product Image -->
+        <div class="cart-item-image">
+            <img src="<?= htmlspecialchars($imageUrl) ?>" alt="<?= htmlspecialchars($altText) ?>">
+        </div>
+        
+        <!-- Product Info -->
+        <div class="cart-item-content">
+            <div class="cart-item-header">
+                <div class="cart-item-info">
+                    <p class="cart-item-name"><?= htmlspecialchars($item['product_name']); ?></p>
+                    <p class="cart-item-sku">SKU: <?= htmlspecialchars($item['sku']); ?></p>
+                    <p class="cart-item-price">
+                        Unit price: RM <?= number_format($item['unit_price'], 2); ?>
+                    </p>
+                    <p class="cart-item-price">
+                        Product Discount: <?= !empty($item['line_discount']) && $item['line_discount'] > 0 ? 
+                            '-RM ' . number_format($item['line_discount'], 2) : '-'; ?>
+                    </p>
+                </div>
 
-                        
-                        <input type="submit" class="checkoutButton" name="checkout" value="Proceed to Checkout" <?php echo (count($cartList) === 0) ? 'disabled' : ''; ?>>
+                <div class="cart-detail-item">
+                    <label class="cart-detail-label">Quantity</label>
+                    <input type="number" class="cart-quantity-input"
+                        name="quantity[<?= $item['cart_item_id']; ?>]"
+                        value="<?= $item['quantity']; ?>" 
+                        min="1" 
+                        data-cart-id="<?= $item['cart_item_id']; ?>">
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 
-                
-                    </form>
-                    
+<input type="submit" class="checkoutButton" name="checkout" value="Proceed to Checkout" <?= (count($cartList) === 0) ? 'disabled' : ''; ?>>
+</form>
                 </div>
             </div>
         </div>

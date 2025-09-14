@@ -172,7 +172,7 @@ css\reward_style.css
                             <div class="voucher-card">
                                 <!-- Image on the left -->
                                 <img class="voucher-image" 
-                                    src="<?php echo htmlspecialchars($voucher['voucher_image_url']); ?>" 
+                                    src="<?php echo htmlspecialchars(BASE_URL . ltrim($voucher['voucher_image_url'], '/')); ?>" alt="Voucher Image"
                                     alt="Voucher Image">
 
                                 <!-- Content on the right -->

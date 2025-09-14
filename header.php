@@ -139,12 +139,12 @@ document.addEventListener("click", function(e) {
           <?php endif; ?>
       </div>
       <div class="icon-box">
-        <a href="<?=BASE_URL?>wishlist/"><i class="bi bi-heart-fill"></i></a>
+        <a href="<?=BASE_URL?>profile/wishlist/index.php"><i class="bi bi-heart-fill"></i></a>
         <span class="icon-badge" id="wishlist-count"><?= $wishlist_count ?></span>
         <span class="label">Wishlist</span>
       </div>
       <div class="icon-box">
-        <a href="<?=BASE_URL?>cart.php"><i class="bi bi-cart-fill"></i></a>
+        <a href="<?=BASE_URL?>profile/cart/index.php"><i class="bi bi-cart-fill"></i></a>
         <span class="icon-badge" id="cart-count"><?= (int)$cart_count ?></span>
         <span class="label" id="cart-total">RM <?= number_format((float)$cart_total, 2) ?></span>
       </div>
@@ -166,7 +166,6 @@ document.addEventListener("click", function(e) {
       <a href="javascript:void(0)" class="dropdown-toggle">
         <i class="bi bi-exclamation-circle-fill"></i>
         <span class="label">Help Center</span>
-        <i class="bi bi-caret-down-fill dropdown-arrow"></i>
       </a>
       <div class="dropdown-menu">
         <a href="<?= BASE_URL ?>help/faq.php" class="<?= ($current_page == 'faq.php' ? 'active' : '') ?>">FAQs</a>
@@ -174,13 +173,13 @@ document.addEventListener("click", function(e) {
       </div>
     </div>
     <div class="icon-box">
-      <a href="<?= BASE_URL ?>best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span class="label">Best Seller</span></a>
+      <a href="<?= BASE_URL ?>profile/order/index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-bag-fill"></i></i><span class="label">Orders</span></a>
     </div>
     <div class="icon-box">
-      <a href="<?= BASE_URL ?>special-deal.php" class="<?= ($current_page == 'special-deal.php' ? 'active' : '') ?>"><i class="bi bi-tag-fill"></i><span class="label">Special Deal</span></a>
+      <a href="<?= BASE_URL ?>profile/deliveryAddress/index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-geo-alt-fill"></i><span class="label">Delivery Address</span></a>
     </div>
     <div class="icon-box">
-      <a href="<?= BASE_URL ?>new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
+      <a href="<?= BASE_URL ?>profile/reward/index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-award-fill"></i> <span class="label">Rewards</span></a>
     </div>
   </div>
 </header>

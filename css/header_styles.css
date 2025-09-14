@@ -301,3 +301,7 @@ header.site-header .icon-box i:hover {
     color: #118997;
     /* Change color on hover */
 }
+
+header.stie-header .icon-box dropdown .dropdown-toggle {
+    margin-right: 30px;
+}

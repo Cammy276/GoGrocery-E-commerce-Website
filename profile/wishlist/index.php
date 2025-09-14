@@ -184,7 +184,7 @@ if (isset($_POST['moveToCart'])) {
                             <button type="submit" class="deleteButton cart-deleteButton" name="delete" value="<?php echo $item['product_id']; ?>" >X</button>
 
                             <div class="cart-item-image">
-                                <img src="<?php echo htmlspecialchars('../' . $item['product_image_url']); ?>" 
+                                <img src="<?php echo htmlspecialchars(BASE_URL . ltrim($item['product_image_url'], '/')); ?>" alt="Product Image"
                                     alt="<?php echo htmlspecialchars($item['alt_text']); ?>" />
                             </div>
                             

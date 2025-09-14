@@ -108,30 +108,27 @@ if ($category['parent_id'] === null) {
     <?php include '../header.php'; ?>
 </header>
 <body>
-    <div class="category-container">
 <h1><?= htmlspecialchars($category['name']) ?></h1>
-
-<?php if (!empty($subcategories)): ?>
-<div class="subcategories">
-    <?php foreach ($subcategories as $sub): ?>
-        <a href="category.php?slug=<?= urlencode($sub['slug']) ?>">
-            <?= htmlspecialchars($sub['name']) ?>
-        </a>
-    <?php endforeach; ?>
-</div>
-<?php endif; ?>
-
-<div class="category-header">
-    <h1><?= htmlspecialchars($category['name']) ?></h1>
-    <div class="filter-sort">
-        <button id="filterSortBtn" class="<?= $sortApplied ? 'active' : '' ?>">
-            <i class="bi <?= $sortApplied ? 'bi-funnel-fill' : 'bi-funnel' ?>"></i> Sort
-        </button>
-        <div class="filter-sort-dropdown" id="filterSortDropdown">
-            <a href="?slug=<?= urlencode($slug) ?>&sort=price_asc">Price: Low to High</a>
-            <a href="?slug=<?= urlencode($slug) ?>&sort=price_desc">Price: High to Low</a>
-            <a href="?slug=<?= urlencode($slug) ?>&sort=newest">Newest</a>
-            <a href="?slug=<?= urlencode($slug) ?>&sort=popular">Most Popular</a>
+<div class="category-container">
+    <div class="category-header">
+    <div class="category-header-inner">
+        <div class="subcategories">
+            <?php foreach ($subcategories as $sub): ?>
+                <a href="category.php?slug=<?= urlencode($sub['slug']) ?>">
+                    <?= htmlspecialchars($sub['name']) ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+        <div class="filter-sort">
+            <button id="filterSortBtn" class="<?= $sortApplied ? 'active' : '' ?>">
+                <i class="bi <?= $sortApplied ? 'bi-funnel-fill' : 'bi-funnel' ?>"></i> Sort
+            </button>
+            <div class="filter-sort-dropdown" id="filterSortDropdown">
+                <a href="?slug=<?= urlencode($slug) ?>&sort=price_asc">Price: Low to High</a>
+                <a href="?slug=<?= urlencode($slug) ?>&sort=price_desc">Price: High to Low</a>
+                <a href="?slug=<?= urlencode($slug) ?>&sort=newest">Newest</a>
+                <a href="?slug=<?= urlencode($slug) ?>&sort=popular">Most Popular</a>
+            </div>
         </div>
     </div>
 </div>
