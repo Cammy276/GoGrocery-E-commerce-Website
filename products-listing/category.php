@@ -99,6 +99,8 @@ include __DIR__ . '/../livechat/chat_UI.php';
 <head>
 <meta charset="UTF-8">
 <title><?= htmlspecialchars($category['name']) ?></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../css/styles.css">
 <link rel="stylesheet" href="../css/header_styles.css">
