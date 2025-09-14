@@ -121,6 +121,7 @@ $cart_data = $user_id ? getCartInfo($conn,$user_id) : ['total_qty'=>0,'total_pri
                 <?= htmlspecialchars($cat['category_name']) ?>
             </a>
         </h3>
+        <hr/>
 
         <?php if(!empty($cat['subcategories'])): ?>
         <div class="carousel-wrapper">
@@ -164,7 +165,9 @@ $cart_data = $user_id ? getCartInfo($conn,$user_id) : ['total_qty'=>0,'total_pri
     </div>
     <button class="scroll-btn right" onclick="scrollRight(this)"><i class="bi bi-chevron-right"></i></button>
 </div>
-                </div>
+<br/>
+<hr/>
+</div>
 <?php endforeach; ?>
 </div>
 <script>

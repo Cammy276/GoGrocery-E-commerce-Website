@@ -65,6 +65,7 @@ include("header.php");
         </button>
     </div>
 
+    <br/>
     <?php 
         include("index_display.php")
     ?>
