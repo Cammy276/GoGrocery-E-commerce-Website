@@ -1,79 +1,82 @@
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-}
-
-.login-container {
+/* ================= LOGIN PAGE STYLES ================= */
+div.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-.login-box {
+div.login-container .login-box {
     padding: 40px;
     width: 100%;
     max-width: 400px;
     text-align: center;
+    position: relative;
 }
 
-h2 {
+div.login-container h2 {
     font-size: 24px;
     font-weight: bold;
     color: #009c99;
     margin-bottom: 20px;
 }
 
-.input-container {
+div.login-container .input-container {
     width: 100%;
     margin-bottom: 20px;
     text-align: left;
+    position: relative;
 }
 
-label {
+div.login-container label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
 }
 
-input[type="text"],
-input[type="password"] {
+div.login-container input[type="text"],
+div.login-container input[type="password"] {
     width: 100%;
     padding: 12px;
     font-size: 16px;
     border: 1px solid #2d2d2d;
     border-radius: 4px;
     margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
-input[type="text"].error,
-input[type="password"].error {
+div.login-container input[type="text"].error,
+div.login-container input[type="password"].error {
     border: 1px solid red;
 }
 
-.error-message {
+div.login-container .error-message {
     display: none;
     color: red;
     font-size: 12px;
     margin-top: 5px;
 }
 
-.show-password {
+div.login-container .show-password,
+div.login-container .clear-password {
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
 }
 
-.action-buttons {
-    margin-top: 1px;
-    margin-bottom:1px;
+div.login-container .clear-password {
+    right: 40px;
 }
 
-.login-btn,
-.guest-btn {
+div.login-container .action-buttons {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+div.login-container .login-btn,
+div.login-container .guest-btn {
     width: 106%;
     padding: 12px;
     font-size: 16px;
@@ -83,85 +86,70 @@ input[type="password"].error {
     margin-bottom: 10px;
 }
 
-.login-btn {
+div.login-container .login-btn {
     background-color: #009c99;
     color: white;
 }
 
-.login-btn:hover {
+div.login-container .login-btn:hover {
     background-color: #10adab;
 }
 
-.guest-btn {
+div.login-container .guest-btn {
     background-color: #0c0b0b40;
     color: #333;
-    
 }
 
-.guest-btn:hover {
+div.login-container .guest-btn:hover {
     background-color: #d2cbcb;
 }
-.register-link{
-    margin-top:1px;
+
+div.login-container .register-link {
+    margin-top: 1px;
 }
-.register-link a {
+
+div.login-container .register-link a {
     color: #009c99;
     font-weight: bold;
     text-decoration: none;
     text-align: center;
 }
 
-.register-link a:hover {
+div.login-container .register-link a:hover {
     text-decoration: underline;
 }
 
-
-.show-password,
-.clear-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-.clear-password {
-    right: 40px;
-}
-
-.forgot-password-link {
+div.login-container .forgot-password-link {
     width: 106%;
     text-align: right;
-    margin-top:1px;
+    margin-top: 1px;
 }
 
-.forgot-password-link a {
+div.login-container .forgot-password-link a {
     font-size: 14px;
     color: #009c99;
     font-weight: bold;
     text-decoration: none;
 }
 
-.forgot-password-link a:hover {
+div.login-container .forgot-password-link a:hover {
     text-decoration: underline;
 }
 
-
-/*Responsive styles*/
-/* Responsive for tablets (max-width: 480px) */
+/* ================= RESPONSIVE STYLES ================= */
 @media screen and (max-width: 480px) {
-    .login-box {
+    div.login-container .login-box {
         padding: 20px 30px;
         width: 100%;
     }
 
-    input[type="text"],
-    input[type="password"] {
+    div.login-container input[type="text"],
+    div.login-container input[type="password"] {
         padding: 10px;
     }
 
-    .login-btn,
-    .guest-btn {
+    div.login-container .login-btn,
+    div.login-container .guest-btn {
         padding: 10px;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 require_once(__DIR__ . '/connect_db.php');
 require_once(__DIR__ . '/header.php'); // Include the header
 

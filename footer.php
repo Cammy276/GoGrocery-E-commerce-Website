@@ -20,12 +20,12 @@
       }
   </script>
   <body>
-    <footer>
+    <footer class="site-footer">
       <div class="footer-grid">
 
         <!-- Column 1: Logo -->
         <section class="logo" aria-label="GoGrocery logo">
-          <a href="index.php"><img src="<?= BASE_URL ?>/images/logo/gogrocery_logo.png" alt="GoGrocery logo" loading="lazy" class="logo-img" />
+          <a href="index.php"><img src="<?= BASE_URL ?>/images/logo/gogrocery_logo.png" alt="GoGrocery logo" loading="lazy" class="logo-img" /></a>
         </section>
 
         <!-- Column 2: Company -->

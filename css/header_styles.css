@@ -1,5 +1,5 @@
 /* ================= HEADER TOP ================= */
-.header-top {
+header.site-header .header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,12 +7,13 @@
     height: 80px;
 }
 
-.header-left img {
+header.site-header .header-left img {
     height: 50px;
+    margin: 25px;
 }
 
 /* ================= HEADER MIDDLE ================= */
-.header-middle {
+header.site-header .header-middle {
     display: flex;
     gap: 10px;
     flex: 1;
@@ -21,8 +22,8 @@
 }
 
 /* ================= CATEGORIES MENU & SEARCH BOX ================= */
-.categories-menu,
-.search-box {
+header.site-header .categories-menu,
+header.site-header .search-box {
     background: #fff;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -30,7 +31,7 @@
     position: relative;
 }
 
-.categories-btn {
+header.site-header .categories-btn {
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
@@ -39,8 +40,8 @@
     gap: 10px;
 }
 
-.categories-btn i,
-.search-box i {
+header.site-header .categories-btn i,
+header.site-header .search-box i {
     justify-content: center !important;
     margin: 6px !important;
     cursor: pointer;
@@ -48,13 +49,13 @@
     height: 16px;
 }
 
-.categories-btn p {
+header.site-header .categories-btn p {
     margin: 0;
     padding: 0;
 }
 
 /* ================= CATEGORIES DROPDOWN ================= */
-.categories-dropdown {
+header.site-header .categories-dropdown {
     display: none;
     position: absolute;
     top: 110%;
@@ -67,18 +68,18 @@
     z-index: 1000;
 }
 
-.categories-menu:hover .categories-dropdown {
+header.site-header .categories-menu:hover .categories-dropdown {
     display: block;
 }
 
 /* ---------------- Dropdown Items ---------------- */
-.categories-dropdown ul {
+header.site-header .categories-dropdown ul {
     list-style: none;
     margin: 0;
     padding: 4px 0;
 }
 
-.categories-dropdown li {
+header.site-header .categories-dropdown li {
     cursor: pointer;
     position: relative;
     color: #000;
@@ -86,7 +87,7 @@
     line-height: 1.3;
 }
 
-.categories-dropdown li a {
+header.site-header .categories-dropdown li a {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -98,17 +99,17 @@
 }
 
 /* Hover effects */
-.categories-dropdown li:hover {
+header.site-header .categories-dropdown li:hover {
     background-color: #FB585D;
     color: #FFF !important;
 }
 
-.categories-dropdown li:hover>a {
+header.site-header .categories-dropdown li:hover>a {
     transform: translateX(5px);
 }
 
 /* Nested submenus */
-.categories-dropdown li.has-children>ul {
+header.site-header .categories-dropdown li.has-children>ul {
     display: none;
     position: absolute;
     top: 0;
@@ -120,11 +121,11 @@
     min-width: 180px;
 }
 
-.categories-dropdown li.has-children:hover>ul {
+header.site-header .categories-dropdown li.has-children:hover>ul {
     display: block;
 }
 
-.categories-dropdown li.has-children>a::after {
+header.site-header .categories-dropdown li.has-children>a::after {
     content: "›";
     font-size: 12px;
     color: #666;
@@ -132,19 +133,19 @@
 }
 
 /* ================= SEARCH BOX ================= */
-.search-box {
+header.site-header .search-box {
     max-width: 500px;
     flex: 1;
 }
 
-.search-form {
+header.site-header .search-form {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-.search-form input {
+header.site-header .search-form input {
     flex: 1;
     border: none;
     outline: none;
@@ -152,7 +153,7 @@
     background: transparent;
 }
 
-.search-form button {
+header.site-header .search-form button {
     border: none;
     background: transparent;
     cursor: pointer;
@@ -161,7 +162,7 @@
 }
 
 /* ================= HEADER RIGHT ================= */
-.header-right {
+header.site-header .header-right {
     display: flex;
     gap: 20px;
     align-items: center;
@@ -170,26 +171,26 @@
     z-index: 1000;
 }
 
-.icon-box {
+header.site-header .icon-box {
     text-align: center;
     position: relative;
     width: 60px;
     min-width: 60px;
 }
 
-.icon-box i {
+header.site-header .icon-box i {
     font-size: 20px;
     display: block;
     margin: 0 auto;
 }
 
-.icon-box span.label {
+header.site-header .icon-box span.label {
     display: block;
     font-size: 11px;
     margin-top: 3px;
 }
 
-.icon-badge {
+header.site-header .icon-badge {
     position: absolute;
     top: 0;
     right: 8px;
@@ -201,7 +202,7 @@
 }
 
 /* ================= NAVBAR ================= */
-.navbar {
+header.site-header .navbar {
     display: flex;
     justify-content: center;
     background: #fff;
@@ -213,7 +214,7 @@
     /* important for dropdown */
 }
 
-.navbar a {
+header.site-header .navbar a {
     text-decoration: none;
     color: #333;
     padding: 8px 30px;
@@ -223,17 +224,17 @@
 }
 
 /* ================= HELP CENTER DROPDOWN ================= */
-.icon-box.dropdown {
+header.site-header .icon-box.dropdown {
     position: relative;
     display: inline-block;
 }
 
-.icon-box.dropdown {
+header.site-header .icon-box.dropdown {
     position: relative;
     display: inline-block;
 }
 
-.icon-box.dropdown .dropdown-menu {
+header.site-header .icon-box.dropdown .dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
@@ -247,16 +248,16 @@
     /* Ensure it appears above page content */
 }
 
-.icon-box.dropdown.open .dropdown-menu {
+header.site-header .icon-box.dropdown.open .dropdown-menu {
     display: block;
 }
 
-.dropdown-toggle .dropdown-arrow {
+header.site-header .dropdown-toggle .dropdown-arrow {
     margin-left: 5px;
     font-size: 10px;
 }
 
-.dropdown-menu {
+header.site-header .dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
@@ -270,11 +271,11 @@
     padding: 5px 0;
 }
 
-.dropdown-menu.show {
+header.site-header .dropdown-menu.show {
     display: block !important;
 }
 
-.dropdown-menu a {
+header.site-header .dropdown-menu a {
     display: block;
     padding: 8px 15px;
     font-size: 14px;
@@ -282,8 +283,21 @@
     text-decoration: none;
 }
 
-.dropdown-menu a:hover,
-.dropdown-menu a.active {
+header.site-header .dropdown-menu a:hover,
+header.site-header .dropdown-menu a.active {
     background-color: #118997;
     color: #fff;
+}
+
+/* ================= ICON HOVER EFFECT ================= */
+header.site-header .icon-box i {
+    transition: transform 0.3s ease, color 0.3s ease;
+    /* Smooth animation */
+}
+
+header.site-header .icon-box i:hover {
+    transform: scale(1.2);
+    /* Increase size slightly */
+    color: #118997;
+    /* Change color on hover */
 }

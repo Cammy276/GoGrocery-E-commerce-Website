@@ -82,107 +82,108 @@ document.addEventListener("click", function(e) {
 </head>
 <body>
 
-<!-- TOP HEADER -->
-<div class="header-top">
-  <div class="header-left">
-    <a href="index.php"><img src="<?= BASE_URL ?>images/logo/gogrocery_logo.png" alt="GoGrocery Logo"></a>
-  </div>
+<header class="site-header">
+  <!-- TOP HEADER -->
+  <div class="header-top">
+    <div class="header-left">
+      <a href="index.php"><img src="<?= BASE_URL ?>images/logo/gogrocery_logo.png" alt="GoGrocery Logo"></a>
+    </div>
 
-  <!-- Categories + Search -->
-  <div class="header-middle">
-    <div class="categories-menu">
-      <div class="categories-btn" onclick="toggleCategories()">
-        <i class="bi bi-list"></i>Categories
+    <!-- Categories + Search -->
+    <div class="header-middle">
+      <div class="categories-menu">
+        <div class="categories-btn" onclick="toggleCategories()">
+          <i class="bi bi-list"></i>Categories
+        </div>
+        <div class="categories-dropdown">
+          <ul>
+            <?php
+            function renderCategoryMenu($cats) {
+                foreach ($cats as $cat) {
+                    $cat_link = BASE_URL . "products-listing/category.php?slug=" . urlencode($cat['slug']);
+                    if (!empty($cat['children'])) {
+                        echo "<li class='has-children'>
+                                <a href='$cat_link'>{$cat['name']}</a>
+                                <ul>";
+                        renderCategoryMenu($cat['children']);
+                        echo "</ul></li>";
+                    } else {
+                        echo "<li><a href='$cat_link'>{$cat['name']}</a></li>";
+                    }
+                }
+            }
+            renderCategoryMenu($categories);
+            ?>
+          </ul>
+        </div>
       </div>
-      <div class="categories-dropdown">
-        <ul>
-          <?php
-          function renderCategoryMenu($cats) {
-              foreach ($cats as $cat) {
-                  $cat_link = BASE_URL . "products-listing/category.php?slug=" . urlencode($cat['slug']);
-                  if (!empty($cat['children'])) {
-                      echo "<li class='has-children'>
-                              <a href='$cat_link'>{$cat['name']}</a>
-                              <ul>";
-                      renderCategoryMenu($cat['children']);
-                      echo "</ul></li>";
-                  } else {
-                      echo "<li><a href='$cat_link'>{$cat['name']}</a></li>";
-                  }
-              }
-          }
-          renderCategoryMenu($categories);
-          ?>
-        </ul>
+
+      <!-- Search Box -->
+      <div class="search-box">
+        <form action="search.php" method="GET" class="search-form">
+          <input type="text" name="q" placeholder="Search products, brands, categories...">
+          <button type="submit"><i class="bi bi-search"></i></button>
+        </form>
       </div>
     </div>
 
-    <!-- Search Box -->
-    <div class="search-box">
-      <form action="search.php" method="GET" class="search-form">
-        <input type="text" name="q" placeholder="Search products, brands, categories...">
-        <button type="submit"><i class="bi bi-search"></i></button>
-      </form>
+    <!-- Right Icons -->
+    <div class="header-right">
+      <div class="icon-box">
+          <?php if (isset($_SESSION['user_id'])): ?>
+              <a href="<?=BASE_URL?>profile/settings"><i class="bi bi-person-fill"></i></a>
+              <span class="label">Profile</span>
+          <?php else: ?>
+              <a href="<?=BASE_URL?>auth/login.php"><i class="bi bi-person-fill"></i></a>
+              <span class="label">Login</span>
+          <?php endif; ?>
+      </div>
+      <div class="icon-box">
+        <a href="wishlist.php"><i class="bi bi-heart-fill"></i></a>
+        <span class="icon-badge" id="wishlist-count"><?= $wishlist_count ?></span>
+        <span class="label">Wishlist</span>
+      </div>
+      <div class="icon-box">
+        <a href="cart.php"><i class="bi bi-cart-fill"></i></a>
+        <span class="icon-badge" id="cart-count"><?= (int)$cart_count ?></span>
+        <span class="label" id="cart-total">RM <?= number_format((float)$cart_total, 2) ?></span>
+      </div>
     </div>
   </div>
 
-  <!-- Right Icons -->
-  <div class="header-right">
+  <!-- NAVIGATION -->
+  <div class="navbar">
     <div class="icon-box">
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="<?=BASE_URL?>profile/settings"><i class="bi bi-person-fill"></i></a>
-            <span class="label">Profile</span>
-        <?php else: ?>
-            <a href="<?=BASE_URL?>auth/login.php"><i class="bi bi-person-fill"></i></a>
-            <span class="label">Login</span>
-        <?php endif; ?>
+      <a href="<?= BASE_URL ?>index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-house-fill"></i><span class="label">Home</span></a>
     </div>
     <div class="icon-box">
-      <a href="wishlist.php"><i class="bi bi-heart-fill"></i></a>
-      <span class="icon-badge" id="wishlist-count"><?= $wishlist_count ?></span>
-      <span class="label">Wishlist</span>
+      <a href="<?= BASE_URL ?>company/about.php" class="<?= ($current_page == 'about.php' ? 'active' : '') ?>"><i class="bi bi-file-earmark-fill"></i><span class="label">About</span></a>
+    </div>
+    <?php
+    $help_pages = ['faq.php', 'contact.php'];
+    ?>
+    <div class="icon-box dropdown">
+      <a href="javascript:void(0)" class="dropdown-toggle">
+        <i class="bi bi-exclamation-circle-fill"></i>
+        <span class="label">Help Center</span>
+        <i class="bi bi-caret-down-fill dropdown-arrow"></i>
+      </a>
+      <div class="dropdown-menu">
+        <a href="<?= BASE_URL ?>help/faq.php" class="<?= ($current_page == 'faq.php' ? 'active' : '') ?>">FAQs</a>
+        <a href="<?= BASE_URL ?>help/contact.php" class="<?= ($current_page == 'contact.php' ? 'active' : '') ?>">Contact Form</a>
+      </div>
     </div>
     <div class="icon-box">
-      <a href="cart.php"><i class="bi bi-cart-fill"></i></a>
-      <span class="icon-badge" id="cart-count"><?= (int)$cart_count ?></span>
-      <span class="label" id="cart-total">RM <?= number_format((float)$cart_total, 2) ?></span>
+      <a href="<?= BASE_URL ?>best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span class="label">Best Seller</span></a>
+    </div>
+    <div class="icon-box">
+      <a href="<?= BASE_URL ?>special-deal.php" class="<?= ($current_page == 'special-deal.php' ? 'active' : '') ?>"><i class="bi bi-tag-fill"></i><span class="label">Special Deal</span></a>
+    </div>
+    <div class="icon-box">
+      <a href="<?= BASE_URL ?>new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
     </div>
   </div>
-</div>
-
-<!-- NAVIGATION -->
-<div class="navbar">
-  <div class="icon-box">
-    <a href="<?= BASE_URL ?>index.php" class="<?= ($current_page == 'index.php' ? 'active' : '') ?>"><i class="bi bi-house-fill"></i><span class="label">Home</span></a>
-  </div>
-  <div class="icon-box">
-    <a href="<?= BASE_URL ?>company/about.php" class="<?= ($current_page == 'about.php' ? 'active' : '') ?>"><i class="bi bi-file-earmark-fill"></i><span class="label">About</span></a>
-  </div>
-  <?php
-  $help_pages = ['faq.php', 'contact.php'];
-  ?>
-  <div class="icon-box dropdown">
-    <a href="javascript:void(0)" class="dropdown-toggle">
-      <i class="bi bi-exclamation-circle-fill"></i>
-      <span class="label">Help Center</span>
-      <i class="bi bi-caret-down-fill dropdown-arrow"></i>
-    </a>
-    <div class="dropdown-menu">
-      <a href="<?= BASE_URL ?>help/faq.php" class="<?= ($current_page == 'faq.php' ? 'active' : '') ?>">FAQs</a>
-      <a href="<?= BASE_URL ?>help/contact.php" class="<?= ($current_page == 'contact.php' ? 'active' : '') ?>">Contact Form</a>
-    </div>
-  </div>
-  <div class="icon-box">
-    <a href="<?= BASE_URL ?>best-seller.php" class="<?= ($current_page == 'best-seller.php' ? 'active' : '') ?>"><i class="bi bi-fire"></i><span class="label">Best Seller</span></a>
-  </div>
-  <div class="icon-box">
-    <a href="<?= BASE_URL ?>special-deal.php" class="<?= ($current_page == 'special-deal.php' ? 'active' : '') ?>"><i class="bi bi-tag-fill"></i><span class="label">Special Deal</span></a>
-  </div>
-  <div class="icon-box">
-    <a href="<?= BASE_URL ?>new-product.php" class="<?= ($current_page == 'new-product.php' ? 'active' : '') ?>"><i class="bi bi-gem"></i><span class="label">New Product</span></a>
-  </div>
-</div>
-
+</header>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll(".icon-box.dropdown").forEach(dropdown => {

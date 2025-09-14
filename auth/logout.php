@@ -28,6 +28,9 @@ if (isset($_POST['action'])) {
     <header>
       <?php include '../header.php'; ?>
     </header>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/header_styles.css">
+    <link rel="stylesheet" href="../css/footer_styles.css">
     <link rel="stylesheet" href="../css/logout_styles.css">
 </head>
 <body>

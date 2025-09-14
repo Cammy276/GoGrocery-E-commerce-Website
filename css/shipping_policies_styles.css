@@ -1,19 +1,12 @@
 /* Shipping Policies Section */
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #ffffff;
-}
-
-.shipping-container {
+div.shipping-container .shipping-container {
   max-width: 1100px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
 }
 
-.shipping-container h1 {
+div.shipping-container .shipping-container h1 {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
@@ -21,94 +14,95 @@ body {
   color: #009c99;
 }
 
-.shipping-container .subtitle {
+div.shipping-container .shipping-container div.shipping-container .subtitle {
   text-align: center;
   font-size: 16px;
   color: #444;
   margin-bottom: 40px;
 }
 
-.tnc-card {
+div.shipping-container .tnc-card {
   background: #ffffff;
   padding: 10px;
 
 }
 
-.tnc-card h3 {
+div.shipping-container .tnc-card h3 {
   font-size: 18px;
   margin-bottom: 10px;
   color: #009c99;
 }
 
-.tnc-card p {
+div.shipping-container .tnc-card p {
   font-size: 15px;
   color: #333;
   line-height: 1.6;
   text-align: justify;
 }
 
-.tnc-card ul li{
+div.shipping-container .tnc-card ul li {
   font-size: 15px;
   color: #333;
   line-height: 1.6;
   text-align: justify;
 }
+
 /* Responsive for tablets (max-width: 768px) */
 @media screen and (max-width: 768px) {
-  .return-container {
+  div.shipping-container .return-container {
     margin: 20px auto;
     padding: 15px;
   }
 
-  .shipping-container h1 {
+  div.shipping-container .shipping-container h1 {
     font-size: 28px;
   }
 
-  .shipping-container .subtitle {
+  div.shipping-container .shipping-container div.shipping-container .subtitle {
     font-size: 15px;
     margin-bottom: 30px;
   }
 
-  .tnc-card {
+  div.shipping-container .tnc-card {
     padding: 15px;
   }
 
-  .tnc-card h3 {
+  div.shipping-container .tnc-card h3 {
     font-size: 16px;
   }
 
-  .tnc-card p,
-  .tnc-card ul li {
+  div.shipping-container .tnc-card p,
+  div.shipping-container .tnc-card ul li {
     font-size: 14px;
   }
 }
 
 /* Responsive for mobile (max-width: 480px) */
 @media screen and (max-width: 480px) {
-  .shipping-container {
+  div.shipping-container .shipping-container {
     margin: 10px;
     padding: 10px;
   }
 
-  .shipping-container h1 {
+  div.shipping-container .shipping-container h1 {
     font-size: 24px;
   }
 
-  .shipping-container .subtitle {
+  div.shipping-container .shipping-container div.shipping-container .subtitle {
     font-size: 14px;
     margin-bottom: 20px;
   }
 
-  .tnc-card {
+  div.shipping-container .tnc-card {
     padding: 10px;
   }
 
-  .tnc-card h3 {
+  div.shipping-container .tnc-card h3 {
     font-size: 15px;
   }
 
-  .tnc-card p,
-  .tnc-card ul li {
+  div.shipping-container .tnc-card p,
+  div.shipping-container .tnc-card ul li {
     font-size: 13px;
   }
 }

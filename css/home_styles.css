@@ -72,3 +72,27 @@
     /* slight zoom on hover */
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
+
+.wishlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.wishlist-icon i {
+    font-size: 20px;
+    color: #118997;
+}
+
+.wishlist-icon.filled i {
+    color: #118997;
+}
+
+.wishlist-icon:hover {
+    transform: scale(1.2);
+    color: #118997;
+}

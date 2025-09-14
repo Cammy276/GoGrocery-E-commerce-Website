@@ -7,13 +7,13 @@
     <header>
         <?php include '../header.php'; ?>
     </header>
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/header_styles.css">
     <link rel="stylesheet" href="../css/forgot_password_styles.css">
     <link rel="stylesheet" href="../css/footer_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-
     <div class="forgot-password-container">
         <div class="forgot-password-box">
             <h2>Forgot Password</h2>

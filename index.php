@@ -12,6 +12,8 @@ include("header.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/header_styles.css">
+    <link rel="stylesheet" href="./css/footer_styles.css">
     <link rel="stylesheet" href="./css/home_styles.css">
 </head>
 
