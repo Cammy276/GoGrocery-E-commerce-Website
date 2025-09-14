@@ -54,6 +54,7 @@ div.login-container input[type="text"].error:focus,
 div.login-container input[type="password"].error:focus {
     border: 3px solid red;
     outline: none;
+    box-shadow: 0 0 3px red;
 }
 div.login-container .error-message {
     display: none;

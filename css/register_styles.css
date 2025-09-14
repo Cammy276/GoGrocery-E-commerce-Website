@@ -34,13 +34,12 @@ p {
 .register-container input[type="password"]:focus {
     border: 3px solid #009c99; /* teal highlight */
     outline: none;
-    box-shadow: 0 0 4px rgba(0, 156, 153, 0.5);
 }
 
 .register-container input.error:focus {
     border: 3px solid red;
     outline: none;
-    box-shadow: 0 0 4px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 3px red;
 }
 
 .register-container input[type="checkbox"].error:focus {
