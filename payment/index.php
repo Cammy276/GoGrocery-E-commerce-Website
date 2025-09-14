@@ -232,18 +232,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
-                 <link rel="stylesheet" href="../css/payment_styles.css">
+        <link rel="stylesheet" href="../css/payment_styles.css">
         <link rel="stylesheet" href="../css/profile_styles.css">
-
+        <link rel="stylesheet" href="../css/styles.css">
         <link rel="stylesheet" href="../css/header_styles.css">
         <link rel="stylesheet" href="../css/footer_styles.css">
 
     </head>
+    <header><?php include("../header.php") ?></header>
     <body>
-        <header><?php include("../header.php") ?></header>
-
-        <div class="main-container">
- 
+        <div class="payment-page-container">
             <div id="profileContent">
                 <div class="content-header">
                     <h1>Payment</h1>

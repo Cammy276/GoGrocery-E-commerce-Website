@@ -11,7 +11,9 @@ $message = $_GET['message'] ?? 'Password reset link sent successfully.';
         <?php include '../header.php'; ?>
     </header>
     <link rel="stylesheet" href="../css/header_styles.css">
+    <link rel="stylesheet" href="../css/footer_styles.css">
     <link rel="stylesheet" href="../css/success_password_reset_styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <div class="success-container">
@@ -22,5 +24,8 @@ $message = $_GET['message'] ?? 'Password reset link sent successfully.';
             <p class="note">Check your email inbox (or spam folder) for the reset link</p>
         </div>
     </div>
+<footer>
+    <?php include '../footer.php'; ?>
+</footer>
 </body>
 </html>

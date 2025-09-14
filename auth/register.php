@@ -65,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
         <?php include '../header.php'; ?>
     </header>
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/header_styles.css">
     <link rel="stylesheet" href="../css/register_styles.css">
     <link rel="stylesheet" href="../css/footer_styles.css">
@@ -287,7 +288,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     </script>
-    <?php include '../footer.php'; ?>
+        <footer>
+             <?php include '../footer.php'; ?>
+        </footer>
 
 </body>
 </html>

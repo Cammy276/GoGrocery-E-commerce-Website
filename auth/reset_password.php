@@ -30,9 +30,15 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
     <meta charset="UTF-8">
     <title>Reset Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/header_styles.css">
     <link rel="stylesheet" href="../css/reset_password_styles.css">
+    <link rel="stylesheet" href="../css/footer_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+<header>
+    <?php include '../header.php'; ?>   
+</header>
 <body>
     <div class="reset-container">
         <h2>Reset Password</h2>
@@ -153,5 +159,8 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
             }
         });
     </script>
+<footer>
+     <?php include '../footer.php'; ?>  
+</footer>
 </body>
 </html>

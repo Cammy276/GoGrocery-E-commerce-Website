@@ -104,10 +104,11 @@ if ($category['parent_id'] === null) {
 <link rel="stylesheet" href="../css/category_styles.css">
 <link rel="stylesheet" href="../css/filter_sort.css">
 </head>
-<body>
 <header>
     <?php include '../header.php'; ?>
 </header>
+<body>
+    <div class="category-container">
 <h1><?= htmlspecialchars($category['name']) ?></h1>
 
 <?php if (!empty($subcategories)): ?>
@@ -212,5 +213,6 @@ document.querySelectorAll('.wishlist-icon').forEach(btn => {
 });
 </script>
 <?php include '../footer.php'; ?>
+</div>
 </body>
 </html>

@@ -25,7 +25,7 @@
                     <small id="email-error" class="error-message"></small>
                 </div>
                 <div class="action-buttons">
-                    <button type="submit" class="send-btn">Send</button>
+                    <button type="submit" id="sendBtn" class="send-btn">Send</button>
                 </div>
             </form>
         </div>
@@ -44,7 +44,7 @@
             }
         });
 
-        document.querySelector("form").addEventListener("submit", function(event) {
+        sendBtn.addEventListener("click", function(event) {
             let isValid = true;
 
             if (emailInput.value.trim() === "") {

@@ -63,7 +63,9 @@ $commentErrorMsg = $_GET['comment_error'] ?? '';
   </style>
 </head>
 <body>
-
+<div class="contact-form-container">
+  <h1>Contact Us</h1>
+  <p>If you have any questions or need assistance, please fill out the form below. Our support team will get back to you as soon as possible.</p>
 <!-- Success / Error Messages -->
 <?php if (isset($_GET['status']) && $_GET['status'] === "success"): ?>
   <p class="success-message">Message sent successfully!</p>
@@ -111,7 +113,6 @@ $commentErrorMsg = $_GET['comment_error'] ?? '';
     <button type="submit">Send</button>
   </div>
 </form>
-
 <!-- Login overlay for non-logged-in users -->
 <?php if (!$loggedIn): ?>
 <div id="loginOverlay">
@@ -175,6 +176,6 @@ form.addEventListener('focusin', function() {
 }, { once: true });
 <?php endif; ?>
 </script>
-
+</div>
 </body>
 </html>

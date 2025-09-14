@@ -54,6 +54,7 @@ $stmt->close();
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="../../css/styles.css">
         <link rel="stylesheet" href="../../css/profile_styles.css">
         <link rel="stylesheet" href="../../css/deliveryAddress_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
@@ -62,7 +63,7 @@ $stmt->close();
     <body>
         <header><?php include("../../header.php") ?></header>
 
-        <div class="main-container">
+        <div class="delivery-address-container">
 
             <!-- left side bar setting -->
             <div id="profileSettingSideBar">  

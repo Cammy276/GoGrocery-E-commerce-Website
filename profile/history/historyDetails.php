@@ -128,6 +128,7 @@ $voucherStmt->close();
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../../css/profile_styles.css">
         <link rel="stylesheet" href="../../css/orders_history_styles.css">
+        <link rel="stylesheet" href="../../css/styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
 
@@ -135,7 +136,7 @@ $voucherStmt->close();
     <body>
         <header><?php include("../../header.php") ?></header>
 
-        <div class="main-container">
+        <div class="order-history-container">
             <div id="profileSettingSideBar">  
                 <ul class="menu-items">
                     <li><a href=""><i class="bi bi-gear-fill"></i> Profile Settings</a></li>

@@ -12,6 +12,9 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <title>My Vouchers</title>
     <link rel="stylesheet" href="../../css/rewards_styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/header_styles.css">
+    <link rel="stylesheet" href="../../css/footer_styles.css">
 </head>
 <body>
     <h1>Vouchers</h1>

@@ -1,11 +1,4 @@
 /* Shipping Policies Section */
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #ffffff;
-}
-
 .return-container {
   max-width: 1100px;
   margin: 40px auto;

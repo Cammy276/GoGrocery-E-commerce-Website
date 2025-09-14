@@ -1,10 +1,4 @@
 /*RegisterPage*/
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-}
 .register-container {
     display: flex;
     justify-content: center;
@@ -47,7 +41,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
+    width: 106%;
     padding: 12px;
     font-size: 16px;
     border: 1px solid #2d2d2d;
@@ -75,7 +69,7 @@ input[type="password"] {
 .register-btn {
     background-color: #009c99;
     color: white;
-    width: 106%;
+    width: 112%;
     padding: 12px;
     font-size: 16px;
     border: none;

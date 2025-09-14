@@ -1,30 +1,30 @@
 /* Inline group (Name, Email, Phone) */
-.inline-group {
+div.contact-form-container .inline-group {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
 }
 
-.inline-group .field {
+div.contact-form-container .inline-group .field {
     flex: 1;
     /* evenly distribute space */
 }
 
 /* Subject, Comment, Attach, and Send span full width */
-.full-width-field {
+div.contact-form-container .full-width-field {
     grid-column: 1 / -1;
     margin-bottom: 20px;
 }
 
-button {
+div.contact-form-container button {
     display: block;
     width: 100%;
     margin-top: 20px;
     padding: 12px 15px;
 }
 
-input,
-textarea {
+div.contact-form-container input,
+div.contact-form-container textarea {
     width: 100%;
     padding: 8px;
     margin-top: 4px;
@@ -32,7 +32,7 @@ textarea {
     box-sizing: border-box;
 }
 
-.helper-text {
+div.contact-form-container .helper-text {
     font-size: 0.85em;
     color: #555;
 }

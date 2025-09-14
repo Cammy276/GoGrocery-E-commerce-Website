@@ -37,9 +37,11 @@ if (!isset($_SESSION['user_id']) && !$accountDeleted) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $accountDeleted ? "Account Deleted" : "Confirm Delete Account"; ?></title>
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/delete_account_styles.css">
 </head>
 <body>
+<div class = "delete-account-container">
   <div class="overlay">
     <div class="container">
       <?php if (!$accountDeleted): ?>
@@ -63,5 +65,6 @@ if (!isset($_SESSION['user_id']) && !$accountDeleted) {
       <?php endif; ?>
     </div>
   </div>
+</div>
 </body>
 </html>

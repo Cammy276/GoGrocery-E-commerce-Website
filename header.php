@@ -139,12 +139,12 @@ document.addEventListener("click", function(e) {
           <?php endif; ?>
       </div>
       <div class="icon-box">
-        <a href="wishlist.php"><i class="bi bi-heart-fill"></i></a>
+        <a href="<?=BASE_URL?>wishlist/"><i class="bi bi-heart-fill"></i></a>
         <span class="icon-badge" id="wishlist-count"><?= $wishlist_count ?></span>
         <span class="label">Wishlist</span>
       </div>
       <div class="icon-box">
-        <a href="cart.php"><i class="bi bi-cart-fill"></i></a>
+        <a href="<?=BASE_URL?>cart.php"><i class="bi bi-cart-fill"></i></a>
         <span class="icon-badge" id="cart-count"><?= (int)$cart_count ?></span>
         <span class="label" id="cart-total">RM <?= number_format((float)$cart_total, 2) ?></span>
       </div>

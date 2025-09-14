@@ -1,18 +1,18 @@
 /* CONTACT PAGE SPECIFIC STYLING */
 
 /* Container */
-a {
+div.contact-container a {
     font-size: 1rem;
 }
 
-.contact-container {
+div.contact-container {
     width: 90vw;
     max-width: 1200px;
     margin: 50px auto;
 }
 
 /* Map styling */
-.map-container iframe {
+div.contact-container .map-container iframe {
     width: 100%;
     height: 350px;
     border: 0;
@@ -21,14 +21,14 @@ a {
 }
 
 /* Bottom row: Contact Info + Form */
-.contact-row {
+div.contact-container.contact-row {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
 /* Contact Info column */
-.contact-info {
+div.contact-container.contact-info {
     flex: 1 1 40%;
     display: flex;
     flex-direction: column;
@@ -36,32 +36,32 @@ a {
 }
 
 /* Contact Form column */
-.contact-form {
+div.contact-container.contact-form {
     flex: 1 1 55%;
 }
 
 /* Cards inside info and form */
-.contact-info .card,
-.contact-form .card {
+div.contact-container.contact-info .card,
+div.contact-container.contact-form .card {
     padding: 15px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
 /* Headings inside contact section */
-.contact-info h5,
-.contact-form h5 {
+div.contact-container.contact-info h5,
+div.contact-container.contact-form h5 {
     font-size: 1.1rem;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .contact-row {
+    div.contact-container.contact-row {
         flex-direction: column;
     }
 
-    .contact-info,
-    .contact-form {
+    div.contact-container.contact-info,
+    div.contact-container.contact-form {
         flex: 1 1 100%;
     }
 }

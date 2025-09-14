@@ -1,27 +1,27 @@
-.profile-pic-container {
+div.profile-settings-container .profile-pic-container {
     position: relative;
     display: inline-block;
 }
-.edit-icon {
+div.profile-settings-container .edit-icon {
     cursor: pointer;
     margin-left: 8px;
     color: #a8b0b8ff;
 }
-.edit-icon:hover {
+div.profile-settings-container .edit-icon:hover {
     color: #037a7b;
 }
-.form-control:focus {
+div.profile-settings-container .form-control:focus {
     box-shadow: none !important; 
 }
 
-.field-row {
+div.profile-settings-container .field-row {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
 }
 
-.field-row .textInput {
+div.profile-settings-container .field-row .textInput {
     flex: 1; 
     width: auto;
     padding: 8px 12px;
@@ -31,20 +31,20 @@
     transition: border 0.3s;
     box-shadow: none !important;
 }
-.field-row .textInput:focus {
+div.profile-settings-container .field-row .textInput:focus {
     border-color: #049b9c;
     border-width: 3px;
     outline: none;
 }
 
-.input-error-wrapper {
+div.profile-settings-container .input-error-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
     flex:1;
 }
 
-.input-error-wrapper .error-message {
+div.profile-settings-container  .input-error-wrapper .error-message {
     margin-top: 4px;
     font-size: 13px;
     color: #dc3545;

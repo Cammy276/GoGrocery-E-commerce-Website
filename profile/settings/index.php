@@ -41,6 +41,10 @@ if (isset($_SESSION['user_id'])) {
         <link rel="stylesheet" href="../../css/profile_styles.css">
         <link rel="stylesheet" href="../../css/cart_styles.css">
         <link rel="stylesheet" href="../../css/profileSetting_styles.css">
+        <link rel="stylesheet" href="../../css/orders_history_styles.css">
+        <link rel="stylesheet" href="../../css/deliveryAddress_styles.css">
+        <link rel="stylesheet" href="../../css/wishlist_styles.css">
+        <link rel="stylesheet" href="../../css/styles.css">
         <link rel="stylesheet" href="../../css/reward_styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
@@ -49,7 +53,7 @@ if (isset($_SESSION['user_id'])) {
 
         <header><?php include("../../header.php") ?></header>
 
-        <div class="main-container">
+        <div class="profile-settings-container">
 
             <!-- left side bar setting -->
             <div id="profileSettingSideBar">  

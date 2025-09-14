@@ -1,12 +1,12 @@
-.delivery-header {
+div.delivery-address-container .delivery-header {
     display: flex;
     justify-content: space-between; 
     align-items: center;                    
 }
-.delivery-header h2 {
+div.delivery-address-container .delivery-header h2 {
     margin: 0;
 }
-.delivery-header i {
+div.delivery-address-container .delivery-header i {
     font-size: 1.5rem;
     color: #049b9c;
     display: inline-flex;
@@ -20,11 +20,11 @@
     position: relative; /* for tooltip positioning */
     cursor: pointer;
 }
-.delivery-header i:hover {
+div.delivery-address-container .delivery-header i:hover {
     color: #037a7b;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
-.delivery-header i::after {
+div.delivery-address-container .delivery-header i::after {
     content: "Add new address"; /* text shown on hover */
     position: absolute;
     bottom: 110%;
@@ -41,7 +41,7 @@
     transition: opacity 0.2s, transform 0.2s;
 }
 /* Show tooltip on hover */
-.delivery-header i:hover::after {
+div.delivery-address-container .delivery-header i:hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(-5px); 
 }

@@ -110,6 +110,7 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../../css/profile_styles.css">
         <link rel="stylesheet" href="../../css/cart_styles.css">
+        <link rel="stylesheet" href="../../css/styles.css">
         <link rel="stylesheet" href="../../css/header_styles.css">
         <link rel="stylesheet" href="../../css/footer_styles.css">
 
@@ -118,7 +119,7 @@ if (isset($_POST['updateQuantity']) && isset($_POST['quantity'])) {
     <body>
         <header><?php include("../../header.php") ?></header>
 
-        <div class="main-container">
+        <div class="cart-container">
 
             <!-- left side bar setting -->
             <div id="profileSettingSideBar">  

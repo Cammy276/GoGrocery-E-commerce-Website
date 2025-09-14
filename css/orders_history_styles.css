@@ -1,59 +1,59 @@
 
 /** for order and history */
-.infoTwoColumn {
+div.order-history-container .infoTwoColumn {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.infoTwoColumn p {
+div.order-history-container .infoTwoColumn p {
     margin: 0%;
 }
 
-.orderId {
+div.order-history-container .orderId {
     font-weight: 600;
     font-size: 18px;
     margin: 0;
 }
 
-.orderDate {
+div.order-history-container .orderDate {
     font-size: 12px;
     color: #6c757d;
     margin-top: 4px;
 }
 
-.infoLeft {
+div.order-history-container .infoLeft {
     display: flex;
     flex-direction: column;
 }
-.infoRight {
+div.order-history-container .infoRight {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-.orderStatus {
+div.order-history-container .orderStatus {
     padding: 6px 12px;
     border-radius: 50px;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 8px;
 }
-.status-paid { 
+div.order-history-container .status-paid { 
     background-color: #fff3cd; 
     color: #856404; 
 }
-.status-delivered { 
+div.order-history-container .status-delivered { 
     background-color: #d1ecf1; color: #0c5460; 
 }
 
-.grandTotal {
+div.order-history-container.grandTotal {
     font-weight: 600;
     font-size: 16px;
     color: #2c3e50;
 }
 
-.card-order {
+div.order-history-container.card-order {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     margin-bottom: 24px;
@@ -61,11 +61,11 @@
     border: 1px solid #eaeaea;
 }
 
-.card-order p {
+div.order-history-container.card-order p {
     margin: 0px;
 }
 
-.order-header {
+div.order-history-container.order-header {
     background-color: #f8f9fa;
     padding: 16px 20px;
     display: flex;
@@ -73,95 +73,95 @@
     align-items: center;
     border-bottom: 1px solid #eaeaea;
 }
-.order-orderId {
+div.order-history-container.order-orderId {
     font-weight: 600;
     color: #2c3e50;
     font-size: 18px;
 }
-.order-status {
+div.order-history-container.order-status {
     padding: 6px 12px;
     border-radius: 50px;
     font-size: 14px;
     font-weight: 500;
 }
-.status-paid {
+div.order-history-container.status-paid {
     background-color: #fff3cd;
     color: #856404;
 }
 
-.order-body {
+div.order-history-container .order-body {
     padding: 20px;
 }
 
-.order-details {
+div.order-history-container .order-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin-bottom: 20px;
 }
-.detail-item {
+div.order-history-container .detail-item {
     display: flex;
     flex-direction: column;
 }
-.detail-label {
+div.order-history-container .detail-label {
     font-size: 12px;
     color: #6c757d;
     margin-bottom: 4px;
 }
-.detail-value {
+div.order-history-container .detail-value {
     font-size: 16px;
     font-weight: 500;
     color: #2c3e50;
 }
 
-.order-items {
+div.order-history-container .order-items {
     margin-top: 16px;
 }
 
-.items-title {
+div.order-history-container .items-title {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
 }
-.items-title i {
+div.order-history-container .items-title i {
     margin-right: 8px;
 }
-.item-list {
+div.order-history-container .item-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-.item-list li {
+div.order-history-container .item-list li {
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #f1f1f1;
 }
-.item-list li:last-child {
+div.order-history-container .item-list li:last-child {
     border-bottom: none;
 }
-.item-info {
+div.order-history-container .item-info {
     flex: 2;
 }
-.item-name {
+div.order-history-container .item-name {
     font-weight: 500;
     margin-bottom: 4px;
 }
-.item-sku {
+div.order-history-container .item-sku {
     font-size: 12px;
     color: #6c757d;
 }
-.item-quantity, .item-price, .item-total {
+div.order-history-container .item-quantity, div.order-history-container .item-price, div.order-history-container .item-total {
     flex: 1;
     text-align: right;
 }
-.item-price, .item-total {
+div.order-history-container .item-price, div.order-history-container .item-total {
     font-weight: 500;
 }
 
-.order-payment-section {
+div.order-history-container .order-payment-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -171,7 +171,7 @@
     border-radius: 10px;
     border: 1px solid #eaeaea;
 }
-.payment-title {
+div.order-history-container .payment-title {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 15px;
@@ -179,62 +179,62 @@
     display: flex;
     align-items: center;
 }
-.payment-title i {
+div.order-history-container .payment-title i {
     margin-right: 10px;
     color: #6f42c1;
 }
-.payment-item {
+div.order-history-container .payment-item {
     display: flex;
     flex-direction: column;
 }
-.payment-label {
+div.order-history-container .payment-label {
     font-size: 12px;
     color: #6c757d;
     margin-bottom: 5px;
 }
-.payment-value {
+div.order-history-container .payment-value {
     font-size: 16px;
     font-weight: 500;
     color: #2c3e50;
 }
 
-.breakdown-section {
+div.order-history-container .breakdown-section {
     margin-top: 25px;
     padding: 20px;
     background-color: #f9fafb;
     border-radius: 10px;
     border: 1px solid #eaeaea;
 }
-.breakdown-title {
+div.order-history-container .breakdown-title {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
 }
-.breakdown-title i {
+div.order-history-container .breakdown-title i {
     margin-right: 10px;
     color: #6f42c1;
 }
-.breakdown-vertical {
+div.order-history-container .breakdown-vertical {
     display: flex;
     flex-direction: column;
     gap: 8px; 
 }
-.breakdown-item {
+div.order-history-container .breakdown-item {
     display: flex;
     justify-content: space-between;
 }
-.breakdown-label {
+div.order-history-container .breakdown-label {
     font-size: 14px;
     color: #6c757d;
 }
-.breakdown-value {
+div.order-history-container .breakdown-value {
     font-size: 16px;
     font-weight: 500;
     color: #2c3e50;
 }
-.grand-total {
+div.order-history-container .grand-total {
     background-color: #f8f9fa;
     padding: 16px 20px;
     text-align: right;
@@ -248,93 +248,93 @@
 
 /* Large desktops and wide screens (1200px) */
 @media (max-width: 1200px) {
-    .card-order {
+    div.order-history-container .card-order {
         margin-bottom: 20px;
     }
-    
-    .order-payment-section {
+
+    div.order-history-container .order-payment-section {
         gap: 15px;
         padding: 15px;
     }
-    
-    .breakdown-section {
+
+    div.order-history-container .breakdown-section {
         padding: 15px;
     }
 }
 
 /* Tablets and smaller laptops (1024px) */
 @media (max-width: 1024px) {
-    .order-header {
+    div.order-history-container .order-header {
         padding: 12px 15px;
     }
-    
-    .order-body {
+
+    div.order-history-container .order-body {
         padding: 15px;
     }
-    
-    .order-details {
+
+    div.order-history-container .order-details {
         gap: 12px;
     }
-    
-    .detail-value,
-    .payment-value,
-    .breakdown-value {
+
+    div.order-history-container .detail-value,
+    div.order-history-container .payment-value,
+    div.order-history-container .breakdown-value {
         font-size: 15px;
     }
 }
 
 /* Large mobile devices (768px) */
 @media (max-width: 768px) {
-    .order-header {
+    div.order-history-container .order-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-    
-    .order-status {
+
+    div.order-history-container .order-status {
         align-self: flex-start;
     }
-    
-    .order-details, 
-    .order-payment-section {
+
+    div.order-history-container .order-details, 
+    div.order-history-container .order-payment-section {
         grid-template-columns: 1fr;
     }
-    
-    .item-list li {
+
+    div.order-history-container .item-list li {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
     }
-    
-    .item-quantity, 
-    .item-price, 
-    .item-total {
+
+    div.order-history-container .item-quantity, 
+    div.order-history-container .item-price, 
+    div.order-history-container .item-total {
         text-align: left;
         padding: 4px 0;
         width: 100%;
         display: flex;
         justify-content: space-between;
     }
-    
-    .item-quantity::before {
+
+    div.order-history-container .item-quantity::before {
         content: "Quantity: ";
         font-weight: normal;
         color: #6c757d;
     }
-    
-    .item-price::before {
+
+    div.order-history-container .item-price::before {
         content: "Unit Price: ";
         font-weight: normal;
         color: #6c757d;
     }
-    
-    .item-total::before {
+
+    div.order-history-container .item-total::before {
         content: "Total: ";
         font-weight: normal;
         color: #6c757d;
     }
-    
-    .grand-total {
+
+    div.order-history-container .grand-total {
         padding: 12px 15px;
         font-size: 16px;
     }
@@ -342,50 +342,50 @@
 
 /* Medium phones (576px) */
 @media (max-width: 576px) {
-    .order-orderId {
+    div.order-history-container .order-orderId {
         font-size: 16px;
     }
     
-    .items-title {
+    div.order-history-container .items-title {
         font-size: 15px;
     }
-    
-    .payment-title,
-    .breakdown-title {
+
+    div.order-history-container .payment-title,
+    div.order-history-container .breakdown-title {
         font-size: 16px;
     }
 }
 
 /* Small phones (400px) */
 @media (max-width: 400px) {
-    .order-header {
+    div.order-history-container .order-header {
         padding: 10px;
     }
     
-    .order-body {
+    div.order-history-container .order-body {
         padding: 10px;
     }
-    
-    .order-payment-section,
-    .breakdown-section {
+
+    div.order-history-container .order-payment-section,
+    div.order-history-container .breakdown-section {
         padding: 12px;
     }
     
-    .detail-value,
-    .payment-value,
-    .breakdown-value {
+    div.order-history-container .detail-value,
+    div.order-history-container .payment-value,
+    div.order-history-container .breakdown-value {
         font-size: 14px;
     }
-    
-    .item-name {
+
+    div.order-history-container .item-name {
         font-size: 15px;
     }
-    
-    .item-sku {
+
+    div.order-history-container .item-sku {
         font-size: 13px;
     }
-    
-    .grand-total {
+
+    div.order-history-container .grand-total {
         font-size: 15px;
         padding: 10px;
     }

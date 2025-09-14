@@ -87,6 +87,8 @@ include(__DIR__ . '/../connect_db.php'); // $conn is available
 
     </div>
   </div>
-
+<footer>
+  <?php include '../footer.php'; ?> 
+</footer>
 </body>
 </html>
