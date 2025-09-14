@@ -112,7 +112,8 @@ $cart_data = $user_id ? getCartInfo($conn,$user_id) : ['total_qty'=>0,'total_pri
 <link rel="stylesheet" href="./css/index_display_styles.css">
 </head>
 <body>
-<div class="container my-4">
+<div class="myContainer">
+<div class="container">
 <?php foreach ($categoryData as $cat): ?>
     <div class="category-section">
         <h3 class="category-title">
@@ -163,6 +164,7 @@ $cart_data = $user_id ? getCartInfo($conn,$user_id) : ['total_qty'=>0,'total_pri
     </div>
     <button class="scroll-btn right" onclick="scrollRight(this)"><i class="bi bi-chevron-right"></i></button>
 </div>
+                </div>
 <?php endforeach; ?>
 </div>
 <script>
