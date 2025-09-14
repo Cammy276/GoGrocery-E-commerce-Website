@@ -45,15 +45,21 @@ div.login-container input[type="password"] {
     box-sizing: border-box;
 }
 
-div.login-container input[type="text"].error,
-div.login-container input[type="password"].error {
-    border: 1px solid red;
+div.login-container input[type="text"]:focus,
+div.login-container input[type="password"]:focus {
+    border: 3px solid #009c99; 
+    outline: none; 
 }
-
+div.login-container input[type="text"].error:focus,
+div.login-container input[type="password"].error:focus {
+    border: 3px solid red;
+    outline: none;
+    box-shadow: 0 0 3px red;
+}
 div.login-container .error-message {
     display: none;
     color: red;
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 5px;
 }
 

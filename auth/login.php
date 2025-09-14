@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="password">Password</label>
                 <div style="position: relative;">
                     <input type="password" id="password" name="password" placeholder="Enter your password">
-                    <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; left:370px; bottom:10px; transform:translateY(-50%);"></i>
+                    <i id="password-icon" class="bi bi-eye-fill" onclick="togglePassword('password','password-icon')" style="cursor:pointer; position:absolute; right:-5px; bottom:10px; transform:translateY(-50%);"></i>
                 </div>
                 <small id="password-error" class="error-message"></small>
                 
@@ -143,6 +143,11 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 
     if (!isValid) {
         event.preventDefault(); // Prevent form submission
+        if (emailInput.classList.contains("error")) {
+            emailInput.focus();
+        } else if (passwordInput.classList.contains("error")) {
+            passwordInput.focus();
+        }
     }
 });
 

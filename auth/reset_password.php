@@ -30,15 +30,9 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
     <meta charset="UTF-8">
     <title>Reset Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/header_styles.css">
     <link rel="stylesheet" href="../css/reset_password_styles.css">
-    <link rel="stylesheet" href="../css/footer_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<header>
-    <?php include '../header.php'; ?>   
-</header>
 <body>
     <div class="reset-container">
         <h2>Reset Password</h2>
@@ -63,7 +57,7 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
                 <small id="confirm-password-error" class="error-message"></small>
             </div>
 
-            <button type="submit">Reset Password</button>
+            <button type="submit" id="resetBtn">Reset Password</button>
         </form>
         <div class="login-link">
             <p><a href="./login.php">Back to Login <i class="bi bi-box-arrow-up-right"></i></a></p>
@@ -126,7 +120,9 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
         });
 
         // On form submit
-        document.querySelector("form").addEventListener("submit", function (event) {
+        const resetBtn = document.getElementById("resetBtn");
+
+        resetBtn.addEventListener("click", function (event) {
             let isValid = true;
 
             if (passwordInput.value.trim() === "") {
@@ -156,11 +152,13 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
 
             if (!isValid) {
                 event.preventDefault();
+                if (passwordInput.classList.contains("error")) {
+                    passwordInput.focus();
+                } else if (passwordConfirmationInput.classList.contains("error")) {
+                    passwordConfirmationInput.focus();
+            }
             }
         });
     </script>
-<footer>
-     <?php include '../footer.php'; ?>  
-</footer>
 </body>
 </html>

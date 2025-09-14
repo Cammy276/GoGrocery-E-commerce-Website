@@ -29,9 +29,21 @@ p {
     margin-bottom: 20px;
     text-align: left;
 }
-input[type="text"].error,
-input[type="password"].error {
-    border: 1px solid red;
+
+.register-container input[type="text"]:focus,
+.register-container input[type="password"]:focus {
+    border: 3px solid #009c99; /* teal highlight */
+    outline: none;
+}
+
+.register-container input.error:focus {
+    border: 3px solid red;
+    outline: none;
+    box-shadow: 0 0 3px red;
+}
+
+.register-container input[type="checkbox"].error:focus {
+    outline: 3px solid red;
 }
 label {
     display: block;
@@ -52,7 +64,7 @@ input[type="password"] {
 .error-message {
     display: none;
     color: red;
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 5px;
 }
 .tnc_confirmation {
