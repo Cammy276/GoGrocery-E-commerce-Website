@@ -34,41 +34,58 @@
     <script>
         const emailInput = document.getElementById("email");
         const emailError = document.getElementById("email-error");
+        const sendBtn = document.getElementById("sendBtn");
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+        // Check if email exists in DB via AJAX
+        async function checkEmailExists(email) {
+            const response = await fetch("./check_email.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "email=" + encodeURIComponent(email)
+            });
+            return response.json();
+        }
+
         // Real-time validation
-        emailInput.addEventListener("input", () => {
-            if (emailInput.value.trim() !== "" && emailPattern.test(emailInput.value)) {
+        emailInput.addEventListener("blur", async () => {
+            const email = emailInput.value.trim();
+
+            if (email === "") {
+                emailError.innerText = "Please enter your email address";
+                emailError.style.display = "block";
+                emailInput.classList.add("error");
+                return;
+            }
+
+            if (!emailPattern.test(email)) {
+                emailError.innerText = "Please enter a valid email address";
+                emailError.style.display = "block";
+                emailInput.classList.add("error");
+                return;
+            }
+
+            // Check DB
+            const result = await checkEmailExists(email);
+            if (!result.exists) {
+                emailError.innerText = "This email is not registered.";
+                emailError.style.display = "block";
+                emailInput.classList.add("error");
+            } else {
                 emailError.style.display = "none";
                 emailInput.classList.remove("error");
             }
         });
 
+        // On Send click
         sendBtn.addEventListener("click", function(event) {
-            let isValid = true;
-
-            if (emailInput.value.trim() === "") {
-                emailError.innerText = "Please enter your email address";
-                emailError.style.display = "block";
-                emailInput.classList.add("error");
-                isValid = false;
-            } else if (!emailPattern.test(emailInput.value)) {
-                emailError.innerText = "Please enter a valid email address";
-                emailError.style.display = "block";
-                emailInput.classList.add("error");
-                isValid = false;
-            } else {
-                emailError.style.display = "none";
-                emailInput.classList.remove("error");
-            }
-
-            if (!isValid) {
+            if (emailInput.classList.contains("error") || emailInput.value.trim() === "") {
                 event.preventDefault();
-                if (emailInput.classList.contains("error")) {
-                    emailInput.focus();
-                }
+                emailInput.focus();
             }
-        });  
+        });
     </script>
     <?php include '../footer.php'; ?>
 </body>
