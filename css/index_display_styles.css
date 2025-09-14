@@ -1,0 +1,136 @@
+/* Minimal styling */
+body {
+    background: #f8f8f8;
+}
+
+.category-section {
+    margin-bottom: 60px;
+}
+
+.category-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+.scroll-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-btn {
+    display: none;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.scroll-btn.left {
+    left: -15px;
+}
+
+.scroll-btn.right {
+    right: -15px;
+}
+
+.subcategories {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.subcategories a {
+    flex: 0 0 auto;
+    background-color: #FFFFE4;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    height: 50px;
+    line-height: 1.1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.subcategories a:hover {
+    background-color: #118997;
+    color: #fff;
+}
+
+.product-card,
+.product-item {
+    flex: 0 0 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+    position: relative;
+}
+
+.product-card:hover,
+.product-item:hover {
+    transform: scale(1.05);
+}
+
+.product-card img,
+.product-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.product-card h3,
+.product-card p,
+.product-item h5,
+.product-item p {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.wishlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.wishlist-icon i {
+    font-size: 20px;
+    color: #dc3545;
+}
+
+.wishlist-icon.filled i {
+    color: #e60023;
+}
+
+.wishlist-icon:hover {
+    transform: scale(1.2);
+}

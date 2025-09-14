@@ -193,66 +193,51 @@ document.querySelectorAll('.carousel-wrapper').forEach(updateScrollButtons);
 window.addEventListener('resize', ()=>document.querySelectorAll('.carousel-wrapper').forEach(updateScrollButtons));
 
 // Wishlist toggle + live update
-document.querySelectorAll('.wishlist-icon').forEach(btn=>{
-    btn.addEventListener('click', function(e){
-        e.preventDefault(); e.stopPropagation();
+document.querySelectorAll('.wishlist-icon').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         const productId = this.dataset.productId;
         const icon = this.querySelector('i');
-        <?php if(!$user_id): ?>
+
+        <?php if (!$user_id): ?>
         window.location.href = '<?= BASE_URL ?>auth/login.php';
         return;
         <?php else: ?>
         const isFilled = this.classList.contains('filled');
+
         fetch('<?= BASE_URL ?>products-listing/wishlist_toggle.php', {
-            method:'POST',
-            headers:{ 'Content-Type':'application/json' },
-            body: JSON.stringify({ product_id: productId, action: isFilled?'remove':'add' })
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ product_id: productId, action: isFilled ? 'remove' : 'add' })
         })
-        .then(res=>res.json())
-        .then(data=>{
-            if(data.success){
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                // Toggle heart icon
                 this.classList.toggle('filled');
-                icon.className = 'bi ' + (isFilled?'bi-heart':'bi-heart-fill');
-                // update header wishlist count
-                const counter = document.getElementById('wishlist-count');
-                if(counter){
-                    let count = parseInt(counter.textContent) || 0;
-                    if(data.status === 'added') count++;
-                    else if(data.status === 'removed' && count > 0) count--;
-                    counter.textContent = count;
+                icon.className = 'bi ' + (isFilled ? 'bi-heart' : 'bi-heart-fill');
+
+                // Update header wishlist count
+                const wishlistCounter = document.getElementById('wishlist-count');
+                if (wishlistCounter) wishlistCounter.textContent = data.wishlist_count;
+
+                // Update header cart count & total price
+                const cartCountEl = document.getElementById('cart-count');
+                const cartTotalEl = document.getElementById('cart-total');
+                if (cartCountEl) cartCountEl.textContent = data.cart_count;
+                if (cartTotalEl) cartTotalEl.textContent = 'RM ' + parseFloat(data.cart_total).toFixed(2);
+            } else {
+                if (data.status === 'not_logged_in') {
+                    window.location.href = '<?= BASE_URL ?>auth/login.php';
+                } else {
+                    alert('Failed to update wishlist.');
                 }
-            } else { alert('Failed to update wishlist.'); }
-        });
+            }
+        })
+        .catch(err => console.error('Error updating wishlist:', err));
         <?php endif; ?>
     });
 });
-
-// Live cart update
-function updateCartCount() {
-    <?php if($user_id): ?>
-    fetch('<?= BASE_URL ?>cart/get_cart_info_inline.php') // we will use inline endpoint
-    .then(res => res.json())
-    .then(data => {
-        if(data.success){
-            const cartCountEl = document.getElementById('cart-count');
-            const cartTotalEl = document.getElementById('cart-total');
-            if(cartCountEl) cartCountEl.textContent = data.total_qty;
-            if(cartTotalEl) cartTotalEl.textContent = 'RM ' + parseFloat(data.total_price).toFixed(2);
-        }
-    });
-    <?php endif; ?>
-}
 </script>
 
-<?php
-// --- Inline endpoint for cart info (AJAX) ---
-if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH'])=='xmlhttprequest' && isset($_POST['action']) && $_POST['action']=='get_cart_info'){
-    header('Content-Type: application/json');
-    echo json_encode([
-        'success'=>true,
-        'total_qty'=>$cart_data['total_qty'],
-        'total_price'=>$cart_data['total_price']
-    ]);
-    exit;
-}
-?>
