@@ -426,6 +426,15 @@ header.site-header .header-right {
         margin-top: 8px;
     }
 
+    header.site-header .search-form input {
+        font-size: 13px;
+    }
+
+    /* Smaller placeholder */
+    header.site-header .search-form input::placeholder {
+        font-size: 12px;
+    }
+
     /* Navbar vertical */
     header.site-header .navbar {
         flex-direction: column;
@@ -470,6 +479,11 @@ header.site-header .header-right {
 
     header.site-header .search-form input {
         font-size: 12px;
+    }
+
+    /* Even smaller placeholder for tiny screens */
+    header.site-header .search-form input::placeholder {
+        font-size: 11px;
     }
 
     header.site-header .navbar {
