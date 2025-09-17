@@ -116,7 +116,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
     h1 {
         text-align: center;
         margin: 20px 0 30px;
-        color: #2c3e50;
+        color: #009c99;
         font-weight: 700;
     }
     
@@ -333,6 +333,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
 </header>
 <body>
 <h1><?= htmlspecialchars($category['name']) ?></h1>
+<div>
 <div class="category-container">
     <div class="category-header">
     <div class="category-header-inner">
@@ -386,6 +387,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
 <?php else: ?>
     <p>No products found in this category.</p>
 <?php endif; ?>
+</div>
 </div>
 
 <script>
