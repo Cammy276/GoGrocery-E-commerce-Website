@@ -19,7 +19,7 @@ class Chat implements MessageComponentInterface {
 
         // DB connection
         $this->pdo = new PDO(
-            'mysql:host=localhost;dbname=chat_db;charset=utf8mb4',
+            'mysql:host=localhost;dbname=gogrocery;charset=utf8mb4',
             'root', '', // <-- change if you have password
             [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

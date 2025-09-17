@@ -1,6 +1,5 @@
 <?php
-require 'db.php';
-
+require __DIR__ . '/../connect_db.php';
 $conversationId = (int)($_GET['conversation_id'] ?? 0);
 $afterId = (int)($_GET['after_id'] ?? 0);
 
