@@ -83,22 +83,6 @@ $categories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 <div class="result-section">
     </br>
-    <h2>Brands</h2>
-    <?php if ($brands): ?>
-        <?php foreach ($brands as $b): ?>
-            <div class="result-card">
-                <a href="<?= BASE_URL ?>brand.php?slug=<?= str_replace(' ', '_', $b['slug']) ?>">
-                    <?= htmlspecialchars($b['name']) ?>
-                </a>
-            </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p class="no-result">No result found.</p>
-    <?php endif; ?>
-</div>
-
-<div class="result-section">
-    </br>
     <h2>Categories</h2>
     <?php if ($categories): ?>
         <?php foreach ($categories as $c): ?>
