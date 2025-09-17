@@ -52,7 +52,6 @@ $categories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="./css/search_styles.css">
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/footer_styles.css">
-    <link rel="stylesheet" href="./css/search_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
