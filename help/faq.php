@@ -19,8 +19,9 @@ include __DIR__ . '/../livechat/chat_UI.php';
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Frequently Asked Questions</h1>
+  
   <div class="faq-container">
+    <h1>Frequently Asked Questions</h1>
     <div class="faq-item">
     <div class="faq-question">
       <span>What is GoGrocery?</span>

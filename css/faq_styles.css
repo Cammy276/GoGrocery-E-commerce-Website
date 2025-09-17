@@ -1,16 +1,19 @@
-div.faq-container {
+.faq-container h1{
+  color: #009c99
+}
+.faq-container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-div.faq-container .faq-item {
+.faq-item {
   background: #fff;
   margin-bottom: 10px;
   border-bottom: 1px solid rgb(41, 41, 41);
   overflow: hidden;
 }
 
-div.faq-container .faq-question {
+.faq-question {
   padding: 15px 20px;
   cursor: pointer;
   display: flex;
@@ -21,41 +24,41 @@ div.faq-container .faq-question {
   color: #000000;
 }
 
-div.faq-container .faq-answer {
+.faq-answer {
   display: none;
   padding: 0 20px 15px 20px;
   color: #555;
   font-size: 15px;
 }
 
-div.faq-container .faq-question:hover {
+.faq-question:hover {
   background: #f1f1f1;
 }
-
-div.faq-container .icon {
+.icon {
   transition: transform 0.3s ease;
 }
 
-div.faq-container .faq-item.active.icon {
-  transform: rotate(180deg);
+.faq-item.active .faq-answer {
+  display: block;
 }
 
-div.faq-container .faq-item.active.faq-answer {
-  display: block;
+/* rotate icon when active */
+.faq-item.active .icon {
+  transform: rotate(180deg);
 }
 
 /* Responsive for tablets (max-width: 768px) */
 @media screen and (max-width: 768px) {
-  div.faq-container h1 {
+  .faq-container h1 {
     font-size: 24px;
   }
 
-  div.faq-container .faq-question {
+  .faq-question {
     font-size: 17px;
     padding: 12px 15px;
   }
 
-  div.faq-container .faq-answer {
+  .faq-answer {
     font-size: 15px;
     padding: 0 15px 12px 15px;
   }
@@ -63,16 +66,16 @@ div.faq-container .faq-item.active.faq-answer {
 
 /* Responsive for small mobiles (max-width: 480px) */
 @media screen and (max-width: 480px) {
-  div.faq-container h1 {
+  .faq-container h1 {
     font-size: 20px;
   }
 
-  div.faq-container .faq-question {
+  .faq-question {
     font-size: 16px;
     padding: 10px 12px;
   }
 
-  div.faq-container .faq-answer {
+  .faq-answer {
     font-size: 14px;
     padding: 0 12px 10px 12px;
   }
