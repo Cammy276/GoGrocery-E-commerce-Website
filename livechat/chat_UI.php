@@ -10,7 +10,6 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGrocery Live Chat</title>
 <link rel="stylesheet" href="../css/livechat_styles.css">
 </head>
 <body>
