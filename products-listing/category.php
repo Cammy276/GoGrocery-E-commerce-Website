@@ -265,13 +265,14 @@ include __DIR__ . '/../livechat/chat_UI.php';
         transform: translateY(-5px);
         box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
-    
     .product-item img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-bottom: 1px solid #eee;
-    }
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
     
     .product-item h3 {
         padding: 15px 15px 5px;
