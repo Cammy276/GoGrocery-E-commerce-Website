@@ -259,6 +259,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
         transition: transform 0.3s, box-shadow 0.3s;
         display: flex;
         flex-direction: column;
+        position: relative; 
     }
     
     .product-item:hover {
@@ -307,6 +308,9 @@ include __DIR__ . '/../livechat/chat_UI.php';
     }
     
     .wishlist-icon {
+        position: absolute; /* position relative to .product-item */
+        top: 10px;          /* distance from the top */
+        right: 10px;        /* distance from the right */
         background: none;
         border: none;
         color: #ccc;
@@ -314,10 +318,12 @@ include __DIR__ . '/../livechat/chat_UI.php';
         cursor: pointer;
         transition: color 0.3s;
         padding: 5px;
+        z-index: 10;        /* make sure it stays above other elements */
     }
-    
-    .wishlist-icon.filled, .wishlist-icon:hover {
-        color: #ff6b6b;
+
+    .wishlist-icon.filled,
+    .wishlist-icon:hover {
+        color: #28a7b5;
     }
     
     .no-products {
