@@ -120,7 +120,7 @@ document.addEventListener("click", function(e) {
 
       <!-- Search Box -->
       <div class="search-box">
-        <form action="search.php" method="GET" class="search-form">
+        <form action="<?= BASE_URL ?>search.php" method="GET" class="search-form">
           <input type="text" name="q" placeholder="Search products, brands, categories...">
           <button type="submit"><i class="bi bi-search"></i></button>
         </form>
