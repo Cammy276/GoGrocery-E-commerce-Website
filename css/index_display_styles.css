@@ -144,8 +144,10 @@
 /* Wishlist icon */
 .wishlist-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    bottom: -300px;
+    /* move to bottom */
+    right: -1px;
+    /* keep at right */
     border: none;
     background: none;
     cursor: pointer;

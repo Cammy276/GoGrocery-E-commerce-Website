@@ -290,13 +290,39 @@ include __DIR__ . '/../livechat/chat_UI.php';
         margin: 0 0 15px;
     }
     
+    .product-item {
+        position: relative; /* make it a positioning container */
+        display: flex;
+        flex-direction: column;
+    }
+
     .product-footer {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start; /* only align offer left */
         align-items: center;
         padding: 0 15px 15px;
         margin-top: auto;
     }
+
+    .wishlist-icon {
+        position: absolute;   /* pin it */
+        bottom: 5px;         /* from bottom */
+        right: 10px;          /* from right */
+        background: none;
+        border: none;
+        color: #ccc;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.2s;
+        padding: 5px;
+    }
+
+    .wishlist-icon.filled,
+    .wishlist-icon:hover {
+        color: #28a7b5;
+        transform: scale(1.1);
+    }
+
     
     .special-offer {
         background: #ff6b6b;
@@ -305,25 +331,6 @@ include __DIR__ . '/../livechat/chat_UI.php';
         border-radius: 4px;
         font-size: 12px;
         font-weight: 600;
-    }
-    
-    .wishlist-icon {
-        position: absolute; /* position relative to .product-item */
-        top: 10px;          /* distance from the top */
-        right: 10px;        /* distance from the right */
-        background: none;
-        border: none;
-        color: #ccc;
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: color 0.3s;
-        padding: 5px;
-        z-index: 10;        /* make sure it stays above other elements */
-    }
-
-    .wishlist-icon.filled,
-    .wishlist-icon:hover {
-        color: #28a7b5;
     }
     
     .no-products {

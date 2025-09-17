@@ -290,59 +290,37 @@ header.site-header .dropdown-menu a.active {
     color: #fff;
 }
 
+/* Force Help Center text to wrap into two lines, but keep icon inline */
+header.site-header .navbar a.help-center {
+    white-space: normal;
+    /* allow wrapping */
+    text-align: center;
+    /* center the text block */
+    line-height: 1.2;
+    /* tighter line spacing */
+    display: flex;
+    align-items: center;
+    /* icon + text on same line */
+    gap: 4px;
+    /* spacing between icon and text */
+}
+
+/* Only the text should wrap, not the whole flex item */
+header.site-header .navbar a.help-center span {
+    display: inline-block;
+    text-align: center;
+    white-space: normal;
+    /* allow wrapping inside span */
+}
+
+/* Keep arrow inline with text */
+header.site-header .navbar a.help-center i.bi-chevron-down {
+    margin-left: 4px;
+    margin-top: 0;
+    /* ensure same baseline */
+}
+
 /* ================= ICON HOVER EFFECT ================= */
-header.site-header .icon-box i {
-    transition: transform 0.3s ease, color 0.3s ease;
-    /* Smooth animation */
-}
-
-header.site-header .icon-box i:hover {
-    transform: scale(1.2);
-    /* Increase size slightly */
-    color: #118997;
-    /* Change color on hover */
-}
-
-header.site-header .icon-box dropdown .dropdown-toggle {
-    margin-right: 30px;
-}
-
-/* ================= BASE LAYOUT FIX ================= */
-header.site-header .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #FFFFE4;
-    height: auto;
-    /* allow flexible height */
-    padding: 10px 20px;
-    flex-wrap: nowrap;
-    /* prevent logo & icons from stacking */
-}
-
-header.site-header .header-left {
-    flex: 0 0 auto;
-    /* logo fixed size */
-}
-
-header.site-header .header-middle {
-    flex: 1;
-    /* flexible space for search/categories */
-    margin: 0 10px;
-    min-width: 0;
-    /* important to avoid overflow on small screens */
-}
-
-header.site-header .header-right {
-    flex: 0 0 auto;
-    /* icons fixed size */
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-/* ================= RESPONSIVE DESIGN ================= */
-
 /* Tablets (≤1024px) */
 @media (max-width: 1024px) {
 
@@ -381,11 +359,24 @@ header.site-header .header-right {
         width: 100%;
     }
 
-    /* Navbar: wrap if needed */
+    /* Navbar: wrap only if needed */
     header.site-header .navbar {
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 22px;
+        /* more gap between items */
         justify-content: center;
+    }
+
+    header.site-header .navbar a {
+        font-size: 15px;
+        padding: 10px 16px;
+        /* more padding so spacing stays */
+    }
+
+    header.site-header .navbar a i {
+        font-size: 14px;
+        margin-right: 3px;
+        /* extra space between icon & word */
     }
 }
 
@@ -409,7 +400,7 @@ header.site-header .header-right {
 
     header.site-header .header-right {
         display: flex;
-        gap: 12px;
+        gap: 16px;
         align-items: center;
     }
 
@@ -436,17 +427,22 @@ header.site-header .header-right {
         font-size: 12px;
     }
 
-    /* Navbar vertical */
+    /* Navbar stays row, spaced */
     header.site-header .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px;
+        flex-wrap: wrap;
+        gap: 16px;
+        /* increased spacing */
+        justify-content: center;
     }
 
     header.site-header .navbar a {
-        width: 100%;
-        padding: 8px 15px;
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    header.site-header .navbar a i {
+        font-size: 13px;
+        margin-right: 3px;
     }
 
     /* Dropdown full width */
@@ -462,7 +458,7 @@ header.site-header .header-right {
 /* Small Mobile (≤480px) */
 @media (max-width: 480px) {
     header.site-header .header-right {
-        gap: 8px;
+        gap: 16px;
     }
 
     header.site-header .icon-box {
@@ -487,7 +483,21 @@ header.site-header .header-right {
         font-size: 11px;
     }
 
+    /* Navbar tighter but still breathable */
     header.site-header .navbar {
-        gap: 5px;
+        flex-wrap: wrap;
+        gap: 16px;
+        /* more spacing between items */
+        justify-content: center;
+    }
+
+    header.site-header .navbar a {
+        font-size: 13px;
+        padding: 7px 10px;
+    }
+
+    header.site-header .navbar a i {
+        font-size: 12px;
+        margin-right: 3px;
     }
 }

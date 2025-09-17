@@ -163,7 +163,7 @@ document.addEventListener("click", function(e) {
     $help_pages = ['faq.php', 'contact.php'];
     ?>
     <div class="icon-box dropdown">
-      <a href="javascript:void(0)" class="dropdown-toggle">
+      <a href="javascript:void(0)" class="dropdown-toggle help-center">
         <i class="bi bi-exclamation-circle-fill"></i>
         <span class="label">Help Center</span>
       </a>
