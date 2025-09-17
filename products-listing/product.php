@@ -235,7 +235,9 @@ include __DIR__ . '/../livechat/chat_UI.php';
         <p style="font-style:italic;">No recommended products available.</p>
     <?php endif; ?>
 </div>
-
+</br>
+</br>
+</br>
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 

@@ -55,7 +55,8 @@
 .cart-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 30px;
+    /* reduce the gap between Add to Cart and wishlist icon */
     margin-top: 10px;
     flex-wrap: nowrap;
 }
@@ -90,6 +91,7 @@
 .cart-icon {
     display: flex;
     align-items: center;
+    /* vertically centers icon with text */
     gap: 8px;
     padding: 0px 13px;
     border-radius: 6px;
@@ -102,9 +104,11 @@
 
 .cart-icon i {
     font-size: 15px;
-    position: relative;
-    top: -10px;
+    position: static;
+    /* remove previous top offset */
     color: white;
+    vertical-align: middle;
+    /* ensures alignment with text */
 }
 
 .cart-icon p {
@@ -112,26 +116,55 @@
     font-size: 15px;
 }
 
-.action-icon {
+/* Container that holds all action icons */
+.action-icons {
     display: flex;
+    gap: 10px;
+    /* space between each icon */
+    align-items: center;
+    /* align them nicely in a row */
+}
+
+.action-icon {
+    display: inline-flex;
+    /* keeps icon and text in one row */
+    align-items: center;
+    /* vertically centers both icon and text */
+    justify-content: center;
+    /* optional, centers horizontally if needed */
+    gap: 5px;
+    /* space between icon and text */
     color: black;
     background: transparent;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform 0.2s, color 0.2s, border-color 0.2s;
     border: none;
+    padding: 8px 12px;
+    /* adjust button padding */
 }
 
 .action-icon i {
     font-size: 20px;
-    position: relative;
-    top: -9px;
-    padding: 10px;
+    line-height: 1;
+    /* ensures the icon vertically aligns with text */
+    padding: 0;
+    /* remove extra padding that misaligns it */
+    vertical-align: middle;
+    /* helps align icon with text baseline */
+    position: static;
+    /* remove any previous top adjustment */
 }
 
 .action-icon i:hover {
     color: #118997;
     transform: scale(1.2);
+}
+
+/* Adjust cart icon only */
+.action-icon i.fa-shopping-cart {
+    position: relative;
+    top: 2px;
+    /* tweak until it looks centered */
 }
 
 .wishlist-icon.filled i {
@@ -257,5 +290,15 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    position: relative;
+    /* new */
     /* make content stick to bottom */
+}
+
+/* Place wishlist icon at the top right of card */
+.recommended-products .product-card .wishlist-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
 }
