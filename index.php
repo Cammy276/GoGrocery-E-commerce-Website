@@ -35,17 +35,24 @@ include("header.php");
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                    <img src="./images/ads/fresh_produces_ads.png" alt="Fresh Produces">
+                    <a href="<?= BASE_URL ?>products-listing/category.php?slug=fresh_produces"><img src="./images/ads/fresh_produces_ads.png" alt="Fresh Produces"></a>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                    <img src="./images/ads/new_user_ads.png" alt="New User Promo">
+                    <?php
+                    // Check if user is logged in
+                    $redirectUrl = isset($_SESSION['user_id']) ? './profile/reward/index.php' : './auth/login.php';
+                    ?>
+
+                    <a href="<?php echo $redirectUrl; ?>">
+                        <img src="./images/ads/new_user_ads.png" alt="New User Promo" style="cursor:pointer;">
+                    </a>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                    <img src="./images/ads/skincare_ads.png" alt="Skincare Promo">
+                    <a href="<?= BASE_URL ?>products-listing/category.php?slug=beauty_health"><img src="./images/ads/skincare_ads.png" alt="Skincare Promo"></a>
                 </div>
             </div>
         </div>

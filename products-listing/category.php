@@ -111,6 +111,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
 <header>
     <?php include '../header.php'; ?>
 </header>
+<br/>
 <body>
 <h1><?= htmlspecialchars($category['name']) ?></h1>
 <div class="category-container">
@@ -136,7 +137,6 @@ include __DIR__ . '/../livechat/chat_UI.php';
         </div>
     </div>
 </div>
-
 <div class="products-grid">
 <?php if (!empty($products)): ?>
     <?php foreach ($products as $p):
