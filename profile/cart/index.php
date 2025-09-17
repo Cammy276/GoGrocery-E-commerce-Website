@@ -7,6 +7,9 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     
+} else {
+    header("Location: ../../auth/login.php");
+    exit;
 }
 ?>
 
@@ -50,8 +53,7 @@ if (isset($_POST['checkout'])) {
     }
 
     if (empty($errorMsgList)) {
-        header("Location: ../../payment/index.php"); // replace with your payment page
-        exit;
+        header("Location: ../../payment/index.php");
     }
     
 }
