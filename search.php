@@ -42,24 +42,18 @@ $stmt->bind_param("ss", $q, $q);
 $stmt->execute();
 $categories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-// ------------------- Base URL -------------------
-// BASE_URL = '/'; // change this if your site is in a subfolder
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Search Results for "<?= htmlspecialchars($q) ?>"</title>
-    <style>
-        h1, h2 { color: black; }
-        .result-section { margin-bottom: 30px; }
-        p.description { font-size: 14px; color: #555; margin: 5px 0 15px; }
-        .no-result { font-style: italic; color: #999; }
-    </style>
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/search_styles.css">
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/footer_styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -71,8 +65,8 @@ $categories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <h2>Products</h2>
     <?php if ($products): ?>
         <?php foreach ($products as $p): ?>
-            <div>
-                <a href="<?= BASE_URL ?>product.php?slug=<?= urlencode($p['slug']) ?>">
+            <div class="result-card">
+                <a href="<?= BASE_URL ?>products-listing/product.php?slug=<?= str_replace(' ', '_', $p['slug']) ?>">
                     <?= htmlspecialchars($p['product_name']) ?>
                 </a>
                 <?php if ($p['product_description']): ?>
@@ -89,8 +83,8 @@ $categories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <h2>Brands</h2>
     <?php if ($brands): ?>
         <?php foreach ($brands as $b): ?>
-            <div>
-                <a href="<?= BASE_URL ?>brand.php?slug=<?= urlencode($b['slug']) ?>">
+            <div class="result-card">
+                <a href="<?= BASE_URL ?>brand.php?slug=<?= str_replace(' ', '_', $b['slug']) ?>">
                     <?= htmlspecialchars($b['name']) ?>
                 </a>
             </div>
@@ -104,8 +98,8 @@ $categories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <h2>Categories</h2>
     <?php if ($categories): ?>
         <?php foreach ($categories as $c): ?>
-            <div>
-                <a href="<?= BASE_URL ?>category.php?slug=<?= urlencode($c['slug']) ?>">
+            <div class="result-card">
+                <a href="<?= BASE_URL ?>products-listing/category.php?slug=<?= str_replace(' ', '_', $c['slug']) ?>">
                     <?= htmlspecialchars($c['name']) ?>
                 </a>
             </div>
