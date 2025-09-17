@@ -105,13 +105,232 @@ include __DIR__ . '/../livechat/chat_UI.php';
 <link rel="stylesheet" href="../css/styles.css">
 <link rel="stylesheet" href="../css/header_styles.css">
 <link rel="stylesheet" href="../css/footer_styles.css">
-<link rel="stylesheet" href="../css/category_styles.css">
 <link rel="stylesheet" href="../css/filter_sort.css">
+<style>
+     .category-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    h1 {
+        text-align: center;
+        margin: 20px 0 30px;
+        color: #2c3e50;
+        font-weight: 700;
+    }
+    
+    .category-header {
+        position: relative;
+        margin-bottom: 30px;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .category-header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .subcategories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        flex: 1;
+        min-width: 0;
+        max-width: calc(100% - 180px);
+    }
+
+    .subcategories:empty {
+        display:none;
+    }
+    
+    .subcategories a {
+        padding: 8px 16px;
+        background-color: #e9ecef;
+        border-radius: 20px;
+        text-decoration: none;
+        color: #495057;
+        transition: all 0.3s;
+        font-weight: 500;
+    }
+    
+    .subcategories a:hover {
+        background-color: #28a7b5;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .filter-sort {
+        flex-shrink: 0;
+        position: relative;
+        z-index: 10;
+    }
+    
+    .filter-sort button {
+        background: #28a7b5;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 16px;
+        transition: all 0.3s;
+    }
+
+    .filter-sort button:hover{
+        background: #0d6f79;
+        transform: translateY(-2px);
+    }
+
+    .filter-sort button i {
+        font-size: 1.3rem;
+        margin: 0;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .filter-sort button.active {
+        background: #0b5c65;
+        transform: scale(1.05);
+        box-shadow: 0 0 8px rgba(0,0,0,0.2);
+        font-weight: bold;
+    }
+
+    .filter-sort button.active:hover {
+        background: #096671;
+        transform: scale(1.08);
+    }
+
+    .filter-sort-dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 110%;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        min-width: 180px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .filter-sort-dropdown a {
+        display: block;
+        padding: 10px 12px;
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+        transition: background 0.2s;
+    }
+
+    .filter-sort-dropdown a:hover {
+        background: #f5f5f5;
+    }
+
+    .filter-sort-dropdown.show {
+        display: block;
+    }
+    
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+    
+    .product-item {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .product-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .product-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .product-item h3 {
+        padding: 15px 15px 5px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0;
+    }
+    
+    .product-item p {
+        padding: 0 15px;
+        color: #28a7b5;
+        font-weight: 600;
+        margin: 0 0 15px;
+    }
+    
+    .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px 15px;
+        margin-top: auto;
+    }
+    
+    .special-offer {
+        background: #ff6b6b;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .wishlist-icon {
+        background: none;
+        border: none;
+        color: #ccc;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s;
+        padding: 5px;
+    }
+    
+    .wishlist-icon.filled, .wishlist-icon:hover {
+        color: #ff6b6b;
+    }
+    
+    .no-products {
+        text-align: center;
+        grid-column: 1 / -1;
+        padding: 40px;
+        color: #6c757d;
+        font-size: 18px;
+    }
+</style>
 </head>
 <header>
     <?php include '../header.php'; ?>
 </header>
-<br/>
 <body>
 <h1><?= htmlspecialchars($category['name']) ?></h1>
 <div class="category-container">
@@ -137,6 +356,7 @@ include __DIR__ . '/../livechat/chat_UI.php';
         </div>
     </div>
 </div>
+
 <div class="products-grid">
 <?php if (!empty($products)): ?>
     <?php foreach ($products as $p):
