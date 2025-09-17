@@ -64,7 +64,6 @@ $commentErrorMsg = $_GET['comment_error'] ?? '';
 </head>
 <body>
 <div class="contact-form-container">
-  <h1>Contact Us</h1>
   <p>If you have any questions or need assistance, please fill out the form below. Our support team will get back to you as soon as possible.</p>
 <!-- Success / Error Messages -->
 <?php if (isset($_GET['status']) && $_GET['status'] === "success"): ?>
